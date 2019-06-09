@@ -9,15 +9,15 @@ Baixar diretamente da Microsoft não é recomendado.
 O Instalador do VS17 pode ser encontrado aqui:
 https://www.techspot.com/downloads/6278-visual-studio.html
 
-Baixe a versão `Free Community Edition` no lado esquerdo da página. O instalador tem a assinatura digital da Microsoft, e portanto é confiável.
+Baixe a versão `Free Community Edition` do botão no lado esquerdo da página. O instalador tem a assinatura digital da Microsoft, portanto é confiável.
 
-Nas opções de instalação, selecione `Desktop development with C++ workload` (`Desenvolvimento para desktop com C++` em português):
+Nas opções de instalação, selecione `Desktop development with C++` (`Desenvolvimento para desktop com C++` em português):
 ![](https://www.wikihow.com/images/thumb/2/23/Set-Up-SDL-with-Visual-Studio-2017-Step-3-Version-2.jpg/aid9342314-v4-900px-Set-Up-SDL-with-Visual-Studio-2017-Step-3-Version-2.jpg)
 
 Se você quiser, também pode instalar os pacotes de idiomas que quiser na aba `Language Packs` (`Pacotes de Idiomas`).
 
 ### Instalado o Visual Studio 2019
-Eu (Leandro Gabriel) não instalei o Visual Studio 2019, então não sei dar instruções de instalação detalhadas. Mas as instruções acima devem servir. Provavelmente é melhor baixar o VS19 do site oficial da Microsoft.
+Eu (Leandro Gabriel) não instalei o Visual Studio 2019, então não posso dar instruções de instalação detalhadas. Mas as instruções acima devem servir. Provavelmente é melhor baixar o VS19 do site oficial da Microsoft.
 
 ### Instalando o SDL
 Baixe o SDL aqui:
@@ -36,4 +36,4 @@ C:\
       [e vários arquivos de texto]
 ```
 
-Com isso, sua instalação do SDL já está completa, e o projeto do Visual Studio deverá funcionar sem configurar nada.
+Com isso, sua instalação do SDL já está completa, e o projeto do Visual Studio desse repositório deverá funcionar sem configurar nada.
