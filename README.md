@@ -1,5 +1,5 @@
 # Grupo42-IntProg1
-Este é o repositório GitHub para o desenvolvimento do jogo do Grupo 42 para o projeto de Introdução à Programação. Usaremos a biblioteca SDL (Simple Directmedia Layer) e o Visual Studio 2017 ou 2019 (não foi decidido qual ainda).
+Este é o repositório GitHub para o desenvolvimento do jogo do Grupo 42 para o projeto da disciplina Introdução à Programação. Usaremos a biblioteca SDL (Simple Directmedia Layer) e o Visual Studio 2017 ou 2019 (não foi decidido qual ainda).
 
 ## Instruções para configurar o ambiente de desenvolvimento:
 É preciso instalar o VS e o SDL. As instruções aqui são apenas para Windows.
