@@ -1,6 +1,14 @@
 
-# Created by https://www.gitignore.io/api/windows,visualstudio
-# Edit at https://www.gitignore.io/?templates=windows,visualstudio
+# Created by https://www.gitignore.io/api/windows,visualstudio,codeblocks
+# Edit at https://www.gitignore.io/?templates=windows,visualstudio,codeblocks
+
+### CodeBlocks ###
+# specific to CodeBlocks IDE
+*.layout
+*.depend
+# generated directories
+bin/
+obj/
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -373,4 +381,4 @@ healthchecksdb
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 
-# End of https://www.gitignore.io/api/windows,visualstudio
+# End of https://www.gitignore.io/api/windows,visualstudio,codeblocks
