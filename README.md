@@ -10,3 +10,6 @@ https://www.libsdl.org/
 Segue o link de um tutorial para instalar a SDL no visual studio:
 
 https://www.wikihow.com/Set-Up-SDL-with-Visual-Studio
+
+Code Blocks
+http://lazyfoo.net/tutorials/SDL/01_hello_SDL/windows/codeblocks/
