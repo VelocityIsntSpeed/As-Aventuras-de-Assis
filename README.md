@@ -1,5 +1,5 @@
 # Grupo42-IntProg1
-Este é o repositório GitHub para o desenvolvimento do jogo do Grupo 42 para o projeto da disciplina Introdução à Programação. Usaremos a biblioteca SDL (Simple Directmedia Layer) e o Visual Studio 2017 ou 2019 (não foi decidido qual ainda). A pasta `Jogo42` é um projeto do VS17, já configurado para funcionar com um SDL instalado da maneira descrita aqui.
+Este é o repositório GitHub para o desenvolvimento do jogo do Grupo 42 para o projeto da disciplina Introdução à Programação. Usaremos a biblioteca SDL (Simple Directmedia Layer) e o Visual Studio 2017 ou 2019 (não foi decidido qual ainda). A pasta `Jogo42` é um projeto do VS17.
 
 ## Instruções para configurar o ambiente de desenvolvimento:
 É preciso instalar o VS e o SDL. As instruções aqui são apenas para Windows.
@@ -37,5 +37,3 @@ C:\
       lib\
       [e vários arquivos de texto]
 ```
-
-Com isso, sua instalação do SDL já está completa, e o projeto do VS17 desse repositório deverá funcionar sem configurar nada.
