@@ -31,10 +31,12 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add directory="C:/Users/Aluno/Downloads/SDL2-2.0.9/i686-w64-mingw32/include/SDL2" />
+			<Add directory="C:/Users/Public/SDL2-2.0.9/i686-w64-mingw32/include/SDL2" />
 		</Compiler>
 		<Linker>
 			<Add option="-lmingw32 -lSDL2main -lSDL2" />
 			<Add directory="C:/Users/Aluno/Downloads/SDL2-2.0.9/i686-w64-mingw32/lib" />
+			<Add directory="C:/Users/Public/SDL2-2.0.9/i686-w64-mingw32/lib" />
 		</Linker>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
