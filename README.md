@@ -1,10 +1,16 @@
 # Grupo42-IntProg1
 Este é o repositório GitHub para o desenvolvimento do jogo do Grupo 42 para o projeto da disciplina Introdução à Programação. Usaremos a biblioteca SDL (Simple Directmedia Layer) e o Visual Studio 2017 ou 2019 ou Code::Blocks (nâo foi decidido qual ainda).
 
-A pasta ´Jogo42_VS´
+A pasta 'Jogo42_CB´ é um projeto de CodeBlocks, e para usá-lo é necessário apenas ter o SDL versão MinGW num diretório específico (veja instruções abaixo).
+
+A pasta ´Jogo42_VS´ é um projeto de Visual Studio 2017, e para usá-lo é necessário configurar os diretórios de busca do compilador e linker, além de ter o SDL versão Visual C++.
 
 ## Instruções para configurar o ambiente de desenvolvimento:
-É preciso instalar o VS e o SDL. As instruções aqui são apenas para Windows.
+É preciso instalar a IDE (VS ou CB) e o SDL. As instruções aqui são apenas para Windows.
+
+### Instalando o Code::Blocks
+http://www.codeblocks.org/downloads/26
+Baixe e use o instalador ´codeblocks-17.12mingw-setup.exe´.
 
 ### Instalando o Visual Studio 2017
 Baixar diretamente da Microsoft não é recomendado.
@@ -23,19 +29,8 @@ Se você quiser, também pode instalar os pacotes de idiomas que quiser na aba `
 ### Instalado o Visual Studio 2019
 Eu (Leandro Gabriel) não instalei o Visual Studio 2019, então não posso dar instruções de instalação detalhadas. Mas as instruções acima devem servir. Provavelmente é melhor baixar o VS19 do site oficial da Microsoft.
 
-### Instalando o SDL
-Baixe o SDL aqui:
+### Instalando o SDL para Code::Blocks
 https://www.libsdl.org/download-2.0.php
+Baixe o arquivo ´SDL2-devel-2.0.9-mingw.tar.gz´.
 
-Na seção entitulada "Development Libraries:", baixe o aqrquivo `SDL2-devel-2.0.9-VC.zip`.
-
-Descompacte-o e coloque-o numa pasta `C:\SDL\` do seu computador, e renomeie-o para SDL2. Deverão existir esses diretórios:
-```
-C:\
-  SDL\
-    SDL2\
-      docs\
-      include\
-      lib\
-      [e vários arquivos de texto]
-```
+Dentro desse arquivo compacatado há a pasta ´SDL2-2.0.9´ (Pode ser necessário descompactá-lo duas vezes). Coloque essa pasta ´SDL2-2.0.9´ em ´C:\Users\Public\´.
