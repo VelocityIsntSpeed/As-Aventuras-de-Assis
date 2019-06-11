@@ -19,8 +19,7 @@ https://www.techspot.com/downloads/6278-visual-studio.html
 
 Baixe a versão `Free Community Edition` do botão no lado esquerdo da página. O instalador tem a assinatura digital da Microsoft, portanto é confiável.
 
-Nas opções de instalação, selecione `Desktop development with C++` (`Desenvolvimento para desktop com C++` em português):
-![](https://www.wikihow.com/images/thumb/2/23/Set-Up-SDL-with-Visual-Studio-2017-Step-3-Version-2.jpg/aid9342314-v4-900px-Set-Up-SDL-with-Visual-Studio-2017-Step-3-Version-2.jpg)
+Nas opções de instalação, selecione `Desktop development with C++` (`Desenvolvimento para desktop com C++` em português).
 
 O instalador irá baixar os arquivos necessários, que será em torno de 6-7 GB.
 
