@@ -1,16 +1,16 @@
 # Grupo42-IntProg1
 Este é o repositório GitHub para o desenvolvimento do jogo do Grupo 42 para o projeto da disciplina Introdução à Programação. Usaremos a biblioteca SDL (Simple Directmedia Layer) e o Visual Studio 2017 ou 2019 ou Code::Blocks (nâo foi decidido qual ainda).
 
-A pasta 'Jogo42_CB´ é um projeto de CodeBlocks, e para usá-lo é necessário apenas ter o SDL versão MinGW num diretório específico (veja instruções abaixo).
+A pasta `Jogo42_CB` é um projeto de CodeBlocks, e para usá-lo é necessário apenas ter o SDL versão MinGW num diretório específico (veja instruções abaixo).
 
-A pasta ´Jogo42_VS´ é um projeto de Visual Studio 2017, e para usá-lo é necessário configurar os diretórios de busca do compilador e linker, além de ter o SDL versão Visual C++.
+A pasta `Jogo42_VS` é um projeto de Visual Studio 2017, e para usá-lo é necessário configurar os diretórios de busca do compilador e linker, além de ter o SDL versão Visual C++.
 
 ## Instruções para configurar o ambiente de desenvolvimento:
 É preciso instalar a IDE (VS ou CB) e o SDL. As instruções aqui são apenas para Windows.
 
 ### Instalando o Code::Blocks
 http://www.codeblocks.org/downloads/26
-Baixe e use o instalador ´codeblocks-17.12mingw-setup.exe´.
+Baixe e use o instalador `codeblocks-17.12mingw-setup.exe`.
 
 ### Instalando o Visual Studio 2017
 Baixar diretamente da Microsoft não é recomendado.
@@ -31,6 +31,6 @@ Eu (Leandro Gabriel) não instalei o Visual Studio 2019, então não posso dar i
 
 ### Instalando o SDL para Code::Blocks
 https://www.libsdl.org/download-2.0.php
-Baixe o arquivo ´SDL2-devel-2.0.9-mingw.tar.gz´.
+Baixe o arquivo `SDL2-devel-2.0.9-mingw.tar.gz`.
 
-Dentro desse arquivo compacatado há a pasta ´SDL2-2.0.9´ (Pode ser necessário descompactá-lo duas vezes). Coloque essa pasta ´SDL2-2.0.9´ em ´C:\Users\Public\´.
+Dentro desse arquivo compacatado há a pasta `SDL2-2.0.9` (Pode ser necessário descompactá-lo duas vezes). Coloque essa pasta `SDL2-2.0.9` em `C:\Users\Public\` (ficará `C:\Users\Public\SDL2-2.0.9\`).
