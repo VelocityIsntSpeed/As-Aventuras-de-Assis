@@ -7,4 +7,5 @@ A pasta `Jogo42_CB` é um projeto de CodeBlocks, e para usá-lo é necessário a
 
 Instruções para configurar o ambiente de desenvolvimento encontram-se no [arquivo configurar.md][config].
 
+
 [config]: configurar.md "Configurar ambiente de desenvolvimento"
