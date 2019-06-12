@@ -5,8 +5,6 @@ Utilizamos a biblioteca SDL ([Simple Directmedia Layer](www.libsdl.org)) e a IDE
 
 A pasta `Jogo42_CB` é um projeto de CodeBlocks, e para usá-lo é necessário apenas ter o SDL versão MinGW num diretório específico (veja [instruções de configuração][config])).
 
-A pasta `Jogo42_VS` é um projeto de Visual Studio 2017, e para usá-lo é necessário ter o SDL versão Visual C++ e configurar os diretórios de busca do compilador e linker.
-
 Instruções para configurar o ambiente de desenvolvimento encontram-se no [arquivo configurar.md][config].
 
 [config]: configurar.md
