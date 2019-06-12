@@ -5,7 +5,7 @@
 http://www.codeblocks.org/downloads/26
 Baixe e execute o instalador `codeblocks-17.12mingw-setup.exe`.
 
-## Instalar o SDL para Code::Blocks
+## Instalar o SDL
 https://www.libsdl.org/download-2.0.php
 Baixe o arquivo `SDL2-devel-2.0.9-mingw.tar.gz`.
 
