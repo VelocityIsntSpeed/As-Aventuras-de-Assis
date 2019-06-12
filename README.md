@@ -1,9 +1,7 @@
 # Jogo42
-Este é o repositório GitHub para o desenvolvimento do jogo provisoriamente entitulado Jogo42. Esse é um projeto em grupo para a disciplina Introdução à Programação, período 2019.1 na UFRPE (Universidade Federal Rural de Pernambuco).
+Este é o repositório GitHub para o desenvolvimento do jogo provisoriamente entitulado Jogo42. Esse é um projeto em grupo para a disciplina Introdução à Programação, período 2019.1 na UFRPE ([Universidade Federal Rural de Pernambuco](www.ufrpe.br)).
 
-TODO: add links to sdl and cb and ufrpe
-
-Utilizamos a biblioteca SDL (Simple Directmedia Layer) e a IDE Code::Blocks.
+Utilizamos a biblioteca SDL ([Simple Directmedia Layer](www.libsdl.org)) e a IDE [Code::Blocks](www.codeblocks.org).
 
 A pasta `Jogo42_CB` é um projeto de CodeBlocks, e para usá-lo é necessário apenas ter o SDL versão MinGW num diretório específico (veja [instruções de configuração][config])).
 
