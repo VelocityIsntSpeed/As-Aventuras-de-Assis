@@ -3,8 +3,8 @@ Este é o repositório GitHub para o desenvolvimento do jogo provisoriamente ent
 
 Utilizamos a biblioteca SDL ([Simple Directmedia Layer](https://www.libsdl.org)) e a IDE [Code::Blocks](https://www.codeblocks.org).
 
-A pasta `Jogo42_CB` é um projeto de CodeBlocks, e para usá-lo é necessário apenas ter o SDL versão MinGW num diretório específico (veja [instruções de configuração][config])).
+A pasta `Jogo42_CB` é um projeto de CodeBlocks, e para usá-lo é necessário apenas ter o SDL versão MinGW num diretório específico (veja [instruções de configuração][config]).
 
 Instruções para configurar o ambiente de desenvolvimento encontram-se no [arquivo configurar.md][config].
 
-[config]: configurar.md
+[config]: configurar.md "Configurar ambiente de desenvolvimento"
