@@ -11,6 +11,8 @@ Baixe o arquivo `SDL2-devel-2.0.9-mingw.tar.gz`.
 
 Dentro desse arquivo compacatado há a pasta `SDL2-2.0.9` (Pode ser necessário descompactá-lo duas vezes). Coloque essa pasta `SDL2-2.0.9` em `C:\Users\Public\` (ficará `C:\Users\Public\SDL2-2.0.9\`).
 
+Esse procedimento funciona também em computadores públicos (como os dos laboratórios da UFRPE).
+
 ## Instalar o Visual Studio
 Baixar o VS17 diretamente da Microsoft não é recomendado.
 O Instalador do VS17 pode ser encontrado aqui:
