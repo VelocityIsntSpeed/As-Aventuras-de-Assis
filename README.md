@@ -3,6 +3,6 @@ Este é o repositório GitHub para o desenvolvimento do jogo provisoriamente ent
 
 <!-- TODO: Informações sobre qual biblioteca e IDE usaremos, com links -->
 
-As pastas [`Jogo42-CB-Ray`](Jogo42-CB-Ray) e [`Jogo42-CB-SDL`](Jogo42-CB-SD/) são projetos de CodeBlocks utilizando Raylib 2.5 e SDL 2.0.9, respectivamente.
+As pastas [`Jogo42-CB-Ray`](Jogo42-CB-Ray/) e [`Jogo42-CB-SDL`](Jogo42-CB-SD/) são projetos de CodeBlocks utilizando Raylib 2.5 e SDL 2.0.9, respectivamente.
 
-Instruções para configurar o ambiente de desenvolvimento encontram-se no [arquivo configurar.md](configurar.md).
+Instruções para configurar o ambiente de desenvolvimento encontram-se no [arquivo configurar.md](documentacao/configurar.md).
