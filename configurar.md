@@ -4,6 +4,7 @@ Instruções para instalar/configurar no Windows as ferramentas e bibliotecas ne
 * Windows Explorer
 * Code::Blocks
 * Raylib
+  * Configurar CB para Raylib
 * SDL
 * GitHub Desktop
 
@@ -30,6 +31,11 @@ Baixe e execute o instalador `codeblocks-17.12mingw-setup.exe`.
 ## Instalar o Raylib
 https://raysan5.itch.io/raylib  
 Baixe e execute o instalador `raylib 2.5 Windows Installer (with MinGW compiler)`.
+
+### Configurar o Code::Blocks para Raylib
+![](enter_compiler_settings.png)
+![](create_new_compiler.png)
+![](raylib_compiler_executables.png)
 
 
 ## Instalar o SDL
