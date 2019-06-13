@@ -1,6 +1,7 @@
 # Instruções para configurar o ambiente de desenvolvimento
 Instruções para instalar/configurar no Windows as ferramentas e bibliotecas necessárias:
 
+* Windows Explorer
 * Code::Blocks
 * Raylib
 * SDL
@@ -8,6 +9,16 @@ Instruções para instalar/configurar no Windows as ferramentas e bibliotecas ne
 <!-- TODO: adicionar instruções para VS e SDL para Visual C++ -->
 <!-- TODO: adionionar links à lista acima para as respectivas seções -->
 
+
+## Configurar Windows Explorer
+Por padrão, o Explorer não mostra extensões de arquivos com extensão conhecida, nem mostra arquivos ocultos.
+
+![](config-explorer.png)
+
+Em qualquer janela do explorer, acesse:
+1. Aba `exibir`
+2. `Mostrar/ocultar`
+3. Marque `Extensões de nomes de arquivos` e `Itens ocultos`
 
 
 ## Instalar o Code::Blocks
