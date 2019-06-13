@@ -5,6 +5,7 @@ Instruções para instalar/configurar no Windows as ferramentas e bibliotecas ne
 * Code::Blocks
 * Raylib
 * SDL
+* GitHub Desktop
 
 <!-- TODO: adicionar instruções para VS e SDL para Visual C++ -->
 <!-- TODO: adionionar links à lista acima para as respectivas seções -->
@@ -40,3 +41,6 @@ Dentro desse arquivo compacatado há a pasta `SDL2-2.0.9` (Pode ser necessário 
 **Obs:** Esse procedimento funciona também em computadores públicos (como os dos laboratórios da UFRPE).
 
 
+## Instalar o GitHub Desktop
+https://desktop.github.com/  
+O instalador não precisa de privilégio administrativo.
