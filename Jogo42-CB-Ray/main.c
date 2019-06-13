@@ -18,6 +18,8 @@ int main(void)
     Vector2 playerPos = {300.0, 300.0}; // Posicao do jogador
     Vector2 playerMovement; // Vetor de movimento do jogador
     float moveSpeed = 150.0; // Velocidade de movimento por segundo
+
+    Rectangle obstaculo = {100.0, 100.0, 150.0, 100.0};
     //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
 
     // Main game loop
@@ -50,10 +52,13 @@ int main(void)
         // Draw
         //(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
         BeginDrawing();
-            ClearBackground(DARKGRAY); // Pintar tudo
+            ClearBackground(DARKBROWN); // Pintar tudo
 
             // Circulo que representa o jogador
             DrawCircleV(playerPos, 30, SKYBLUE);
+
+            // Obstáculo:
+            DrawRectangleRec(obstaculo, GRAY);
 
         EndDrawing();
         //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
