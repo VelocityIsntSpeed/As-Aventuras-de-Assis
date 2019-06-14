@@ -7,6 +7,12 @@
 #include "raylib.h"
 #include "raymath.h"
 
+// Retorna o vetor normalizado, ou o vetor nulo
+Vector2 V2Norm(Vector2 v)
+{
+    return (Vector2Length(v) == 0) ? Vector2Zero() : Vector2Normalize(v);
+}
+
 int main(void)
 {
     // Initialization
@@ -27,7 +33,7 @@ int main(void)
     {
         // Update
         //(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
-        // Input
+        // Movimento do player
         playerMovement = Vector2Zero();
 
         if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))
@@ -40,25 +46,35 @@ int main(void)
             playerMovement.y += 1.0;
 
         // Normalizar vetor:
-        playerMovement = (Vector2Length(playerMovement) == 0.0) ?
-                         Vector2Zero() : Vector2Normalize(playerMovement);
+        playerMovement = V2Norm(playerMovement);
 
         playerMovement = Vector2Scale(playerMovement, moveSpeed * GetFrameTime());
 
         playerPos = Vector2Add(playerPos, playerMovement);
-
         //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
 
         // Draw
         //(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
         BeginDrawing();
             ClearBackground(DARKBROWN); // Pintar tudo
-
+            //-----------------------------------------------------------------
             // Circulo que representa o jogador
             DrawCircleV(playerPos, 30, SKYBLUE);
-
-            // Obstáculo:
+            //-----------------------------------------------------------------
+            // Indicador de direção:
+            // Posicao do indicador de direção
+            Vector2 p2m = Vector2Subtract(GetMousePosition(), playerPos);
+            p2m = V2Norm(p2m);
+            p2m = Vector2Scale(p2m, 20);
+            p2m = Vector2Add(playerPos, p2m);
+            // Desenhar indicador de direcao
+            DrawCircleV(p2m, 3, WHITE);
+            //-----------------------------------------------------------------
+            // Obstáculo
             DrawRectangleRec(obstaculo, GRAY);
+            //-----------------------------------------------------------------
+            // FPS:
+            DrawFPS(screenWidth - 100, 10);
 
         EndDrawing();
         //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
