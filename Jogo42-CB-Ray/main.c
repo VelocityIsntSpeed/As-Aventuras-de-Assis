@@ -15,8 +15,7 @@ Vector2 V2Norm(Vector2 v)
 
 int main(void)
 {
-    // Initialization
-    //[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+    // Initialization [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
     const int screenWidth = 1280, screenHeight = 720;
     InitWindow(screenWidth, screenHeight, "Teste Jogo42 Raylib");
     SetTargetFPS(60);
@@ -26,13 +25,12 @@ int main(void)
     float moveSpeed = 150.0; // Velocidade de movimento (por segundo)
 
     Rectangle obstaculo = {100.0, 100.0, 150.0, 100.0};
-    //]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+    // Initialization ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
-        // Update
-        //[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+        // Update [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
         // Movimento do player
         playerMoveTo = Vector2Zero();
 
@@ -61,15 +59,15 @@ int main(void)
 
 
         //---------------------------------------------------------------------
-        //]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+        // Something
+        // Update ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 
-        // Draw
-        //[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+        // Draw [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
         BeginDrawing();
             ClearBackground(DARKBROWN); // Pintar tudo
             //-----------------------------------------------------------------
             // Circulo que representa o jogador
-            DrawCircleV(playerPos, 30, SKYBLUE);
+            DrawCircleGradient(playerPos.x, playerPos.y, 30, SKYBLUE, BLUE);
             //-----------------------------------------------------------------
             // Indicador de direção:
             // Posicao do indicador de direção
@@ -87,13 +85,12 @@ int main(void)
             DrawFPS(10, 10);
 
         EndDrawing();
-        //]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+        // Draw ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
     }
 
-    // De-Initialization
-    //[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+    // De-Initialization [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
     CloseWindow(); // Close window and OpenGL context
-    //]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+    // De-Initialization ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 
     return 0;
 }
