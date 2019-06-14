@@ -1,13 +1,13 @@
-/*******************************************************************************************
+/******************************************************************************
 *
 *
 *
-********************************************************************************************/
+******************************************************************************/
 
 #include "raylib.h"
 #include "raymath.h"
 
-// Retorna o vetor normalizado, ou o vetor nulo
+/* Se v for vetor nulo, retorna v, caso contrario retorna v normalizado */
 Vector2 V2Norm(Vector2 v)
 {
     return (Vector2Length(v) == 0) ? Vector2Zero() : Vector2Normalize(v);
@@ -16,45 +16,55 @@ Vector2 V2Norm(Vector2 v)
 int main(void)
 {
     // Initialization
-    //(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
+    //[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
     const int screenWidth = 1280, screenHeight = 720;
     InitWindow(screenWidth, screenHeight, "Teste Jogo42 Raylib");
     SetTargetFPS(60);
 
     Vector2 playerPos = {300.0, 300.0}; // Posicao do jogador
-    Vector2 playerMovement; // Vetor de movimento do jogador
-    float moveSpeed = 150.0; // Velocidade de movimento por segundo
+    Vector2 playerMoveTo; // Vetor de movimento do jogador
+    float moveSpeed = 150.0; // Velocidade de movimento (por segundo)
 
     Rectangle obstaculo = {100.0, 100.0, 150.0, 100.0};
-    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
         // Update
-        //(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
+        //[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
         // Movimento do player
-        playerMovement = Vector2Zero();
+        playerMoveTo = Vector2Zero();
 
         if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))
-            playerMovement.x -= 1.0;
+            playerMoveTo.x -= 1.0;
         if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))
-            playerMovement.x += 1.0;
+            playerMoveTo.x += 1.0;
         if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))
-            playerMovement.y -= 1.0;
+            playerMoveTo.y -= 1.0;
         if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))
-            playerMovement.y += 1.0;
+            playerMoveTo.y += 1.0;
 
         // Normalizar vetor:
-        playerMovement = V2Norm(playerMovement);
+        playerMoveTo = V2Norm(playerMoveTo);
+        // Deixar do tamanho certo:
+        playerMoveTo = Vector2Scale(playerMoveTo, moveSpeed * GetFrameTime());
+        // Transformar para referencial global:
+        playerMoveTo = Vector2Add(playerPos, playerMoveTo);
 
-        playerMovement = Vector2Scale(playerMovement, moveSpeed * GetFrameTime());
+        // Se nao houver colisao com obstaculo
+        if (!CheckCollisionCircleRec(playerMoveTo, 30, obstaculo)) {
+            // Mover player
+            playerPos = playerMoveTo;
+        }
 
-        playerPos = Vector2Add(playerPos, playerMovement);
-        //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+
+
+        //---------------------------------------------------------------------
+        //]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 
         // Draw
-        //(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
+        //[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
         BeginDrawing();
             ClearBackground(DARKBROWN); // Pintar tudo
             //-----------------------------------------------------------------
@@ -77,13 +87,13 @@ int main(void)
             DrawFPS(screenWidth - 100, 10);
 
         EndDrawing();
-        //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+        //]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
     }
 
     // De-Initialization
-    //(((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((((
+    //[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
     CloseWindow(); // Close window and OpenGL context
-    //)))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))
+    //]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 
     return 0;
 }
