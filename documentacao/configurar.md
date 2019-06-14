@@ -1,15 +1,15 @@
 # Instruções para configurar o ambiente de desenvolvimento
 Instruções para instalar/configurar no Windows as ferramentas e bibliotecas necessárias:
 
-* [Windows Explorer](#configurar-windows-explorer)
-* [Code::Blocks](#instalar-o-codeblocks)
-* [Raylib](#instalar-o-raylib)
-  * [Configurar CB para Raylib](#configurar-o-codeblocks-para-raylib)
-* [SDL](#instalar-o-sdl)
-* [GitHub Desktop](#instalar-o-github-desktop)
 
-<!-- TODO: adicionar instruções para VS e SDL para Visual C++ -->
-<!-- TODO: adionionar links à lista acima para as respectivas seções -->
+* [Configurar Windows Explorer](#configurar-windows-explorer)
+* [Instalar o Code::Blocks](#instalar-o-codeblocks)
+* [Instalar o Raylib](#instalar-o-raylib)
+  * [Configurar o Code::Blocks para Raylib](#configurar-o-codeblocks-para-raylib)
+* [Instalar o SDL](#instalar-o-sdl)
+* [Instalar o GitHub Desktop](#instalar-o-github-desktop)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 
 ## Configurar Windows Explorer
