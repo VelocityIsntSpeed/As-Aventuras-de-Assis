@@ -1,6 +1,19 @@
 #ifndef HELPERS_H_INCLUDED
 #define HELPERS_H_INCLUDED
 
+/******************************************************************************
+===============================================================================
+                                 ATENCAO!!!
+
+NAO COLOQUE LETRAS COM ACENTOS NO CODIGO-FONTE!
+O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
+===============================================================================
+
+Funcoes utilitarias.
+
+******************************************************************************/
+
+
 // Se v for vetor nulo, retorna v
 // caso contrario retorna v escalado de forma que sua magnitude seja `to`
 Vector2 V2ScaleTo(Vector2 v, float to)
