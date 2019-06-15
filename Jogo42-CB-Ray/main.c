@@ -42,7 +42,7 @@ int main(void)
     SetTargetFPS(60);
     ///========================================================================
     Gs* gs = malloc(sizeof(Gs));
-    // Usamos um pointer ao inves de apenas criar uma variavel do tipo Gs,
+    // Usamos um pointer ao inves de apenas criar uma variavel do tipo `Gs`,
     // para que seja possivel transferir codigo do main() para outra funcao sem
     // ter que editar muita coisa.
 
