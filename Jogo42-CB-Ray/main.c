@@ -9,12 +9,7 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 
 #include "raylib.h"
 #include "raymath.h"
-
-// Se v for vetor nulo, retorna v, caso contrario retorna v normalizado
-Vector2 V2Norm(Vector2 v)
-{
-    return (Vector2Length(v) == 0) ? Vector2Zero() : Vector2Normalize(v);
-}
+#include "helpers.h"
 
 int main(void)
 {
