@@ -12,13 +12,14 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 #include "stdlib.h" // Por causa do malloc()
 #include "helpers.h"
 
-// Estado do jogo:
+// Estado do jogo
 typedef struct {
     Vector2 playerPos; // Posicao world do jogador
     Rectangle obstaculo;
     Camera2D cam;
 } Gs;
 
+// Desenhar Player
 void DrawPlayer(Gs* gs)
 {
     // Circulo azul que representa o jogador
@@ -79,7 +80,7 @@ int main(void)
             // Mover player
             gs->playerPos = playerMoveTo;
         }
-        ///Centrar camera no player============================================
+        ///Centralizar camera no player========================================
         gs->cam.offset = Vector2Negate(gs->playerPos);
         gs->cam.offset.x += GetScreenWidth() / 2;
         gs->cam.offset.y += GetScreenHeight() / 2;
@@ -91,9 +92,9 @@ int main(void)
             // Pintar tudo (para formar o background)
             ClearBackground(DARKBROWN);
             BeginMode2D(gs->cam);
-                // Desenhar player
+                // Player
                 DrawPlayer(gs);
-                ///Obstaculo===================================================
+                // Obstaculo
                 DrawRectangleRec(gs->obstaculo, GRAY);
             EndMode2D();
             ///================================================================
@@ -106,6 +107,5 @@ int main(void)
     /// De-Initialization
     free(gs);
     CloseWindow(); // Close window and OpenGL context
-
     return 0;
 }
