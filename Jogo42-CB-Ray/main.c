@@ -9,6 +9,7 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 
 #include "raylib.h"
 #include "raymath.h"
+#include "stdlib.h" // Por causa do malloc()
 #include "helpers.h"
 
 // Estado do jogo:
@@ -20,10 +21,10 @@ typedef struct {
 
 void DrawPlayer(Gs* gs)
 {
-    // Circulo que representa o jogador
+    // Circulo azul que representa o jogador
     DrawCircleGradient(gs->playerPos.x, gs->playerPos.y, 30, SKYBLUE, BLUE);
 
-    // Indicador de direcao
+    // Indicador de direcao (pontinho branco)
     Vector2 p2m = Vector2Subtract(GetMouseWorldPos(gs->cam), gs->playerPos);
     p2m = V2ScaleTo(p2m, 20.0);
     p2m = Vector2Add(gs->playerPos, p2m);
@@ -87,7 +88,8 @@ int main(void)
 
         /// [[[[[ Draw ]]]]]
         BeginDrawing();
-            ClearBackground(DARKBROWN); // Pintar tudo
+            // Pintar tudo (para formar o background)
+            ClearBackground(DARKBROWN);
             BeginMode2D(gs->cam);
                 // Desenhar player
                 DrawPlayer(gs);
