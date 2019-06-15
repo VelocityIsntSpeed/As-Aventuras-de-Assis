@@ -1,7 +1,10 @@
 /******************************************************************************
-*
-*
-*
+
+ATENCAO!!!
+
+NAO COLOQUE ACENTOS NO CODIGO-FONTE!
+O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
+
 ******************************************************************************/
 
 #include "raylib.h"
