@@ -62,7 +62,7 @@ int main(void)
         playerMoveTo = Vector2Scale(playerMoveTo, MOVESPEED * GetFrameTime());
 
         /* Transformar de coordenadas player para coordenadas world (i.e. antes
-           era a partir da posical atual do player, agora vai ser a partir da
+           era a partir da posicao atual do player, agora vai ser a partir da
            origem do world, assim como eh playerPos) */
         playerMoveTo = Vector2Add(playerPos, playerMoveTo);
 
