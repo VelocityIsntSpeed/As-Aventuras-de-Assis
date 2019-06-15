@@ -40,12 +40,15 @@ int main(void)
     InitWindow(screenWidth, screenHeight, "Teste Jogo42 Raylib");
     SetTargetFPS(60);
     ///========================================================================
-    Gs gs;
+    Gs* gs = malloc(sizeof(Gs));
+    // Usamos um pointer ao inves de apenas criar uma variavel do tipo Gs,
+    // para que seja possivel transferir codigo do main() para outra funcao sem
+    // ter que editar muita coisa.
 
-    gs.playerPos = (Vector2){300.0, 300.0};
-    gs.obstaculo = (Rectangle){100.0, 100.0, 150.0, 100.0};
-    gs.cam = (Camera2D){0};
-    gs.cam.zoom = 1.0f;
+    gs->playerPos = (Vector2){300.0, 300.0};
+    gs->obstaculo = (Rectangle){100.0, 100.0, 150.0, 100.0};
+    gs->cam = (Camera2D){0};
+    gs->cam.zoom = 1.0f;
     /// [[[[[ End Initalization ]]]]]
 
     // Main game loop
@@ -68,28 +71,28 @@ int main(void)
         // Deixar da magnitude certa
         playerMoveTo = V2ScaleTo(playerMoveTo, MOVESPEED * GetFrameTime());
         // Transformar para referencial world
-        playerMoveTo = Vector2Add(gs.playerPos, playerMoveTo);
+        playerMoveTo = Vector2Add(gs->playerPos, playerMoveTo);
 
         // Se nao houver colisao com obstaculo
-        if (!CheckCollisionCircleRec(playerMoveTo, 30, gs.obstaculo)) {
+        if (!CheckCollisionCircleRec(playerMoveTo, 30, gs->obstaculo)) {
             // Mover player
-            gs.playerPos = playerMoveTo;
+            gs->playerPos = playerMoveTo;
         }
         ///Centrar camera no player============================================
-        gs.cam.offset = Vector2Negate(gs.playerPos);
-        gs.cam.offset.x += GetScreenWidth() / 2;
-        gs.cam.offset.y += GetScreenHeight() / 2;
+        gs->cam.offset = Vector2Negate(gs->playerPos);
+        gs->cam.offset.x += GetScreenWidth() / 2;
+        gs->cam.offset.y += GetScreenHeight() / 2;
 
         /// [[[[[ End Update ]]]]]
 
         /// [[[[[ Draw ]]]]]
         BeginDrawing();
             ClearBackground(DARKBROWN); // Pintar tudo
-            BeginMode2D(gs.cam);
+            BeginMode2D(gs->cam);
                 // Desenhar player
-                DrawPlayer(&gs);
+                DrawPlayer(gs);
                 ///Obstaculo===================================================
-                DrawRectangleRec(gs.obstaculo, GRAY);
+                DrawRectangleRec(gs->obstaculo, GRAY);
             EndMode2D();
             ///================================================================
             // FPS
@@ -99,6 +102,7 @@ int main(void)
     }
 
     /// De-Initialization
+    free(gs);
     CloseWindow(); // Close window and OpenGL context
 
     return 0;
