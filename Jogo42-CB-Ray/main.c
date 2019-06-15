@@ -25,7 +25,6 @@ int main(void)
     SetTargetFPS(60);
     ///Player==================================================================
     Vector2 playerPos = {300.0, 300.0}; // Posicao world do jogador
-    Vector2 playerMoveTo;
     float moveSpeed = 150.0; // Velocidade de movimento (por segundo)
     ///Level===================================================================
     Rectangle obstaculo = {100.0, 100.0, 150.0, 100.0};
@@ -40,7 +39,7 @@ int main(void)
         /// [[[[[ Update ]]]]]
         ///Movimento do player=================================================
         // playerMoveTo armazena a posicao futura do player ignorando colisoes
-        playerMoveTo = Vector2Zero();
+        Vector2 playerMoveTo = Vector2Zero();
 
         if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))
             playerMoveTo.x -= 1.0;
