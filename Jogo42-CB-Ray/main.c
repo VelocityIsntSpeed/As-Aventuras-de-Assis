@@ -20,7 +20,7 @@ int main(void)
     SetTargetFPS(60);
     ///Player==================================================================
     Vector2 playerPos = {300.0, 300.0}; // Posicao world do jogador
-    float moveSpeed = 150.0; // Velocidade de movimento (por segundo)
+    const float moveSpeed = 150.0; // Velocidade de movimento (por segundo)
     ///Level===================================================================
     Rectangle obstaculo = {100.0, 100.0, 150.0, 100.0};
     ///Camera==================================================================
