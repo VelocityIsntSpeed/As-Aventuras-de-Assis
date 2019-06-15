@@ -11,6 +11,27 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 #include "raymath.h"
 #include "helpers.h"
 
+// Estado do jogo:
+typedef struct {
+    Vector2 playerPos; // Posicao world do jogador
+    Rectangle obstaculo;
+    Camera2D cam;
+} Gs;
+
+void DrawPlayer(Gs* gs)
+{
+    // Circulo que representa o jogador
+    DrawCircleGradient(gs->playerPos.x, gs->playerPos.y, 30, SKYBLUE, BLUE);
+
+    // Indicador de direcao
+    Vector2 p2m = Vector2Subtract(GetMouseWorldPos(gs->cam), gs->playerPos);
+    p2m = V2ScaleTo(p2m, 20.0);
+    p2m = Vector2Add(gs->playerPos, p2m);
+    DrawCircleV(p2m, 3, WHITE);
+}
+
+#define MOVESPEED 150.0 // Velocidade de movimento do player (por segundo)
+
 int main(void)
 {
     /// [[[[[ Initialization ]]]]]
@@ -18,14 +39,13 @@ int main(void)
     const int screenWidth = 1280, screenHeight = 720;
     InitWindow(screenWidth, screenHeight, "Teste Jogo42 Raylib");
     SetTargetFPS(60);
-    ///Player==================================================================
-    Vector2 playerPos = {300.0, 300.0}; // Posicao world do jogador
-    const float moveSpeed = 150.0; // Velocidade de movimento (por segundo)
-    ///Level===================================================================
-    Rectangle obstaculo = {100.0, 100.0, 150.0, 100.0};
-    ///Camera==================================================================
-    Camera2D cam = {0};
-    cam.zoom = 1.0f;
+    ///========================================================================
+    Gs gs;
+
+    gs.playerPos = (Vector2){300.0, 300.0};
+    gs.obstaculo = (Rectangle){100.0, 100.0, 150.0, 100.0};
+    gs.cam = (Camera2D){0};
+    gs.cam.zoom = 1.0f;
     /// [[[[[ End Initalization ]]]]]
 
     // Main game loop
@@ -45,41 +65,31 @@ int main(void)
         if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))
             playerMoveTo.y += 1.0;
 
-        // Normalizar
-        playerMoveTo = V2Norm(playerMoveTo);
         // Deixar da magnitude certa
-        playerMoveTo = Vector2Scale(playerMoveTo, moveSpeed * GetFrameTime());
+        playerMoveTo = V2ScaleTo(playerMoveTo, MOVESPEED * GetFrameTime());
         // Transformar para referencial world
-        playerMoveTo = Vector2Add(playerPos, playerMoveTo);
+        playerMoveTo = Vector2Add(gs.playerPos, playerMoveTo);
 
         // Se nao houver colisao com obstaculo
-        if (!CheckCollisionCircleRec(playerMoveTo, 30, obstaculo)) {
+        if (!CheckCollisionCircleRec(playerMoveTo, 30, gs.obstaculo)) {
             // Mover player
-            playerPos = playerMoveTo;
+            gs.playerPos = playerMoveTo;
         }
         ///Centrar camera no player============================================
-        cam.offset = Vector2Negate(playerPos);
-        cam.offset.x += GetScreenWidth() / 2;
-        cam.offset.y += GetScreenHeight() / 2;
-        ///Calcular posicao world do mouse=====================================
-        Vector2 mouseWorldPos = Vector2Subtract(GetMousePosition(), cam.offset);
+        gs.cam.offset = Vector2Negate(gs.playerPos);
+        gs.cam.offset.x += GetScreenWidth() / 2;
+        gs.cam.offset.y += GetScreenHeight() / 2;
 
         /// [[[[[ End Update ]]]]]
 
         /// [[[[[ Draw ]]]]]
         BeginDrawing();
             ClearBackground(DARKBROWN); // Pintar tudo
-            BeginMode2D(cam);
-                ///Jogador=====================================================
-                // Circulo que representa o jogador
-                DrawCircleGradient(playerPos.x, playerPos.y, 30, SKYBLUE, BLUE);
-                ///----Indicador de direcao------------------------------------
-                Vector2 p2m = Vector2Subtract(mouseWorldPos, playerPos);
-                p2m = Vector2Scale(V2Norm(p2m), 20);
-                p2m = Vector2Add(playerPos, p2m);
-                DrawCircleV(p2m, 3, WHITE);
+            BeginMode2D(gs.cam);
+                // Desenhar player
+                DrawPlayer(&gs);
                 ///Obstaculo===================================================
-                DrawRectangleRec(obstaculo, GRAY);
+                DrawRectangleRec(gs.obstaculo, GRAY);
             EndMode2D();
             ///================================================================
             // FPS
