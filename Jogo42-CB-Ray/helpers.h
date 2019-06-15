@@ -11,11 +11,13 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 
 Funcoes utilitarias.
 
+raylib.h e raymath.h devem ser incluidos antes.
+
 ******************************************************************************/
 
 
-// Se v for vetor nulo, retorna v
-// caso contrario retorna v escalado de forma que sua magnitude seja `to`
+// Se v for vetor nulo, retorna `v`
+// caso contrario retorna `v` escalado de forma que sua magnitude seja `to`
 Vector2 V2ScaleTo(Vector2 v, float to)
 {
     return (Vector2Length(v) == 0) ? Vector2Zero() :
