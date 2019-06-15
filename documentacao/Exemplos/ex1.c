@@ -26,10 +26,10 @@ int main(void)
     SetTargetFPS(60);
     ///========================================================================
     // Posicao do jogador
-    Vector2 playerPos = (Vector2){300.0, 300.0};
+    Vector2 playerPos = {300.0, 300.0};
 
     // Obstaculo cinza para bloquear o player
-    Rectangle obstaculo = (Rectangle){100.0, 100.0, 150.0, 100.0};
+    Rectangle obstaculo = {100.0, 100.0, 150.0, 100.0};
 
     /// [[[[[ End Initalization ]]]]]
 
