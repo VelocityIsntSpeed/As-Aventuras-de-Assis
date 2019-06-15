@@ -16,10 +16,9 @@ Vector2 V2Norm(Vector2 v)
     return (Vector2Length(v) == 0) ? Vector2Zero() : Vector2Normalize(v);
 }
 
-
 int main(void)
 {
-    /// Initialization [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+    /// [[[[[ Initialization ]]]]]
     ///Janela==================================================================
     const int screenWidth = 1280, screenHeight = 720;
     InitWindow(screenWidth, screenHeight, "Teste Jogo42 Raylib");
@@ -33,12 +32,12 @@ int main(void)
     ///Camera==================================================================
     Camera2D cam = {0};
     cam.zoom = 1.0f;
-    /// Initialization ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+    /// [[[[[ End Initalization ]]]]]
 
     // Main game loop
     while (!WindowShouldClose()) // Detect window close button or ESC key
     {
-        /// Update [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+        /// [[[[[ Update ]]]]]
         ///Movimento do player=================================================
         // playerMoveTo armazena a posicao futura do player ignorando colisoes
         playerMoveTo = Vector2Zero();
@@ -52,9 +51,9 @@ int main(void)
         if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))
             playerMoveTo.y += 1.0;
 
-        // Normalizar vetor
+        // Normalizar
         playerMoveTo = V2Norm(playerMoveTo);
-        // Deixar do tamanho certo
+        // Deixar da magnitude certa
         playerMoveTo = Vector2Scale(playerMoveTo, moveSpeed * GetFrameTime());
         // Transformar para referencial world
         playerMoveTo = Vector2Add(playerPos, playerMoveTo);
@@ -71,16 +70,16 @@ int main(void)
         ///Calcular posicao world do mouse=====================================
         Vector2 mouseWorldPos = Vector2Subtract(GetMousePosition(), cam.offset);
 
-        /// Update ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+        /// [[[[[ End Update ]]]]]
 
-        /// Draw [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+        /// [[[[[ Draw ]]]]]
         BeginDrawing();
             ClearBackground(DARKBROWN); // Pintar tudo
             BeginMode2D(cam);
                 ///Jogador=====================================================
                 // Circulo que representa o jogador
                 DrawCircleGradient(playerPos.x, playerPos.y, 30, SKYBLUE, BLUE);
-                ///Indicador de direcao----------------------------------------
+                ///----Indicador de direcao------------------------------------
                 Vector2 p2m = Vector2Subtract(mouseWorldPos, playerPos);
                 p2m = Vector2Scale(V2Norm(p2m), 20);
                 p2m = Vector2Add(playerPos, p2m);
@@ -91,14 +90,12 @@ int main(void)
             ///================================================================
             // FPS
             DrawFPS(10, 10);
-
         EndDrawing();
-        /// Draw ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+        /// [[[[[ End Draw ]]]]]
     }
 
-    /// De-Initialization [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+    /// De-Initialization
     CloseWindow(); // Close window and OpenGL context
-    /// De-Initialization ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 
     return 0;
 }
