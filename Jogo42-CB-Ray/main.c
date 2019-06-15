@@ -61,10 +61,13 @@ int main(void)
             // Mover player
             playerPos = playerMoveTo;
         }
-        ///Mover Camera========================================================
-        //cam.offset.x = 200.0;
-        ///Mouse world position:
-        //TODO: mouse world position
+        ///Centrar camera no player============================================
+        cam.offset = Vector2Negate(playerPos);
+        cam.offset.x += GetScreenWidth() / 2;
+        cam.offset.y += GetScreenHeight() / 2;
+        ///Calcular posicao world do mouse=====================================
+        Vector2 mouseWorldPos = Vector2Subtract(GetMousePosition(), cam.offset);
+
         /// Update ]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 
         /// Draw [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
@@ -75,7 +78,7 @@ int main(void)
                 // Circulo que representa o jogador
                 DrawCircleGradient(playerPos.x, playerPos.y, 30, SKYBLUE, BLUE);
                 ///Indicador de direcao----------------------------------------
-                Vector2 p2m = Vector2Subtract(GetMousePosition(), playerPos);
+                Vector2 p2m = Vector2Subtract(mouseWorldPos, playerPos);
                 p2m = Vector2Scale(V2Norm(p2m), 20);
                 p2m = Vector2Add(playerPos, p2m);
                 DrawCircleV(p2m, 3, WHITE);
