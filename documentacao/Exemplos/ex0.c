@@ -32,9 +32,9 @@ int main(void)
     // Posicao do jogador
     Vector2 playerPos = {300.0, 300.0};
 
-    // Retangulos
+    // Obstaculos
     Rectangle obstaculoCinza = {100.0, 100.0, 150.0, 100.0},
-              obstaculoRoxo  = {350.0, 300.0, 250.0, 100.0};
+              obstaculoRoxo  = {650.0, 300.0, 150.0, 200.0};
 
     /// [[[[[ End Initalization ]]]]]
 
@@ -75,7 +75,9 @@ int main(void)
             ClearBackground(DARKBROWN);
 
             // Obstaculo Roxo
-            DrawRectangleRec(obstaculoRoxo, PURPLE);
+            Vector2 center = {obstaculoRoxo.width / 2.0,
+                              obstaculoRoxo.height / 2.0};
+            DrawRectanglePro(obstaculoRoxo, center, 45, VIOLET);
 
             // Player
             DrawCircleGradient(playerPos.x, playerPos.y,
