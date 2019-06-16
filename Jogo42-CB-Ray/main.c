@@ -1,111 +1,59 @@
-/******************************************************************************
-===============================================================================
-                                 ATENCAO!!!
-
-NAO COLOQUE LETRAS COM ACENTOS NO CODIGO-FONTE!
-O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
-===============================================================================
-******************************************************************************/
+/*******************************************************************************************
+*
+*   raylib [core] example - Keyboard input
+*
+*   This example has been created using raylib 1.0 (www.raylib.com)
+*   raylib is licensed under an unmodified zlib/libpng license (View raylib.h for details)
+*
+*   Copyright (c) 2014 Ramon Santamaria (@raysan5)
+*
+********************************************************************************************/
 
 #include "raylib.h"
-#include "raymath.h"
-#include "stdlib.h" // Por causa do malloc()
-#include "helpers.h"
-
-// Estado do jogo
-typedef struct {
-    Vector2 playerPos; // Posicao world do jogador
-    Rectangle obstaculo;
-    Camera2D cam;
-} Gs;
-
-// Desenhar Player
-void DrawPlayer(Gs* gs)
-{
-    // Circulo azul que representa o jogador
-    DrawCircleGradient(gs->playerPos.x, gs->playerPos.y, 30, SKYBLUE, BLUE);
-
-    // Indicador de direcao (pontinho branco)
-    Vector2 p2m = Vector2Subtract(GetMouseWorldPos(gs->cam), gs->playerPos);
-    p2m = V2ScaleTo(p2m, 20.0);
-    p2m = Vector2Add(gs->playerPos, p2m);
-    DrawCircleV(p2m, 3, WHITE);
-}
-
-#define MOVESPEED 150.0 // Velocidade de movimento do player (por segundo)
 
 int main(void)
 {
-    /// [[[[[ Initialization ]]]]]
-    ///Janela==================================================================
-    const int screenWidth = 1280, screenHeight = 720;
-    InitWindow(screenWidth, screenHeight, "Teste Jogo42 Raylib");
-    SetTargetFPS(60);
-    ///========================================================================
-    Gs* gs = malloc(sizeof(Gs));
-    // Usamos um pointer ao inves de apenas criar uma variavel do tipo `Gs`,
-    // para que seja possivel transferir codigo do main() para outra funcao sem
-    // ter que editar muita coisa.
+    // Initialization
+    //--------------------------------------------------------------------------------------
+    const int screenWidth = 800;
+    const int screenHeight = 450;
 
-    gs->playerPos = (Vector2){300.0, 300.0};
-    gs->obstaculo = (Rectangle){100.0, 100.0, 150.0, 100.0};
-    gs->cam = (Camera2D){0};
-    gs->cam.zoom = 1.0f;
-    /// [[[[[ End Initalization ]]]]]
+    InitWindow(screenWidth, screenHeight, "raylib [core] example - keyboard input");
+
+    Vector2 ballPosition = { (float)screenWidth/2, (float)screenHeight/2 };
+
+    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
+    //--------------------------------------------------------------------------------------
 
     // Main game loop
-    while (!WindowShouldClose()) // Detect window close button or ESC key
+    while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        /// [[[[[ Update ]]]]]
-        ///Movimento do player=================================================
-        // playerMoveTo armazena a posicao futura do player ignorando colisoes
-        Vector2 playerMoveTo = Vector2Zero();
+        // Update
+        //----------------------------------------------------------------------------------
+        if (IsKeyDown(KEY_RIGHT)) ballPosition.x += 2.0f;
+        if (IsKeyDown(KEY_LEFT)) ballPosition.x -= 2.0f;
+        if (IsKeyDown(KEY_UP)) ballPosition.y -= 2.0f;
+        if (IsKeyDown(KEY_DOWN)) ballPosition.y += 2.0f;
+        //----------------------------------------------------------------------------------
 
-        if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))
-            playerMoveTo.x -= 1.0;
-        if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))
-            playerMoveTo.x += 1.0;
-        if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))
-            playerMoveTo.y -= 1.0;
-        if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))
-            playerMoveTo.y += 1.0;
-
-        // Deixar da magnitude certa
-        playerMoveTo = V2ScaleTo(playerMoveTo, MOVESPEED * GetFrameTime());
-        // Transformar para referencial world
-        playerMoveTo = Vector2Add(gs->playerPos, playerMoveTo);
-
-        // Se nao houver colisao com obstaculo
-        if (!CheckCollisionCircleRec(playerMoveTo, 30, gs->obstaculo)) {
-            // Mover player
-            gs->playerPos = playerMoveTo;
-        }
-        ///Centralizar camera no player========================================
-        gs->cam.offset = Vector2Negate(gs->playerPos);
-        gs->cam.offset.x += GetScreenWidth() / 2;
-        gs->cam.offset.y += GetScreenHeight() / 2;
-
-        /// [[[[[ End Update ]]]]]
-
-        /// [[[[[ Draw ]]]]]
+        // Draw
+        //----------------------------------------------------------------------------------
         BeginDrawing();
-            // Pintar tudo (para formar o background)
-            ClearBackground(DARKBROWN);
-            BeginMode2D(gs->cam);
-                // Player
-                DrawPlayer(gs);
-                // Obstaculo
-                DrawRectangleRec(gs->obstaculo, GRAY);
-            EndMode2D();
-            ///================================================================
-            // FPS
-            DrawFPS(10, 10);
+
+            ClearBackground(RAYWHITE);
+
+            DrawText("move the ball with arrow keys", 10, 10, 20, DARKGRAY);
+
+            DrawCircleV(ballPosition, 50, MAROON);
+
         EndDrawing();
-        /// [[[[[ End Draw ]]]]]
+        //----------------------------------------------------------------------------------
     }
 
-    /// De-Initialization
-    free(gs);
-    CloseWindow(); // Close window and OpenGL context
+    // De-Initialization
+    //--------------------------------------------------------------------------------------
+    CloseWindow();        // Close window and OpenGL context
+    //--------------------------------------------------------------------------------------
+
     return 0;
 }

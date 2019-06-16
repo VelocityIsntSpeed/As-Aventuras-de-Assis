@@ -29,6 +29,7 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-Wall" />
 			<Add option="-Wall -std=c99" />
 			<Add directory="C:/raylib/mingw/i686-w64-mingw32/include" />
 		</Compiler>
@@ -36,7 +37,6 @@
 			<Add option="-lraylib -lopengl32 -lgdi32 -lwinmm" />
 			<Add directory="C:/raylib/mingw/i686-w64-mingw32/lib" />
 		</Linker>
-		<Unit filename="helpers.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
