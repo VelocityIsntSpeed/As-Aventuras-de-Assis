@@ -81,7 +81,7 @@ int main(void)
         if (IsKeyPressed(KEY_SPACE)) {
             obCinza.x += 10;
             obCinza.height += 5;
-            roxoTaAndando = true;
+            roxoTaAndando = !roxoTaAndando;
         }
         if (roxoTaAndando) {
             obRoxoCentro.x -= VEL_ROXO * GetFrameTime();
