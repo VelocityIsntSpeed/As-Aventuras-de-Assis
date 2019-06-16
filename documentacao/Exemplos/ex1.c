@@ -90,6 +90,10 @@ int main(void)
                      "WASD/Setas para andar\n"
                      "Espaco para movimentar obstaculos", 200, 10, 19, MAROON);
 
+            // Raio do roxo
+            DrawText(TextFormat("Raio = %.1f", obRoxoRaio),
+                     obRoxoCentro.x, obRoxoCentro.y, 17, WHITE);
+
             // FPS
             DrawFPS(10, 10);
         EndDrawing();
