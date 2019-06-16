@@ -26,6 +26,8 @@ Novidades:
 #define MOVESPEED 150.0 // Velocidade de movimento do player (por segundo)
 #define PLR_RADIUS 30.0 // Raio do circulo do player
 
+#define VEL_ROXO 20.0f // Velocidade do movimento do circulo roxo
+
 // Move o player
 void MovePlayer(Vector2* playerPos, Rectangle obRet, Vector2 obCircCentro, float raio);
 
@@ -43,8 +45,9 @@ int main(void)
 
     // Obstaculos
     Rectangle obCinza = {100.0, 100.0, 150.0, 100.0};
-    Vector2 obRoxoCentro = {650.0, 300.0};
+    Vector2 obRoxoCentro = {750.0, 300.0};
     float obRoxoRaio = 100.0;
+    bool roxoTaAndando = false;
 
     /// [[[[[ End Initalization ]]]]]
 
@@ -57,11 +60,13 @@ int main(void)
 
         ///Mover obstaculos====================================================
         if (IsKeyPressed(KEY_SPACE)) {
-            obRoxoCentro.x -= 10.0;
-            obRoxoRaio -= 2.0;
-
             obCinza.x += 10.0f;
             obCinza.height += 5.0f;
+            roxoTaAndando = true;
+        }
+        if (roxoTaAndando) {
+            obRoxoCentro.x -= VEL_ROXO * GetFrameTime();
+            obRoxoRaio -= VEL_ROXO / 7 * GetFrameTime();
         }
         /// [[[[[ End Update ]]]]]
 
