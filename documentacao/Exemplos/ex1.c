@@ -29,7 +29,8 @@ Novidades em relacao ao Exemplo 0:
 #define VEL_ROXO 30.0f // Velocidade do movimento do circulo roxo
 
 // Move o player
-void MovePlayer(Vector2* playerPos, Rectangle obRet, Vector2 obCircCentro, float raio);
+void MovePlayer(Vector2* playerPos, Rectangle obRet,
+                Vector2 obCircCentro, float raio);
 
 int main(void)
 {
@@ -107,7 +108,8 @@ int main(void)
 }
 
 
-void MovePlayer(Vector2* playerPos, Rectangle obRect, Vector2 obCircCenter, float raio)
+void MovePlayer(Vector2* playerPos, Rectangle obRect,
+                Vector2 obCircCenter, float raio)
 {
     // Posicao do player no proximo frame em relacao ah posicao atual
     Vector2 playerMoveTo = Vector2Zero();
