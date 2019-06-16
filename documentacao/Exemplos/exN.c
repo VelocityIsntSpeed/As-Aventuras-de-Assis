@@ -43,7 +43,7 @@ int main(void)
     /// [[[[[ Initialization ]]]]]
 
     ///Janela==================================================================
-    const int screenWidth = 1280, screenHeight = 720;
+    const int screenWidth = 1024, screenHeight = 576;
     InitWindow(screenWidth, screenHeight, "Teste Jogo42 Raylib");
     SetTargetFPS(60);
     ///========================================================================
