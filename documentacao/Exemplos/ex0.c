@@ -38,7 +38,7 @@ int main(void)
 
     // Obstaculos
     Rectangle obCinza = {100, 100, 150, 100};
-    Vector2 obRoxoCentro = {750, 300};
+    Vector2 obRoxoCentro = {900, 350};
     float obRoxoRaio = 100;
     bool roxoTaAndando = false;
 
@@ -80,7 +80,7 @@ int main(void)
         }
         if (roxoTaAndando) {
             obRoxoCentro.x -= VEL_ROXO * GetFrameTime();
-            obRoxoRaio -= VEL_ROXO / 6.0f * GetFrameTime();
+            obRoxoRaio -= VEL_ROXO / 5.0f * GetFrameTime();
         }
         /// [[[[[ End Update ]]]]]
 
