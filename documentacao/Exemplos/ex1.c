@@ -49,10 +49,10 @@ int main(void)
     /// [[[[[ End Initalization ]]]]]
 
     // Main game loop
-    while (!WindowShouldClose()) // Detect window close button or ESC key
-    {
+    while (!WindowShouldClose()) { // Detect window close button or ESC key
         /// [[[[[ Update ]]]]]
-        ///Movimentacao do player==============================================
+
+        // Mover player
         MovePlayer(&playerPos, obCinza, obRoxoCentro, obRoxoRaio);
 
         ///Mover obstaculos====================================================
