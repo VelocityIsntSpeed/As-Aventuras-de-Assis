@@ -23,8 +23,8 @@ Novidades:
 #include "raylib.h"
 #include "raymath.h"
 
-#define MOVESPEED 150.0f // Velocidade de movimento do player (por segundo)
-#define PLR_RADIUS 30.0f // Raio do circulo do player
+#define VEL_PLR 150.0f // Velocidade de movimento do player (por segundo)
+#define RAIO_PLR 30.0f // Raio do circulo do player
 
 #define VEL_ROXO 30.0f // Velocidade do movimento do circulo roxo
 
@@ -80,7 +80,7 @@ int main(void)
 
             // Player
             DrawCircleGradient(playerPos.x, playerPos.y,
-                               PLR_RADIUS, SKYBLUE, BLUE);
+                               RAIO_PLR, SKYBLUE, BLUE);
 
             // Obstaculo Cinza
             DrawRectangleRec(obCinza, GRAY);
@@ -117,14 +117,14 @@ void MovePlayer(Vector2* playerPos, Rectangle obRect, Vector2 obCircCenter, floa
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))     playerMoveTo.y -= 1;
     if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))   playerMoveTo.y += 1;
 
-    playerMoveTo = Vector2Scale(playerMoveTo, MOVESPEED * GetFrameTime());
+    playerMoveTo = Vector2Scale(playerMoveTo, VEL_PLR * GetFrameTime());
 
     // Transformar para coordenadas world
     playerMoveTo = Vector2Add(*playerPos, playerMoveTo);
 
-    // Verificar colisão
-    if (!CheckCollisionCircleRec(playerMoveTo, PLR_RADIUS, obRect) &&
-        !CheckCollisionCircles(playerMoveTo, PLR_RADIUS, obCircCenter, raio))
+    // Verificar colisao
+    if (!CheckCollisionCircleRec(playerMoveTo, RAIO_PLR, obRect) &&
+        !CheckCollisionCircles(playerMoveTo, RAIO_PLR, obCircCenter, raio))
     {
         // Atualizar a posicao do player
         *playerPos = playerMoveTo;

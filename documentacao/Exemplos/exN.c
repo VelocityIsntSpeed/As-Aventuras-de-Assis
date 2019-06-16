@@ -18,7 +18,7 @@ Ignore esse exemplo, ele eh ruim
 #include "helpers.h"
 
 #define MOVESPEED 150.0 // Velocidade de movimento do player (por segundo)
-#define PLR_RADIUS 30.0 // Raio do circulo do player
+#define RAIO_PLR 30.0 // Raio do circulo do player
 
 // Estado do jogo
 typedef struct {
@@ -31,7 +31,7 @@ typedef struct {
 void DrawPlayer(Gs* gs)
 {
     // Circulo azul que representa o jogador
-    DrawCircleGradient(gs->playerPos.x, gs->playerPos.y, PLR_RADIUS, SKYBLUE, BLUE);
+    DrawCircleGradient(gs->playerPos.x, gs->playerPos.y, RAIO_PLR, SKYBLUE, BLUE);
 
     // Indicador de direcao (pontinho branco)
     Vector2 p2m = Vector2Subtract(GetMouseWorldPos(gs->cam), gs->playerPos);
@@ -80,7 +80,7 @@ int main(void)
         playerMoveTo = Vector2Add(gs->playerPos, playerMoveTo);
 
         // Se nao houver colisao com obstaculo
-        if (!CheckCollisionCircleRec(playerMoveTo, PLR_RADIUS, gs->obstaculo)) {
+        if (!CheckCollisionCircleRec(playerMoveTo, RAIO_PLR, gs->obstaculo)) {
             // Mover player
             gs->playerPos = playerMoveTo;
         }
