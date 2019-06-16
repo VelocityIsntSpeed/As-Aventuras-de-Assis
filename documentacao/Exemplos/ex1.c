@@ -58,6 +58,7 @@ int main(void)
 
     // Main game loop
     while (!WindowShouldClose()) { // Detect window close button or ESC key
+
         /// [[[[[ Update ]]]]]
 
         // Mover player
@@ -67,6 +68,7 @@ int main(void)
         MoveObstacles(&obCinza, &obRoxoCentro, &obRoxoRaio, &roxoTaAndando);
 
         /// [[[[[ End Update ]]]]]
+
 
         /// [[[[[ Draw ]]]]]
         BeginDrawing();
@@ -95,7 +97,6 @@ int main(void)
             // FPS
             DrawFPS(10, 10);
         EndDrawing();
-
         /// [[[[[ End Draw ]]]]]
     }
 

@@ -46,6 +46,7 @@ int main(void)
 
     // Main game loop
     while (!WindowShouldClose()) { // Detect window close button or ESC key
+
         /// [[[[[ Update ]]]]]
         ///Movimentacao do player==============================================
         /* A posicao para a qual vamos mover o player nesse frame,
@@ -89,6 +90,7 @@ int main(void)
         }
         /// [[[[[ End Update ]]]]]
 
+
         /// [[[[[ Draw ]]]]]
         BeginDrawing();
             // Pintar tudo (para formar o background)
@@ -116,7 +118,6 @@ int main(void)
             // FPS
             DrawFPS(10, 10);
         EndDrawing();
-
         /// [[[[[ End Draw ]]]]]
     }
 
