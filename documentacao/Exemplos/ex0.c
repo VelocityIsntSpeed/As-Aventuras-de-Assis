@@ -8,6 +8,10 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 
 Exemplo 0
 
+Nesse projeto de CodeBlocks, cada exemplo tem seu build target. Vc pode mudar
+o target atual no menu drop-down da toolbar de compilador.
+(veja mudar-build-target.png)
+
 ******************************************************************************/
 
 #include "raylib.h"
