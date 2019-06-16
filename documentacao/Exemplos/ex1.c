@@ -108,8 +108,8 @@ int main(void)
 }
 
 
-void MovePlayer(Vector2* playerPos, Rectangle obRect,
-                Vector2 obCircCenter, float raio)
+void MovePlayer(Vector2* playerPos, Rectangle obRet,
+                Vector2 obCircCentro, float raio)
 {
     // Posicao do player no proximo frame em relacao ah posicao atual
     Vector2 playerMoveTo = Vector2Zero();
@@ -130,8 +130,8 @@ void MovePlayer(Vector2* playerPos, Rectangle obRect,
        A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
 
     // Verificar colisao
-    if (!CheckCollisionCircleRec(playerMoveTo, RAIO_PLR, obRect) &&
-        !CheckCollisionCircles(playerMoveTo, RAIO_PLR, obCircCenter, raio))
+    if (!CheckCollisionCircleRec(playerMoveTo, RAIO_PLR, obRet) &&
+        !CheckCollisionCircles(playerMoveTo, RAIO_PLR, obCircCentro, raio))
     {
         // Atualizar a posicao do player
         *playerPos = playerMoveTo;
