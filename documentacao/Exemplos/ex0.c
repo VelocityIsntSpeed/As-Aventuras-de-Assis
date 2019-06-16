@@ -19,8 +19,8 @@ Exemplo 0
 #include "raylib.h"
 #include "raymath.h"
 
-#define MOVESPEED 150.0 // Velocidade de movimento do player (por segundo)
-#define PLR_RADIUS 30.0 // Raio do circulo do player
+#define MOVESPEED 150.0f // Velocidade de movimento do player (por segundo)
+#define PLR_RADIUS 30.0f // Raio do circulo do player
 
 #define VEL_ROXO 30.0f // Velocidade do movimento do circulo roxo
 
@@ -34,12 +34,12 @@ int main(void)
     SetTargetFPS(60);
     ///========================================================================
     // Posicao do jogador
-    Vector2 playerPos = {300.0, 300.0};
+    Vector2 playerPos = {300, 300};
 
     // Obstaculos
-    Rectangle obCinza = {100.0, 100.0, 150.0, 100.0};
-    Vector2 obRoxoCentro = {750.0, 300.0};
-    float obRoxoRaio = 100.0;
+    Rectangle obCinza = {100, 100, 150, 100};
+    Vector2 obRoxoCentro = {750, 300};
+    float obRoxoRaio = 100;
     bool roxoTaAndando = false;
 
     /// [[[[[ End Initalization ]]]]]
@@ -52,10 +52,10 @@ int main(void)
            relativa ah posicao atual do player */
         Vector2 playerMoveTo = Vector2Zero();
 
-        if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))   playerMoveTo.x -= 1.0;
-        if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))  playerMoveTo.x += 1.0;
-        if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))     playerMoveTo.y -= 1.0;
-        if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))   playerMoveTo.y += 1.0;
+        if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))   playerMoveTo.x -= 1;
+        if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))  playerMoveTo.x += 1;
+        if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))     playerMoveTo.y -= 1;
+        if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))   playerMoveTo.y += 1;
 
         /* Se andarmos uma quantidade fixa por frame, a velocidade de movimento
            dependerah da frame rate. Para q isso nao aconteca, multiplicamos a
@@ -74,13 +74,13 @@ int main(void)
 
         ///Mover obstaculos====================================================
         if (IsKeyPressed(KEY_SPACE)) {
-            obCinza.x += 10.0f;
-            obCinza.height += 5.0f;
+            obCinza.x += 10;
+            obCinza.height += 5;
             roxoTaAndando = true;
         }
         if (roxoTaAndando) {
             obRoxoCentro.x -= VEL_ROXO * GetFrameTime();
-            obRoxoRaio -= VEL_ROXO / 6 * GetFrameTime();
+            obRoxoRaio -= VEL_ROXO / 6.0f * GetFrameTime();
         }
         /// [[[[[ End Update ]]]]]
 
