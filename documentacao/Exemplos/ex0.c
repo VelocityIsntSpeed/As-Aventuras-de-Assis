@@ -38,7 +38,7 @@ int main(void)
 
     // Obstaculos
     Rectangle obCinza = {100, 100, 150, 100};
-    Vector2 obRoxoCentro = {900, 350};
+    Vector2 obRoxoCentro = {900, 350}; // Posicao do centro do circulo
     float obRoxoRaio = 100;
     bool roxoTaAndando = false;
 
