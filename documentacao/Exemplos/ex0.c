@@ -34,6 +34,11 @@ int main(void)
     // Posicao do jogador
     Vector2 playerPos = {300.0, 300.0};
 
+    // Obstaculos
+    Rectangle obCinza = {100.0, 100.0, 150.0, 100.0};
+    Vector2 obRoxoCentro = {650.0, 300.0};
+    float obRoxoRaio = 100.0;
+
     /// [[[[[ End Initalization ]]]]]
 
     // Main game loop
@@ -65,6 +70,14 @@ int main(void)
         // Finalmente, atualizar a posicao do player
         playerPos = playerMoveTo;
 
+        ///Mover obstaculos====================================================
+        if (IsKeyPressed(KEY_SPACE)) {
+            obRoxoCentro.x -= 10.0;
+            obRoxoRaio -= 2.0;
+
+            obCinza.x += 10.0f;
+            obCinza.height += 5.0f;
+        }
         /// [[[[[ End Update ]]]]]
 
         /// [[[[[ Draw ]]]]]
@@ -73,14 +86,17 @@ int main(void)
             ClearBackground(DARKBROWN);
 
             // Obstaculo Roxo
-            DrawCircle(650, 300, 100.0, VIOLET);
+            DrawCircleV(obRoxoCentro, obRoxoRaio, VIOLET);
 
             // Player
             DrawCircleGradient(playerPos.x, playerPos.y,
                                PLR_RADIUS, SKYBLUE, BLUE);
 
             // Obstaculo Cinza
-            DrawRectangle(100.0, 100.0, 150, 100, GRAY);
+            DrawRectangleRec(obCinza, GRAY);
+
+            // Controles
+            DrawText("Controles: WASD/Setas e Espaco", 200, 10, 19, MAROON);
 
             // FPS
             DrawFPS(10, 10);
