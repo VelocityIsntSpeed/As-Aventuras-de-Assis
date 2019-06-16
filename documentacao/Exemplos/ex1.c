@@ -14,7 +14,7 @@ o target atual no menu drop-down da toolbar de compilador.
 
 Exemplo 1
 
-Novidades:
+Novidades em relacao ao Exemplo 0:
 - Colisao com os obstaculos
 - MovePlayer()
 
