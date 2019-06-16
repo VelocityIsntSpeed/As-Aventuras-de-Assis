@@ -17,6 +17,7 @@ Exemplo 1
 Novidades em relacao ao Exemplo 0:
 - Colisao com os obstaculos
 - MovePlayer()
+- MoveObstacles()
 
 ******************************************************************************/
 
@@ -31,6 +32,9 @@ Novidades em relacao ao Exemplo 0:
 // Move o player
 void MovePlayer(Vector2* playerPos, Rectangle obRet,
                 Vector2 obCircCentro, float raio);
+
+void MoveObstacles(Rectangle* obCinza, Vector2* obRoxoCentro,
+                   float* raio, bool* roxoTaAndando);
 
 int main(void)
 {
@@ -59,16 +63,9 @@ int main(void)
         // Mover player
         MovePlayer(&playerPos, obCinza, obRoxoCentro, obRoxoRaio);
 
-        ///Mover obstaculos====================================================
-        if (IsKeyPressed(KEY_SPACE)) {
-            obCinza.x += 10;
-            obCinza.height += 5;
-            roxoTaAndando = !roxoTaAndando;
-        }
-        if (roxoTaAndando) {
-            obRoxoCentro.x -= VEL_ROXO * GetFrameTime();
-            obRoxoRaio -= VEL_ROXO / 5.0f * GetFrameTime();
-        }
+        // Mover obstaculos
+        MoveObstacles(&obCinza, &obRoxoCentro, &obRoxoRaio, &roxoTaAndando);
+
         /// [[[[[ End Update ]]]]]
 
         /// [[[[[ Draw ]]]]]
@@ -138,7 +135,19 @@ void MovePlayer(Vector2* playerPos, Rectangle obRet,
     }
 }
 
-
+void MoveObstacles(Rectangle* obCinza, Vector2* obRoxoCentro,
+                   float* raio, bool* roxoTaAndando)
+{
+    if (IsKeyPressed(KEY_SPACE)) {
+        obCinza->x += 10;
+        obCinza->height += 5;
+        *roxoTaAndando = !*roxoTaAndando;
+    }
+    if (*roxoTaAndando) {
+        obRoxoCentro->x -= VEL_ROXO * GetFrameTime();
+        *raio -= VEL_ROXO / 5.0f * GetFrameTime();
+    }
+}
 
 
 
