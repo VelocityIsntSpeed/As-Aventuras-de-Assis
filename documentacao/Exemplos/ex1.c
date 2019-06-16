@@ -86,7 +86,9 @@ int main(void)
             DrawRectangleRec(obCinza, GRAY);
 
             // Controles
-            DrawText("Controles: WASD/Setas e Espaco", 200, 10, 19, MAROON);
+            DrawText("Controles:\n"
+                     "WASD/Setas para andar\n"
+                     "Espaco para movimentar obstaculos", 200, 10, 19, MAROON);
 
             // FPS
             DrawFPS(10, 10);
