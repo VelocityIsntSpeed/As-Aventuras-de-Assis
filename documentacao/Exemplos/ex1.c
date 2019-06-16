@@ -26,7 +26,7 @@ Novidades:
 #define MOVESPEED 150.0 // Velocidade de movimento do player (por segundo)
 #define PLR_RADIUS 30.0 // Raio do circulo do player
 
-#define VEL_ROXO 20.0f // Velocidade do movimento do circulo roxo
+#define VEL_ROXO 30.0f // Velocidade do movimento do circulo roxo
 
 // Move o player
 void MovePlayer(Vector2* playerPos, Rectangle obRet, Vector2 obCircCentro, float raio);
@@ -66,7 +66,7 @@ int main(void)
         }
         if (roxoTaAndando) {
             obRoxoCentro.x -= VEL_ROXO * GetFrameTime();
-            obRoxoRaio -= VEL_ROXO / 7 * GetFrameTime();
+            obRoxoRaio -= VEL_ROXO / 6 * GetFrameTime();
         }
         /// [[[[[ End Update ]]]]]
 
