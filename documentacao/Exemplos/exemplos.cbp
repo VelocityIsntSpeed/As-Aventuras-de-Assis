@@ -6,6 +6,12 @@
 		<Option pch_mode="2" />
 		<Option compiler="raylib_mingw_compiler" />
 		<Build>
+			<Target title="EX0">
+				<Option output="bin/EX0/exemplo0" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/EX0/" />
+				<Option type="1" />
+				<Option compiler="raylib_mingw_compiler" />
+			</Target>
 			<Target title="EX1">
 				<Option output="bin/EX1/exemplo1" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/EX1/" />
@@ -29,6 +35,10 @@
 			<Add option="-lraylib -lopengl32 -lgdi32 -lwinmm" />
 			<Add directory="C:/raylib/mingw/i686-w64-mingw32/lib" />
 		</Linker>
+		<Unit filename="ex0.c">
+			<Option compilerVar="CC" />
+			<Option target="EX0" />
+		</Unit>
 		<Unit filename="ex1.c">
 			<Option compilerVar="CC" />
 			<Option target="EX1" />
