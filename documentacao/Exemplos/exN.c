@@ -8,6 +8,8 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 
 Exemplo N
 
+Ignore esse exemplo, ele eh ruim
+
 ******************************************************************************/
 
 #include "raylib.h"
