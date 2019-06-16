@@ -32,10 +32,6 @@ int main(void)
     // Posicao do jogador
     Vector2 playerPos = {300.0, 300.0};
 
-    // Obstaculos
-    Rectangle obstaculoCinza = {100.0, 100.0, 150.0, 100.0},
-              obstaculoRoxo  = {650.0, 300.0, 150.0, 200.0};
-
     /// [[[[[ End Initalization ]]]]]
 
     // Main game loop
@@ -75,16 +71,14 @@ int main(void)
             ClearBackground(DARKBROWN);
 
             // Obstaculo Roxo
-            Vector2 center = {obstaculoRoxo.width / 2.0,
-                              obstaculoRoxo.height / 2.0};
-            DrawRectanglePro(obstaculoRoxo, center, 45, VIOLET);
+            DrawCircle(650, 300, 100.0, VIOLET);
 
             // Player
             DrawCircleGradient(playerPos.x, playerPos.y,
                                PLR_RADIUS, SKYBLUE, BLUE);
 
             // Obstaculo Cinza
-            DrawRectangleRec(obstaculoCinza, GRAY);
+            DrawRectangle(100.0, 100.0, 150, 100, GRAY);
 
             // FPS
             DrawFPS(10, 10);
