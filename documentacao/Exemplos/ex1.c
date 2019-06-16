@@ -122,6 +122,11 @@ void MovePlayer(Vector2* playerPos, Rectangle obRect, Vector2 obCircCenter, floa
     // Transformar para coordenadas world
     playerMoveTo = Vector2Add(*playerPos, playerMoveTo);
 
+    /* Note que com esse algoritmo, o player anda 41% mais rapido se
+       estiver andando na diagonal. Por exemplo: segurando D e S,
+       playerMoveTo eh {1.0f, 1.0f} antes de ser escalado.
+       A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
+
     // Verificar colisao
     if (!CheckCollisionCircleRec(playerMoveTo, RAIO_PLR, obRect) &&
         !CheckCollisionCircles(playerMoveTo, RAIO_PLR, obCircCenter, raio))

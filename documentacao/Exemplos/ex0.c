@@ -72,6 +72,11 @@ int main(void)
         // Finalmente, atualizar a posicao do player
         playerPos = playerMoveTo;
 
+        /* Note que com esse algoritmo, o player anda 41% mais rapido se
+           estiver andando na diagonal. Por exemplo: segurando D e S,
+           playerMoveTo eh {1.0f, 1.0f} antes de ser escalado.
+           A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
+
         ///Mover obstaculos====================================================
         if (IsKeyPressed(KEY_SPACE)) {
             obCinza.x += 10;
