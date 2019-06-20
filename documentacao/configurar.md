@@ -6,7 +6,6 @@ Instruções para instalar/configurar no Windows as ferramentas e bibliotecas ne
 * [Instalar o Code::Blocks](#instalar-o-codeblocks)
 * [Instalar o Raylib](#instalar-o-raylib)
   * [Configurar o Code::Blocks para Raylib](#configurar-o-codeblocks-para-raylib)
-* [Instalar o SDL](#instalar-o-sdl)
 * [Instalar o GitHub Desktop](#instalar-o-github-desktop)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
@@ -36,16 +35,6 @@ Baixe e execute o instalador `raylib 2.5 Windows Installer (with MinGW compiler)
 ![](enter_compiler_settings.png)
 ![](create_new_compiler.png)
 ![](raylib_compiler_executables.png)
-
-
-## Instalar o SDL
-https://www.libsdl.org/download-2.0.php  
-Baixe o arquivo `SDL2-devel-2.0.9-mingw.tar.gz`.
-
-Dentro desse arquivo compacatado há a pasta `SDL2-2.0.9` (Pode ser necessário descompactá-lo duas vezes). Coloque essa pasta `SDL2-2.0.9` em `C:\Users\Public\` (ficará `C:\Users\Public\SDL2-2.0.9\`).
-
-**Obs:** Esse procedimento funciona também em computadores públicos (como os dos laboratórios da UFRPE).
-
 
 ## Instalar o GitHub Desktop
 https://desktop.github.com/  
