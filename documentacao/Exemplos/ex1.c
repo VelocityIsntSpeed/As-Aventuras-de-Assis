@@ -157,3 +157,7 @@ void MoveObstacles(Rectangle* obCinza, Vector2* obRoxoCentro,
 
 
 
+
+
+
+
