@@ -29,7 +29,7 @@ Novidades em relacao ao Exemplo 0:
 
 #define VEL_ROXO 30.0f // Velocidade do movimento do circulo roxo (por segundo)
 
-// Move o player
+// Move o jogador
 void MovePlayer(Vector2* playerPos, Rectangle obRet,
                 Vector2 obCircCentro, float raio);
 
