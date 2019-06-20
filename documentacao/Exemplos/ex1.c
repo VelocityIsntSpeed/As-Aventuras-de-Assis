@@ -127,6 +127,10 @@ void MovePlayer(Vector2* playerPos, Rectangle obRet,
        playerMoveTo eh {1.0f, 1.0f} antes de ser escalado.
        A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
 
+    /* Se o raio for menor que 0, tornah-lo 0. Note que isso nao afeta nada
+       fora da funcao. */
+    raio = (raio < 0) ? 0 : raio;
+
     // Verificar colisao
     if (!CheckCollisionCircleRec(playerMoveTo, RAIO_PLR, obRet) &&
         !CheckCollisionCircles(playerMoveTo, RAIO_PLR, obCircCentro, raio))
