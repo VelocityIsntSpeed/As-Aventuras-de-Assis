@@ -30,7 +30,7 @@ int main(void)
 
     ///Janela==================================================================
     const int screenWidth = 1024, screenHeight = 576;
-    InitWindow(screenWidth, screenHeight, "Teste Jogo42 Raylib");
+    InitWindow(screenWidth, screenHeight, "Exemplo 0");
     SetTargetFPS(60);
     ///========================================================================
     // Posicao do jogador
