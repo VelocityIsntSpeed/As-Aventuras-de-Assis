@@ -144,14 +144,18 @@ void MovePlayer(Vector2* playerPos, Rectangle obRet,
 void MoveObstacles(Rectangle* obCinza, Vector2* obRoxoCentro,
                    float* raio, bool* roxoTaAndando)
 {
+    // Mover o cinza
     if (IsKeyPressed(KEY_SPACE)) {
         obCinza->x += 10;
         obCinza->height += 5;
-        *roxoTaAndando = !*roxoTaAndando;
     }
-    if (*roxoTaAndando) {
+    // Mover o roxo
+    if (IsKeyDown(KEY_SPACE)) {
+        *roxoTaAndando = true;
         obRoxoCentro->x -= VEL_ROXO * GetFrameTime();
         *raio -= VEL_ROXO / 5.0f * GetFrameTime();
+    } else {
+        *roxoTaAndando = false;
     }
 }
 

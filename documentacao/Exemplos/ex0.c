@@ -78,14 +78,18 @@ int main(void)
            A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
 
         ///Mover obstaculos====================================================
+        // Mover o cinza
         if (IsKeyPressed(KEY_SPACE)) {
             obCinza.x += 10;
             obCinza.height += 5;
-            roxoTaAndando = !roxoTaAndando;
         }
-        if (roxoTaAndando) {
+        // Mover o roxo
+        if (IsKeyDown(KEY_SPACE)) {
+            roxoTaAndando = true;
             obRoxoCentro.x -= VEL_ROXO * GetFrameTime();
             obRoxoRaio -= VEL_ROXO / 5.0f * GetFrameTime();
+        } else {
+            roxoTaAndando = false;
         }
         /// [[[[[ End Update ]]]]]
 
