@@ -96,7 +96,8 @@ int main(void)
             ClearBackground(DARKBROWN);
 
             // Obstaculo Roxo
-            DrawCircleV(obRoxoCentro, obRoxoRaio, VIOLET);
+            DrawCircleV(obRoxoCentro, obRoxoRaio,
+                        roxoTaAndando ? PURPLE : VIOLET);
 
             // Player
             DrawCircleGradient(playerPos.x, playerPos.y,
