@@ -27,8 +27,8 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="-std=c99" />
 			<Add option="-g" />
-			<Add option="-Wall -std=c99" />
 			<Add directory="C:/raylib/mingw/i686-w64-mingw32/include" />
 		</Compiler>
 		<Linker>
