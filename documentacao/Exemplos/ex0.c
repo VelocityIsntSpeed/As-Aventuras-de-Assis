@@ -22,7 +22,7 @@ Exemplo 0
 #define VEL_PLR 150.0f // Velocidade de movimento do player (por segundo)
 #define RAIO_PLR 30.0f // Raio do circulo do player
 
-#define VEL_ROXO 30.0f // Velocidade do movimento do circulo roxo
+#define VEL_ROXO 30.0f // Velocidade do movimento do circulo roxo (por segundo)
 
 int main(void)
 {
