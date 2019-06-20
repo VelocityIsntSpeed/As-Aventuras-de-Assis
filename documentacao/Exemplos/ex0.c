@@ -10,7 +10,7 @@ Nesse projeto de CodeBlocks, cada exemplo tem seu build target. Vc pode mudar
 o target atual no menu drop-down da toolbar de compilador.
 (veja mudar-build-target.png)
 
-===============================================================================
+-------------------------------------------------------------------------------
 
 Exemplo 0
 
