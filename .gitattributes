@@ -1,5 +1,8 @@
-# Arquivos que deverao ser tratados como texto:
+#################################################
+# Arquivos que deverao ser tratados como texto: #
+#################################################
 *.c text
 *.h text
-*.cbp text # CodeBlocksProject
+# CodeBlocksProject
+*.cbp text
 *.md
