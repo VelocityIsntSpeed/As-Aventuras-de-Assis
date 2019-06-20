@@ -33,6 +33,7 @@ Novidades em relacao ao Exemplo 0:
 void MovePlayer(Vector2* playerPos, Rectangle obRet,
                 Vector2 obCircCentro, float raio);
 
+// Move os obstaculos
 void MoveObstacles(Rectangle* obCinza, Vector2* obRoxoCentro,
                    float* raio, bool* roxoTaAndando);
 
