@@ -128,7 +128,7 @@ void MovePlayer(Vector2* playerPos, Rectangle obRet,
        A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
 
     /* Se o raio for menor que 0, tornah-lo 0. Note que isso nao afeta nada
-       fora da funcao. */
+       fora da funcao (pq raio nao eh ponteiro). */
     raio = (raio < 0) ? 0 : raio;
 
     // Verificar colisao
