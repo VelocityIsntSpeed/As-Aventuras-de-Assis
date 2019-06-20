@@ -1,0 +1,5 @@
+# Arquivos que deverao ser tratados como texto:
+*.c text
+*.h text
+*.cbp text # CodeBlocksProject
+*.md
