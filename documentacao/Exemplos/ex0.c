@@ -29,8 +29,7 @@ int main(void)
     /// [[[[[ Initialization ]]]]]
 
     ///Janela==================================================================
-    const int screenWidth = 1024, screenHeight = 576;
-    InitWindow(screenWidth, screenHeight, "Exemplo 0");
+    InitWindow(1024, 576, "Exemplo 0");
     SetTargetFPS(60);
     ///========================================================================
     // Posicao do jogador
