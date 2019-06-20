@@ -29,6 +29,7 @@
 			<Add option="-Wall" />
 			<Add option="-std=c99" />
 			<Add option="-g" />
+			<Add option="-DPLATFORM_DESKTOP" />
 			<Add directory="C:/raylib/mingw/i686-w64-mingw32/include" />
 		</Compiler>
 		<Linker>
