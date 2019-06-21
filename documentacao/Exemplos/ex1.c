@@ -34,7 +34,7 @@ void MoverJog(Vector2* posAtual, Rectangle obRet,
                 Vector2 obCircCentro, float raio);
 
 // Move os obstaculos
-void MoverObst(Rectangle* obCinza, Vector2* obRoxoCentro,
+void MoverObst(Rectangle* obstRet, Vector2* obRoxoCentro,
                    float* raio, bool* roxoTaAndando);
 
 int main(void)
@@ -141,13 +141,13 @@ void MoverJog(Vector2* posAtual, Rectangle obRet,
     }
 }
 
-void MoverObst(Rectangle* obCinza, Vector2* obRoxoCentro,
+void MoverObst(Rectangle* obstRet, Vector2* obRoxoCentro,
                    float* raio, bool* roxoTaAndando)
 {
-    // Mover o cinza
+    // Mover o retangulo
     if (IsKeyPressed(KEY_SPACE)) {
-        obCinza->x += 10;
-        obCinza->height += 5;
+        obstRet->x += 10;
+        obstRet->height += 5;
     }
     // Mover o roxo
     if (IsKeyDown(KEY_SPACE)) {
