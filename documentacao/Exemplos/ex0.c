@@ -52,31 +52,31 @@ int main(void)
         ///Movimentacao do jogador==============================================
         /* A posicao para a qual vamos mover o jogador nesse frame,
            relativa ah posicao atual dele */
-        Vector2 playerMoveTo = Vector2Zero();
+        Vector2 posFutura = Vector2Zero();
 
-        if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))  { playerMoveTo.x -= 1; }
-        if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) { playerMoveTo.x += 1; }
-        if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    { playerMoveTo.y -= 1; }
-        if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  { playerMoveTo.y += 1; }
+        if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))  { posFutura.x -= 1; }
+        if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) { posFutura.x += 1; }
+        if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    { posFutura.y -= 1; }
+        if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  { posFutura.y += 1; }
 
         /* Se andarmos uma quantidade fixa por frame, a velocidade de movimento
            dependerah da frame rate. Para q isso nao aconteca, multiplicamos a
            quantidade que queremos mover por segundo (VEL_PLR) pela
            quantidade de segundos que o frame dura. O resultado eh a distancia
            q devemos mover no frame. */
-        playerMoveTo = Vector2Scale(playerMoveTo, VEL_PLR * GetFrameTime());
+        posFutura = Vector2Scale(posFutura, VEL_PLR * GetFrameTime());
 
         /* Transformar de coordenadas player para coordenadas world (i.e. antes
            era a partir da posicao atual do jogador, agora vai ser a partir da
            origem do world, assim como eh posJog) */
-        playerMoveTo = Vector2Add(posJog, playerMoveTo);
+        posFutura = Vector2Add(posJog, posFutura);
 
         // Finalmente, atualizar a posicao do jogador
-        posJog = playerMoveTo;
+        posJog = posFutura;
 
         /* Note que com esse algoritmo, o jogador anda 41% mais rapido se
            estiver andando na diagonal. Por exemplo: segurando D e S,
-           playerMoveTo eh {1.0f, 1.0f} antes de ser escalado.
+           posFutura eh {1.0f, 1.0f} antes de ser escalado.
            A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
 
         ///Mover obstaculos====================================================

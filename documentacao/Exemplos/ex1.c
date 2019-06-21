@@ -112,21 +112,21 @@ void MoverJog(Vector2* posAtual, Rectangle obRet,
                 Vector2 obCircCentro, float obstRaio)
 {
     // Posicao futura do jogador em relacao ah posicao atual
-    Vector2 playerMoveTo = Vector2Zero();
+    Vector2 posFutura = Vector2Zero();
 
-    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))  { playerMoveTo.x -= 1; }
-    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) { playerMoveTo.x += 1; }
-    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    { playerMoveTo.y -= 1; }
-    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  { playerMoveTo.y += 1; }
+    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))  { posFutura.x -= 1; }
+    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) { posFutura.x += 1; }
+    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    { posFutura.y -= 1; }
+    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  { posFutura.y += 1; }
 
-    playerMoveTo = Vector2Scale(playerMoveTo, VEL_PLR * GetFrameTime());
+    posFutura = Vector2Scale(posFutura, VEL_PLR * GetFrameTime());
 
     // Transformar para coordenadas world
-    playerMoveTo = Vector2Add(*posAtual, playerMoveTo);
+    posFutura = Vector2Add(*posAtual, posFutura);
 
     /* Note que com esse algoritmo, o jogador anda 41% mais rapido se
        estiver andando na diagonal. Por exemplo: segurando D e S,
-       playerMoveTo eh {1.0f, 1.0f} antes de ser escalado.
+       posFutura eh {1.0f, 1.0f} antes de ser escalado.
        A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
 
     /* Se o raio for menor que 0, tornah-lo 0. Note que isso nao afeta nada
@@ -134,11 +134,11 @@ void MoverJog(Vector2* posAtual, Rectangle obRet,
     obstRaio = (obstRaio < 0) ? 0 : obstRaio;
 
     // Verificar colisao
-    if (!CheckCollisionCircleRec(playerMoveTo, RAIO_PLR, obRet) &&
-        !CheckCollisionCircles(playerMoveTo, RAIO_PLR, obCircCentro, obstRaio))
+    if (!CheckCollisionCircleRec(posFutura, RAIO_PLR, obRet) &&
+        !CheckCollisionCircles(posFutura, RAIO_PLR, obCircCentro, obstRaio))
     {
         // Atualizar a posicao do jogador
-        *posAtual = playerMoveTo;
+        *posAtual = posFutura;
     }
 }
 
