@@ -24,10 +24,10 @@ Novidades em relacao ao Exemplo 0:
 #include "raylib.h"
 #include "raymath.h"
 
-#define VEL_PLR 150.0f // Velocidade de movimento do player (por segundo)
-#define RAIO_PLR 30.0f // Raio do circulo do player
+#define VEL_PLR 150.0f // Velocidade do jogador (por segundo)
+#define RAIO_PLR 30.0f // Raio do circulo do jogador
 
-#define VEL_ROXO 40.0f // Velocidade do movimento do circulo roxo (por segundo)
+#define VEL_ROXO 40.0f // Velocidade do obstaculo circular (por segundo)
 
 // Move o jogador
 void MoverJog(Vector2* posAtual, Rectangle obRet,
