@@ -49,7 +49,7 @@ int main(void)
     Vector2 posJog = {300, 300};
 
     // Obstaculos
-    Rectangle obCinza = {100, 100, 150, 100};
+    Rectangle obstRet = {100, 100, 150, 100};
     Vector2 obRoxoCentro = {900, 350}; // Posicao do centro do circulo
     float obRoxoRaio = 100;
     bool roxoTaAndando = false;
@@ -62,10 +62,10 @@ int main(void)
         /// [[[[[ Update ]]]]]
 
         // Mover player
-        MoverJog(&posJog, obCinza, obRoxoCentro, obRoxoRaio);
+        MoverJog(&posJog, obstRet, obRoxoCentro, obRoxoRaio);
 
         // Mover obstaculos
-        MoverObst(&obCinza, &obRoxoCentro, &obRoxoRaio, &roxoTaAndando);
+        MoverObst(&obstRet, &obRoxoCentro, &obRoxoRaio, &roxoTaAndando);
 
         /// [[[[[ End Update ]]]]]
 
@@ -83,8 +83,8 @@ int main(void)
             DrawCircleGradient(posJog.x, posJog.y,
                                RAIO_PLR, SKYBLUE, BLUE);
 
-            // Obstaculo Cinza
-            DrawRectangleRec(obCinza, GRAY);
+            // Obstaculo retangular
+            DrawRectangleRec(obstRet, GRAY);
 
             // Controles
             DrawText("Controles:\n"

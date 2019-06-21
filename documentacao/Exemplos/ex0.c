@@ -35,8 +35,7 @@ int main(void)
     // Posicao do jogador
     Vector2 posJog = {300, 300};
 
-    // Obstaculos
-    Rectangle obCinza = {100, 100, 150, 100};
+    Rectangle obstRet = {100, 100, 150, 100};
     Vector2 obRoxoCentro = {900, 350}; // Posicao do centro do circulo
     float obRoxoRaio = 100;
     bool roxoTaAndando = false;
@@ -78,10 +77,10 @@ int main(void)
            A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
 
         ///Mover obstaculos====================================================
-        // Mover o cinza
+        // Mover o retangulo
         if (IsKeyPressed(KEY_SPACE)) {
-            obCinza.x += 10;
-            obCinza.height += 5;
+            obstRet.x += 10;
+            obstRet.height += 5;
         }
         // Mover o roxo
         if (IsKeyDown(KEY_SPACE)) {
@@ -107,8 +106,8 @@ int main(void)
             DrawCircleGradient(posJog.x, posJog.y,
                                RAIO_PLR, SKYBLUE, BLUE);
 
-            // Obstaculo Cinza
-            DrawRectangleRec(obCinza, GRAY);
+            // Obstaculo retangular
+            DrawRectangleRec(obstRet, GRAY);
 
             // Controles
             DrawText("Controles:\n"
