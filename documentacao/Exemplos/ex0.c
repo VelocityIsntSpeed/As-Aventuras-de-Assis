@@ -118,7 +118,7 @@ int main(void)
 
             // Texto com raio do obstaculo
             DrawText(TextFormat("Raio = %.1f", obstCircRaio),
-                     obstCircCentro.x, obstCircCentro.y, 17, WHITE);
+                     obstCircCentro.x, obstCircCentro.y, 20, WHITE);
 
             // FPS
             DrawFPS(10, 10);
