@@ -16,26 +16,26 @@ Exemplo 1
 
 Novidades em relacao ao Exemplo 0:
 - Colisao com os obstaculos
-- MovePlayer()
-- MoveObstacles()
+- MoverJog()
+- MoverObst()
 
 ******************************************************************************/
 
 #include "raylib.h"
 #include "raymath.h"
 
-#define VEL_PLR 150.0f // Velocidade de movimento do player (por segundo)
-#define RAIO_PLR 30.0f // Raio do circulo do player
+#define VEL_JOG 150.0f // Velocidade do jogador (por segundo)
+#define RAIO_JOG 30.0f // Raio do circulo do jogador
 
-#define VEL_ROXO 40.0f // Velocidade do movimento do circulo roxo (por segundo)
+#define VEL_CIRC 40.0f // Velocidade do obstaculo circular (por segundo)
 
 // Move o jogador
-void MovePlayer(Vector2* playerPos, Rectangle obRet,
-                Vector2 obCircCentro, float raio);
+void MoverJog(Vector2* posAtual, Rectangle obRet,
+                Vector2 obCircCentro, float obstRaio);
 
 // Move os obstaculos
-void MoveObstacles(Rectangle* obCinza, Vector2* obRoxoCentro,
-                   float* raio, bool* roxoTaAndando);
+void MoverObst(Rectangle* obstRet, Vector2* circCentro,
+                   float* raio, bool* obstCircTaAndando);
 
 int main(void)
 {
@@ -46,13 +46,15 @@ int main(void)
     SetTargetFPS(60);
     ///========================================================================
     // Posicao do jogador
-    Vector2 playerPos = {300, 300};
+    Vector2 posJog = {300, 300};
 
-    // Obstaculos
-    Rectangle obCinza = {100, 100, 150, 100};
-    Vector2 obRoxoCentro = {900, 350}; // Posicao do centro do circulo
-    float obRoxoRaio = 100;
-    bool roxoTaAndando = false;
+    ///Obstaculos==============================================================
+    // Obstaculo retangular
+    Rectangle obstRet = {100, 100, 150, 100};
+    // Obstaculo circular
+    Vector2 obstCircCentro = {900, 350}; // Posicao do centro do circulo
+    float obstCircRaio = 100;
+    bool obstCircTaAndando = false;
 
     /// [[[[[ End Initalization ]]]]]
 
@@ -61,11 +63,11 @@ int main(void)
 
         /// [[[[[ Update ]]]]]
 
-        // Mover player
-        MovePlayer(&playerPos, obCinza, obRoxoCentro, obRoxoRaio);
+        // Mover jogador
+        MoverJog(&posJog, obstRet, obstCircCentro, obstCircRaio);
 
         // Mover obstaculos
-        MoveObstacles(&obCinza, &obRoxoCentro, &obRoxoRaio, &roxoTaAndando);
+        MoverObst(&obstRet, &obstCircCentro, &obstCircRaio, &obstCircTaAndando);
 
         /// [[[[[ End Update ]]]]]
 
@@ -75,25 +77,24 @@ int main(void)
             // Pintar tudo (para formar o background)
             ClearBackground(DARKBROWN);
 
-            // Obstaculo Roxo
-            DrawCircleV(obRoxoCentro, obRoxoRaio,
-                        roxoTaAndando ? PURPLE : VIOLET);
+            // Obstaculo circular
+            DrawCircleV(obstCircCentro, obstCircRaio,
+                        obstCircTaAndando ? PURPLE : VIOLET);
 
-            // Player
-            DrawCircleGradient(playerPos.x, playerPos.y,
-                               RAIO_PLR, SKYBLUE, BLUE);
+            // Jogador
+            DrawCircleGradient(posJog.x, posJog.y, RAIO_JOG, SKYBLUE, BLUE);
 
-            // Obstaculo Cinza
-            DrawRectangleRec(obCinza, GRAY);
+            // Obstaculo retangular
+            DrawRectangleRec(obstRet, GRAY);
 
             // Controles
             DrawText("Controles:\n"
                      "WASD/Setas para andar\n"
                      "Espaco para movimentar obstaculos", 200, 10, 19, MAROON);
 
-            // Texto com raio do roxo
-            DrawText(TextFormat("Raio = %.1f", obRoxoRaio),
-                     obRoxoCentro.x, obRoxoCentro.y, 17, WHITE);
+            // Texto com raio do obstaculo
+            DrawText(TextFormat("Raio = %.1f", obstCircRaio),
+                     obstCircCentro.x, obstCircCentro.y, 17, WHITE);
 
             // FPS
             DrawFPS(10, 10);
@@ -107,55 +108,56 @@ int main(void)
 }
 
 
-void MovePlayer(Vector2* playerPos, Rectangle obRet,
-                Vector2 obCircCentro, float raio)
+void MoverJog(Vector2* posAtual, Rectangle obRet,
+                Vector2 obCircCentro, float obstRaio)
 {
-    // Posicao do player no proximo frame em relacao ah posicao atual
-    Vector2 playerMoveTo = Vector2Zero();
+    // Posicao futura do jogador em relacao ah posicao atual
+    Vector2 posFutura = Vector2Zero();
 
-    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))  { playerMoveTo.x -= 1; }
-    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) { playerMoveTo.x += 1; }
-    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    { playerMoveTo.y -= 1; }
-    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  { playerMoveTo.y += 1; }
+    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))  { posFutura.x -= 1; }
+    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) { posFutura.x += 1; }
+    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    { posFutura.y -= 1; }
+    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  { posFutura.y += 1; }
 
-    playerMoveTo = Vector2Scale(playerMoveTo, VEL_PLR * GetFrameTime());
+    posFutura = Vector2Scale(posFutura, VEL_JOG * GetFrameTime());
 
     // Transformar para coordenadas world
-    playerMoveTo = Vector2Add(*playerPos, playerMoveTo);
+    posFutura = Vector2Add(*posAtual, posFutura);
 
-    /* Note que com esse algoritmo, o player anda 41% mais rapido se
+    /* Note que com esse algoritmo, o jogador anda 41% mais rapido se
        estiver andando na diagonal. Por exemplo: segurando D e S,
-       playerMoveTo eh {1.0f, 1.0f} antes de ser escalado.
+       posFutura eh {1.0f, 1.0f} antes de ser escalado.
        A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
 
     /* Se o raio for menor que 0, tornah-lo 0. Note que isso nao afeta nada
-       fora da funcao (pq raio nao eh ponteiro). */
-    raio = (raio < 0) ? 0 : raio;
+       fora dessa funcao (pq obstRaio nao eh ponteiro). Isso eh necessario pq a
+       funcao de checar colisao buga se for fornecida um raio negativo. */
+    obstRaio = (obstRaio < 0) ? 0 : obstRaio;
 
     // Verificar colisao
-    if (!CheckCollisionCircleRec(playerMoveTo, RAIO_PLR, obRet) &&
-        !CheckCollisionCircles(playerMoveTo, RAIO_PLR, obCircCentro, raio))
+    if (!CheckCollisionCircleRec(posFutura, RAIO_JOG, obRet) &&
+        !CheckCollisionCircles(posFutura, RAIO_JOG, obCircCentro, obstRaio))
     {
-        // Atualizar a posicao do player
-        *playerPos = playerMoveTo;
+        // Atualizar a posicao do jogador
+        *posAtual = posFutura;
     }
 }
 
-void MoveObstacles(Rectangle* obCinza, Vector2* obRoxoCentro,
-                   float* raio, bool* roxoTaAndando)
+void MoverObst(Rectangle* obstRet, Vector2* circCentro,
+                   float* raio, bool* obstCircTaAndando)
 {
-    // Mover o cinza
+    // Mover o retangulo
     if (IsKeyPressed(KEY_SPACE)) {
-        obCinza->x += 10;
-        obCinza->height += 5;
+        obstRet->x += 10;
+        obstRet->height += 5;
     }
-    // Mover o roxo
+    // Mover o circulo
     if (IsKeyDown(KEY_SPACE)) {
-        *roxoTaAndando = true;
-        obRoxoCentro->x -= VEL_ROXO * GetFrameTime();
-        *raio -= VEL_ROXO / 5.0f * GetFrameTime();
+        *obstCircTaAndando = true;
+        circCentro->x -= VEL_CIRC * GetFrameTime();
+        *raio -= VEL_CIRC / 5.0f * GetFrameTime();
     } else {
-        *roxoTaAndando = false;
+        *obstCircTaAndando = false;
     }
 }
 

@@ -19,10 +19,10 @@ Exemplo 0
 #include "raylib.h"
 #include "raymath.h"
 
-#define VEL_PLR 150.0f // Velocidade de movimento do player (por segundo)
-#define RAIO_PLR 30.0f // Raio do circulo do player
+#define VEL_JOG 150.0f // Velocidade do jogador (por segundo)
+#define RAIO_JOG 30.0f // Raio do circulo do jogador
 
-#define VEL_ROXO 40.0f // Velocidade do movimento do circulo roxo (por segundo)
+#define VEL_CIRC 40.0f // Velocidade do obstaculo circular (por segundo)
 
 int main(void)
 {
@@ -33,13 +33,15 @@ int main(void)
     SetTargetFPS(60);
     ///========================================================================
     // Posicao do jogador
-    Vector2 playerPos = {300, 300};
+    Vector2 posJog = {300, 300};
 
-    // Obstaculos
-    Rectangle obCinza = {100, 100, 150, 100};
-    Vector2 obRoxoCentro = {900, 350}; // Posicao do centro do circulo
-    float obRoxoRaio = 100;
-    bool roxoTaAndando = false;
+    ///Obstaculos==============================================================
+    // Obstaculo retangular
+    Rectangle obstRet = {100, 100, 150, 100};
+    // Obstaculo circular
+    Vector2 obstCircCentro = {900, 350}; // Posicao do centro do circulo
+    float obstCircRaio = 100;
+    bool obstCircTaAndando = false;
 
     /// [[[[[ End Initalization ]]]]]
 
@@ -47,49 +49,49 @@ int main(void)
     while (!WindowShouldClose()) { // Detect window close button or ESC key
 
         /// [[[[[ Update ]]]]]
-        ///Movimentacao do player==============================================
-        /* A posicao para a qual vamos mover o player nesse frame,
-           relativa ah posicao atual do player */
-        Vector2 playerMoveTo = Vector2Zero();
+        ///Movimentacao do jogador==============================================
+        /* A posicao para a qual vamos mover o jogador nesse frame,
+           relativa ah posicao atual dele */
+        Vector2 posFutura = Vector2Zero();
 
-        if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))  { playerMoveTo.x -= 1; }
-        if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) { playerMoveTo.x += 1; }
-        if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    { playerMoveTo.y -= 1; }
-        if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  { playerMoveTo.y += 1; }
+        if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))  { posFutura.x -= 1; }
+        if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) { posFutura.x += 1; }
+        if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    { posFutura.y -= 1; }
+        if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  { posFutura.y += 1; }
 
         /* Se andarmos uma quantidade fixa por frame, a velocidade de movimento
            dependerah da frame rate. Para q isso nao aconteca, multiplicamos a
-           quantidade que queremos mover por segundo (VEL_PLR) pela
+           quantidade que queremos mover por segundo (VEL_JOG) pela
            quantidade de segundos que o frame dura. O resultado eh a distancia
            q devemos mover no frame. */
-        playerMoveTo = Vector2Scale(playerMoveTo, VEL_PLR * GetFrameTime());
+        posFutura = Vector2Scale(posFutura, VEL_JOG * GetFrameTime());
 
         /* Transformar de coordenadas player para coordenadas world (i.e. antes
-           era a partir da posicao atual do player, agora vai ser a partir da
-           origem do world, assim como eh playerPos) */
-        playerMoveTo = Vector2Add(playerPos, playerMoveTo);
+           era a partir da posicao atual do jogador, agora vai ser a partir da
+           origem do world, assim como eh posJog) */
+        posFutura = Vector2Add(posJog, posFutura);
 
-        // Finalmente, atualizar a posicao do player
-        playerPos = playerMoveTo;
+        // Finalmente, atualizar a posicao do jogador
+        posJog = posFutura;
 
-        /* Note que com esse algoritmo, o player anda 41% mais rapido se
+        /* Note que com esse algoritmo, o jogador anda 41% mais rapido se
            estiver andando na diagonal. Por exemplo: segurando D e S,
-           playerMoveTo eh {1.0f, 1.0f} antes de ser escalado.
+           posFutura eh {1.0f, 1.0f} antes de ser escalado.
            A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
 
         ///Mover obstaculos====================================================
-        // Mover o cinza
+        // Mover o retangulo
         if (IsKeyPressed(KEY_SPACE)) {
-            obCinza.x += 10;
-            obCinza.height += 5;
+            obstRet.x += 10;
+            obstRet.height += 5;
         }
-        // Mover o roxo
+        // Mover o circulo
         if (IsKeyDown(KEY_SPACE)) {
-            roxoTaAndando = true;
-            obRoxoCentro.x -= VEL_ROXO * GetFrameTime();
-            obRoxoRaio -= VEL_ROXO / 5.0f * GetFrameTime();
+            obstCircTaAndando = true;
+            obstCircCentro.x -= VEL_CIRC * GetFrameTime();
+            obstCircRaio -= VEL_CIRC / 5.0f * GetFrameTime();
         } else {
-            roxoTaAndando = false;
+            obstCircTaAndando = false;
         }
         /// [[[[[ End Update ]]]]]
 
@@ -99,25 +101,24 @@ int main(void)
             // Pintar tudo (para formar o background)
             ClearBackground(DARKBROWN);
 
-            // Obstaculo Roxo
-            DrawCircleV(obRoxoCentro, obRoxoRaio,
-                        roxoTaAndando ? PURPLE : VIOLET);
+            // Obstaculo circular
+            DrawCircleV(obstCircCentro, obstCircRaio,
+                        obstCircTaAndando ? PURPLE : VIOLET);
 
-            // Player
-            DrawCircleGradient(playerPos.x, playerPos.y,
-                               RAIO_PLR, SKYBLUE, BLUE);
+            // Jogador
+            DrawCircleGradient(posJog.x, posJog.y, RAIO_JOG, SKYBLUE, BLUE);
 
-            // Obstaculo Cinza
-            DrawRectangleRec(obCinza, GRAY);
+            // Obstaculo retangular
+            DrawRectangleRec(obstRet, GRAY);
 
             // Controles
             DrawText("Controles:\n"
                      "WASD/Setas para andar\n"
                      "Espaco para movimentar obstaculos", 200, 10, 19, MAROON);
 
-            // Texto com raio do roxo
-            DrawText(TextFormat("Raio = %.1f", obRoxoRaio),
-                     obRoxoCentro.x, obRoxoCentro.y, 17, WHITE);
+            // Texto com raio do obstaculo
+            DrawText(TextFormat("Raio = %.1f", obstCircRaio),
+                     obstCircCentro.x, obstCircCentro.y, 17, WHITE);
 
             // FPS
             DrawFPS(10, 10);
