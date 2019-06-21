@@ -35,10 +35,13 @@ int main(void)
     // Posicao do jogador
     Vector2 posJog = {300, 300};
 
+    ///Obstaculos==============================================================
+    // Obstaculo retangular
     Rectangle obstRet = {100, 100, 150, 100};
-    Vector2 obRoxoCentro = {900, 350}; // Posicao do centro do circulo
-    float obRoxoRaio = 100;
-    bool roxoTaAndando = false;
+    // Obstaculo circular
+    Vector2 obstCircCentro = {900, 350}; // Posicao do centro do circulo
+    float obstCircRaio = 100;
+    bool obstCircTaAndando = false;
 
     /// [[[[[ End Initalization ]]]]]
 
@@ -82,13 +85,13 @@ int main(void)
             obstRet.x += 10;
             obstRet.height += 5;
         }
-        // Mover o roxo
+        // Mover o circulo
         if (IsKeyDown(KEY_SPACE)) {
-            roxoTaAndando = true;
-            obRoxoCentro.x -= VEL_ROXO * GetFrameTime();
-            obRoxoRaio -= VEL_ROXO / 5.0f * GetFrameTime();
+            obstCircTaAndando = true;
+            obstCircCentro.x -= VEL_ROXO * GetFrameTime();
+            obstCircRaio -= VEL_ROXO / 5.0f * GetFrameTime();
         } else {
-            roxoTaAndando = false;
+            obstCircTaAndando = false;
         }
         /// [[[[[ End Update ]]]]]
 
@@ -98,9 +101,9 @@ int main(void)
             // Pintar tudo (para formar o background)
             ClearBackground(DARKBROWN);
 
-            // Obstaculo Roxo
-            DrawCircleV(obRoxoCentro, obRoxoRaio,
-                        roxoTaAndando ? PURPLE : VIOLET);
+            // Obstaculo circular
+            DrawCircleV(obstCircCentro, obstCircRaio,
+                        obstCircTaAndando ? PURPLE : VIOLET);
 
             // Player
             DrawCircleGradient(posJog.x, posJog.y,
@@ -115,8 +118,8 @@ int main(void)
                      "Espaco para movimentar obstaculos", 200, 10, 19, MAROON);
 
             // Texto com raio do roxo
-            DrawText(TextFormat("Raio = %.1f", obRoxoRaio),
-                     obRoxoCentro.x, obRoxoCentro.y, 17, WHITE);
+            DrawText(TextFormat("Raio = %.1f", obstCircRaio),
+                     obstCircCentro.x, obstCircCentro.y, 17, WHITE);
 
             // FPS
             DrawFPS(10, 10);

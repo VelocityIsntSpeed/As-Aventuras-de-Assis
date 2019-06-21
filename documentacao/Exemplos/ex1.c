@@ -31,10 +31,10 @@ Novidades em relacao ao Exemplo 0:
 
 // Move o jogador
 void MoverJog(Vector2* posAtual, Rectangle obRet,
-                Vector2 obCircCentro, float raio);
+                Vector2 obCircCentro, float obstRaio);
 
 // Move os obstaculos
-void MoverObst(Rectangle* obstRet, Vector2* obRoxoCentro,
+void MoverObst(Rectangle* obstRet, Vector2* circCentro,
                    float* raio, bool* roxoTaAndando);
 
 int main(void)
@@ -48,11 +48,13 @@ int main(void)
     // Posicao do jogador
     Vector2 posJog = {300, 300};
 
-    // Obstaculos
+    ///Obstaculos==============================================================
+    // Obstaculo retangular
     Rectangle obstRet = {100, 100, 150, 100};
-    Vector2 obRoxoCentro = {900, 350}; // Posicao do centro do circulo
-    float obRoxoRaio = 100;
-    bool roxoTaAndando = false;
+    // Obstaculo circular
+    Vector2 obstCircCentro = {900, 350}; // Posicao do centro do circulo
+    float obstCircRaio = 100;
+    bool obstCircTaAndando = false;
 
     /// [[[[[ End Initalization ]]]]]
 
@@ -62,10 +64,10 @@ int main(void)
         /// [[[[[ Update ]]]]]
 
         // Mover player
-        MoverJog(&posJog, obstRet, obRoxoCentro, obRoxoRaio);
+        MoverJog(&posJog, obstRet, obstCircCentro, obstCircRaio);
 
         // Mover obstaculos
-        MoverObst(&obstRet, &obRoxoCentro, &obRoxoRaio, &roxoTaAndando);
+        MoverObst(&obstRet, &obstCircCentro, &obstCircRaio, &roxoTaAndando);
 
         /// [[[[[ End Update ]]]]]
 
@@ -76,7 +78,7 @@ int main(void)
             ClearBackground(DARKBROWN);
 
             // Obstaculo Roxo
-            DrawCircleV(obRoxoCentro, obRoxoRaio,
+            DrawCircleV(obstCircCentro, obstCircRaio,
                         roxoTaAndando ? PURPLE : VIOLET);
 
             // Player
@@ -92,8 +94,8 @@ int main(void)
                      "Espaco para movimentar obstaculos", 200, 10, 19, MAROON);
 
             // Texto com raio do roxo
-            DrawText(TextFormat("Raio = %.1f", obRoxoRaio),
-                     obRoxoCentro.x, obRoxoCentro.y, 17, WHITE);
+            DrawText(TextFormat("Raio = %.1f", obstCircRaio),
+                     obstCircCentro.x, obstCircCentro.y, 17, WHITE);
 
             // FPS
             DrawFPS(10, 10);
@@ -108,7 +110,7 @@ int main(void)
 
 
 void MoverJog(Vector2* posAtual, Rectangle obRet,
-                Vector2 obCircCentro, float raio)
+                Vector2 obCircCentro, float obstRaio)
 {
     // Posicao do player no proximo frame em relacao ah posicao atual
     Vector2 playerMoveTo = Vector2Zero();
@@ -129,19 +131,19 @@ void MoverJog(Vector2* posAtual, Rectangle obRet,
        A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
 
     /* Se o raio for menor que 0, tornah-lo 0. Note que isso nao afeta nada
-       fora da funcao (pq raio nao eh ponteiro). */
-    raio = (raio < 0) ? 0 : raio;
+       fora da funcao (pq obstRaio nao eh ponteiro). */
+    obstRaio = (obstRaio < 0) ? 0 : obstRaio;
 
     // Verificar colisao
     if (!CheckCollisionCircleRec(playerMoveTo, RAIO_PLR, obRet) &&
-        !CheckCollisionCircles(playerMoveTo, RAIO_PLR, obCircCentro, raio))
+        !CheckCollisionCircles(playerMoveTo, RAIO_PLR, obCircCentro, obstRaio))
     {
         // Atualizar a posicao do player
         *posAtual = playerMoveTo;
     }
 }
 
-void MoverObst(Rectangle* obstRet, Vector2* obRoxoCentro,
+void MoverObst(Rectangle* obstRet, Vector2* circCentro,
                    float* raio, bool* roxoTaAndando)
 {
     // Mover o retangulo
@@ -152,7 +154,7 @@ void MoverObst(Rectangle* obstRet, Vector2* obRoxoCentro,
     // Mover o roxo
     if (IsKeyDown(KEY_SPACE)) {
         *roxoTaAndando = true;
-        obRoxoCentro->x -= VEL_ROXO * GetFrameTime();
+        circCentro->x -= VEL_ROXO * GetFrameTime();
         *raio -= VEL_ROXO / 5.0f * GetFrameTime();
     } else {
         *roxoTaAndando = false;
