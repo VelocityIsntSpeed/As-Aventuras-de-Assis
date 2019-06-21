@@ -22,7 +22,7 @@ Exemplo 0
 #define VEL_PLR 150.0f // Velocidade do jogador (por segundo)
 #define RAIO_PLR 30.0f // Raio do circulo do jogador
 
-#define VEL_ROXO 40.0f // Velocidade do obstaculo circular (por segundo)
+#define VEL_CIRC 40.0f // Velocidade do obstaculo circular (por segundo)
 
 int main(void)
 {
@@ -88,8 +88,8 @@ int main(void)
         // Mover o circulo
         if (IsKeyDown(KEY_SPACE)) {
             obstCircTaAndando = true;
-            obstCircCentro.x -= VEL_ROXO * GetFrameTime();
-            obstCircRaio -= VEL_ROXO / 5.0f * GetFrameTime();
+            obstCircCentro.x -= VEL_CIRC * GetFrameTime();
+            obstCircRaio -= VEL_CIRC / 5.0f * GetFrameTime();
         } else {
             obstCircTaAndando = false;
         }

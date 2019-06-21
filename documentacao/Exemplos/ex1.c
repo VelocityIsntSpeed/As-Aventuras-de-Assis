@@ -27,7 +27,7 @@ Novidades em relacao ao Exemplo 0:
 #define VEL_PLR 150.0f // Velocidade do jogador (por segundo)
 #define RAIO_PLR 30.0f // Raio do circulo do jogador
 
-#define VEL_ROXO 40.0f // Velocidade do obstaculo circular (por segundo)
+#define VEL_CIRC 40.0f // Velocidade do obstaculo circular (por segundo)
 
 // Move o jogador
 void MoverJog(Vector2* posAtual, Rectangle obRet,
@@ -154,8 +154,8 @@ void MoverObst(Rectangle* obstRet, Vector2* circCentro,
     // Mover o roxo
     if (IsKeyDown(KEY_SPACE)) {
         *obstCircTaAndando = true;
-        circCentro->x -= VEL_ROXO * GetFrameTime();
-        *raio -= VEL_ROXO / 5.0f * GetFrameTime();
+        circCentro->x -= VEL_CIRC * GetFrameTime();
+        *raio -= VEL_CIRC / 5.0f * GetFrameTime();
     } else {
         *obstCircTaAndando = false;
     }
