@@ -117,7 +117,7 @@ int main(void)
                      "WASD/Setas para andar\n"
                      "Espaco para movimentar obstaculos", 200, 10, 19, MAROON);
 
-            // Texto com raio do roxo
+            // Texto com raio do obstaculo
             DrawText(TextFormat("Raio = %.1f", obstCircRaio),
                      obstCircCentro.x, obstCircCentro.y, 17, WHITE);
 
