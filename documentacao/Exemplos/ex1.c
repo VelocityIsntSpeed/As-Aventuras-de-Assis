@@ -148,8 +148,8 @@ void MoverObst(Rectangle* obstRet, Vector2* circCentro,
 {
     // Mover o retangulo
     if (IsKeyPressed(KEY_SPACE)) {
-        obstRet->x += 10;
-        obstRet->height += 5;
+        obstRet->x += 15;
+        obstRet->height += 10;
     }
     // Mover o circulo
     if (IsKeyDown(KEY_SPACE)) {
