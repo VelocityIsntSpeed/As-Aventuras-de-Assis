@@ -24,6 +24,9 @@ Exemplo 0
 
 #define VEL_CIRC 40.0f // Velocidade do obstaculo circular (por segundo)
 
+// Desenha o texto que diz os controles
+void DesenharControles();
+
 int main(void)
 {
     /// [[[[[ Initialization ]]]]]
@@ -112,9 +115,7 @@ int main(void)
             DrawRectangleRec(obstRet, GRAY);
 
             // Controles
-            DrawText("Controles:\n"
-                     "WASD/Setas para andar\n"
-                     "Espaco para movimentar obstaculos", 200, 10, 19, MAROON);
+            DesenharControles();
 
             // Texto com raio do obstaculo
             DrawText(TextFormat("Raio = %.1f", obstCircRaio),
@@ -130,3 +131,17 @@ int main(void)
     CloseWindow(); // Close window and OpenGL context
     return 0;
 }
+
+void DesenharControles()
+{
+    const char texto[] = "Controles:\n"
+                         "WASD/Setas para andar\n"
+                         "Espaco para movimentar obstaculos";
+    //
+    float alturaTexto = MeasureTextEx(GetFontDefault(), texto, 20, 2).y;
+
+    // Desenhar texto
+    DrawText(texto, 10, GetScreenHeight() - alturaTexto - 10, 20, BLACK);
+}
+
+

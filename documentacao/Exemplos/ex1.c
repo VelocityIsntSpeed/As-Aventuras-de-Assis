@@ -37,6 +37,9 @@ void MoverJog(Vector2* posAtual, Rectangle obRet,
 void MoverObst(Rectangle* obstRet, Vector2* circCentro,
                    float* raio, bool* obstCircTaAndando);
 
+// Desenha o texto que diz os controles
+void DesenharControles();
+
 int main(void)
 {
     /// [[[[[ Initialization ]]]]]
@@ -88,9 +91,7 @@ int main(void)
             DrawRectangleRec(obstRet, GRAY);
 
             // Controles
-            DrawText("Controles:\n"
-                     "WASD/Setas para andar\n"
-                     "Espaco para movimentar obstaculos", 200, 10, 19, MAROON);
+            DesenharControles();
 
             // Texto com raio do obstaculo
             DrawText(TextFormat("Raio = %.1f", obstCircRaio),
@@ -161,7 +162,17 @@ void MoverObst(Rectangle* obstRet, Vector2* circCentro,
     }
 }
 
+void DesenharControles()
+{
+    const char texto[] = "Controles:\n"
+                         "WASD/Setas para andar\n"
+                         "Espaco para movimentar obstaculos";
+    //
+    float alturaTexto = MeasureTextEx(GetFontDefault(), texto, 20, 2).y;
 
+    // Desenhar texto
+    DrawText(texto, 10, GetScreenHeight() - alturaTexto - 10, 20, BLACK);
+}
 
 
 
