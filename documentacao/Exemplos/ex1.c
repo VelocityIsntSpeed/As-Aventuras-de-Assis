@@ -35,7 +35,7 @@ void MoverJog(Vector2* posAtual, Rectangle obRet,
 
 // Move os obstaculos
 void MoverObst(Rectangle* obstRet, Vector2* circCentro,
-                   float* raio, bool* roxoTaAndando);
+                   float* raio, bool* obstCircTaAndando);
 
 int main(void)
 {
@@ -67,7 +67,7 @@ int main(void)
         MoverJog(&posJog, obstRet, obstCircCentro, obstCircRaio);
 
         // Mover obstaculos
-        MoverObst(&obstRet, &obstCircCentro, &obstCircRaio, &roxoTaAndando);
+        MoverObst(&obstRet, &obstCircCentro, &obstCircRaio, &obstCircTaAndando);
 
         /// [[[[[ End Update ]]]]]
 
@@ -79,7 +79,7 @@ int main(void)
 
             // Obstaculo Roxo
             DrawCircleV(obstCircCentro, obstCircRaio,
-                        roxoTaAndando ? PURPLE : VIOLET);
+                        obstCircTaAndando ? PURPLE : VIOLET);
 
             // Player
             DrawCircleGradient(posJog.x, posJog.y,
@@ -144,7 +144,7 @@ void MoverJog(Vector2* posAtual, Rectangle obRet,
 }
 
 void MoverObst(Rectangle* obstRet, Vector2* circCentro,
-                   float* raio, bool* roxoTaAndando)
+                   float* raio, bool* obstCircTaAndando)
 {
     // Mover o retangulo
     if (IsKeyPressed(KEY_SPACE)) {
@@ -153,11 +153,11 @@ void MoverObst(Rectangle* obstRet, Vector2* circCentro,
     }
     // Mover o roxo
     if (IsKeyDown(KEY_SPACE)) {
-        *roxoTaAndando = true;
+        *obstCircTaAndando = true;
         circCentro->x -= VEL_ROXO * GetFrameTime();
         *raio -= VEL_ROXO / 5.0f * GetFrameTime();
     } else {
-        *roxoTaAndando = false;
+        *obstCircTaAndando = false;
     }
 }
 
