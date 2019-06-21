@@ -19,8 +19,8 @@ Exemplo 0
 #include "raylib.h"
 #include "raymath.h"
 
-#define VEL_PLR 150.0f // Velocidade do jogador (por segundo)
-#define RAIO_PLR 30.0f // Raio do circulo do jogador
+#define VEL_JOG 150.0f // Velocidade do jogador (por segundo)
+#define RAIO_JOG 30.0f // Raio do circulo do jogador
 
 #define VEL_CIRC 40.0f // Velocidade do obstaculo circular (por segundo)
 
@@ -61,10 +61,10 @@ int main(void)
 
         /* Se andarmos uma quantidade fixa por frame, a velocidade de movimento
            dependerah da frame rate. Para q isso nao aconteca, multiplicamos a
-           quantidade que queremos mover por segundo (VEL_PLR) pela
+           quantidade que queremos mover por segundo (VEL_JOG) pela
            quantidade de segundos que o frame dura. O resultado eh a distancia
            q devemos mover no frame. */
-        posFutura = Vector2Scale(posFutura, VEL_PLR * GetFrameTime());
+        posFutura = Vector2Scale(posFutura, VEL_JOG * GetFrameTime());
 
         /* Transformar de coordenadas player para coordenadas world (i.e. antes
            era a partir da posicao atual do jogador, agora vai ser a partir da
@@ -106,7 +106,7 @@ int main(void)
                         obstCircTaAndando ? PURPLE : VIOLET);
 
             // Jogador
-            DrawCircleGradient(posJog.x, posJog.y, RAIO_PLR, SKYBLUE, BLUE);
+            DrawCircleGradient(posJog.x, posJog.y, RAIO_JOG, SKYBLUE, BLUE);
 
             // Obstaculo retangular
             DrawRectangleRec(obstRet, GRAY);

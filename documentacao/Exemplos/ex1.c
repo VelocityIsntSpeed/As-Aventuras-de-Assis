@@ -24,8 +24,8 @@ Novidades em relacao ao Exemplo 0:
 #include "raylib.h"
 #include "raymath.h"
 
-#define VEL_PLR 150.0f // Velocidade do jogador (por segundo)
-#define RAIO_PLR 30.0f // Raio do circulo do jogador
+#define VEL_JOG 150.0f // Velocidade do jogador (por segundo)
+#define RAIO_JOG 30.0f // Raio do circulo do jogador
 
 #define VEL_CIRC 40.0f // Velocidade do obstaculo circular (por segundo)
 
@@ -82,7 +82,7 @@ int main(void)
                         obstCircTaAndando ? PURPLE : VIOLET);
 
             // Jogador
-            DrawCircleGradient(posJog.x, posJog.y, RAIO_PLR, SKYBLUE, BLUE);
+            DrawCircleGradient(posJog.x, posJog.y, RAIO_JOG, SKYBLUE, BLUE);
 
             // Obstaculo retangular
             DrawRectangleRec(obstRet, GRAY);
@@ -119,7 +119,7 @@ void MoverJog(Vector2* posAtual, Rectangle obRet,
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    { posFutura.y -= 1; }
     if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  { posFutura.y += 1; }
 
-    posFutura = Vector2Scale(posFutura, VEL_PLR * GetFrameTime());
+    posFutura = Vector2Scale(posFutura, VEL_JOG * GetFrameTime());
 
     // Transformar para coordenadas world
     posFutura = Vector2Add(*posAtual, posFutura);
@@ -135,8 +135,8 @@ void MoverJog(Vector2* posAtual, Rectangle obRet,
     obstRaio = (obstRaio < 0) ? 0 : obstRaio;
 
     // Verificar colisao
-    if (!CheckCollisionCircleRec(posFutura, RAIO_PLR, obRet) &&
-        !CheckCollisionCircles(posFutura, RAIO_PLR, obCircCentro, obstRaio))
+    if (!CheckCollisionCircleRec(posFutura, RAIO_JOG, obRet) &&
+        !CheckCollisionCircles(posFutura, RAIO_JOG, obCircCentro, obstRaio))
     {
         // Atualizar a posicao do jogador
         *posAtual = posFutura;
