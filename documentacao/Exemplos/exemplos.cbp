@@ -18,12 +18,6 @@
 				<Option type="1" />
 				<Option compiler="raylib_mingw_compiler" />
 			</Target>
-			<Target title="EXN">
-				<Option output="bin/EXN/exemploN" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj/EXN/" />
-				<Option type="1" />
-				<Option compiler="raylib_mingw_compiler" />
-			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
@@ -44,12 +38,8 @@
 			<Option compilerVar="CC" />
 			<Option target="EX1" />
 		</Unit>
-		<Unit filename="exN.c">
-			<Option compilerVar="CC" />
-			<Option target="EXN" />
-		</Unit>
 		<Unit filename="helpers.h">
-			<Option target="EXN" />
+			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Extensions>
 			<code_completion />
