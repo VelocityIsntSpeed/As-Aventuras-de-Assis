@@ -77,7 +77,7 @@ int main(void)
             // Pintar tudo (para formar o background)
             ClearBackground(DARKBROWN);
 
-            // Obstaculo Roxo
+            // Obstaculo circular
             DrawCircleV(obstCircCentro, obstCircRaio,
                         obstCircTaAndando ? PURPLE : VIOLET);
 
