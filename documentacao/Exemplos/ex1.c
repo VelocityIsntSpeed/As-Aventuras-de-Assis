@@ -130,7 +130,8 @@ void MoverJog(Vector2* posAtual, Rectangle obRet,
        A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
 
     /* Se o raio for menor que 0, tornah-lo 0. Note que isso nao afeta nada
-       fora da funcao (pq obstRaio nao eh ponteiro). */
+       fora dessa funcao (pq obstRaio nao eh ponteiro). Isso eh necessario pq a
+       funcao de checar colisao buga se for fornecida um raio negativo. */
     obstRaio = (obstRaio < 0) ? 0 : obstRaio;
 
     // Verificar colisao
