@@ -49,9 +49,9 @@ int main(void)
     while (!WindowShouldClose()) { // Detect window close button or ESC key
 
         /// [[[[[ Update ]]]]]
-        ///Movimentacao do player==============================================
-        /* A posicao para a qual vamos mover o player nesse frame,
-           relativa ah posicao atual do player */
+        ///Movimentacao do jogador==============================================
+        /* A posicao para a qual vamos mover o jogador nesse frame,
+           relativa ah posicao atual dele */
         Vector2 playerMoveTo = Vector2Zero();
 
         if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))  { playerMoveTo.x -= 1; }
@@ -67,14 +67,14 @@ int main(void)
         playerMoveTo = Vector2Scale(playerMoveTo, VEL_PLR * GetFrameTime());
 
         /* Transformar de coordenadas player para coordenadas world (i.e. antes
-           era a partir da posicao atual do player, agora vai ser a partir da
+           era a partir da posicao atual do jogador, agora vai ser a partir da
            origem do world, assim como eh posJog) */
         playerMoveTo = Vector2Add(posJog, playerMoveTo);
 
-        // Finalmente, atualizar a posicao do player
+        // Finalmente, atualizar a posicao do jogador
         posJog = playerMoveTo;
 
-        /* Note que com esse algoritmo, o player anda 41% mais rapido se
+        /* Note que com esse algoritmo, o jogador anda 41% mais rapido se
            estiver andando na diagonal. Por exemplo: segurando D e S,
            playerMoveTo eh {1.0f, 1.0f} antes de ser escalado.
            A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */

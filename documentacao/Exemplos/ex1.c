@@ -63,7 +63,7 @@ int main(void)
 
         /// [[[[[ Update ]]]]]
 
-        // Mover player
+        // Mover jogador
         MoverJog(&posJog, obstRet, obstCircCentro, obstCircRaio);
 
         // Mover obstaculos
@@ -125,7 +125,7 @@ void MoverJog(Vector2* posAtual, Rectangle obRet,
     // Transformar para coordenadas world
     playerMoveTo = Vector2Add(*posAtual, playerMoveTo);
 
-    /* Note que com esse algoritmo, o player anda 41% mais rapido se
+    /* Note que com esse algoritmo, o jogador anda 41% mais rapido se
        estiver andando na diagonal. Por exemplo: segurando D e S,
        playerMoveTo eh {1.0f, 1.0f} antes de ser escalado.
        A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
@@ -138,7 +138,7 @@ void MoverJog(Vector2* posAtual, Rectangle obRet,
     if (!CheckCollisionCircleRec(playerMoveTo, RAIO_PLR, obRet) &&
         !CheckCollisionCircles(playerMoveTo, RAIO_PLR, obCircCentro, obstRaio))
     {
-        // Atualizar a posicao do player
+        // Atualizar a posicao do jogador
         *posAtual = playerMoveTo;
     }
 }
