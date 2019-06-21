@@ -112,7 +112,7 @@ int main(void)
 void MoverJog(Vector2* posAtual, Rectangle obRet,
                 Vector2 obCircCentro, float obstRaio)
 {
-    // Posicao do player no proximo frame em relacao ah posicao atual
+    // Posicao futura do jogador em relacao ah posicao atual
     Vector2 playerMoveTo = Vector2Zero();
 
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))  { playerMoveTo.x -= 1; }
