@@ -151,7 +151,7 @@ void MoverObst(Rectangle* obstRet, Vector2* circCentro,
         obstRet->x += 10;
         obstRet->height += 5;
     }
-    // Mover o roxo
+    // Mover o circulo
     if (IsKeyDown(KEY_SPACE)) {
         *obstCircTaAndando = true;
         circCentro->x -= VEL_CIRC * GetFrameTime();
