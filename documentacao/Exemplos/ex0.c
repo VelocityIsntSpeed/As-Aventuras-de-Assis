@@ -33,7 +33,7 @@ int main(void)
     SetTargetFPS(60);
     ///========================================================================
     // Posicao do jogador
-    Vector2 playerPos = {300, 300};
+    Vector2 posJog = {300, 300};
 
     // Obstaculos
     Rectangle obCinza = {100, 100, 150, 100};
@@ -66,11 +66,11 @@ int main(void)
 
         /* Transformar de coordenadas player para coordenadas world (i.e. antes
            era a partir da posicao atual do player, agora vai ser a partir da
-           origem do world, assim como eh playerPos) */
-        playerMoveTo = Vector2Add(playerPos, playerMoveTo);
+           origem do world, assim como eh posJog) */
+        playerMoveTo = Vector2Add(posJog, playerMoveTo);
 
         // Finalmente, atualizar a posicao do player
-        playerPos = playerMoveTo;
+        posJog = playerMoveTo;
 
         /* Note que com esse algoritmo, o player anda 41% mais rapido se
            estiver andando na diagonal. Por exemplo: segurando D e S,
@@ -104,7 +104,7 @@ int main(void)
                         roxoTaAndando ? PURPLE : VIOLET);
 
             // Player
-            DrawCircleGradient(playerPos.x, playerPos.y,
+            DrawCircleGradient(posJog.x, posJog.y,
                                RAIO_PLR, SKYBLUE, BLUE);
 
             // Obstaculo Cinza

@@ -16,8 +16,8 @@ Exemplo 1
 
 Novidades em relacao ao Exemplo 0:
 - Colisao com os obstaculos
-- MovePlayer()
-- MoveObstacles()
+- MoverJog()
+- MoverObst()
 
 ******************************************************************************/
 
@@ -30,11 +30,11 @@ Novidades em relacao ao Exemplo 0:
 #define VEL_ROXO 40.0f // Velocidade do movimento do circulo roxo (por segundo)
 
 // Move o jogador
-void MovePlayer(Vector2* playerPos, Rectangle obRet,
+void MoverJog(Vector2* posAtual, Rectangle obRet,
                 Vector2 obCircCentro, float raio);
 
 // Move os obstaculos
-void MoveObstacles(Rectangle* obCinza, Vector2* obRoxoCentro,
+void MoverObst(Rectangle* obCinza, Vector2* obRoxoCentro,
                    float* raio, bool* roxoTaAndando);
 
 int main(void)
@@ -46,7 +46,7 @@ int main(void)
     SetTargetFPS(60);
     ///========================================================================
     // Posicao do jogador
-    Vector2 playerPos = {300, 300};
+    Vector2 posJog = {300, 300};
 
     // Obstaculos
     Rectangle obCinza = {100, 100, 150, 100};
@@ -62,10 +62,10 @@ int main(void)
         /// [[[[[ Update ]]]]]
 
         // Mover player
-        MovePlayer(&playerPos, obCinza, obRoxoCentro, obRoxoRaio);
+        MoverJog(&posJog, obCinza, obRoxoCentro, obRoxoRaio);
 
         // Mover obstaculos
-        MoveObstacles(&obCinza, &obRoxoCentro, &obRoxoRaio, &roxoTaAndando);
+        MoverObst(&obCinza, &obRoxoCentro, &obRoxoRaio, &roxoTaAndando);
 
         /// [[[[[ End Update ]]]]]
 
@@ -80,7 +80,7 @@ int main(void)
                         roxoTaAndando ? PURPLE : VIOLET);
 
             // Player
-            DrawCircleGradient(playerPos.x, playerPos.y,
+            DrawCircleGradient(posJog.x, posJog.y,
                                RAIO_PLR, SKYBLUE, BLUE);
 
             // Obstaculo Cinza
@@ -107,7 +107,7 @@ int main(void)
 }
 
 
-void MovePlayer(Vector2* playerPos, Rectangle obRet,
+void MoverJog(Vector2* posAtual, Rectangle obRet,
                 Vector2 obCircCentro, float raio)
 {
     // Posicao do player no proximo frame em relacao ah posicao atual
@@ -121,7 +121,7 @@ void MovePlayer(Vector2* playerPos, Rectangle obRet,
     playerMoveTo = Vector2Scale(playerMoveTo, VEL_PLR * GetFrameTime());
 
     // Transformar para coordenadas world
-    playerMoveTo = Vector2Add(*playerPos, playerMoveTo);
+    playerMoveTo = Vector2Add(*posAtual, playerMoveTo);
 
     /* Note que com esse algoritmo, o player anda 41% mais rapido se
        estiver andando na diagonal. Por exemplo: segurando D e S,
@@ -137,11 +137,11 @@ void MovePlayer(Vector2* playerPos, Rectangle obRet,
         !CheckCollisionCircles(playerMoveTo, RAIO_PLR, obCircCentro, raio))
     {
         // Atualizar a posicao do player
-        *playerPos = playerMoveTo;
+        *posAtual = playerMoveTo;
     }
 }
 
-void MoveObstacles(Rectangle* obCinza, Vector2* obRoxoCentro,
+void MoverObst(Rectangle* obCinza, Vector2* obRoxoCentro,
                    float* raio, bool* roxoTaAndando)
 {
     // Mover o cinza
