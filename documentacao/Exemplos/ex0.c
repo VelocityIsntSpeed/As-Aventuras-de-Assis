@@ -105,7 +105,7 @@ int main(void)
             DrawCircleV(obstCircCentro, obstCircRaio,
                         obstCircTaAndando ? PURPLE : VIOLET);
 
-            // Player
+            // Jogador
             DrawCircleGradient(posJog.x, posJog.y, RAIO_PLR, SKYBLUE, BLUE);
 
             // Obstaculo retangular
