@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/windows,codeblocks
-# Edit at https://www.gitignore.io/?templates=windows,codeblocks
+# Created by https://www.gitignore.io/api/windows,codeblocks,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=windows,codeblocks,visualstudiocode
 
 ### CodeBlocks ###
 # specific to CodeBlocks IDE
@@ -9,6 +9,17 @@
 # generated directories
 bin/
 obj/
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -35,4 +46,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.gitignore.io/api/windows,codeblocks
+# End of https://www.gitignore.io/api/windows,codeblocks,visualstudiocode
