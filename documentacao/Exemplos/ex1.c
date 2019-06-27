@@ -59,7 +59,7 @@ int main(void)
     float obstCircRaio = 100;
     bool obstCircTaAndando = false;
 
-    /// [[[[[ End Initalization ]]]]]
+    /// [[[[[ End Initialization ]]]]]
 
     // Main game loop
     while (!WindowShouldClose()) { // Detect window close button or ESC key
