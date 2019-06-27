@@ -22,8 +22,7 @@ int main(void)
 
     InitWindow(screenWidth, screenHeight, "Jogo 42");       // Inicializar tela
 
-    Image playerImage = LoadImage("Textures/protag.png");  // Encontra a imagem do player nos arquivos do jogo
-    Texture2D sprite = LoadTextureFromImage(playerImage);   // Carrega o sprite
+    Texture2D sprite = LoadTexture("Textures/protag.png");   // Carrega o sprite
 
     int frameWidth = sprite.width;      // Largura do sprite
     int frameHeight = sprite.height;    // Altura do sprite
