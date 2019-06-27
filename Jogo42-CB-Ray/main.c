@@ -1,37 +1,46 @@
-/*******************************************************************************************
-*
-*   raylib [shapes] example - following eyes
-*
-*   This example has been created using raylib 2.5 (www.raylib.com)
-*   raylib is licensed under an unmodified zlib/libpng license (View raylib.h for details)
-*
-*   Copyright (c) 2013-2019 Ramon Santamaria (@raysan5)
-*
-********************************************************************************************/
+#include <raylib.h>
+#include <raymath.h>
 
-#include "raylib.h"
+// Responsavel pela movimentação do player
+int playerMovement (Rectangle* playerTransform, Rectangle* playerPosition)
+{
+    if(IsKeyDown(KEY_W)) (*playerTransform).y -= 3.0f;
+    if(IsKeyDown(KEY_A)) (*playerTransform).x -= 3.0f;
+    if(IsKeyDown(KEY_S)) (*playerTransform).y += 3.0f;
+    if(IsKeyDown(KEY_D)) (*playerTransform).x += 3.0f;
 
-#include <math.h>       // Required for: atan2f()
+    (*playerPosition).x = (*playerTransform).x;
+    (*playerPosition).y = (*playerTransform).y;
+}
 
 int main(void)
 {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
+    const int screenWidth = 800;        // Largura da tela
+    const int screenHeight = 450;       // Altura da tela
 
-    InitWindow(screenWidth, screenHeight, "raylib [shapes] example - following eyes");
+    InitWindow(screenWidth, screenHeight, "Jogo 42");       // Inicializar tela
 
-    Vector2 scleraLeftPosition = { GetScreenWidth()/2 - 100, GetScreenHeight()/2 };
-    Vector2 scleraRightPosition = { GetScreenWidth()/2 + 100, GetScreenHeight()/2 };
-    float scleraRadius = 80;
+    Image playerImage = LoadImage("Textures/protag.png");  // Encontra a imagem do player nos arquivos do jogo
+    Texture2D sprite = LoadTextureFromImage(playerImage);   // Carrega o sprite
 
-    Vector2 irisLeftPosition = { GetScreenWidth()/2 - 100, GetScreenHeight()/2 };
-    Vector2 irisRightPosition = { GetScreenWidth()/2 + 100, GetScreenHeight()/2};
-    float irisRadius = 24;
+    int frameWidth = sprite.width;      // Largura do sprite
+    int frameHeight = sprite.height;    // Altura do sprite
 
-    float angle = 0.0f;
-    float dx = 0.0f, dy = 0.0f, dxx = 0.0f, dyy = 0.0f;
+    // Seleciona o sprite do player
+    Rectangle sourceRec = {0.0f, 0.0f, frameWidth, frameHeight};
+
+    // Determina o local onde o player será desenhado e a escala do mesmo
+    Rectangle playerTransform = {screenWidth/2, screenHeight/2, frameWidth/2, frameHeight/2};
+
+    // Guarda a posição x e y do player
+    Vector2 playerPosition = {playerTransform.x, playerTransform.y};
+
+    // Determina o ponto do sprite que é usado de referência para movimentação e rotação
+    Vector2 origin = {frameWidth/4, frameHeight/4};
+
+    float rotation = 0.0f;          // Rotação do sprite
 
     SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
@@ -41,38 +50,9 @@ int main(void)
     {
         // Update
         //----------------------------------------------------------------------------------
-        irisLeftPosition = GetMousePosition();
-        irisRightPosition = GetMousePosition();
+        playerMovement(&playerTransform, &playerPosition);
 
-        // Check not inside the left eye sclera
-        if (!CheckCollisionPointCircle(irisLeftPosition, scleraLeftPosition, scleraRadius - 20))
-        {
-            dx = irisLeftPosition.x - scleraLeftPosition.x;
-            dy = irisLeftPosition.y - scleraLeftPosition.y;
-
-            angle = atan2f(dy, dx);
-
-            dxx = (scleraRadius - irisRadius)*cosf(angle);
-            dyy = (scleraRadius - irisRadius)*sinf(angle);
-
-            irisLeftPosition.x = scleraLeftPosition.x + dxx;
-            irisLeftPosition.y = scleraLeftPosition.y + dyy;
-        }
-
-        // Check not inside the right eye sclera
-        if (!CheckCollisionPointCircle(irisRightPosition, scleraRightPosition, scleraRadius - 20))
-        {
-            dx = irisRightPosition.x - scleraRightPosition.x;
-            dy = irisRightPosition.y - scleraRightPosition.y;
-
-            angle = atan2f(dy, dx);
-
-            dxx = (scleraRadius - irisRadius)*cosf(angle);
-            dyy = (scleraRadius - irisRadius)*sinf(angle);
-
-            irisRightPosition.x = scleraRightPosition.x + dxx;
-            irisRightPosition.y = scleraRightPosition.y + dyy;
-        }
+        rotation = Vector2Angle(playerPosition, GetMousePosition());    // Adquire o angulo do player em relação a câmera
         //----------------------------------------------------------------------------------
 
         // Draw
@@ -81,15 +61,9 @@ int main(void)
 
             ClearBackground(RAYWHITE);
 
-            DrawCircleV(scleraLeftPosition, scleraRadius, LIGHTGRAY);
-            DrawCircleV(irisLeftPosition, irisRadius, BROWN);
-            DrawCircleV(irisLeftPosition, 10, BLACK);
-
-            DrawCircleV(scleraRightPosition, scleraRadius, LIGHTGRAY);
-            DrawCircleV(irisRightPosition, irisRadius, DARKGREEN);
-            DrawCircleV(irisRightPosition, 10, BLACK);
-
-            DrawFPS(10, 10);
+            // Desenha o sprite do player já com a escala e rotação certas.
+            DrawTexturePro(sprite, sourceRec, playerTransform, origin, rotation, RAYWHITE);
+            DrawText("Move the ball with W/A/S/D", 10, 10, 20, DARKGRAY);
 
         EndDrawing();
         //----------------------------------------------------------------------------------
@@ -97,6 +71,8 @@ int main(void)
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
+    UnloadTexture(sprite);  // Descarregar a textura
+
     CloseWindow();        // Close window and OpenGL context
     //--------------------------------------------------------------------------------------
 
