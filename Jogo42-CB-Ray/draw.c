@@ -27,17 +27,8 @@ static void DesenharControles()
     DrawText(texto, 10, GetScreenHeight() - alturaTexto - 10, 20, BLACK);
 }
 
-// Desenha tudo
-void Desenhar(GameState* gs, Texture2D* spriteJog)
+static void DesenharJogador(GameState* gs, Texture2D* spriteJog)
 {
-    // Pintar tudo (para formar o background)
-    ClearBackground(DARKBROWN);
-
-    // Obstaculo circular
-    DrawCircleV(gs->obstCircCentro, gs->obstCircRaio,
-                gs->obstCircTaAndando ? PURPLE : VIOLET);
-
-    ///Jogador=================================================================
     // A parte da textura a ser utilizada
     const Rectangle SRC_REC = {0, 0, spriteJog->width, spriteJog->height};
 
@@ -50,7 +41,20 @@ void Desenhar(GameState* gs, Texture2D* spriteJog)
 
     DrawTexturePro(*spriteJog,\
                    SRC_REC, DEST_REC, CENTRO, gs->rotJog, WHITE);
-    ///========================================================================
+}
+
+// Desenha tudo
+void Desenhar(GameState* gs, Texture2D* spriteJog)
+{
+    // Pintar tudo (para formar o background)
+    ClearBackground(DARKBROWN);
+
+    // Obstaculo circular
+    DrawCircleV(gs->obstCircCentro, gs->obstCircRaio,
+                gs->obstCircTaAndando ? PURPLE : VIOLET);
+
+    //Jogador
+    DesenharJogador(gs, spriteJog);
 
     // Obstaculo retangular
     DrawRectangleRec(gs->obstRet, GRAY);
