@@ -11,6 +11,22 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 #include "raymath.h"
 #include "jogo42.h"
 
+// Desenha o texto que diz os controles
+static void DesenharControles()
+{
+    // Texto que vai aparecer
+    const char texto[] =
+    "Controles:\n"
+    "WASD/Setas para andar\n"
+    "Espaco para movimentar obstaculos";
+
+    // Calcular a altura:
+    float alturaTexto = MeasureTextEx(GetFontDefault(), texto, 20, 2).y;
+
+    // Desenhar texto
+    DrawText(texto, 10, GetScreenHeight() - alturaTexto - 10, 20, BLACK);
+}
+
 // Desenha tudo
 void Desenhar(GameState* gs, Texture2D* spriteJog)
 {
@@ -51,18 +67,3 @@ void Desenhar(GameState* gs, Texture2D* spriteJog)
 }
 
 
-// Desenha o texto que diz os controles
-void DesenharControles()
-{
-    // Texto que vai aparecer
-    const char texto[] =
-    "Controles:\n"
-    "WASD/Setas para andar\n"
-    "Espaco para movimentar obstaculos";
-
-    // Calcular a altura:
-    float alturaTexto = MeasureTextEx(GetFontDefault(), texto, 20, 2).y;
-
-    // Desenhar texto
-    DrawText(texto, 10, GetScreenHeight() - alturaTexto - 10, 20, BLACK);
-}
