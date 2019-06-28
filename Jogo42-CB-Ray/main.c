@@ -84,9 +84,6 @@ int main(void)
                         gs->obstCircTaAndando ? PURPLE : VIOLET);
 
             ///Jogador=========================================================
-            // Metodo antigo, sem textura
-            //DrawCircleGradient(gs->posJog.x, gs->posJog.y, RAIO_JOG,\
-                               SKYBLUE, BLUE);
             // Retangulo que determina que parte da textura utilizar
             const Rectangle SRC_REC = {0, 0, spriteJog.width, spriteJog.height};
             // Determina a posicao e o tamanho
