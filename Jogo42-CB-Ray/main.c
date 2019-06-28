@@ -38,8 +38,12 @@ int main(void)
     GameState* gs = malloc(sizeof(GameState));
 
     ///Jogador=================================================================
-    // Posicao do jogador
+    // Posicao
     gs->posJog = (Vector2){300, 300};
+    // Rotacao
+    gs->rotJog = 0;
+    // Sprite
+    Texture2D spriteJog = LoadTexture("tex/protag.png");
 
     ///Obstaculos==============================================================
     // Obstaculo retangular
@@ -59,6 +63,11 @@ int main(void)
         // Mover jogador
         MoverJog(gs);
 
+        /* Atualizar rotacao do jogador.
+           Nao funciona com uma camera movel (para isso eh necessario calcular
+           a posicao do mouse em coordenadas world). */
+        gs->rotJog = Vector2Angle(gs->posJog, GetMousePosition());
+
         // Mover obstaculos
         MoverObst(gs);
 
@@ -74,9 +83,20 @@ int main(void)
             DrawCircleV(gs->obstCircCentro, gs->obstCircRaio,
                         gs->obstCircTaAndando ? PURPLE : VIOLET);
 
-            // Jogador
-            DrawCircleGradient(gs->posJog.x, gs->posJog.y, RAIO_JOG,
-                               SKYBLUE, BLUE);
+            ///Jogador=========================================================
+            // A parte da textura a ser utilizada
+            const Rectangle SRC_REC = {0, 0, spriteJog.width, spriteJog.height};
+
+            // Posicao e tamanho na tela
+            const Rectangle DEST_REC = {gs->posJog.x, gs->posJog.y,\
+                                        RAIO_JOG * 2, RAIO_JOG * 2};
+
+            // Posicao do centro relativa ah parte superior esquerda do DEST_REC
+            const Vector2 CENTRO = {RAIO_JOG, RAIO_JOG};
+
+            DrawTexturePro(spriteJog,\
+                           SRC_REC, DEST_REC, CENTRO, gs->rotJog, WHITE);
+            ///================================================================
 
             // Obstaculo retangular
             DrawRectangleRec(gs->obstRet, GRAY);

@@ -7,8 +7,10 @@
 // Struct de estado do jogo
 typedef struct {
     ///Jogador=================================================================
-    // Posicao do jogador
+    // Posicao
     Vector2 posJog;
+    // Rotacao em graus
+    float rotJog;
     ///Obstaculos==============================================================
     // Obstaculo retangular
     Rectangle obstRet;
