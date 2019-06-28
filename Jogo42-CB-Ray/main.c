@@ -68,7 +68,7 @@ int main(void)
 
         /// [[[[[ Desenhar ]]]]]
         BeginDrawing();
-            Desenhar(gs);
+            Desenhar(gs, &spriteJog);
         EndDrawing();
         /// [[[[[ Fim Desenhar ]]]]]
     }
