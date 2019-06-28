@@ -52,6 +52,7 @@ int main(void)
     gs->obstCircCentro = (Vector2){900, 350};
     gs->obstCircRaio = 100;
     gs->obstCircTaAndando = false;
+
     /// [[[[[ Fim Inicializacao ]]]]]
 
     // Main game loop
@@ -66,6 +67,7 @@ int main(void)
            Nao funciona com uma camera movel (para isso eh necessario calcular
            a posicao do mouse em coordenadas world). */
         gs->rotJog = Vector2Angle(gs->posJog, GetMousePosition());
+
         // Mover obstaculos
         MoverObst(gs);
 
@@ -84,9 +86,11 @@ int main(void)
             ///Jogador=========================================================
             // A parte da textura a ser utilizada
             const Rectangle SRC_REC = {0, 0, spriteJog.width, spriteJog.height};
+
             // Posicao e tamanho na tela
             const Rectangle DEST_REC = {gs->posJog.x, gs->posJog.y,\
                                         RAIO_JOG * 2, RAIO_JOG * 2};
+
             // Posicao do centro relativa ah parte superior esquerda do DEST_REC
             const Vector2 CENTRO = {RAIO_JOG, RAIO_JOG};
 
