@@ -28,6 +28,27 @@ typedef struct {
     bool obstCircTaAndando;
 } GameState;
 
-// TODO: helper functions and macros
+///Declaracao de funcoes definidas em outros arquivos==========================
+// draw.c
+void Desenhar(GameState* gs, Texture2D* spriteJog);
+
+/* Exemplos:
+// arquivo-que-ainda-nao-existe.c
+void FuncaoQueAindaNaoExiste();
+void FuncaoQueAindaNaoExiste();
+void FuncaoQueAindaNaoExiste();
+
+// outro-arquivo-que-ainda-nao-existe.c
+void FuncaoQueAindaNaoExiste();
+void FuncaoQueAindaNaoExiste();
+*/
+
+///Funcoes helper (i.e. utilitarias, declaradas e definidas aqui)
+// Ainda nao existe nenhuma
 
 #endif // JOGO42_H_INCLUDED
+
+
+
+
+
