@@ -12,11 +12,6 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 #include "jogo42.h"
 #include "stdlib.h" // pelo malloc
 
-#define VEL_JOG 150.0f // Velocidade do jogador (por segundo)
-#define RAIO_JOG 30.0f // Raio do circulo do jogador
-
-#define VEL_CIRC 40.0f // Velocidade do obstaculo circular (por segundo)
-
 // Move o jogador
 void MoverJog(GameState* gs);
 

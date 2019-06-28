@@ -4,6 +4,14 @@
 #include "raylib.h"
 #include "raymath.h"
 
+// Velocidade do jogador (por segundo)
+#define VEL_JOG 150.0f
+// Raio do jogador
+#define RAIO_JOG 30.0f
+
+// Velocidade do obstaculo circular (por segundo)
+#define VEL_CIRC 40.0f
+
 // Struct de estado do jogo
 typedef struct {
     ///Jogador=================================================================
