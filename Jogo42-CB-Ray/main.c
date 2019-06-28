@@ -43,7 +43,7 @@ int main(void)
     // Rotacao
     gs->rotJog = 0;
     // Sprite
-    Texture2D spriteJog = LoadTexture("Textures/protag.png");
+    Texture2D spriteJog = LoadTexture("tex/protag.png");
 
     ///Obstaculos==============================================================
     // Obstaculo retangular
