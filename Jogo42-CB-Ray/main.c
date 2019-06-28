@@ -84,12 +84,12 @@ int main(void)
                         gs->obstCircTaAndando ? PURPLE : VIOLET);
 
             ///Jogador=========================================================
-            // Retangulo que determina que parte da textura utilizar
+            // A parte da textura a ser utilizada
             const Rectangle SRC_REC = {0, 0, spriteJog.width, spriteJog.height};
-            // Determina a posicao e o tamanho
+            // Posicao e tamanho na tela
             const Rectangle DEST_REC = {gs->posJog.x, gs->posJog.y,\
                                         RAIO_JOG * 2, RAIO_JOG * 2};
-            // Determina a posicao do centro
+            // Posicao do centro relativa ah parte superior esquerda do DEST_REC
             const Vector2 CENTRO = {RAIO_JOG, RAIO_JOG};
 
             DrawTexturePro(spriteJog,\
