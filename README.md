@@ -3,7 +3,7 @@ Este é o repositório GitHub para o desenvolvimento do jogo provisoriamente int
 
 **_Instruções para configurar o ambiente de desenvolvimento encontram-se em [documentacao/configurar.md](documentacao/configurar.md)._**
 
-A pasta [`Jogo42-CB-Ray`](Jogo42-CB-Ray/) é um projeto de CodeBlocks utilizando Raylib.
+A pasta [`jogo42-cb`](jogo42-cb/) é um projeto de CodeBlocks utilizando Raylib.
 
 Em [`documentacao/Exemplos/`](documentacao/Exemplos/) há outro projeto de CodeBlocks, com exemplos de implementação de funcionalidades básicas do jogo.
 
