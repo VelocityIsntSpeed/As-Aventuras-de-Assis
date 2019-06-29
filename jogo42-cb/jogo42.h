@@ -62,17 +62,6 @@ GameState;
 // draw.c
 void Desenhar(GameState* gs, Texture2D* spriteJog);
 
-/* Exemplos:
-// arquivo-que-ainda-nao-existe.c
-void FuncaoQueAindaNaoExiste();
-void FuncaoQueAindaNaoExiste();
-void FuncaoQueAindaNaoExiste();
-
-// outro-arquivo-que-ainda-nao-existe.c
-void FuncaoQueAindaNaoExiste();
-void FuncaoQueAindaNaoExiste();
-*/
-
 #endif // JOGO42_H_INCLUDED
 
 
