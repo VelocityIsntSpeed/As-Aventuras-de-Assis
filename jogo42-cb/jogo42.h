@@ -12,6 +12,9 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 #include "raylib.h"
 #include "raymath.h"
 
+
+
+///Definicoes de constantes====================================================
 // Velocidade do jogador (por segundo)
 #define VEL_JOG 150.0f
 // Raio do jogador
@@ -20,6 +23,9 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 // Velocidade do obstaculo circular (por segundo)
 #define VEL_CIRC 40.0f
 
+
+
+///Definicoes de tipos=========================================================
 // Struct de estado do jogo
 typedef struct {
     ///Jogador=================================================================
@@ -36,7 +42,14 @@ typedef struct {
     bool obstCircTaAndando;
 } GameState;
 
-///Declaracao de funcoes definidas em outros arquivos==========================
+
+
+///Funcoes helper (i.e. utilitarias, declaradas e definidas aqui)==============
+// Ainda nao existe nenhuma
+
+
+
+///Declaracoes de funcoes definidas em outros arquivos==========================
 // draw.c
 void Desenhar(GameState* gs, Texture2D* spriteJog);
 
@@ -50,9 +63,6 @@ void FuncaoQueAindaNaoExiste();
 void FuncaoQueAindaNaoExiste();
 void FuncaoQueAindaNaoExiste();
 */
-
-///Funcoes helper (i.e. utilitarias, declaradas e definidas aqui)
-// Ainda nao existe nenhuma
 
 #endif // JOGO42_H_INCLUDED
 
