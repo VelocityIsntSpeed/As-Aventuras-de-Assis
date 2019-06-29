@@ -6,3 +6,26 @@ Este é o repositório GitHub para o desenvolvimento do jogo provisoriamente int
 A pasta [`Jogo42-CB-Ray`](Jogo42-CB-Ray/) é um projeto de CodeBlocks utilizando Raylib.
 
 Em [`documentacao/Exemplos/`](documentacao/Exemplos/) há outro projeto de CodeBlocks, com exemplos de implementação de funcionalidades básicas do jogo.
+
+----------------
+
+### Recursos úteis
+- Cheatsheet do Raylib  
+  - https://www.raylib.com/cheatsheet/cheatsheet.html
+- Exemplos do Raylib
+  - https://www.raylib.com/examples.html
+  - `C:\raylib\raylib\examples\` (compilam facilmente com o Notepad++ que vem com o raylib)
+  - https://github.com/raysan5/raylib/tree/master/examples
+- Jogos de amostra do Raylib
+  - https://github.com/raysan5/raylib/tree/master/games
+- Assets grátis
+  - Trilhas sonoras
+    - https://incompetech.com/music/
+    - https://freepd.com/
+  - Visuais
+    - https://opengameart.org/
+    - https://itch.io/game-assets/free
+  - Efeitos sonoros
+    - Nada ainda
+
+_Obs: É possível clonar o repositório do raylib para utilizar os jogos de amostra_
