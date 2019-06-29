@@ -39,9 +39,9 @@ Jog;
 
 // Struct de estado do jogo
 typedef struct {
-    ///Jogador=================================================================
+    ///Jogador-----------------------------------------------------------------
     Jog jog;
-    ///Obstaculos==============================================================
+    ///Obstaculos--------------------------------------------------------------
     // Obstaculo retangular
     Rectangle obstRet;
     // Posicao do centro do obstaculo circular
