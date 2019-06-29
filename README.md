@@ -1,5 +1,5 @@
 # Jogo42
-Este é o repositório GitHub para o desenvolvimento do jogo provisoriamente intitulado Jogo42. Esse é um projeto em grupo para a disciplina _Introdução à Programação_, período 2019.1 da UFRPE ([Universidade Federal Rural de Pernambuco](http://www.ufrpe.br)). 
+Este é o repositório GitHub para o desenvolvimento do jogo provisoriamente intitulado Jogo42. Este é um projeto em grupo para a disciplina _Introdução à Programação_, período 2019.1 da UFRPE ([Universidade Federal Rural de Pernambuco](http://www.ufrpe.br)). 
 
 Utilizamos a biblioteca [Raylib](https://www.raylib.com/) e a IDE [Code::Blocks](http://www.codeblocks.org/).
 
