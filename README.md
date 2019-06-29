@@ -5,7 +5,7 @@ Este é o repositório GitHub para o desenvolvimento do jogo provisoriamente int
 
 A pasta [`jogo42-cb`](jogo42-cb/) é um projeto de CodeBlocks utilizando Raylib.
 
-Em [`documentacao/Exemplos/`](documentacao/Exemplos/) há outro projeto de CodeBlocks, com exemplos de implementação de funcionalidades básicas do jogo.
+Em [`doc/exemplos/`](doc/exemplos/) há outro projeto de CodeBlocks, com exemplos de implementação de funcionalidades básicas do jogo.
 
 ----------------
 
