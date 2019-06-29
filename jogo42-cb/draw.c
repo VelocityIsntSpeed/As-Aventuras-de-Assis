@@ -33,14 +33,14 @@ static void DesenharJogador(GameState* gs, Texture2D* spriteJog)
     const Rectangle SRC_REC = {0, 0, spriteJog->width, spriteJog->height};
 
     // Posicao e tamanho na tela
-    const Rectangle DEST_REC = {gs->posJog.x, gs->posJog.y,\
+    const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y,\
                                 RAIO_JOG * 2, RAIO_JOG * 2};
 
     // Posicao do centro relativa ah parte superior esquerda do DEST_REC
     const Vector2 CENTRO = {RAIO_JOG, RAIO_JOG};
 
     DrawTexturePro(*spriteJog,\
-                   SRC_REC, DEST_REC, CENTRO, gs->rotJog, WHITE);
+                   SRC_REC, DEST_REC, CENTRO, gs->jog.rot, WHITE);
 }
 
 // Desenha tudo

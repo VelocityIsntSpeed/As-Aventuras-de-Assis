@@ -26,13 +26,20 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 
 
 ///Definicoes de tipos=========================================================
+// Estado do jogo relacionado ao jogador
+typedef struct {
+    // Posicao
+    Vector2 pos;
+    // Rotacao em graus
+    float rot;
+    // HP
+    float hp;
+} Jog;
+
 // Struct de estado do jogo
 typedef struct {
     ///Jogador=================================================================
-    // Posicao
-    Vector2 posJog;
-    // Rotacao em graus
-    float rotJog;
+    Jog jog;
     ///Obstaculos==============================================================
     // Obstaculo retangular
     Rectangle obstRet;

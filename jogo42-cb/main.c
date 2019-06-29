@@ -31,9 +31,9 @@ int main(void)
 
     ///Jogador=================================================================
     // Posicao
-    gs->posJog = (Vector2){300, 300};
+    gs->jog.pos = (Vector2){300, 300};
     // Rotacao
-    gs->rotJog = 0;
+    gs->jog.rot = 0;
     // Sprite
     Texture2D spriteJog = LoadTexture("tex/protag.png");
 
@@ -58,7 +58,7 @@ int main(void)
         /* Atualizar rotacao do jogador.
            Nao funciona com uma camera movel (para isso eh necessario calcular
            a posicao do mouse em coordenadas world). */
-        gs->rotJog = Vector2Angle(gs->posJog, GetMousePosition());
+        gs->jog.rot = Vector2Angle(gs->jog.pos, GetMousePosition());
 
         // Mover obstaculos
         MoverObst(gs);
@@ -92,7 +92,7 @@ void MoverJog(GameState* gs)
     posFutura = Vector2Scale(posFutura, VEL_JOG * GetFrameTime());
 
     // Transformar para coordenadas world
-    posFutura = Vector2Add(gs->posJog, posFutura);
+    posFutura = Vector2Add(gs->jog.pos, posFutura);
 
     /* Note que com esse algoritmo, o jogador anda 41% mais rapido se
        estiver andando na diagonal. Por exemplo: segurando D e S,
@@ -110,7 +110,7 @@ void MoverJog(GameState* gs)
                                   gs->obstCircCentro, obstRaio))
     {
         // Atualizar a posicao do jogador
-        gs->posJog = posFutura;
+        gs->jog.pos = posFutura;
     }
 }
 
