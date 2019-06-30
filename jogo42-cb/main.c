@@ -10,6 +10,7 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 #include "raylib.h"
 #include "raymath.h"
 #include "jogo42.h"
+#include "stdio.h" // Para mandar mensagens de erro no console
 #include "stdlib.h" // pelo malloc
 
 // Move os obstaculos
@@ -35,25 +36,31 @@ int main(void)
     Texture2D spriteJog = LoadTexture("tex/protag.png");
 
     ///Level===================================================================
-    /* Esta string determina como vai ser o level. Isso eh provisorio, so
-       enquanto nao tivermos um editor de mapa. */
+    /*
+    Esta string determina como vai ser o level. Isso eh provisorio, so
+    enquanto nao tivermos um editor de mapa.
+    "." = TILE_chao
+    "#" = TILE_parede
+    "I" = TILE_paredeInvisivel
+    Resto = TILE_vazio
+    */
     StringParaLevel(
 //   12345678901234567890
-    "...................#"//1
+    ".................###"//1
     ".....##########....#"//2
-    ".....#....#...#....#"//3
+    ".....#....#...#IIII#"//3
     ".....#..###...#....#"//4
     ".....#.............#"//5
-    ".....#..........#..#"//6
-    ".....#.............#"//7
-    ".....#........#....#"//8
+    ". . .#..........#..#"//6
+    ".. ..#.............#"//7
+    ". . .#........#....#"//8
     ".....#........#....#"//9
-    ".######..########..#"//10
-    "...................#"//11
-    "...............#...#"//12
-    "......#####.#..#...#"//13
-    "...................#"//14
-    ".................###",//15
+    "#.#####..########..#"//10
+    "......I............#"//11
+    "     .I........#...#"//12
+    "     .##.#..#..#...#"//13
+    "     ..............#"//14
+    "        .........###",//15
     gs->sala);
 
     ///Obstaculos==============================================================
