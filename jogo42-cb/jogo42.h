@@ -18,16 +18,16 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 // Velocidade do jogador (por segundo)
 #define VEL_JOG 150.0f
 // Raio do jogador
-#define RAIO_JOG 30.0f
+#define RAIO_JOG 20.0f
 
 // Velocidade do obstaculo circular (por segundo)
-#define VEL_CIRC 40.0f
+#define VEL_CIRC 100.0f
 
 // Tamanho de uma sala, em numero de tiles
-#define TAM_SALA_X 30
+#define TAM_SALA_X 20
 #define TAM_SALA_Y 15
 // Tamanho de uma tile
-#define TAM_TILE 33
+#define TAM_TILE 35
 
 
 
@@ -83,9 +83,13 @@ GameState;
 // draw.c
 void Desenhar(GameState* gs, Texture2D* spriteJog);
 
+// mover_jog.c
+void MoverJog(GameState* gs);
+
 // level.c
 void StringParaLevel(const char str[TAM_SALA_Y * TAM_SALA_X + 1],
                      Tile lvl[TAM_SALA_Y][TAM_SALA_X]);
+
 
 #endif // JOGO42_H_INCLUDED
 

@@ -12,9 +12,6 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 #include "jogo42.h"
 #include "stdlib.h" // pelo malloc
 
-// Move o jogador
-void MoverJog(GameState* gs);
-
 // Move os obstaculos
 void MoverObst(GameState* gs);
 
@@ -40,22 +37,24 @@ int main(void)
     ///Level===================================================================
     /* Esta string determina como vai ser o level. Isso eh provisorio, so
        enquanto nao tivermos um editor de mapa. */
-    StringParaLevel(".............................."
-                    "...........##########........."
-                    "...........#...#....#........."
-                    "...........#...#....#........."
-                    "...........#.................."
-                    "...........#.................."
-                    "...........#.................."
-                    "...........#........#........."
-                    "...........#........#........."
-                    ".......######...#######......."
-                    ".............................."
-                    ".............................."
-                    ".............................."
-                    ".......################......."
-                    "..............................",
-                    gs->sala);
+    StringParaLevel(
+//   12345678901234567890
+    "...................#"//1
+    ".....##########....#"//2
+    ".....#....#...#....#"//3
+    ".....#..###...#....#"//4
+    ".....#.............#"//5
+    ".....#..........#..#"//6
+    ".....#.............#"//7
+    ".....#........#....#"//8
+    ".....#........#....#"//9
+    ".######..########..#"//10
+    "...................#"//11
+    "...............#...#"//12
+    "......#####.#..#...#"//13
+    "...................#"//14
+    ".................###",//15
+    gs->sala);
 
     ///Obstaculos==============================================================
     // Obstaculo retangular
@@ -99,47 +98,12 @@ int main(void)
 }
 
 
-void MoverJog(GameState* gs)
-{
-    // Posicao futura do jogador em relacao ah posicao atual
-    Vector2 posFutura = Vector2Zero();
-
-    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))  { posFutura.x -= 1; }
-    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) { posFutura.x += 1; }
-    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    { posFutura.y -= 1; }
-    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  { posFutura.y += 1; }
-
-    posFutura = Vector2Scale(posFutura, VEL_JOG * GetFrameTime());
-
-    // Transformar para coordenadas world
-    posFutura = Vector2Add(gs->jog.pos, posFutura);
-
-    /* Note que com esse algoritmo, o jogador anda 41% mais rapido se
-       estiver andando na diagonal. Por exemplo: segurando D e S,
-       posFutura eh {1.0f, 1.0f} antes de ser escalado.
-       A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
-
-    /* Se o raio for menor que 0, tornah-lo 0. Note que isso nao afeta nada
-       fora dessa funcao (pq obstRaio nao eh ponteiro). Isso eh necessario pq a
-       funcao de checar colisao buga se for fornecida um raio negativo. */
-    float obstRaio = (gs->obstCircRaio < 0) ? 0 : gs->obstCircRaio;
-
-    // Se nao houver colisao
-    if (!CheckCollisionCircleRec(posFutura, RAIO_JOG, gs->obstRet)
-        && !CheckCollisionCircles(posFutura, RAIO_JOG,
-                                  gs->obstCircCentro, obstRaio))
-    {
-        // Atualizar a posicao do jogador
-        gs->jog.pos = posFutura;
-    }
-}
-
 void MoverObst(GameState* gs)
 {
     // Obstaculo retangular
     if (IsKeyPressed(KEY_SPACE)) {
-        gs->obstRet.x += 15;
-        gs->obstRet.height += 10;
+        gs->obstRet.x += 35;
+        gs->obstRet.height += 35;
     }
     // Obstaculo circular
     if (IsKeyDown(KEY_SPACE)) {
