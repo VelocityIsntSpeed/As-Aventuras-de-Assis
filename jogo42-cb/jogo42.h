@@ -23,9 +23,26 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 // Velocidade do obstaculo circular (por segundo)
 #define VEL_CIRC 40.0f
 
+// Tamanho da sala em ambas as dimensoes
+#define TAM_SALA_X 30
+#define TAM_SALA_Y 15
+
 
 
 ///Definicoes de tipos=========================================================
+// Tipos de tile
+typedef enum {
+    // Indefinido (Nao contem nada, nem mesmo chao)
+    TILE_vazio = 0,
+    // Mostra grafico de chao e nao colide
+    TILE_chao,
+    // Mostra grafico de parede e colide
+    TILE_parede,
+    // Mostra grafico de chao e colide
+    TILE_paredeInvisivel
+}
+Tile;
+
 // Estado do jogador
 typedef struct {
     // Posicao
@@ -41,6 +58,8 @@ Jog;
 typedef struct {
     ///Jogador-----------------------------------------------------------------
     Jog jog;
+    ///Level-------------------------------------------------------------------
+    Tile sala[TAM_SALA_Y][TAM_SALA_X];
     ///Obstaculos--------------------------------------------------------------
     // Obstaculo retangular
     Rectangle obstRet;
@@ -61,6 +80,10 @@ GameState;
 ///Declaracoes de funcoes definidas em outros arquivos==========================
 // draw.c
 void Desenhar(GameState* gs, Texture2D* spriteJog);
+
+// level.c
+void StringParaLevel(const char str[TAM_SALA_Y * TAM_SALA_X + 1],
+                     Tile lvl[TAM_SALA_Y][TAM_SALA_X]);
 
 #endif // JOGO42_H_INCLUDED
 
