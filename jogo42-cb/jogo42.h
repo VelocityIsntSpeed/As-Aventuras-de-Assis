@@ -74,12 +74,11 @@ GameState;
 
 
 
-///Funcoes helper (i.e. utilitarias, declaradas e definidas aqui)==============
-// Ainda nao existe nenhuma
-
-
-
 ///Declaracoes de funcoes definidas em outros arquivos==========================
+// helpers.c
+/** Retorna o retangulo correspondente ah tile nas dimensoes fornecidas */
+Rectangle RectDaTile(int x, int y);
+
 // draw.c
 void Desenhar(GameState* gs, Texture2D* spriteJog);
 

@@ -64,20 +64,14 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
                     cor = GRAY; break;
             }
 
-            // Achar retangulo da tile:
-            const Rectangle tileRect = { .x = col * TAM_TILE,
-                                         .y = lin * TAM_TILE,
-                                         .width = TAM_TILE,
-                                         .height = TAM_TILE };
-
             // Desenhar
-            DrawRectangleRec(tileRect, cor);
+            DrawRectangleRec(RectDaTile(col, lin), cor);
             // Contorno da mesma cor so que mais escuro um pouco
             const float coef = 0.8f;
             cor.r *= coef;
             cor.g *= coef;
             cor.b *= coef;
-            DrawRectangleLinesEx(tileRect, 1, cor);
+            DrawRectangleLinesEx(RectDaTile(col, lin), 1, cor);
         }
     }
 }

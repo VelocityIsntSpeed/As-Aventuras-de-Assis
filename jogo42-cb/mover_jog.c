@@ -31,16 +31,10 @@ static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
 
             const Tile* aqui = &gs->sala[lin][col];
 
-            if (*aqui == TILE_parede || *aqui == TILE_paredeInvisivel) {
-                // Retangulo da tile
-                const Rectangle aquiRect = { .x = col * TAM_TILE,
-                                             .y = lin * TAM_TILE,
-                                             .width = TAM_TILE,
-                                             .height = TAM_TILE };
-
-                if (CheckCollisionCircleRec(posJogTeste, RAIO_JOG, aquiRect)) {
-                    return true;
-                }
+            if ((*aqui == TILE_parede || *aqui == TILE_paredeInvisivel)
+                && CheckCollisionCircleRec(posJogTeste, RAIO_JOG,
+                                           RectDaTile(col, lin))) {
+                return true;
             }
         }
     }
