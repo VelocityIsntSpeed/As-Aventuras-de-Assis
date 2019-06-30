@@ -26,6 +26,8 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 // Tamanho da sala em ambas as dimensoes
 #define TAM_SALA_X 30
 #define TAM_SALA_Y 15
+// Tamanho de uma tile
+#define TAM_TILE 33
 
 
 
