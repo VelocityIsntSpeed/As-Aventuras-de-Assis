@@ -18,6 +18,16 @@ void MoverJog(GameState* gs);
 // Move os obstaculos
 void MoverObst(GameState* gs);
 
+const float dis=100.0;
+
+bool ataque (GameState* gs)
+{
+    Vector2 Atk;
+    Atk.x= gs->jog.pos.x + dis*cos(gs->jog.rot/60);
+    Atk.y= gs->jog.pos.y + dis*sin(gs->jog.rot/60);
+    return CheckCollisionCircles(Atk, 10, gs->obstCircCentro, gs->obstCircRaio);
+}
+
 int main(void)
 {
     /// [[[[[ Inicializacao ]]]]]
@@ -62,6 +72,13 @@ int main(void)
 
         // Mover obstaculos
         MoverObst(gs);
+        if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            if(ataque(gs))
+            {
+                DrawCircle(300, 300, 200.0, RAYWHITE);
+            }
+        }
 
         /// [[[[[ Fim Update ]]]]]
 
