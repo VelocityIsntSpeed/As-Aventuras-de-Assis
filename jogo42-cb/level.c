@@ -9,7 +9,6 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 
 #include "raylib.h"
 #include "jogo42.h"
-#include "stdlib.h"
 
 
 void StringParaLevel(const char str[TAM_SALA_Y * TAM_SALA_X + 1],
