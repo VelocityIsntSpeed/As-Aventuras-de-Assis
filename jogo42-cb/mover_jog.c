@@ -12,6 +12,8 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 
 static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
 {
+    /** Retorna true se o jogador estiver colidindo com o level (incluindo
+        os obstaculos moveis), e false caso contrario. */
     // Checar contra o obstaculo retangular
     if (CheckCollisionCircleRec(posJogTeste, RAIO_JOG, gs->obstRet)) {
         return true;

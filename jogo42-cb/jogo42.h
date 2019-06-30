@@ -87,6 +87,8 @@ void Desenhar(GameState* gs, Texture2D* spriteJog);
 void MoverJog(GameState* gs);
 
 // level.c
+/** Itera sobre cada elemento de lvl, setando-o de acordo com o caractere
+    correspondente em str. */
 void StringParaLevel(const char str[TAM_SALA_Y * TAM_SALA_X + 1],
                      Tile lvl[TAM_SALA_Y][TAM_SALA_X]);
 
