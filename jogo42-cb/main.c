@@ -99,9 +99,7 @@ void MoverJog(GameState* gs)
        posFutura eh {1.0f, 1.0f} antes de ser escalado.
        A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
 
-    /* Se o raio for menor que 0, tornah-lo 0. Note que isso nao afeta nada
-       fora dessa funcao (pq obstRaio nao eh ponteiro). Isso eh necessario pq a
-       funcao de checar colisao buga se for fornecida um raio negativo. */
+    // A funcao de checar colisao buga se for fornecida um raio negativo
     float obstRaio = (gs->obstCircRaio < 0) ? 0 : gs->obstCircRaio;
 
     // Se nao houver colisao
