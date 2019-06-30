@@ -14,6 +14,7 @@ static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
 {
     /** Retorna true se o jogador estiver colidindo com o level (incluindo
         os obstaculos moveis), e false caso contrario. */
+
     // Checar contra o obstaculo retangular
     if (CheckCollisionCircleRec(posJogTeste, RAIO_JOG, gs->obstRet)) {
         return true;
@@ -39,6 +40,7 @@ static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
         }
     }
 
+    // Se chegou aqui entao n ta colidindo com nada
     return false;
 }
 
