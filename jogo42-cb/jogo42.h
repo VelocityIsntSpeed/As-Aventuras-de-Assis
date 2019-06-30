@@ -23,7 +23,7 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 // Velocidade do obstaculo circular (por segundo)
 #define VEL_CIRC 40.0f
 
-// Tamanho da sala em ambas as dimensoes
+// Tamanho de uma sala, em numero de tiles
 #define TAM_SALA_X 30
 #define TAM_SALA_Y 15
 // Tamanho de uma tile

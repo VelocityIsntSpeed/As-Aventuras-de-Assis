@@ -150,3 +150,7 @@ void MoverObst(GameState* gs)
         gs->obstCircTaAndando = false;
     }
 }
+
+
+
+
