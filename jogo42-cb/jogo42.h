@@ -56,13 +56,32 @@ typedef struct {
 }
 Jog;
 
+// Estado de um inimigo
+typedef struct {
+    // Posicao
+    Vector2 pos;
+    // Rotacao em graus
+    float rot;
+    // HP
+    float hp;
+    // Se estah seguindo o jogador
+    bool seguindo;
+}
+Inimigo;
+
 // Struct de estado do jogo
 typedef struct {
-    ///Jogador-----------------------------------------------------------------
+    //Jogador------------------------------------------------------------------
     Jog jog;
-    ///Level-------------------------------------------------------------------
+
+    //Inimigos-----------------------------------------------------------------
+    // So tem um por enquanto, depois vai ter uma lista
+    Inimigo inim;
+  
+    //Level--------------------------------------------------------------------
     Tile sala[TAM_SALA_Y][TAM_SALA_X];
-    ///Obstaculos--------------------------------------------------------------
+
+    //Obstaculos---------------------------------------------------------------
     // Obstaculo retangular
     Rectangle obstRet;
     // Posicao do centro do obstaculo circular
