@@ -45,6 +45,12 @@ int main(void)
     gs->obstCircRaio = 100;
     gs->obstCircTaAndando = false;
 
+    ///Inimigo=================================================================
+    gs->inim.pos = (Vector2){300, 400};
+    gs->inim.rot = 0;
+    gs->inim.hp = 120;
+    gs->inim.seguindo = false;
+
     /// [[[[[ Fim Inicializacao ]]]]]
 
     // Main game loop
@@ -59,6 +65,9 @@ int main(void)
            Nao funciona com uma camera movel (para isso eh necessario calcular
            a posicao do mouse em coordenadas world). */
         gs->jog.rot = Vector2Angle(gs->jog.pos, GetMousePosition());
+
+        // Mover inimigo
+        // TODO
 
         // Mover obstaculos
         MoverObst(gs);
