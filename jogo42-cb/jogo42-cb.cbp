@@ -42,8 +42,17 @@
 		<Unit filename="draw.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="helpers.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="jogo42.h" />
+		<Unit filename="level.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="mover_jog.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>
