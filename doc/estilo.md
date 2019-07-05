@@ -116,30 +116,71 @@ TODO
 Todos os identificadores e nomes devem ser descritivos, deixando o mais claro possível o propósito da coisa sendo nomeada.
 
 ### Funções e tipos
-As iniciais das palavras devem ser maiúsculas, e o resto das letras devem ser minúsculas. Não deve ter nenhum separador entre as palavras:  
-```TODO: exemplos```
+As iniciais das palavras devem ser maiúsculas, e o resto das letras devem ser minúsculas. Não deve ter nenhum separador entre as palavras:
+
+Exemplos:
+```c
+void MoverJog(GameState* gs);
+```
+```c
+static void DesenharJogador(GameState* gs, Texture2D* spriteJog);
+```
+```c
+// Tipos de tile
+typedef enum {
+    /* ... */
+}
+Tile;
+```
+A função `main` é uma exceção.
 
 ### Variáveis não constantes
-Iniciais de palavra maiúsculas, exceto na primeira palavra. O resto das letras devem ser minúsculas. Sem separador.  
-```TODO: exemplos```
+Iniciais de palavra maiúsculas, exceto na primeira palavra. O resto das letras devem ser minúsculas. Sem separador.
+
+Exemplos:
+```c
+TODO: exemplos
+```
 
 ### Variáveis constantes e `#define`s
 Todas as letras devem estar maiúsculas, e as palavras separadas por `_`.
 
-Exemplo:
+Exemplos:
 ```c
 // Velocidade do jogador (por segundo)
 #define VEL_JOG 150.0f
 ```
+```c
+TODO: exemplo de variável constante
+```
 
 ### Valores de `enum`
 Mesma regra que variáveis constantes, ou então esta regra:
-> Mesma regra que tipos, mas com um prefixo em maiúsculas. O prefixo deve ser igual para todos os valores de um mesmo enumerador. O prefixo deve ser separado do resto do nome por um `_`.  
-```TODO: exemplo```
+> Mesma regra que tipos, mas com um prefixo em maiúsculas. O prefixo deve ser igual para todos os valores de um mesmo enumerador. O prefixo deve ser separado do resto do nome por um `_`.
+
+Exemplo:
+```c
+// Tipos de tile
+typedef enum {
+    // Indefinido (Nao contem nada, nem mesmo chao)
+    TILE_vazio = 0,
+    // Mostra grafico de chao e nao colide
+    TILE_chao,
+    // Mostra grafico de parede e colide
+    TILE_parede,
+    // Mostra grafico de chao e colide
+    TILE_paredeInvisivel
+}
+Tile;
+```
 
 ### Nomes de arquivo `.c` e `.h`
-Todas as letras minúsculas, e palavras separadas por `_`.  
-```TODO: exemplos```
+Todas as letras minúsculas, e palavras separadas por `_`.
+
+Exemplos:
+```c
+TODO: exemplos
+```
 
 
 
