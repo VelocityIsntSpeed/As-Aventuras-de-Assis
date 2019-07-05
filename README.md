@@ -3,7 +3,7 @@ Este é o repositório GitHub para o desenvolvimento do jogo provisoriamente int
 
 Utilizamos a biblioteca [Raylib](https://www.raylib.com/) e a IDE [Code::Blocks](http://www.codeblocks.org/).
 
-**_Instruções para configurar o ambiente de desenvolvimento encontram-se em [documentacao/configurar.md](documentacao/configurar.md)._**
+**_Instruções para configurar o ambiente de desenvolvimento encontram-se em [doc/configurar.md](doc/configurar.md)._**
 
 A pasta [`jogo42-cb`](jogo42-cb/) é um projeto de CodeBlocks utilizando Raylib.
 
