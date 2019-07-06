@@ -21,8 +21,10 @@ static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
     {
         return true;
     }
+
     // Checar contra o obstaculo circular
     const float raio = (gs->obstCircRaio < 0) ? 0 : gs->obstCircRaio;
+
     if (CheckCollisionCircles(posJogTeste, RAIO_JOG, gs->obstCircCentro, raio))
     {
         return true;
@@ -54,10 +56,10 @@ void MoverJog(GameState* gs)
     // Posicao futura do jogador em relacao ah posicao atual
     Vector2 posFutura = Vector2Zero();
 
-    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))  { posFutura.x -= 1; }
-    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) { posFutura.x += 1; }
-    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    { posFutura.y -= 1; }
-    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  { posFutura.y += 1; }
+    if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT))  {       posFutura.x -= 1; }
+    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) {       posFutura.x += 1; }
+    if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    {       posFutura.y -= 1; }
+    if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  {       posFutura.y += 1; }
 
     posFutura = Vector2Scale(posFutura, VEL_JOG * GetFrameTime());
 

@@ -60,9 +60,9 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 
             /* Se for vazio, nao precisa desenhar nada entao ja passa pra
                proxima tile */
-            if (tipo == TILE_vazio) { continue; }
+            if (tipo == TILE_vazio) {     continue; }
 
-            // Definir grafico da tile (por enquanto so uma cor)
+            // Definir grafico da tile (por enquanto eh so uma cor)
             Color cor;
             switch (tipo)
             {
@@ -73,7 +73,7 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
                     cor = GRAY; break;
             }
 
-            // Desenhar
+            // Desenhar tile
             DrawRectangleRec(RectDaTile(col, lin), cor);
             // Contorno da mesma cor so que mais escuro um pouco
             const float coef = 0.8f;
