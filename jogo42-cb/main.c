@@ -76,6 +76,10 @@ int main(void)
     gs->inim.hp = 120;
     gs->inim.seguindo = false;
 
+    //[ CAMERA ]===============================================================
+    gs->cam.rotation = 0;
+    gs->cam.zoom = 1;
+
     // [[[ FIM INICIALIZACAO ]]]
 
 
@@ -100,12 +104,18 @@ int main(void)
         // Mover obstaculos
         MoverObst(gs);
 
+        // Atualizar camera
+        gs->cam.offset = Vector2Negate(gs->jog.pos);
+        gs->cam.offset.x += GetScreenWidth() / 2;
+        gs->cam.offset.y += GetScreenHeight() / 2;
+        gs->cam.target = gs->jog.pos;
+
         // [[[ FIM UPDATE ]]]
 
 
         // [[[[[ DESENHAR ]]]]]
         BeginDrawing();
-            Desenhar(gs, &SPRITE_JOG);
+        Desenhar(gs, &SPRITE_JOG);
         EndDrawing();
         // [[[ FIM DESENHAR ]]]
     }

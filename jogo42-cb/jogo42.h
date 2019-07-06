@@ -64,6 +64,7 @@ Inimigo;
 typedef struct {
     //[ JOGADOR ]--------------------------------------------------------------
     Jog jog;
+    Camera2D cam;
 
     //[ INIMIGOS ]-------------------------------------------------------------
     // So tem um por enquanto, depois vai ter uma lista
