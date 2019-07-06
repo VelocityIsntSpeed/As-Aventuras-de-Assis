@@ -23,9 +23,10 @@ static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
     }
 
     // Checar contra o obstaculo circular
-    const float raio = (gs->obstCircRaio < 0) ? 0 : gs->obstCircRaio;
+    // A funcao de checar colisao buga se for fornecida raio menor que 0
+    const float RAIO = (gs->obstCircRaio < 0) ? 0 : gs->obstCircRaio;
 
-    if (CheckCollisionCircles(posJogTeste, RAIO_JOG, gs->obstCircCentro, raio))
+    if (CheckCollisionCircles(posJogTeste, RAIO_JOG, gs->obstCircCentro, RAIO))
     {
         return true;
     }
@@ -35,10 +36,9 @@ static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
     {
         for (int col = 0; col < TAM_SALA_X; col++)
         {
+            const Tile* AQUI = &gs->sala[lin][col];
 
-            const Tile* aqui = &gs->sala[lin][col];
-
-            if ((*aqui == TILE_parede || *aqui == TILE_paredeInvisivel)
+            if ((*AQUI == TILE_parede || *AQUI == TILE_paredeInvisivel)
                 && CheckCollisionCircleRec(posJogTeste, RAIO_JOG,
                                            RectDaTile(col, lin)))
             {

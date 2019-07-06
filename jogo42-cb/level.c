@@ -20,12 +20,12 @@ void StringParaLevel(const char str[TAM_SALA_Y * TAM_SALA_X + 1],
         for (int col = 0; col < TAM_SALA_X; col++)
         {
             // Indice na string correspondente ahs lin e col atuais
-            const int indiceStr = lin * TAM_SALA_X + col;
+            const int INDICE_STR = lin * TAM_SALA_X + col;
 
             // Valor Tile correspondente ao caractere atual
             Tile tile;
             // Definir `tile` de acordo com o caractere
-            switch (str[indiceStr])
+            switch (str[INDICE_STR])
             {
                 case '.':
                     tile = TILE_chao; break;

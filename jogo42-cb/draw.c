@@ -17,16 +17,15 @@
 static void DesenharControles()
 {
     // Texto que vai aparecer
-    const char texto[] =
-    "Controles:\n"
-    "WASD/Setas para andar\n"
-    "Espaco para movimentar obstaculos";
+    const char TEXTO[] = "Controles:\n"
+                         "WASD/Setas para andar\n"
+                         "Espaco para movimentar obstaculos";
 
     // Calcular a altura:
-    float alturaTexto = MeasureTextEx(GetFontDefault(), texto, 20, 2).y;
+    const float ALTURA_TEXTO = MeasureTextEx(GetFontDefault(), TEXTO, 20, 2).y;
 
     // Desenhar texto
-    DrawText(texto, 10, GetScreenHeight() - alturaTexto - 10, 20, BLACK);
+    DrawText(TEXTO, 10, GetScreenHeight() - ALTURA_TEXTO - 10, 20, BLACK);
 }
 
 
@@ -56,15 +55,15 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
     {
         for (int col = 0; col < TAM_SALA_X; col++)
         {
-            const Tile tipo = lvl[lin][col];
+            const Tile AQUI = lvl[lin][col];
 
-            /* Se for vazio, nao precisa desenhar nada entao ja passa pra
-               proxima tile */
-            if (tipo == TILE_vazio) {     continue; }
+            /* Se for vazio, nao precisa desenhar nada entao
+               ja passa pra proxima tile */
+            if (AQUI == TILE_vazio) {     continue; }
 
-            // Definir grafico da tile (por enquanto eh so uma cor)
+            // Determinar grafico da tile (por enquanto eh so uma cor)
             Color cor;
-            switch (tipo)
+            switch (AQUI)
             {
                 case TILE_chao:
                 case TILE_paredeInvisivel:
@@ -75,6 +74,7 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 
             // Desenhar tile
             DrawRectangleRec(RectDaTile(col, lin), cor);
+
             // Contorno da mesma cor so que mais escuro um pouco
             const float coef = 0.8f;
             cor.r *= coef;

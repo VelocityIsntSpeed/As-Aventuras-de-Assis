@@ -31,8 +31,8 @@ int main(void)
     gs->jog.pos = (Vector2){300, 300};
     // Rotacao
     gs->jog.rot = 0;
-    // Sprite
-    Texture2D spriteJog = LoadTexture("tex/protag.png");
+    /// Sprite do jogador.
+    const Texture2D SPRITE_JOG = LoadTexture("tex/protag.png");
 
     //[ LEVEL ]================================================================
     /*
@@ -105,7 +105,7 @@ int main(void)
 
         // [[[[[ DESENHAR ]]]]]
         BeginDrawing();
-            Desenhar(gs, &spriteJog);
+            Desenhar(gs, &SPRITE_JOG);
         EndDrawing();
         // [[[ FIM DESENHAR ]]]
     }
