@@ -91,28 +91,33 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
     // Pintar tudo (para formar o background)
     ClearBackground(MAGENTA);
 
-    // Level
-    DesenharLevel(gs->sala);
+    // Tudo dentro deste bloco sera desenhado em modo camera
+    BeginMode2D(gs->cam); //===================================================
 
-    // Obstaculo circular
-    DrawCircleV(gs->obstCircCentro, gs->obstCircRaio,
-                gs->obstCircTaAndando ? PURPLE : VIOLET);
+        // Level
+        DesenharLevel(gs->sala);
 
-    // Jogador
-    DesenharJogador(gs, spriteJog);
+        // Obstaculo circular
+        DrawCircleV(gs->obstCircCentro, gs->obstCircRaio,
+                    gs->obstCircTaAndando ? PURPLE : VIOLET);
 
-    // Inimigo
-    DrawCircleV(gs->inim.pos, 20, (Color){223, 0, 0, 255});
+        // Jogador
+        DesenharJogador(gs, spriteJog);
 
-    // Obstaculo retangular
-    DrawRectangleRec(gs->obstRet, DARKGRAY);
+        // Inimigo
+        DrawCircleV(gs->inim.pos, 20, (Color){223, 0, 0, 255});
+
+        // Obstaculo retangular
+        DrawRectangleRec(gs->obstRet, DARKGRAY);
+
+        // Texto com raio do obstaculo
+        DrawText(TextFormat("Raio = %.1f", gs->obstCircRaio),
+                 gs->obstCircCentro.x, gs->obstCircCentro.y, 20, WHITE);
+
+    EndMode2D(); //============================================================
 
     // Controles
     DesenharControles();
-
-    // Texto com raio do obstaculo
-    DrawText(TextFormat("Raio = %.1f", gs->obstCircRaio),
-             gs->obstCircCentro.x, gs->obstCircCentro.y, 20, WHITE);
 
     // FPS
     DrawFPS(10, 10);

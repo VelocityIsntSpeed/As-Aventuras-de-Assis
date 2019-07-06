@@ -19,3 +19,12 @@ Rectangle RectDaTile(const int x, const int y)
                         .width = TAM_TILE,\
                         .height = TAM_TILE };
 }
+
+Vector2 PosWorldDoCursor(const GameState* gs)
+{
+    Vector2 resultado = GetMousePosition();
+
+    resultado = Vector2Add(Vector2Negate(gs->cam.offset), resultado);
+
+    return resultado;
+}

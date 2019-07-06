@@ -17,9 +17,9 @@
 
 //[ DEFINICOES DE CONSTANTES UTILIZADAS NAS DEFINICOES DE TIPOS ]==============
 /// Tamanho de uma sala, em numero de tiles.
-#define TAM_SALA_X 20
+#define TAM_SALA_X 39
 /// Tamanho de uma sala, em numero de tiles.
-#define TAM_SALA_Y 15
+#define TAM_SALA_Y 27
 
 
 //[ DEFINICOES DE TIPOS ]======================================================
@@ -64,6 +64,7 @@ Inimigo;
 typedef struct {
     //[ JOGADOR ]--------------------------------------------------------------
     Jog jog;
+    Camera2D cam;
 
     //[ INIMIGOS ]-------------------------------------------------------------
     // So tem um por enquanto, depois vai ter uma lista
@@ -105,6 +106,9 @@ GameState;
 // helpers.c ------------------------------------------------------------------
 /** Retorna o retangulo correspondente ah tile nas dimensoes fornecidas. */
 Rectangle RectDaTile(int x, int y);
+
+/** Retorna a posicao do cursor em coordenadas world. */
+Vector2 PosWorldDoCursor(const GameState* gs);
 
 // desenhar.c -----------------------------------------------------------------
 /** Desenha tudo. */

@@ -57,7 +57,7 @@ void MoverObst(GameState* gs)
     {
         gs->obstCircTaAndando = true;
         gs->obstCircCentro.x -= VEL_CIRC * GetFrameTime();
-        gs->obstCircRaio -= VEL_CIRC / 5.0f * GetFrameTime();
+        gs->obstCircRaio -= VEL_CIRC / 20.0f * GetFrameTime();
     }
     else
     {
