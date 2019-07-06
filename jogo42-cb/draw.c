@@ -1,36 +1,39 @@
-/******************************************************************************
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                                 ATENCAO!!!
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\
+|                                  ATENCAO!!!                                 |
+|               NAO COLOQUE LETRAS COM ACENTOS NO CODIGO-FONTE!               |
+|  O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO. |
+\++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-NAO COLOQUE LETRAS COM ACENTOS NO CODIGO-FONTE!
-O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-******************************************************************************/
+/*
+ Contem codigo de desenho.
+*/
 
 #include "raylib.h"
 #include "raymath.h"
 #include "jogo42.h"
 
-// Desenha o texto que diz os controles
+
+/// Desenha o texto que diz os controles.
 static void DesenharControles()
 {
     // Texto que vai aparecer
-    const char texto[] =
-    "Controles:\n"
-    "WASD/Setas para andar\n"
-    "Espaco para movimentar obstaculos";
+    const char TEXTO[] = "Controles:\n"
+                         "WASD/Setas para andar\n"
+                         "Espaco para movimentar obstaculos";
 
     // Calcular a altura:
-    float alturaTexto = MeasureTextEx(GetFontDefault(), texto, 20, 2).y;
+    const float ALTURA_TEXTO = MeasureTextEx(GetFontDefault(), TEXTO, 20, 2).y;
 
     // Desenhar texto
-    DrawText(texto, 10, GetScreenHeight() - alturaTexto - 10, 20, BLACK);
+    DrawText(TEXTO, 10, GetScreenHeight() - ALTURA_TEXTO - 10, 20, BLACK);
 }
 
-static void DesenharJogador(GameState* gs, Texture2D* spriteJog)
+
+/// Desenha o jogador.
+static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
 {
     // A parte da textura a ser utilizada
-    const Rectangle SRC_REC = {0, 0, spriteJog->width, spriteJog->height};
+    const Rectangle SRC_REC = {0, 0, sprite->width, sprite->height};
 
     // Posicao e tamanho na tela
     const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y,\
@@ -39,24 +42,28 @@ static void DesenharJogador(GameState* gs, Texture2D* spriteJog)
     // Posicao do centro relativa ah parte superior esquerda do DEST_REC
     const Vector2 CENTRO = {RAIO_JOG, RAIO_JOG};
 
-    DrawTexturePro(*spriteJog,\
-                   SRC_REC, DEST_REC, CENTRO, gs->jog.rot, WHITE);
+    DrawTexturePro(*sprite, SRC_REC, DEST_REC, CENTRO, gs->jog.rot, WHITE);
 }
 
+
+/// Desenha o level.
 static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 {
     // Itera sobre cada tile
-    for (int lin = 0; lin < TAM_SALA_Y; lin++) {
-        for (int col = 0; col < TAM_SALA_X; col++) {
-            const Tile tipo = lvl[lin][col];
+    for (int lin = 0; lin < TAM_SALA_Y; lin++)
+    {
+        for (int col = 0; col < TAM_SALA_X; col++)
+        {
+            const Tile AQUI = lvl[lin][col];
 
-            /* Se for vazio, nao precisa desenhar nada entao ja passa pra
-               proxima tile */
-            if (tipo == TILE_vazio) { continue; }
+            /* Se for vazio, nao precisa desenhar nada entao
+               ja passa pra proxima tile */
+            if (AQUI == TILE_vazio) {     continue; }
 
-            // Definir grafico da tile (por enquanto so uma cor)
+            // Determinar grafico da tile (por enquanto eh so uma cor)
             Color cor;
-            switch (tipo) {
+            switch (AQUI)
+            {
                 case TILE_chao:
                 case TILE_paredeInvisivel:
                     cor = DARKBROWN; break;
@@ -64,8 +71,9 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
                     cor = GRAY; break;
             }
 
-            // Desenhar
+            // Desenhar tile
             DrawRectangleRec(RectDaTile(col, lin), cor);
+
             // Contorno da mesma cor so que mais escuro um pouco
             const float coef = 0.8f;
             cor.r *= coef;
@@ -76,8 +84,9 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
     }
 }
 
-// Desenha tudo
-void Desenhar(GameState* gs, Texture2D* spriteJog)
+
+
+void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 {
     // Pintar tudo (para formar o background)
     ClearBackground(MAGENTA);
@@ -89,7 +98,7 @@ void Desenhar(GameState* gs, Texture2D* spriteJog)
     DrawCircleV(gs->obstCircCentro, gs->obstCircRaio,
                 gs->obstCircTaAndando ? PURPLE : VIOLET);
 
-    //Jogador
+    // Jogador
     DesenharJogador(gs, spriteJog);
 
     // Inimigo

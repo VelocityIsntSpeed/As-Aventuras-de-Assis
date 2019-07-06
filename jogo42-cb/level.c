@@ -1,11 +1,12 @@
-/******************************************************************************
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                                 ATENCAO!!!
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\
+|                                  ATENCAO!!!                                 |
+|               NAO COLOQUE LETRAS COM ACENTOS NO CODIGO-FONTE!               |
+|  O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO. |
+\++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-NAO COLOQUE LETRAS COM ACENTOS NO CODIGO-FONTE!
-O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-******************************************************************************/
+/*
+ Contem coisas relacionadas ao level.
+*/
 
 #include "raylib.h"
 #include "jogo42.h"
@@ -14,16 +15,18 @@ O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
 void StringParaLevel(const char str[TAM_SALA_Y * TAM_SALA_X + 1],
                      Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 {
-    for (int lin = 0; lin < TAM_SALA_Y; lin++) {
-        for (int col = 0; col < TAM_SALA_X; col++) {
-
+    for (int lin = 0; lin < TAM_SALA_Y; lin++)
+    {
+        for (int col = 0; col < TAM_SALA_X; col++)
+        {
             // Indice na string correspondente ahs lin e col atuais
-            const int indiceStr = lin * TAM_SALA_X + col;
+            const int INDICE_STR = lin * TAM_SALA_X + col;
 
             // Valor Tile correspondente ao caractere atual
             Tile tile;
             // Definir `tile` de acordo com o caractere
-            switch (str[indiceStr]) {
+            switch (str[INDICE_STR])
+            {
                 case '.':
                     tile = TILE_chao; break;
                 case '#':
@@ -37,5 +40,27 @@ void StringParaLevel(const char str[TAM_SALA_Y * TAM_SALA_X + 1],
 
             lvl[lin][col] = tile;
         }
+    }
+}
+
+
+void MoverObst(GameState* gs)
+{
+    //[ OBSTACULO RETANGULAR ]=================================================
+    if (IsKeyPressed(KEY_SPACE))
+    {
+        gs->obstRet.x += 35;
+        gs->obstRet.height += 35;
+    }
+    //[ OBSTACULO CIRCULAR ]===================================================
+    if (IsKeyDown(KEY_SPACE))
+    {
+        gs->obstCircTaAndando = true;
+        gs->obstCircCentro.x -= VEL_CIRC * GetFrameTime();
+        gs->obstCircRaio -= VEL_CIRC / 5.0f * GetFrameTime();
+    }
+    else
+    {
+        gs->obstCircTaAndando = false;
     }
 }
