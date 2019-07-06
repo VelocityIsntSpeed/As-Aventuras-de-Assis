@@ -14,22 +14,10 @@
 #include "raymath.h"
 
 
-
-//[ DEFINICOES DE CONSTANTES ]=================================================
-// Velocidade do jogador (por segundo)
-#define VEL_JOG 150.0f
-// Raio do jogador
-#define RAIO_JOG 20.0f
-
-// Velocidade do obstaculo circular (por segundo)
-#define VEL_CIRC 100.0f
-
+//[ DEFINICOES DE CONSTANTES UTILIZADAS NAS DEFINICOES DE TIPOS ]==============
 // Tamanho de uma sala, em numero de tiles
 #define TAM_SALA_X 20
 #define TAM_SALA_Y 15
-// Tamanho de uma tile
-#define TAM_TILE 35
-
 
 
 //[ DEFINICOES DE TIPOS ]======================================================
@@ -92,6 +80,19 @@ typedef struct {
 }
 GameState;
 
+
+
+//[ DEFINICOES DE CONSTANTES ]=================================================
+// Velocidade do jogador (por segundo)
+#define VEL_JOG 150.0f
+// Raio do jogador
+#define RAIO_JOG 20.0f
+
+// Velocidade do obstaculo circular (por segundo)
+#define VEL_CIRC 100.0f
+
+// Tamanho de uma tile
+#define TAM_TILE 35
 
 
 
