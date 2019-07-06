@@ -30,10 +30,10 @@ static void DesenharControles()
 
 
 /// Desenha o jogador.
-static void DesenharJogador(GameState* gs, Texture2D* spriteJog)
+static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
 {
     // A parte da textura a ser utilizada
-    const Rectangle SRC_REC = {0, 0, spriteJog->width, spriteJog->height};
+    const Rectangle SRC_REC = {0, 0, sprite->width, sprite->height};
 
     // Posicao e tamanho na tela
     const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y,\
@@ -42,8 +42,7 @@ static void DesenharJogador(GameState* gs, Texture2D* spriteJog)
     // Posicao do centro relativa ah parte superior esquerda do DEST_REC
     const Vector2 CENTRO = {RAIO_JOG, RAIO_JOG};
 
-    DrawTexturePro(*spriteJog,\
-                   SRC_REC, DEST_REC, CENTRO, gs->jog.rot, WHITE);
+    DrawTexturePro(*sprite, SRC_REC, DEST_REC, CENTRO, gs->jog.rot, WHITE);
 }
 
 
@@ -87,7 +86,7 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 
 
 
-void Desenhar(GameState* gs, Texture2D* spriteJog)
+void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 {
     // Pintar tudo (para formar o background)
     ClearBackground(MAGENTA);

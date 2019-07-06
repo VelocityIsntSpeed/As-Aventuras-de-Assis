@@ -108,7 +108,7 @@ Rectangle RectDaTile(int x, int y);
 
 // draw.c ---------------------------------------------------------------------
 /** Desenha tudo. */
-void Desenhar(GameState* gs, Texture2D* spriteJog);
+void Desenhar(const GameState* gs, const Texture2D* spriteJog);
 
 // mover_jog.c ----------------------------------------------------------------
 /** Move o jogador. */
