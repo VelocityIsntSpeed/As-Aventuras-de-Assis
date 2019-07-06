@@ -84,7 +84,7 @@ int main(void)
     gs->obstCircTaAndando = false;
 
     //[ INIMIGO ]==============================================================
-    gs->inim.pos = (Vector2){300, 400};
+    gs->inim.pos = (Vector2){1000, 200};
     gs->inim.rot = 0;
     gs->inim.hp = 120;
     gs->inim.seguindo = false;
