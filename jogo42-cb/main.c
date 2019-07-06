@@ -11,14 +11,16 @@
 #include "raymath.h"
 #include "jogo42.h"
 #include "stdio.h" // Para mandar mensagens de erro no console
-#include "stdlib.h" // pelo malloc
+#include "stdlib.h" // Pelo malloc
+
 
 // Move os obstaculos
 void MoverObst(GameState* gs);
 
+
 int main(void)
 {
-    /// [[[[[ Inicializacao ]]]]]
+    // [[[[[ INICIALIZACAO ]]]]]
 
     ///Janela==================================================================
     InitWindow(1024, 576, "Jogo42");
@@ -46,20 +48,20 @@ int main(void)
     */
     StringParaLevel(
 //   12345678901234567890
-    "...................."//1
-    ".....##########....."//2
-    ".....#........#IIII."//3
-    ".....#........#....#"//4
-    ".....#..####.......#"//5
-    ". . .#..#..#....#..#"//6
-    ".. ..#..####.......#"//7
-    ". . .#........#....#"//8
-    ".....#........#....#"//9
-    "#.#####..########..#"//10
-    "......I............#"//11
-    "    ..I........#...#"//12
-    "     .##...........#"//13
-    "     .........#....#"//14
+    "...................." // 1
+    ".....##########....." // 2
+    ".....#........#IIII." // 3
+    ".....#........#....#" // 4
+    ".....#..####.......#" // 5
+    ". . .#..#..#....#..#" // 6
+    ".. ..#..####.......#" // 7
+    ". . .#........#....#" // 8
+    ".....#........#....#" // 9
+    "#.#####..########..#" //10
+    "......I............#" //11
+    "    ..I........#...#" //12
+    "     .##...........#" //13
+    "     .........#....#" //14
     "        . . ..#..###",//15
     gs->sala);
 
@@ -77,12 +79,14 @@ int main(void)
     gs->inim.hp = 120;
     gs->inim.seguindo = false;
 
-    /// [[[[[ Fim Inicializacao ]]]]]
+    // [[[ FIM INICIALIZACAO ]]]
 
-    // Main game loop
+
+    // Loop principal
     while (!WindowShouldClose()) {
 
-        /// [[[[[ Update ]]]]]
+
+        // [[[[[ UPDATE ]]]]]
 
         // Mover jogador
         MoverJog(gs);
@@ -98,17 +102,18 @@ int main(void)
         // Mover obstaculos
         MoverObst(gs);
 
-        /// [[[[[ Fim Update ]]]]]
+        // [[[ FIM UPDATE ]]]
 
 
-        /// [[[[[ Desenhar ]]]]]
+        // [[[[[ DESENHAR ]]]]]
         BeginDrawing();
             Desenhar(gs, &spriteJog);
         EndDrawing();
-        /// [[[[[ Fim Desenhar ]]]]]
+        // [[[ FIM DESENHAR ]]]
     }
 
-    /// Desinicializacao
+
+    // Desinicializacao
     CloseWindow(); // Close window and OpenGL context
     return 0;
 }
