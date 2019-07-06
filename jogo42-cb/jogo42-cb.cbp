@@ -39,7 +39,7 @@
 			<Add option="-lraylib -lopengl32 -lgdi32 -lwinmm" />
 			<Add directory="C:/raylib/mingw/i686-w64-mingw32/lib" />
 		</Linker>
-		<Unit filename="draw.c">
+		<Unit filename="desenhar.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="helpers.c">

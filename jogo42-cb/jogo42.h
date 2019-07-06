@@ -106,7 +106,7 @@ GameState;
 /** Retorna o retangulo correspondente ah tile nas dimensoes fornecidas. */
 Rectangle RectDaTile(int x, int y);
 
-// draw.c ---------------------------------------------------------------------
+// desenhar.c -----------------------------------------------------------------
 /** Desenha tudo. */
 void Desenhar(const GameState* gs, const Texture2D* spriteJog);
 
