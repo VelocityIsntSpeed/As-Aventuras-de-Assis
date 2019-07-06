@@ -15,10 +15,6 @@
 #include "stdlib.h" // Pelo malloc
 
 
-/// Move os obstaculos.
-void MoverObst(GameState* gs);
-
-
 int main(void)
 {
     // [[[[[ INICIALIZACAO ]]]]]
@@ -118,28 +114,6 @@ int main(void)
     // Desinicializacao
     CloseWindow(); // Close window and OpenGL context
     return 0;
-}
-
-
-void MoverObst(GameState* gs)
-{
-    //[ OBSTACULO RETANGULAR ]=================================================
-    if (IsKeyPressed(KEY_SPACE))
-    {
-        gs->obstRet.x += 35;
-        gs->obstRet.height += 35;
-    }
-    //[ OBSTACULO CIRCULAR ]===================================================
-    if (IsKeyDown(KEY_SPACE))
-    {
-        gs->obstCircTaAndando = true;
-        gs->obstCircCentro.x -= VEL_CIRC * GetFrameTime();
-        gs->obstCircRaio -= VEL_CIRC / 5.0f * GetFrameTime();
-    }
-    else
-    {
-        gs->obstCircTaAndando = false;
-    }
 }
 
 

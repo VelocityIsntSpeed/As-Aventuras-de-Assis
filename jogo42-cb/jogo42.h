@@ -115,6 +115,9 @@ void Desenhar(GameState* gs, Texture2D* spriteJog);
 void MoverJog(GameState* gs);
 
 // level.c
+/** Move os obstaculos. */
+void MoverObst(GameState* gs);
+
 /** Itera sobre cada elemento de lvl, setando-o de acordo com o caractere
     correspondente em str. */
 void StringParaLevel(const char str[TAM_SALA_Y * TAM_SALA_X + 1],
