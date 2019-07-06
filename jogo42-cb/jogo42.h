@@ -89,15 +89,15 @@ GameState;
 
 //[ DEFINICOES DE CONSTANTES ]=================================================
 /// Velocidade do jogador (por segundo).
-#define VEL_JOG 150.0f
+#define VEL_JOG (150.0f)
 /// Raio do jogador.
-#define RAIO_JOG 20.0f
+#define RAIO_JOG (20.0f)
 
 /// Velocidade do obstaculo circular (por segundo).
-#define VEL_CIRC 100.0f
+#define VEL_CIRC (100.0f)
 
 /// Tamanho de uma tile.
-#define TAM_TILE 35
+#define TAM_TILE (35)
 
 
 
