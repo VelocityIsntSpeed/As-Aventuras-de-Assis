@@ -107,6 +107,9 @@ GameState;
 /** Retorna o retangulo correspondente ah tile nas dimensoes fornecidas. */
 Rectangle RectDaTile(int x, int y);
 
+/** Retorna a posicao do cursor em coordenadas world. */
+Vector2 PosWorldDoCursor(const GameState* gs);
+
 // desenhar.c -----------------------------------------------------------------
 /** Desenha tudo. */
 void Desenhar(const GameState* gs, const Texture2D* spriteJog);

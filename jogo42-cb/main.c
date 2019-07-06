@@ -93,10 +93,8 @@ int main(void)
         // Mover jogador
         MoverJog(gs);
 
-        /* Atualizar rotacao do jogador.
-           Nao funciona com uma camera movel (para isso eh necessario calcular
-           a posicao do mouse em coordenadas world). */
-        gs->jog.rot = Vector2Angle(gs->jog.pos, GetMousePosition());
+        // Rotacao do jogador
+        gs->jog.rot = Vector2Angle(gs->jog.pos, PosWorldDoCursor(gs));
 
         // Mover inimigo
         // TODO
