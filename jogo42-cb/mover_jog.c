@@ -3,6 +3,9 @@
 |               NAO COLOQUE LETRAS COM ACENTOS NO CODIGO-FONTE!               |
 |  O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO. |
 \++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/**
+ Contem codigo do jogador.
+*/
 
 #include "raylib.h"
 #include "jogo42.h"

@@ -3,6 +3,9 @@
 |               NAO COLOQUE LETRAS COM ACENTOS NO CODIGO-FONTE!               |
 |  O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO. |
 \++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/**
+ Funcoes utilitarias (aka helper functions).
+*/
 
 #include "raylib.h"
 #include "raymath.h"
