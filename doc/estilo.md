@@ -1,5 +1,24 @@
-# Diretrizes de estilo
+# Diretrizes de estilo (WIP)
 É importante que utilizemos um estilo consistente, para maior produtividade.
+
+#### Índice:
+* [Acentos](#acentos)
+* [Indentação e posição das chaves](#indentação-e-posição-das-chaves)
+  + [Exceção](#exceção)
+* [Tamanho máximo da linha](#tamanho-máximo-da-linha)
+  + [Como e onde dividir linhas grandes](#como-e-onde-dividir-linhas-grandes)
+    - [Strings](#strings)
+* [Whitespace](#whitespace)
+* [Comentários](#comentários)
+* [Identificadores e nomes](#identificadores-e-nomes)
+  + [Funções e tipos](#funções-e-tipos)
+  + [Variáveis não constantes](#variáveis-não-constantes)
+  + [Variáveis constantes e `#define`s](#variáveis-constantes-e-defines)
+  + [Valores de `enum`](#valores-de-enum)
+  + [Nomes de arquivo `.c` e `.h`](#nomes-de-arquivo-c-e-h)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 
 -------------
 **TO-DO:**
