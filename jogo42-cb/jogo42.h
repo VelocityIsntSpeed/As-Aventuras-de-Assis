@@ -1,11 +1,12 @@
-/******************************************************************************
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-                                 ATENCAO!!!
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\
+|                                  ATENCAO!!!                                 |
+|               NAO COLOQUE LETRAS COM ACENTOS NO CODIGO-FONTE!               |
+|  O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO. |
+\++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+/**
+ Este arquivo deve ser incluso em todos os arquivos `.c`.
+*/
 
-NAO COLOQUE LETRAS COM ACENTOS NO CODIGO-FONTE!
-O GITHUB DESKTOP TEM UM BUG COM ISSO QUE FAZ COM QUE OS COMMITS DEEM ERRO.
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-******************************************************************************/
 #ifndef JOGO42_H_INCLUDED
 #define JOGO42_H_INCLUDED
 
@@ -77,7 +78,7 @@ typedef struct {
     //Inimigos-----------------------------------------------------------------
     // So tem um por enquanto, depois vai ter uma lista
     Inimigo inim;
-  
+
     //Level--------------------------------------------------------------------
     Tile sala[TAM_SALA_Y][TAM_SALA_X];
 
