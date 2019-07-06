@@ -17,9 +17,9 @@
 
 //[ DEFINICOES DE CONSTANTES UTILIZADAS NAS DEFINICOES DE TIPOS ]==============
 /// Tamanho de uma sala, em numero de tiles.
-#define TAM_SALA_X 20
+#define TAM_SALA_X 39
 /// Tamanho de uma sala, em numero de tiles.
-#define TAM_SALA_Y 15
+#define TAM_SALA_Y 27
 
 
 //[ DEFINICOES DE TIPOS ]======================================================
