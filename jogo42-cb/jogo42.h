@@ -94,6 +94,7 @@ GameState;
 
 
 
+
 //[ DECLARACOES DE FUNCOES DEFINIDAS EM OUTROS ARQUIVOS ]======================
 // helpers.c
 /** Retorna o retangulo correspondente ah tile nas dimensoes fornecidas */
