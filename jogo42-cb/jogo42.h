@@ -15,7 +15,7 @@
 
 
 
-///Definicoes de constantes====================================================
+//[ DEFINICOES DE CONSTANTES ]=================================================
 // Velocidade do jogador (por segundo)
 #define VEL_JOG 150.0f
 // Raio do jogador
@@ -32,7 +32,7 @@
 
 
 
-///Definicoes de tipos=========================================================
+//[ DEFINICOES DE TIPOS ]======================================================
 // Tipos de tile
 typedef enum {
     // Indefinido (Nao contem nada, nem mesmo chao)
@@ -72,17 +72,17 @@ Inimigo;
 
 // Struct de estado do jogo
 typedef struct {
-    //Jogador------------------------------------------------------------------
+    //[ JOGADOR ]--------------------------------------------------------------
     Jog jog;
 
-    //Inimigos-----------------------------------------------------------------
+    //[ INIMIGOS ]-------------------------------------------------------------
     // So tem um por enquanto, depois vai ter uma lista
     Inimigo inim;
 
-    //Level--------------------------------------------------------------------
+    //[ LEVEL ]----------------------------------------------------------------
     Tile sala[TAM_SALA_Y][TAM_SALA_X];
 
-    //Obstaculos---------------------------------------------------------------
+    //[ OBSTACULOS ]-----------------------------------------------------------
     // Obstaculo retangular
     Rectangle obstRet;
     // Posicao do centro do obstaculo circular
@@ -94,7 +94,7 @@ GameState;
 
 
 
-///Declaracoes de funcoes definidas em outros arquivos==========================
+//[ DECLARACOES DE FUNCOES DEFINIDAS EM OUTROS ARQUIVOS ]======================
 // helpers.c
 /** Retorna o retangulo correspondente ah tile nas dimensoes fornecidas */
 Rectangle RectDaTile(int x, int y);

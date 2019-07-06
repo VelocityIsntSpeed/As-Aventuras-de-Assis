@@ -22,14 +22,14 @@ int main(void)
 {
     // [[[[[ INICIALIZACAO ]]]]]
 
-    ///Janela==================================================================
+    //[ JANELA ]===============================================================
     InitWindow(1024, 576, "Jogo42");
     SetTargetFPS(60);
 
-    ///Struct de estado do jogo================================================
+    //[ STRUCT DE ESTADO DO JOGO ]=============================================
     GameState* gs = malloc(sizeof(GameState));
 
-    ///Jogador=================================================================
+    //[ JOGADOR ]==============================================================
     // Posicao
     gs->jog.pos = (Vector2){300, 300};
     // Rotacao
@@ -37,7 +37,7 @@ int main(void)
     // Sprite
     Texture2D spriteJog = LoadTexture("tex/protag.png");
 
-    ///Level===================================================================
+    //[ LEVEL ]================================================================
     /*
     Esta string determina como vai ser o level. Isso eh provisorio, so
     enquanto nao tivermos um editor de mapa.
@@ -65,7 +65,7 @@ int main(void)
     "        . . ..#..###",//15
     gs->sala);
 
-    ///Obstaculos==============================================================
+    //[ OBSTACULOS ]===========================================================
     // Obstaculo retangular
     gs->obstRet = (Rectangle){100, 100, 150, 100};
     // Obstaculo circular
@@ -73,7 +73,7 @@ int main(void)
     gs->obstCircRaio = 100;
     gs->obstCircTaAndando = false;
 
-    ///Inimigo=================================================================
+    //[ INIMIGO ]==============================================================
     gs->inim.pos = (Vector2){300, 400};
     gs->inim.rot = 0;
     gs->inim.hp = 120;
@@ -121,12 +121,12 @@ int main(void)
 
 void MoverObst(GameState* gs)
 {
-    // Obstaculo retangular
+    //[ OBSTACULO RETANGULAR ]=================================================
     if (IsKeyPressed(KEY_SPACE)) {
         gs->obstRet.x += 35;
         gs->obstRet.height += 35;
     }
-    // Obstaculo circular
+    //[ OBSTACULO CIRCULAR ]===================================================
     if (IsKeyDown(KEY_SPACE)) {
         gs->obstCircTaAndando = true;
         gs->obstCircCentro.x -= VEL_CIRC * GetFrameTime();
