@@ -12,7 +12,8 @@
 #include "raymath.h"
 #include "jogo42.h"
 
-// Desenha o texto que diz os controles
+
+/// Desenha o texto que diz os controles.
 static void DesenharControles()
 {
     // Texto que vai aparecer
@@ -28,6 +29,8 @@ static void DesenharControles()
     DrawText(texto, 10, GetScreenHeight() - alturaTexto - 10, 20, BLACK);
 }
 
+
+/// Desenha o jogador.
 static void DesenharJogador(GameState* gs, Texture2D* spriteJog)
 {
     // A parte da textura a ser utilizada
@@ -44,6 +47,8 @@ static void DesenharJogador(GameState* gs, Texture2D* spriteJog)
                    SRC_REC, DEST_REC, CENTRO, gs->jog.rot, WHITE);
 }
 
+
+/// Desenha o level.
 static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 {
     // Itera sobre cada tile
@@ -77,7 +82,8 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
     }
 }
 
-// Desenha tudo
+
+
 void Desenhar(GameState* gs, Texture2D* spriteJog)
 {
     // Pintar tudo (para formar o background)
@@ -90,7 +96,7 @@ void Desenhar(GameState* gs, Texture2D* spriteJog)
     DrawCircleV(gs->obstCircCentro, gs->obstCircRaio,
                 gs->obstCircTaAndando ? PURPLE : VIOLET);
 
-    //Jogador
+    // Jogador
     DesenharJogador(gs, spriteJog);
 
     // Inimigo

@@ -15,7 +15,7 @@
 #include "stdlib.h" // Pelo malloc
 
 
-// Move os obstaculos
+/// Move os obstaculos.
 void MoverObst(GameState* gs);
 
 

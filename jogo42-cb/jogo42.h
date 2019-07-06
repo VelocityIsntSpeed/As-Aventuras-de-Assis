@@ -16,67 +16,71 @@
 
 
 //[ DEFINICOES DE CONSTANTES UTILIZADAS NAS DEFINICOES DE TIPOS ]==============
-// Tamanho de uma sala, em numero de tiles
+/// Tamanho de uma sala, em numero de tiles.
 #define TAM_SALA_X 20
+/// Tamanho de uma sala, em numero de tiles.
 #define TAM_SALA_Y 15
 
 
 //[ DEFINICOES DE TIPOS ]======================================================
-// Tipos de tile
+/// Tipos de tile.
 typedef enum {
-    // Indefinido (Nao contem nada, nem mesmo chao)
+    /// Indefinido (Nao contem nada, nem mesmo chao).
     TILE_vazio = 0,
-    // Mostra grafico de chao e nao colide
+    /// Mostra grafico de chao e nao colide.
     TILE_chao,
-    // Mostra grafico de parede e colide
+    /// Mostra grafico de parede e colide.
     TILE_parede,
-    // Mostra grafico de chao e colide
+    /// Mostra grafico de chao e colide.
     TILE_paredeInvisivel
 }
 Tile;
 
-// Estado do jogador
+/// Estado do jogador.
 typedef struct {
-    // Posicao
+    /// Posicao world.
     Vector2 pos;
-    // Rotacao em graus
+    /// Rotacao em graus.
     float rot;
-    // HP
+    /// Health Points.
     float hp;
 }
 Jog;
 
-// Estado de um inimigo
+/// Estado de um inimigo.
 typedef struct {
-    // Posicao
+    /// Posicao world.
     Vector2 pos;
-    // Rotacao em graus
+    /// Rotacao em graus.
     float rot;
-    // HP
+    /// Health Points.
     float hp;
-    // Se estah seguindo o jogador
+    /// Se estah seguindo o jogador.
     bool seguindo;
 }
 Inimigo;
 
-// Struct de estado do jogo
+/// Struct de estado do jogo.
 typedef struct {
     //[ JOGADOR ]--------------------------------------------------------------
     Jog jog;
 
     //[ INIMIGOS ]-------------------------------------------------------------
     // So tem um por enquanto, depois vai ter uma lista
+    /// O inimigo.
     Inimigo inim;
 
     //[ LEVEL ]----------------------------------------------------------------
     Tile sala[TAM_SALA_Y][TAM_SALA_X];
 
     //[ OBSTACULOS ]-----------------------------------------------------------
-    // Obstaculo retangular
+    /// Obstaculo retangular.
     Rectangle obstRet;
-    // Posicao do centro do obstaculo circular
+    /// Posicao do centro do obstaculo circular.
     Vector2 obstCircCentro;
+    /// Raio do obstaculo circular.
     float obstCircRaio;
+    /// Se o obstaculo circular ta andando.
     bool obstCircTaAndando;
 }
 GameState;
@@ -84,28 +88,30 @@ GameState;
 
 
 //[ DEFINICOES DE CONSTANTES ]=================================================
-// Velocidade do jogador (por segundo)
+/// Velocidade do jogador (por segundo).
 #define VEL_JOG 150.0f
-// Raio do jogador
+/// Raio do jogador.
 #define RAIO_JOG 20.0f
 
-// Velocidade do obstaculo circular (por segundo)
+/// Velocidade do obstaculo circular (por segundo).
 #define VEL_CIRC 100.0f
 
-// Tamanho de uma tile
+/// Tamanho de uma tile.
 #define TAM_TILE 35
 
 
 
 //[ DECLARACOES DE FUNCOES DEFINIDAS EM OUTROS ARQUIVOS ]======================
 // helpers.c
-/** Retorna o retangulo correspondente ah tile nas dimensoes fornecidas */
+/** Retorna o retangulo correspondente ah tile nas dimensoes fornecidas. */
 Rectangle RectDaTile(int x, int y);
 
 // draw.c
+/** Desenha tudo. */
 void Desenhar(GameState* gs, Texture2D* spriteJog);
 
 // mover_jog.c
+/** Move o jogador. */
 void MoverJog(GameState* gs);
 
 // level.c
