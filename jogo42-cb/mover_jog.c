@@ -17,25 +17,29 @@ static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
         os obstaculos moveis), e false caso contrario. */
 
     // Checar contra o obstaculo retangular
-    if (CheckCollisionCircleRec(posJogTeste, RAIO_JOG, gs->obstRet)) {
+    if (CheckCollisionCircleRec(posJogTeste, RAIO_JOG, gs->obstRet))
+    {
         return true;
     }
     // Checar contra o obstaculo circular
     const float raio = (gs->obstCircRaio < 0) ? 0 : gs->obstCircRaio;
-    if (CheckCollisionCircles(posJogTeste, RAIO_JOG,
-                              gs->obstCircCentro, raio)) {
+    if (CheckCollisionCircles(posJogTeste, RAIO_JOG, gs->obstCircCentro, raio))
+    {
         return true;
     }
 
     // Checar contra as tiles
-    for (int lin = 0; lin < TAM_SALA_Y; lin++) {
-        for (int col = 0; col < TAM_SALA_X; col++) {
+    for (int lin = 0; lin < TAM_SALA_Y; lin++)
+    {
+        for (int col = 0; col < TAM_SALA_X; col++)
+        {
 
             const Tile* aqui = &gs->sala[lin][col];
 
             if ((*aqui == TILE_parede || *aqui == TILE_paredeInvisivel)
                 && CheckCollisionCircleRec(posJogTeste, RAIO_JOG,
-                                           RectDaTile(col, lin))) {
+                                           RectDaTile(col, lin)))
+            {
                 return true;
             }
         }
@@ -66,7 +70,8 @@ void MoverJog(GameState* gs)
        A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
 
     // Colisao com o level
-    if (!ColisaoJogLevel(posFutura, gs)) {
+    if (!ColisaoJogLevel(posFutura, gs))
+    {
         gs->jog.pos = posFutura;
     }
 }

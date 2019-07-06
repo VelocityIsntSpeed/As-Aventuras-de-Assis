@@ -52,8 +52,10 @@ static void DesenharJogador(GameState* gs, Texture2D* spriteJog)
 static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 {
     // Itera sobre cada tile
-    for (int lin = 0; lin < TAM_SALA_Y; lin++) {
-        for (int col = 0; col < TAM_SALA_X; col++) {
+    for (int lin = 0; lin < TAM_SALA_Y; lin++)
+    {
+        for (int col = 0; col < TAM_SALA_X; col++)
+        {
             const Tile tipo = lvl[lin][col];
 
             /* Se for vazio, nao precisa desenhar nada entao ja passa pra
@@ -62,7 +64,8 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 
             // Definir grafico da tile (por enquanto so uma cor)
             Color cor;
-            switch (tipo) {
+            switch (tipo)
+            {
                 case TILE_chao:
                 case TILE_paredeInvisivel:
                     cor = DARKBROWN; break;

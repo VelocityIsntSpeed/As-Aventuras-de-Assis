@@ -84,7 +84,8 @@ int main(void)
 
 
     // Loop principal
-    while (!WindowShouldClose()) {
+    while (!WindowShouldClose())
+    {
 
 
         // [[[[[ UPDATE ]]]]]
@@ -123,16 +124,20 @@ int main(void)
 void MoverObst(GameState* gs)
 {
     //[ OBSTACULO RETANGULAR ]=================================================
-    if (IsKeyPressed(KEY_SPACE)) {
+    if (IsKeyPressed(KEY_SPACE))
+    {
         gs->obstRet.x += 35;
         gs->obstRet.height += 35;
     }
     //[ OBSTACULO CIRCULAR ]===================================================
-    if (IsKeyDown(KEY_SPACE)) {
+    if (IsKeyDown(KEY_SPACE))
+    {
         gs->obstCircTaAndando = true;
         gs->obstCircCentro.x -= VEL_CIRC * GetFrameTime();
         gs->obstCircRaio -= VEL_CIRC / 5.0f * GetFrameTime();
-    } else {
+    }
+    else
+    {
         gs->obstCircTaAndando = false;
     }
 }
