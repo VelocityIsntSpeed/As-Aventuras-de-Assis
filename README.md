@@ -3,11 +3,13 @@ Este é o repositório GitHub para o desenvolvimento do jogo provisoriamente int
 
 Utilizamos a biblioteca [Raylib](https://www.raylib.com/) e a IDE [Code::Blocks](http://www.codeblocks.org/).
 
-**_Instruções para configurar o ambiente de desenvolvimento encontram-se em [doc/configurar.md](doc/configurar.md)._**
+----------------
 
 A pasta [`jogo42-cb`](jogo42-cb/) é um projeto de CodeBlocks utilizando Raylib.
 
 Em [`doc/exemplos/`](doc/exemplos/) há outro projeto de CodeBlocks, com exemplos de implementação de funcionalidades básicas do jogo.
+
+Em [`doc/estilo.md`](doc/estilo.md) há diretrizes de estilo a serem seguidas na programação do jogo.
 
 ----------------
 
@@ -37,3 +39,5 @@ Em [`doc/exemplos/`](doc/exemplos/) há outro projeto de CodeBlocks, com exemplo
     - https://itch.io/game-assets/free
   - Efeitos sonoros
     - Nada ainda
+
+_Instruções para configurar o ambiente de desenvolvimento encontram-se em [doc/configurar.md](doc/configurar.md)._
