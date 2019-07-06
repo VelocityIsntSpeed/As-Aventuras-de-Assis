@@ -102,19 +102,19 @@ GameState;
 
 
 //[ DECLARACOES DE FUNCOES DEFINIDAS EM OUTROS ARQUIVOS ]======================
-// helpers.c
+// helpers.c ------------------------------------------------------------------
 /** Retorna o retangulo correspondente ah tile nas dimensoes fornecidas. */
 Rectangle RectDaTile(int x, int y);
 
-// draw.c
+// draw.c ---------------------------------------------------------------------
 /** Desenha tudo. */
 void Desenhar(GameState* gs, Texture2D* spriteJog);
 
-// mover_jog.c
+// mover_jog.c ----------------------------------------------------------------
 /** Move o jogador. */
 void MoverJog(GameState* gs);
 
-// level.c
+// level.c --------------------------------------------------------------------
 /** Move os obstaculos. */
 void MoverObst(GameState* gs);
 
