@@ -22,14 +22,14 @@
 
 -------------
 **TO-DO:**
-- Strings de documentação, com exemplos de uso pelo CB
-- Comentários separadores
+- Comentários de documentação, com exemplos de uso pelo CB
+- Comentários separadores de seções
 -------------
 
 <!--%%%%%%%%%%%%%%%%%%%%%%%%%%%-->
 
 ## Acentos
-Não coloque letras com acentos no código fonte. O GitHub Desktop tem um bug que faz com que commits que incluem apenas algumas mudanças de um arquivo possam falhar se o arquivo contiver letras com acentos.
+Não coloque letras com acentos no código fonte. O GitHub Desktop tem um bug que faz com que commits que incluem apenas algumas das mudanças de um arquivo possam falhar se o arquivo contiver letras com acentos.
 
 Para evitar ambiguidades no texto em português:
 - Ao invés de escrever a palavra `é`, escrever `eh`
