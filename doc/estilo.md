@@ -1,5 +1,5 @@
 # Diretrizes de estilo (WIP)
-É importante que utilizemos um estilo consistente, para maior produtividade.
+É importante que as pessoas que programam num único projeto se organizem para usar o mesmo estilo, para que o código se mantenha organizado e fácil de ler.
 
 #### Índice:
 * [Acentos](#acentos)
