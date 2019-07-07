@@ -31,13 +31,12 @@ Em [`doc/estilo.md`](doc/estilo.md) há diretrizes de estilo a serem seguidas na
   - https://github.com/raysan5/raylib/tree/master/games
   - _Obs: É possível clonar o repositório do raylib para utilizar os jogos de amostra._
 - Assets grátis
-  - Trilhas sonoras
-    - https://incompetech.com/music/
-    - https://freepd.com/
-  - Visuais
-    - https://opengameart.org/
-    - https://itch.io/game-assets/free
-  - Efeitos sonoros
-    - Nada ainda
+  - https://incompetech.com/music/ (Trilhas sonoras)
+  - https://freepd.com/ (Trilhas sonoras)
+  - https://opengameart.org/
+    - Trilhas, Texturas, Sprites, Efeitos Sonoros, Ícones
+  - https://itch.io/game-assets/free
+  - https://letsmakegames.org/resources/art-assets-for-game-developers/
+  - https://web.archive.org/web/20190102050122/http://www.pixelprospector.com/royalty-free-graphics
 
 _Instruções para configurar o ambiente de desenvolvimento encontram-se em [doc/configurar.md](doc/configurar.md)._
