@@ -23,9 +23,9 @@
 
 
 //[ DEFINICOES DE TIPOS ]======================================================
-/// Tipos de tile.
+
 typedef enum {
-    /// Indefinido (Nao contem nada, nem mesmo chao).
+    /// Vazio (Nao contem nada, nem mesmo chao).
     TILE_vazio = 0,
     /// Mostra grafico de chao e nao colide.
     TILE_chao,
@@ -34,9 +34,9 @@ typedef enum {
     /// Mostra grafico de chao e colide.
     TILE_paredeInvisivel
 }
-Tile;
+Tile; ///< Tipos de tile.
 
-/// Estado do jogador.
+
 typedef struct {
     /// Posicao world.
     Vector2 pos;
@@ -45,9 +45,9 @@ typedef struct {
     /// Health Points.
     int hp;
 }
-Jog;
+Jog; ///< Estado do jogador.
 
-/// Estado de um inimigo.
+
 typedef struct {
     /// Posicao world.
     Vector2 pos;
@@ -64,9 +64,9 @@ typedef struct {
     /// Contador de frames
     int framesCounter;
 }
-Inimigo;
+Inimigo; ///< Estado de um inimigo.
 
-/// Struct de estado do jogo.
+
 typedef struct {
     //[ JOGADOR ]--------------------------------------------------------------
     Jog jog;
@@ -90,7 +90,7 @@ typedef struct {
     /// Se o obstaculo circular ta andando.
     bool obstCircTaAndando;
 }
-GameState;
+GameState; ///< Struct de estado do jogo.
 
 
 
@@ -128,10 +128,8 @@ void MoverJog(GameState* gs);
 /** Move os obstaculos. */
 void MoverObst(GameState* gs);
 
-/** Itera sobre cada elemento de lvl, setando-o de acordo com o caractere
-    correspondente em str. */
-void StringParaLevel(const char str[TAM_SALA_Y * TAM_SALA_X + 1],
-                     Tile lvl[TAM_SALA_Y][TAM_SALA_X]);
+/** Inicializa o level de acordo com a string na definicao desta funcao. */
+void InicializarLevel(Tile lvl[TAM_SALA_Y][TAM_SALA_X]);
 
 
 #endif // JOGO42_H_INCLUDED
