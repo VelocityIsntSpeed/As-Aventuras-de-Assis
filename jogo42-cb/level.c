@@ -33,8 +33,7 @@ void StringParaLevel(const char str[TAM_SALA_Y * TAM_SALA_X + 1],
                     tile = TILE_parede; break;
                 case 'I':
                     tile = TILE_paredeInvisivel; break;
-                case ' ':
-                default:
+                case ' ': default:
                     tile = TILE_vazio;
             }
 
@@ -52,6 +51,7 @@ void MoverObst(GameState* gs)
         gs->obstRet.x += 35;
         gs->obstRet.height += 35;
     }
+
     //[ OBSTACULO CIRCULAR ]===================================================
     if (IsKeyDown(KEY_SPACE))
     {

@@ -14,17 +14,13 @@
 
 Rectangle RectDaTile(const int x, const int y)
 {
-    return (Rectangle){ .x = x * TAM_TILE,\
-                        .y = y * TAM_TILE,\
-                        .width = TAM_TILE,\
+    return (Rectangle){ .x = x * TAM_TILE,
+                        .y = y * TAM_TILE,
+                        .width = TAM_TILE,
                         .height = TAM_TILE };
 }
 
 Vector2 PosWorldDoCursor(const GameState* gs)
 {
-    Vector2 resultado = GetMousePosition();
-
-    resultado = Vector2Add(Vector2Negate(gs->cam.offset), resultado);
-
-    return resultado;
+    return Vector2Add(Vector2Negate(gs->cam.offset), GetMousePosition());
 }

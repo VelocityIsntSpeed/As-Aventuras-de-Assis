@@ -21,52 +21,62 @@ static void DesenharControles()
                          "WASD/Setas para andar\n"
                          "Espaco para movimentar obstaculos";
 
-    // Calcular a altura:
-    const float ALTURA_TEXTO = MeasureTextEx(GetFontDefault(), TEXTO, 20, 2).y;
+    // Tamanho da fonte
+    const int TAM_FONTE = 20;
 
-    // Desenhar texto
-    DrawText(TEXTO, 10, GetScreenHeight() - ALTURA_TEXTO - 10, 20, BLACK);
+    // A altura de todo o texto
+    const float ALTURA_TEXTO =
+        MeasureTextEx(GetFontDefault(), TEXTO, TAM_FONTE, TAM_FONTE * 10).y;
+
+    // Distancia entre o texto e as bordas da tela
+    const int MARGEM = 10;
+
+    // Desenhar texto no canto inferior esquerdo
+    DrawText(TEXTO, MARGEM, GetScreenHeight() - ALTURA_TEXTO - MARGEM,
+             TAM_FONTE, BLACK);
 }
 
 
 /// Desenha o jogador.
 static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
 {
-    // A parte da textura a ser utilizada
+    // A parte da sprite a ser utilizada (nesse caso, tudo)
     const Rectangle SRC_REC = {0, 0, sprite->width, sprite->height};
 
-    // Posicao e tamanho na tela
+    // Posicao e tamanho
     const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y,\
                                 RAIO_JOG * 2, RAIO_JOG * 2};
 
-    // Posicao do centro relativa ah parte superior esquerda do DEST_REC
-    const Vector2 CENTRO = {RAIO_JOG, RAIO_JOG};
+    /* Posicao do eixo de rotacao,
+       onde {0, 0} eh no canto superior esquerdo do DEST_REC */
+    const Vector2 ORIGEM = {DEST_REC.width / 2.0f, DEST_REC.height / 2.0f};
 
-    DrawTexturePro(*sprite, SRC_REC, DEST_REC, CENTRO, gs->jog.rot, WHITE);
+    DrawTexturePro(*sprite, SRC_REC, DEST_REC, ORIGEM, gs->jog.rot, WHITE);
 }
 
 
 /// Desenha o level.
 static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 {
-    // Itera sobre cada tile
+    // Iterar sobre cada tile
     for (int lin = 0; lin < TAM_SALA_Y; lin++)
     {
         for (int col = 0; col < TAM_SALA_X; col++)
         {
+            // Tile nas coordenadas atuais
             const Tile AQUI = lvl[lin][col];
-
-            /* Se for vazio, nao precisa desenhar nada entao
-               ja passa pra proxima tile */
-            if (AQUI == TILE_vazio) {     continue; }
 
             // Determinar grafico da tile (por enquanto eh so uma cor)
             Color cor;
             switch (AQUI)
             {
-                case TILE_chao:
-                case TILE_paredeInvisivel:
+                case TILE_vazio:
+                    // Imediatamente passa para a proxima iteracao do loop
+                    continue;
+
+                case TILE_chao: case TILE_paredeInvisivel:
                     cor = DARKBROWN; break;
+
                 case TILE_parede:
                     cor = GRAY; break;
             }
@@ -75,10 +85,10 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
             DrawRectangleRec(RectDaTile(col, lin), cor);
 
             // Contorno da mesma cor so que mais escuro um pouco
-            const float coef = 0.8f;
-            cor.r *= coef;
-            cor.g *= coef;
-            cor.b *= coef;
+            const float coeficiente = 0.85f;
+            cor.r *= coeficiente;
+            cor.g *= coeficiente;
+            cor.b *= coeficiente;
             DrawRectangleLinesEx(RectDaTile(col, lin), 1, cor);
         }
     }
@@ -91,8 +101,10 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
     // Pintar tudo (para formar o background)
     ClearBackground(MAGENTA);
 
-    // Tudo dentro deste bloco sera desenhado em modo camera
-    BeginMode2D(gs->cam); //===================================================
+    /* Tudo dentro deste bloco serah desenhado em modo camera (i.e. as
+       coordenadas serao interpretadas como coordenadas world). Fora dele,
+       as coordenadas sao interpretadas como coordenadas na tela. */
+    BeginMode2D(gs->cam); //[[[[[ MODO CAMERA ]]]]]----------------------------
 
         // Level
         DesenharLevel(gs->sala);
@@ -114,13 +126,13 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DrawText(TextFormat("Raio = %.1f", gs->obstCircRaio),
                  gs->obstCircCentro.x, gs->obstCircCentro.y, 20, WHITE);
 
-    EndMode2D(); //============================================================
+    EndMode2D(); //[[[ FIM MODO CAMERA ]]]-------------------------------------
 
     // Controles
     DesenharControles();
 
-    // FPS
-    DrawFPS(10, 10);
+    // Frames Por Segundo
+    DrawFPS(GetScreenWidth() - 80, 10);
 }
 
 

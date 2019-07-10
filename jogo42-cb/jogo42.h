@@ -23,9 +23,9 @@
 
 
 //[ DEFINICOES DE TIPOS ]======================================================
-/// Tipos de tile.
+
 typedef enum {
-    /// Indefinido (Nao contem nada, nem mesmo chao).
+    /// Vazio (Nao contem nada, nem mesmo chao).
     TILE_vazio = 0,
     /// Mostra grafico de chao e nao colide.
     TILE_chao,
@@ -34,9 +34,9 @@ typedef enum {
     /// Mostra grafico de chao e colide.
     TILE_paredeInvisivel
 }
-Tile;
+Tile; ///< Tipos de tile.
 
-/// Estado do jogador.
+
 typedef struct {
     /// Posicao world.
     Vector2 pos;
@@ -45,9 +45,9 @@ typedef struct {
     /// Health Points.
     float hp;
 }
-Jog;
+Jog; ///< Estado do jogador.
 
-/// Estado de um inimigo.
+
 typedef struct {
     /// Posicao world.
     Vector2 pos;
@@ -58,9 +58,9 @@ typedef struct {
     /// Se estah seguindo o jogador.
     bool seguindo;
 }
-Inimigo;
+Inimigo; ///< Estado de um inimigo.
 
-/// Struct de estado do jogo.
+
 typedef struct {
     //[ JOGADOR ]--------------------------------------------------------------
     Jog jog;
@@ -84,7 +84,7 @@ typedef struct {
     /// Se o obstaculo circular ta andando.
     bool obstCircTaAndando;
 }
-GameState;
+GameState; ///< Struct de estado do jogo.
 
 
 
