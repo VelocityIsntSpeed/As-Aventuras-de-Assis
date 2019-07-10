@@ -81,7 +81,7 @@ int main(void)
         gs->jog.rot = Vector2Angle(gs->jog.pos, PosWorldDoCursor(gs));
 
         // Mover inimigo
-        if(CheckCollisionCircles((Vector2){gs->inim.pos.x, gs->inim.pos.y}, 160, (Vector2){gs->jog.pos.x, gs->jog.pos.y}, RAIO_JOG))
+        if(CheckCollisionCircles(gs->inim.pos, 160, gs->jog.pos, RAIO_JOG))
         {
             Vector2 posFutura = Vector2Zero();
             if( (gs->jog.pos.x > gs->inim.pos.x) && abs(gs->jog.pos.x - gs->inim.pos.x) > 40) {posFutura.x += 0.7f;}
@@ -98,11 +98,11 @@ int main(void)
         }
 
         // Ataque Inimigo
-        if(CheckCollisionCircles((Vector2){gs->inim.pos.x, gs->inim.pos.y}, 40, (Vector2){gs->jog.pos.x, gs->jog.pos.y}, RAIO_JOG))
+        if(CheckCollisionCircles(gs->inim.pos, 40, gs->jog.pos, RAIO_JOG))
         {
             gs->inim.framesCounter++;
 
-            // Mudança de Cor
+            // MudanÃ§a de Cor
             gs->inim.cor = (Color){(gs->inim.framesCounter)*8, 240 - 8*(gs->inim.framesCounter), 0, 255};
 
             if(gs->inim.framesCounter >= 30)
