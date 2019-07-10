@@ -122,10 +122,8 @@ void MoverJog(GameState* gs);
 /** Move os obstaculos. */
 void MoverObst(GameState* gs);
 
-/** Itera sobre cada elemento de lvl, setando-o de acordo com o caractere
-    correspondente em str. */
-void StringParaLevel(const char str[TAM_SALA_Y * TAM_SALA_X + 1],
-                     Tile lvl[TAM_SALA_Y][TAM_SALA_X]);
+/** Inicializa o level de acordo com a string na definicao desta funcao. */
+void InicializarLevel(Tile lvl[TAM_SALA_Y][TAM_SALA_X]);
 
 
 #endif // JOGO42_H_INCLUDED

@@ -12,20 +12,59 @@
 #include "jogo42.h"
 
 
-void StringParaLevel(const char str[TAM_SALA_Y * TAM_SALA_X + 1],
-                     Tile lvl[TAM_SALA_Y][TAM_SALA_X])
+void InicializarLevel(Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 {
+    /*
+    Esta string determina como vai ser o level. Isso eh provisorio, so
+    enquanto nao tivermos um editor de mapa.
+     '.'  = TILE_chao
+     '#'  = TILE_parede
+     'I'  = TILE_paredeInvisivel
+    Resto = TILE_vazio
+    */
+    const char STRING_DO_LEVEL[] =
+//   123456789|123456789|123456789|123456789|
+    "#######################################" // 1
+    "........#.......#.....#.....#.....#####" // 2
+    ".  ..  .#............................##" // 3
+    ".  ..  .#............................##" // 4
+    "...  ...#...###...###...###..........##" // 5
+    "..    ..#...###...###...###..........##" // 6
+    "..    ..#............................##" // 7
+    ".. .. ..#............................##" // 8
+    "........#.......#.....#.....#.....#####" // 9
+    "#..#######...######.###################" //10
+    "#.......I......##.....#################" //11
+    "#.......I.......#......##........#....#" //12
+    "###########.....##......##.......#....#" //13
+    "#........###....##.......##...........#" //14
+    "#.........###....##.......###.........#" //15
+    "#..........#......##.......#####..##..#" //16
+    "#......#...#.......##.........#....#..#" //17
+    "#......#............#.................#" //18
+    ".......#...#..........................#" //19
+    "......................##......#....#..#" //20
+    ".#...#...#...#...#.....#########..##..#" //21
+    "...#...#...#...#...#..........#....#..#" //22
+    "......................................#" //23
+    ".#...#...#...#...#....................#" //24
+    "......................................#" //25
+    "...#...#...#...#......................#" //26
+    "................#######################";//27
+
+    /* Iterar sobre cada elemento de lvl, setando-os de acordo com os
+       caracteres correspondentes em STRING_DO_LEVEL. */
     for (int lin = 0; lin < TAM_SALA_Y; lin++)
     {
         for (int col = 0; col < TAM_SALA_X; col++)
         {
-            // Indice na string correspondente ahs lin e col atuais
+            // Indice em STRING_DO_LEVEL correspondente ahs lin e col atuais
             const int INDICE_STR = lin * TAM_SALA_X + col;
 
-            // Valor Tile correspondente ao caractere atual
+            // Valor Tile que vai ser definido
             Tile tile;
             // Definir `tile` de acordo com o caractere
-            switch (str[INDICE_STR])
+            switch (STRING_DO_LEVEL[INDICE_STR])
             {
                 case '.':
                     tile = TILE_chao; break;
