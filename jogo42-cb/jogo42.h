@@ -109,6 +109,7 @@ GameState; ///< Struct de estado do jogo.
 
 
 //[ DECLARACOES DE FUNCOES DEFINIDAS EM OUTROS ARQUIVOS ]======================
+
 // helpers.c ------------------------------------------------------------------
 /** Retorna o retangulo correspondente ah tile nas dimensoes fornecidas. */
 Rectangle RectDaTile(int x, int y);
@@ -123,6 +124,14 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog);
 // jogador.c ------------------------------------------------------------------
 /** Move o jogador. */
 void MoverJog(GameState* gs);
+
+// inimigo.c ------------------------------------------------------------------
+/** Move o inimigo. */
+void MoverInimigo(GameState* gs);
+
+/** Checa se o inimigo estah em range e se nao estah em cooldown de ataque,
+    e caso sim, ataca. */
+void AtaqueDoInimigo(GameState* gs);
 
 // level.c --------------------------------------------------------------------
 /** Move os obstaculos. */
