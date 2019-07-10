@@ -19,7 +19,7 @@ static void DesenharControles()
     // Texto que vai aparecer
     const char TEXTO[] = "Controles:\n"
                          "WASD/Setas para andar\n"
-                         "Espaco para movimentar obstaculos";
+                         "Espaco para movimentar obstaculos\n";
 
     // Calcular a altura:
     const float ALTURA_TEXTO = MeasureTextEx(GetFontDefault(), TEXTO, 20, 2).y;
@@ -84,7 +84,17 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
     }
 }
 
+static void DesenharUI(const GameState* gs)
+{
+    // Informacoes do jogador
+    const char TEXTO[] = {"Vida: %i"};
 
+    // Calcular a altura:
+    const float ALTURA_TEXTO = MeasureTextEx(GetFontDefault(), TEXTO, 20, 2).y;
+
+    // Desenhar texto
+    DrawText(FormatText(TEXTO, gs->jog.hp), 10, GetScreenHeight() - ALTURA_TEXTO - 10, 20, BLACK);
+}
 
 void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 {
@@ -105,7 +115,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DesenharJogador(gs, spriteJog);
 
         // Inimigo
-        DrawCircleV(gs->inim.pos, 20, (Color){223, 0, 0, 255});
+        DrawCircleV(gs->inim.pos, 20, gs->inim.cor);
 
         // Obstaculo retangular
         DrawRectangleRec(gs->obstRet, DARKGRAY);
@@ -118,6 +128,9 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
     // Controles
     DesenharControles();
+
+    // UI
+    DesenharUI(gs);
 
     // FPS
     DrawFPS(10, 10);

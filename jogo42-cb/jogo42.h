@@ -43,7 +43,7 @@ typedef struct {
     /// Rotacao em graus.
     float rot;
     /// Health Points.
-    float hp;
+    int hp;
 }
 Jog;
 
@@ -54,9 +54,15 @@ typedef struct {
     /// Rotacao em graus.
     float rot;
     /// Health Points.
-    float hp;
+    int hp;
     /// Se estah seguindo o jogador.
     bool seguindo;
+    /// Dano
+    int dano;
+    /// Color
+    Color cor;
+    /// Contador de frames
+    int framesCounter;
 }
 Inimigo;
 

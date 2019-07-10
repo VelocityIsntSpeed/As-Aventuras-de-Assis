@@ -13,6 +13,7 @@
 #include "jogo42.h"
 #include "stdio.h" // Para mandar mensagens de erro no console
 #include "stdlib.h" // Pelo malloc
+#include "math.h" // Pelo abs (funcao de modulo)
 
 
 int main(void)
@@ -32,6 +33,8 @@ int main(void)
     gs->jog.pos.y = RectDaTile(35, 5).y;
     // Rotacao
     gs->jog.rot = 0;
+    // Vida
+    gs->jog.hp = 40;
     /// Sprite do jogador.
     const Texture2D SPRITE_JOG = LoadTexture("tex/protag.png");
 
@@ -46,27 +49,27 @@ int main(void)
     */
     StringParaLevel(
 //   123456789|123456789|123456789|123456789|
-    "#######################################" // 1
-    "........#.......#.....#.....#.....#####" // 2
-    ".  ..  .#............................##" // 3
-    ".  ..  .#............................##" // 4
-    "...  ...#...###...###...###..........##" // 5
-    "..    ..#...###...###...###..........##" // 6
-    "..    ..#............................##" // 7
-    ".. .. ..#............................##" // 8
-    "........#.......#.....#.....#.....#####" // 9
-    "#..#######...######.###################" //10
-    "#.......I.......#.....#################" //11
-    "#.......I.......#......##.............." //12
-    "###########.....##......##............." //13
-    "#........###....##.......##............" //14
-    "#.........###....##.......##..........." //15
-    "#..........#......##.......#..........." //16
-    "#..................##......#..........." //17
-    "#...................#......#..........." //18
-    ".....................#................." //19
-    "......................#................" //20
-    ".......................#########......." //21
+    "......................................." // 1
+    "......................................." // 2
+    "......................................." // 3
+    "......................................." // 4
+    "......................................." // 5
+    "......................................." // 6
+    "......................................." // 7
+    "......................................." // 8
+    "......................................." // 9
+    "......................................." //10
+    "......................................." //11
+    "......................................." //12
+    "......................................." //13
+    "......................................." //14
+    "......................................." //15
+    "......................................." //16
+    "......................................." //17
+    "......................................." //18
+    "......................................." //19
+    "......................................." //20
+    "......................................." //21
     "......................................." //22
     "......................................." //23
     "......................................." //24
@@ -76,18 +79,23 @@ int main(void)
     gs->sala);
 
     //[ OBSTACULOS ]===========================================================
+    /*
     // Obstaculo retangular
     gs->obstRet = (Rectangle){100, 100, 150, 100};
     // Obstaculo circular
     gs->obstCircCentro = (Vector2){1500, 350};
     gs->obstCircRaio = 150;
     gs->obstCircTaAndando = false;
+    */
 
     //[ INIMIGO ]==============================================================
     gs->inim.pos = (Vector2){1000, 200};
     gs->inim.rot = 0;
-    gs->inim.hp = 120;
+    gs->inim.hp = 8;
     gs->inim.seguindo = false;
+    gs->inim.dano = 4;
+    gs->inim.cor = (Color){0, 240, 0, 255};
+    gs->inim.framesCounter = 0;
 
     //[ CAMERA ]===============================================================
     gs->cam.rotation = 0;
@@ -110,7 +118,41 @@ int main(void)
         gs->jog.rot = Vector2Angle(gs->jog.pos, PosWorldDoCursor(gs));
 
         // Mover inimigo
-        // TODO
+        if(CheckCollisionCircles((Vector2){gs->inim.pos.x, gs->inim.pos.y}, 160, (Vector2){gs->jog.pos.x, gs->jog.pos.y}, RAIO_JOG))
+        {
+            Vector2 posFutura = Vector2Zero();
+            if( (gs->jog.pos.x > gs->inim.pos.x) && abs(gs->jog.pos.x - gs->inim.pos.x) > 40) {posFutura.x += 0.7f;}
+            if( (gs->jog.pos.x < gs->inim.pos.x) && abs(gs->jog.pos.x - gs->inim.pos.x) > 40) {posFutura.x -= 0.7f;}
+            if( (gs->jog.pos.y > gs->inim.pos.y) && abs(gs->jog.pos.y - gs->inim.pos.y) > 40) {posFutura.y += 0.7f;}
+            if( (gs->jog.pos.y < gs->inim.pos.y) && abs(gs->jog.pos.y - gs->inim.pos.y) > 40) {posFutura.y -= 0.7f;}
+
+            posFutura = Vector2Scale(posFutura, VEL_JOG * GetFrameTime());
+
+            // Transformar para coordenadas world
+            posFutura = Vector2Add(gs->inim.pos, posFutura);
+
+            gs->inim.pos = posFutura;
+        }
+
+        // Ataque Inimigo
+        if(CheckCollisionCircles((Vector2){gs->inim.pos.x, gs->inim.pos.y}, 40, (Vector2){gs->jog.pos.x, gs->jog.pos.y}, RAIO_JOG))
+        {
+            gs->inim.framesCounter++;
+
+            // Mudança de Cor
+            gs->inim.cor = (Color){(gs->inim.framesCounter)*8, 240 - 8*(gs->inim.framesCounter), 0, 255};
+
+            if(gs->inim.framesCounter >= 30)
+            {
+                gs->inim.framesCounter = 0;
+                gs->jog.hp -= gs->inim.dano;
+            }
+        }
+        else
+        {
+            gs->inim.framesCounter = 0;
+            gs->inim.cor = (Color){0, 240, 0, 255};
+        }
 
         // Mover obstaculos
         MoverObst(gs);
