@@ -147,8 +147,7 @@ void MoverJog(GameState* gs);
 /** Move o inimigo. */
 void MoverInimigo(GameState* gs);
 
-/** Checa se o inimigo estah em range e se nao estah em cooldown de ataque,
-    e caso sim, ataca. */
+/** Ataque do inimigo. Deve ser chamada em cada frame. */
 void AtaqueDoInimigo(GameState* gs);
 
 // level.c --------------------------------------------------------------------
