@@ -55,8 +55,6 @@ typedef struct {
     float rot;
     /// Health Points.
     int hp;
-    /// Se estah seguindo o jogador.
-    bool seguindo;
     /// Cor.
     Color cor;
     /// Frames que se passaram desde o inimigo ter comecado o ataque.
