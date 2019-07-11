@@ -21,25 +21,25 @@ void MoverInimigo(GameState* gs)
         if(gs->jog.pos.x > gs->inim.pos.x
            && abs(gs->jog.pos.x - gs->inim.pos.x) > INIM_MIN_DIST)
         {
-            posFutura.x += 0.7f;
+            posFutura.x += 1.0f;
         }
         if(gs->jog.pos.x < gs->inim.pos.x
            && abs(gs->jog.pos.x - gs->inim.pos.x) > INIM_MIN_DIST)
         {
-            posFutura.x -= 0.7f;
+            posFutura.x -= 1.0f;
         }
         if(gs->jog.pos.y > gs->inim.pos.y
            && abs(gs->jog.pos.y - gs->inim.pos.y) > INIM_MIN_DIST)
         {
-            posFutura.y += 0.7f;
+            posFutura.y += 1.0f;
         }
         if(gs->jog.pos.y < gs->inim.pos.y
            && abs(gs->jog.pos.y - gs->inim.pos.y) > INIM_MIN_DIST)
         {
-            posFutura.y -= 0.7f;
+            posFutura.y -= 1.0f;
         }
 
-        posFutura = Vector2Scale(posFutura, VEL_JOG * GetFrameTime());
+        posFutura = Vector2Scale(posFutura, VEL_INIM * GetFrameTime());
 
         // Transformar para coordenadas world
         posFutura = Vector2Add(gs->inim.pos, posFutura);
