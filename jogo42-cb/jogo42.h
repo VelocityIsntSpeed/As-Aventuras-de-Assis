@@ -57,8 +57,6 @@ typedef struct {
     int hp;
     /// Se estah seguindo o jogador.
     bool seguindo;
-    /// Dano
-    int dano;
     /// Color
     Color cor;
     /// Contador de frames
@@ -119,6 +117,9 @@ GameState; ///< Struct de estado do jogo.
 
 /// Alcance de ataque do inimigo, do centro do inimigo ah borda do jogador.
 #define INIM_ATQ_DIST (40.0f)
+
+/// Dano de ataque
+#define INIM_DANO (4)
 
 //[ OUTROS ]-------------------------------------------------------------------
 /// Velocidade do obstaculo circular (por segundo).

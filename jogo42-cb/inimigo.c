@@ -64,7 +64,7 @@ void AtaqueDoInimigo(GameState* gs)
         if(gs->inim.framesCounter >= 30)
         {
             gs->inim.framesCounter = 0;
-            gs->jog.hp -= gs->inim.dano;
+            gs->jog.hp -= INIM_DANO;
         }
     }
     else

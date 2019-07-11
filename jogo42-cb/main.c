@@ -53,7 +53,6 @@ int main(void)
     gs->inim.rot = 0;
     gs->inim.hp = 8;
     gs->inim.seguindo = false;
-    gs->inim.dano = 4;
     gs->inim.cor = (Color){0, 240, 0, 255};
     gs->inim.framesCounter = 0;
 
