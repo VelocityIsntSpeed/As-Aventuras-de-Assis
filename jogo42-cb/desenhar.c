@@ -98,9 +98,10 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 /// Desenha a UI (User Interface)
 static void DesenharUI(const GameState* gs)
 {
-    // Desenhar texto
+    const int TAM_FONTE = 20, POS_X = 10, POS_Y = 10;
+
     DrawText(FormatText("HP: %d", gs->jog.hp),
-             10, 10, 20, WHITE);
+             POS_X, POS_Y, TAM_FONTE, WHITE);
 }
 
 
