@@ -14,27 +14,27 @@
 
 void MoverInimigo(GameState* gs)
 {
-    if(CheckCollisionCircles(gs->inim.pos, 160, gs->jog.pos, RAIO_JOG))
+    if(CheckCollisionCircles(gs->inim.pos, INIM_MAX_DIST, gs->jog.pos, RAIO_JOG))
     {
         Vector2 posFutura = Vector2Zero();
 
         if(gs->jog.pos.x > gs->inim.pos.x
-           && abs(gs->jog.pos.x - gs->inim.pos.x) > 40)
+           && abs(gs->jog.pos.x - gs->inim.pos.x) > INIM_MIN_DIST)
         {
             posFutura.x += 0.7f;
         }
         if(gs->jog.pos.x < gs->inim.pos.x
-           && abs(gs->jog.pos.x - gs->inim.pos.x) > 40)
+           && abs(gs->jog.pos.x - gs->inim.pos.x) > INIM_MIN_DIST)
         {
             posFutura.x -= 0.7f;
         }
         if(gs->jog.pos.y > gs->inim.pos.y
-           && abs(gs->jog.pos.y - gs->inim.pos.y) > 40)
+           && abs(gs->jog.pos.y - gs->inim.pos.y) > INIM_MIN_DIST)
         {
             posFutura.y += 0.7f;
         }
         if(gs->jog.pos.y < gs->inim.pos.y
-           && abs(gs->jog.pos.y - gs->inim.pos.y) > 40)
+           && abs(gs->jog.pos.y - gs->inim.pos.y) > INIM_MIN_DIST)
         {
             posFutura.y -= 0.7f;
         }
@@ -51,7 +51,7 @@ void MoverInimigo(GameState* gs)
 
 void AtaqueDoInimigo(GameState* gs)
 {
-    if(CheckCollisionCircles(gs->inim.pos, 40, gs->jog.pos, RAIO_JOG))
+    if(CheckCollisionCircles(gs->inim.pos, INIM_ATQ_DIST, gs->jog.pos, RAIO_JOG))
     {
         gs->inim.framesCounter++;
 

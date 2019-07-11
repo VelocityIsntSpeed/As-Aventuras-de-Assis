@@ -95,11 +95,29 @@ GameState; ///< Struct de estado do jogo.
 
 
 //[ DEFINICOES DE CONSTANTES ]=================================================
+
+//[ JOGADOR ]------------------------------------------------------------------
 /// Velocidade do jogador (por segundo).
 #define VEL_JOG (150.0f)
 /// Raio do jogador.
 #define RAIO_JOG (20.0f)
 
+//[ INIMIGO ]------------------------------------------------------------------
+/// Raio do inimigo.
+#define RAIO_INIM (15.0f)
+
+/** Distancia maxima na qual o inimigo vai seguir o jogador, do centro do
+    inimigo ah borda do jogador. */
+#define INIM_MAX_DIST (160.0f)
+
+/** Distancia minima na qual o inimigo vai seguir o jogador, do centro do
+    inimigo ah borda do jogador. */
+#define INIM_MIN_DIST (40.0f)
+
+/// Alcance de ataque do inimigo, do centro do inimigo ah borda do jogador.
+#define INIM_ATQ_DIST (40.0f)
+
+//[ OUTROS ]-------------------------------------------------------------------
 /// Velocidade do obstaculo circular (por segundo).
 #define VEL_CIRC (100.0f)
 

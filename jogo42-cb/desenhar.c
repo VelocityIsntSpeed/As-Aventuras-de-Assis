@@ -127,7 +127,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DesenharJogador(gs, spriteJog);
 
         // Inimigo
-        DrawCircleV(gs->inim.pos, 20, gs->inim.cor);
+        DrawCircleV(gs->inim.pos, RAIO_INIM, gs->inim.cor);
 
         // Obstaculo retangular
         DrawRectangleRec(gs->obstRet, DARKGRAY);
