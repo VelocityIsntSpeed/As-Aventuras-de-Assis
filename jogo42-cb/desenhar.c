@@ -109,7 +109,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
         // Obstaculo circular
         DrawCircleV(gs->obstCircCentro, gs->obstCircRaio,
-                    gs->obstCircTaAndando ? PURPLE : VIOLET);
+                    Fade(gs->obstCircTaAndando ? PURPLE : VIOLET, 0.5f));
 
         // Jogador
         DesenharJogador(gs, spriteJog);
@@ -118,7 +118,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DrawCircleV(gs->inim.pos, 20, (Color){223, 0, 0, 255});
 
         // Obstaculo retangular
-        DrawRectangleRec(gs->obstRet, DARKGRAY);
+        DrawRectangleRec(gs->obstRet, Fade(DARKGRAY, 0.5f));
 
         // Texto com raio do obstaculo
         DrawText(TextFormat("Raio = %.1f", gs->obstCircRaio),
