@@ -125,6 +125,9 @@ void MoverObst(GameState* gs);
 /** Inicializa o level de acordo com a string na definicao desta funcao. */
 void InicializarLevel(Tile lvl[TAM_SALA_Y][TAM_SALA_X]);
 
+/** Inicializa os obstaculos. */
+void InicializarObst(GameState* gs);
+
 
 #endif // JOGO42_H_INCLUDED
 

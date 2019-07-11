@@ -37,12 +37,7 @@ int main(void)
     InicializarLevel(gs->sala);
 
     //[ OBSTACULOS ]===========================================================
-    // Obstaculo retangular
-    gs->obstRet = (Rectangle){100, 100, 150, 100};
-    // Obstaculo circular
-    gs->obstCircCentro = (Vector2){1500, 350};
-    gs->obstCircRaio = 150;
-    gs->obstCircTaAndando = false;
+    InicializarObst(gs);
 
     //[ INIMIGO ]==============================================================
     gs->inim.pos = (Vector2){1000, 200};
