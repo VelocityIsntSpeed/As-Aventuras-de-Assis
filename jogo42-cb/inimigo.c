@@ -14,30 +14,20 @@
 
 void MoverInimigo(GameState* gs)
 {
-    if(CheckCollisionCircles(gs->inim.pos, INIM_MAX_DIST, gs->jog.pos, RAIO_JOG))
-    {
-        Vector2 posFutura = Vector2Zero();
+    // Distancias entre o inimigo e o jogador
+    // De centro a centro
+    const float DIST_CENTROS = Vector2Distance(gs->inim.pos, gs->jog.pos);
+    // De borda a borda
+    const float DIST_BORDAS = DIST_CENTROS - RAIO_INIM - RAIO_JOG;
 
-        if(gs->jog.pos.x > gs->inim.pos.x
-           && abs(gs->jog.pos.x - gs->inim.pos.x) > INIM_MIN_DIST)
-        {
-            posFutura.x += 1.0f;
-        }
-        if(gs->jog.pos.x < gs->inim.pos.x
-           && abs(gs->jog.pos.x - gs->inim.pos.x) > INIM_MIN_DIST)
-        {
-            posFutura.x -= 1.0f;
-        }
-        if(gs->jog.pos.y > gs->inim.pos.y
-           && abs(gs->jog.pos.y - gs->inim.pos.y) > INIM_MIN_DIST)
-        {
-            posFutura.y += 1.0f;
-        }
-        if(gs->jog.pos.y < gs->inim.pos.y
-           && abs(gs->jog.pos.y - gs->inim.pos.y) > INIM_MIN_DIST)
-        {
-            posFutura.y -= 1.0f;
-        }
+    if (DIST_CENTROS < INIM_MAX_DIST && DIST_BORDAS > INIM_MIN_DIST)
+    {
+        // Posicao para a qual moveremos
+        Vector2 posFutura;
+        // Vetor que aponta do inimigo para o jogador
+        posFutura = Vector2Subtract(gs->jog.pos, gs->inim.pos);
+
+        posFutura = Vector2Normalize(posFutura);
 
         posFutura = Vector2Scale(posFutura, VEL_INIM * GetFrameTime());
 
@@ -51,7 +41,11 @@ void MoverInimigo(GameState* gs)
 
 void AtaqueDoInimigo(GameState* gs)
 {
-    if(CheckCollisionCircles(gs->inim.pos, INIM_ATQ_DIST, gs->jog.pos, RAIO_JOG))
+    // Distancia entre o inimigo e o jogador, de borda a borda
+    const float DIST_BORDAS =
+        Vector2Distance(gs->inim.pos, gs->jog.pos) - RAIO_INIM - RAIO_JOG;
+
+    if(DIST_BORDAS < INIM_ATQ_DIST)
     {
         gs->inim.framesCounter++;
 
