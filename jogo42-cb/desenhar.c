@@ -94,6 +94,8 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
     }
 }
 
+
+/// Desenha a UI (User Interface)
 static void DesenharUI(const GameState* gs)
 {
     // Informacoes do jogador
@@ -103,8 +105,11 @@ static void DesenharUI(const GameState* gs)
     const float ALTURA_TEXTO = MeasureTextEx(GetFontDefault(), TEXTO, 20, 2).y;
 
     // Desenhar texto
-    DrawText(FormatText(TEXTO, gs->jog.hp), 10, GetScreenHeight() - ALTURA_TEXTO - 10, 20, BLACK);
+    DrawText(FormatText(TEXTO, gs->jog.hp),
+             10, GetScreenHeight() - ALTURA_TEXTO - 10, 20, BLACK);
 }
+
+
 
 void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 {
