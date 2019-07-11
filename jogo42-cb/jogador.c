@@ -8,7 +8,6 @@
  Contem codigo do jogador.
 */
 
-#include "raylib.h"
 #include "jogo42.h"
 
 static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)

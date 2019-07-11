@@ -8,7 +8,6 @@
  Contem coisas relacionadas ao level.
 */
 
-#include "raylib.h"
 #include "jogo42.h"
 
 
@@ -79,6 +78,17 @@ void InicializarLevel(Tile lvl[TAM_SALA_Y][TAM_SALA_X])
             lvl[lin][col] = tile;
         }
     }
+}
+
+
+void InicializarObst(GameState* gs)
+{
+    // Obstaculo retangular
+    gs->obstRet = (Rectangle){100, 100, 150, 100};
+    // Obstaculo circular
+    gs->obstCircCentro = (Vector2){1500, 350};
+    gs->obstCircRaio = 150;
+    gs->obstCircTaAndando = false;
 }
 
 

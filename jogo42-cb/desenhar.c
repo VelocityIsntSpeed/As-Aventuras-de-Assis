@@ -8,8 +8,6 @@
  Contem codigo de desenho.
 */
 
-#include "raylib.h"
-#include "raymath.h"
 #include "jogo42.h"
 
 
@@ -121,7 +119,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
         // Obstaculo circular
         DrawCircleV(gs->obstCircCentro, gs->obstCircRaio,
-                    gs->obstCircTaAndando ? PURPLE : VIOLET);
+                    Fade(gs->obstCircTaAndando ? PURPLE : VIOLET, 0.5f));
 
         // Jogador
         DesenharJogador(gs, spriteJog);
@@ -130,7 +128,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DrawCircleV(gs->inim.pos, RAIO_INIM, gs->inim.cor);
 
         // Obstaculo retangular
-        DrawRectangleRec(gs->obstRet, DARKGRAY);
+        DrawRectangleRec(gs->obstRet, Fade(DARKGRAY, 0.5f));
 
         // Texto com raio do obstaculo
         DrawText(TextFormat("Raio = %.1f", gs->obstCircRaio),
