@@ -8,7 +8,6 @@
  Contem o codigo do inimigo.
 */
 
-#include "raylib.h"
 #include "jogo42.h"
 
 
