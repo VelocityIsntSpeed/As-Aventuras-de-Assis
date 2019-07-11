@@ -38,7 +38,7 @@ void AtaqueDoInimigo(GameState* gs)
     {
         gs->inim.framesCounter++;
 
-        // Mudança de Cor
+        // Mudanca de Cor
         gs->inim.cor = (Color){(gs->inim.framesCounter)*8, 240 - 8*(gs->inim.framesCounter), 0, 255};
 
         if(gs->inim.framesCounter >= 30)
