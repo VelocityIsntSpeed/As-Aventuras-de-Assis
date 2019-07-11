@@ -98,7 +98,7 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 /// Desenha o HP do jogador
 static void DesenharHpJog(const GameState* gs)
 {
-    const int TAM_FONTE = 20, POS_X = 10, POS_Y = 10;
+    const int POS_X = 10, POS_Y = 10, TAM_FONTE = 20;
 
     DrawText(FormatText("HP: %d", gs->jog.hp),
              POS_X, POS_Y, TAM_FONTE, WHITE);

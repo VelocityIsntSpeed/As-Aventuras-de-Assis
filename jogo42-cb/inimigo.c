@@ -45,7 +45,7 @@ void AtaqueDoInimigo(GameState* gs)
     const float DIST_BORDAS =
         Vector2Distance(gs->inim.pos, gs->jog.pos) - RAIO_INIM - RAIO_JOG;
 
-    if(DIST_BORDAS < INIM_ATQ_DIST)
+    if (DIST_BORDAS < INIM_ATQ_DIST)
     {
         gs->inim.framesCounter++;
 
@@ -55,7 +55,7 @@ void AtaqueDoInimigo(GameState* gs)
                                 0,
                                 255 };
 
-        if(gs->inim.framesCounter >= 30)
+        if (gs->inim.framesCounter >= 30)
         {
             gs->inim.framesCounter = 0;
             gs->jog.hp -= INIM_DANO;
