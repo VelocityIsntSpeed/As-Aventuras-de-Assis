@@ -95,8 +95,8 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 }
 
 
-/// Desenha a UI (User Interface)
-static void DesenharUI(const GameState* gs)
+/// Desenha o HP do jogador
+static void DesenharHpJog(const GameState* gs)
 {
     const int TAM_FONTE = 20, POS_X = 10, POS_Y = 10;
 
@@ -141,8 +141,8 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
     // Controles
     DesenharControles();
 
-    // UI
-    DesenharUI(gs);
+    // HP do jogador
+    DesenharHpJog(gs);
 
     // Frames Por Segundo
     DrawFPS(GetScreenWidth() - 80, 10);
