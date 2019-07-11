@@ -8,7 +8,6 @@
  Contem coisas relacionadas ao level.
 */
 
-#include "raylib.h"
 #include "jogo42.h"
 
 

@@ -8,8 +8,6 @@
  Contem codigo de desenho.
 */
 
-#include "raylib.h"
-#include "raymath.h"
 #include "jogo42.h"
 
 

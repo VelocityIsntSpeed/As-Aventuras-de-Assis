@@ -8,8 +8,6 @@
  Funcoes utilitarias (aka helper functions).
 */
 
-#include "raylib.h"
-#include "raymath.h"
 #include "jogo42.h"
 
 Rectangle RectDaTile(const int x, const int y)

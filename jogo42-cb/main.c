@@ -8,8 +8,6 @@
  Arquivo principal, contem o ponto de entrada (funcao main).
 */
 
-#include "raylib.h"
-#include "raymath.h"
 #include "jogo42.h"
 #include "stdio.h" // Para mandar mensagens de erro no console
 #include "stdlib.h" // Pelo malloc
