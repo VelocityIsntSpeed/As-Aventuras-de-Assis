@@ -57,9 +57,9 @@ typedef struct {
     int hp;
     /// Se estah seguindo o jogador.
     bool seguindo;
-    /// Color
+    /// Cor.
     Color cor;
-    /// Contador de frames
+    /// Frames que se passaram desde o inimigo ter comecado o ataque.
     int framesCounter;
 }
 Inimigo; ///< Estado de um inimigo.
