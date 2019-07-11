@@ -19,7 +19,7 @@ static void DesenharControles()
     // Texto que vai aparecer
     const char TEXTO[] = "Controles:\n"
                          "WASD/Setas para andar\n"
-                         "Espaco para movimentar obstaculos\n";
+                         "Espaco para movimentar obstaculos";
 
     // Tamanho da fonte
     const int TAM_FONTE = 20;
@@ -98,15 +98,9 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 /// Desenha a UI (User Interface)
 static void DesenharUI(const GameState* gs)
 {
-    // Informacoes do jogador
-    const char TEXTO[] = {"Vida: %i"};
-
-    // Calcular a altura:
-    const float ALTURA_TEXTO = MeasureTextEx(GetFontDefault(), TEXTO, 20, 2).y;
-
     // Desenhar texto
-    DrawText(FormatText(TEXTO, gs->jog.hp),
-             10, GetScreenHeight() - ALTURA_TEXTO - 10, 20, BLACK);
+    DrawText(FormatText("HP: %d", gs->jog.hp),
+             10, 10, 20, WHITE);
 }
 
 
