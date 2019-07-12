@@ -33,7 +33,7 @@ int main(void)
     /// Sprite do jogador.
     const Texture2D SPRITE_JOG = LoadTexture("tex/protag.png");
     gs->jog.hitbox = gs->jog.pos;
-    gs->jog.hitbox.x = gs->jog.hitbox.x-100;
+    gs->jog.hitbox.x = gs->jog.hitbox.x - 100;
 
     //[ LEVEL ]================================================================
     InicializarLevel(gs->sala);
@@ -46,8 +46,8 @@ int main(void)
     gs->inim.rot = 0;
     gs->inim.hp = 120;
     gs->inim.seguindo = true;
-    gs->inim.hpos.x = gs->inim.pos.x-12;
-    gs->inim.hpos.y = gs->inim.pos.y+22;
+    gs->inim.hpos.x = gs->inim.pos.x - 12;
+    gs->inim.hpos.y = gs->inim.pos.y + 22;
     itoa(gs->inim.hp, gs->inim.vida, 10);
 
 
@@ -81,12 +81,13 @@ int main(void)
         gs->cam.offset.x += GetScreenWidth() / 2;
         gs->cam.offset.y += GetScreenHeight() / 2;
         gs->cam.target = gs->jog.pos;
+
         // Atualizar hp do inimigo
-        if( IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
-            if(CheckCollisionCircles(gs->jog.hitbox, 10,gs->inim.pos, 20))
+            if (CheckCollisionCircles(gs->jog.hitbox, 10, gs->inim.pos, 20))
             {
-                gs->inim.hp = gs->inim.hp - 20;
+                gs->inim.hp -= 20;
                 itoa(gs->inim.hp, gs->inim.vida, 10);
             }
         }
