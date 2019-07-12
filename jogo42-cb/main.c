@@ -81,6 +81,16 @@ int main(void)
         gs->cam.offset.x += GetScreenWidth() / 2;
         gs->cam.offset.y += GetScreenHeight() / 2;
         gs->cam.target = gs->jog.pos;
+        // Atualizar hp do inimigo
+        if( IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            if(CheckCollisionCircles(gs->jog.hitbox, 10,gs->inim.pos, 20))
+            {
+                gs->inim.hp = gs->inim.hp - 20;
+                itoa(gs->inim.hp, gs->inim.vida, 10);
+            }
+        }
+
 
         // [[[ FIM UPDATE ]]]
 
