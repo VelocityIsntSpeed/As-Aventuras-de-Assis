@@ -40,8 +40,6 @@ Tile; ///< Tipos de tile.
 typedef struct {
     /// Posicao world.
     Vector2 pos;
-    /// Hitbox do ataque
-    Vector2 hitbox;
     /// Rotacao em graus.
     float rot;
     /// Health Points.
@@ -99,6 +97,10 @@ GameState; ///< Struct de estado do jogo.
 #define VEL_JOG (150.0f)
 /// Raio do jogador.
 #define RAIO_JOG (20.0f)
+/// Distancia entre o centro da posicao da hitbox de ataque e o jogador.
+#define JOG_ATQ_DIST (50.0f)
+/// Raio da hitbox de ataque
+#define JOG_ATQ_RAIO (10.0f)
 
 /// Velocidade do obstaculo circular (por segundo).
 #define VEL_CIRC (100.0f)
@@ -123,6 +125,9 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog);
 // jogador.c ------------------------------------------------------------------
 /** Move o jogador. */
 void MoverJog(GameState* gs);
+
+/** Ataque do jogador. Deve ser chamada todo frame. */
+void AtaqueJogador(GameState* gs);
 
 // level.c --------------------------------------------------------------------
 /** Move os obstaculos. */

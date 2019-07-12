@@ -8,7 +8,33 @@
  Contem codigo do jogador.
 */
 
+#include "stdlib.h"
 #include "jogo42.h"
+
+void AtaqueJogador(GameState* gs)
+{
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+    {
+        // Posicao da hitbox de ataque, inicialmente com origem no jogador
+        Vector2 posHitboxAtq = { .x = cos(gs->jog.rot * DEG2RAD),
+                                 .y = sin(gs->jog.rot * DEG2RAD)  };;
+
+        /* Agora posHitboxAtq aponta para a direcao certa mas tem
+           comprimento 1, entao o escalaremos para o comprimento certo */
+        posHitboxAtq = Vector2Scale(posHitboxAtq, JOG_ATQ_DIST);
+
+        // Transformar para coordenadas world
+        posHitboxAtq = Vector2Add(gs->jog.pos, posHitboxAtq);
+
+        // Se acertar o inimigo
+        if (CheckCollisionCircles(posHitboxAtq, JOG_ATQ_RAIO,
+                                  gs->inim.pos, 20))
+        {
+            gs->inim.hp -= 20;
+            itoa(gs->inim.hp, gs->inim.vida, 10);
+        }
+    }
+}
 
 static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
 {
@@ -75,10 +101,6 @@ void MoverJog(GameState* gs)
     {
         gs->jog.pos = posFutura;
     }
-    // Ataque
-    gs->jog.hitbox = gs->jog.pos;
-    gs->jog.hitbox.x = gs->jog.hitbox.x + RAD2DEG * cos(gs->jog.rot * DEG2RAD);
-    gs->jog.hitbox.y = gs->jog.hitbox.y + RAD2DEG * sin(gs->jog.rot * DEG2RAD);
 }
 
 

@@ -32,8 +32,6 @@ int main(void)
     gs->jog.rot = 0;
     /// Sprite do jogador.
     const Texture2D SPRITE_JOG = LoadTexture("tex/protag.png");
-    gs->jog.hitbox = gs->jog.pos;
-    gs->jog.hitbox.x = gs->jog.hitbox.x - 100;
 
     //[ LEVEL ]================================================================
     InicializarLevel(gs->sala);
@@ -82,15 +80,8 @@ int main(void)
         gs->cam.offset.y += GetScreenHeight() / 2;
         gs->cam.target = gs->jog.pos;
 
-        // Atualizar hp do inimigo
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-        {
-            if (CheckCollisionCircles(gs->jog.hitbox, 10, gs->inim.pos, 20))
-            {
-                gs->inim.hp -= 20;
-                itoa(gs->inim.hp, gs->inim.vida, 10);
-            }
-        }
+        // Ataque do jogador
+        AtaqueJogador(gs);
 
 
         // [[[ FIM UPDATE ]]]
