@@ -117,7 +117,8 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
         // Inimigo
         DrawCircleV(gs->inim.pos, 20, (Color){223, 0, 0, 255});
-        DrawText(gs->inim.vida, gs->inim.hpos.x, gs->inim.hpos.y, 20, RED);
+        DrawText(TextFormat("%d", (int)gs->inim.hp),
+                 gs->inim.pos.x - 7, gs->inim.pos.y + 23, 10, WHITE);
 
         // Obstaculo retangular
         DrawRectangleRec(gs->obstRet, Fade(DARKGRAY, 0.5f));

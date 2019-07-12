@@ -55,12 +55,6 @@ typedef struct {
     float rot;
     /// Health Points.
     float hp;
-    /// A posicao do mostrador de hp
-    Vector2 hpos;
-    /// O texto q vai ser o hp do inimigo
-    char vida[5];
-    /// Se estah seguindo o jogador.
-    bool seguindo;
 }
 Inimigo; ///< Estado de um inimigo.
 

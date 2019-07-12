@@ -31,7 +31,6 @@ void AtaqueJogador(GameState* gs)
                                   gs->inim.pos, 20))
         {
             gs->inim.hp -= 20;
-            itoa(gs->inim.hp, gs->inim.vida, 10);
         }
     }
 }
