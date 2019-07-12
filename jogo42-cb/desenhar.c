@@ -123,11 +123,9 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         }
 
         // Inimigo
-        if(gs->inim.seguindo)
-        {
-            DrawCircleV(gs->inim.pos, 20, (Color){223, 0, 0, 255});
-            DrawText(gs->inim.vida, gs->inim.hpos.x, gs->inim.hpos.y, 20, RED);
-        }
+        DrawCircleV(gs->inim.pos, 20, (Color){223, 0, 0, 255});
+        DrawText(gs->inim.vida, gs->inim.hpos.x, gs->inim.hpos.y, 20, RED);
+
         // Obstaculo retangular
         DrawRectangleRec(gs->obstRet, Fade(DARKGRAY, 0.5f));
 
