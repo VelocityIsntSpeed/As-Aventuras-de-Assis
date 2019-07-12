@@ -45,8 +45,7 @@ int main(void)
     gs->inim.pos = (Vector2){1000, 200};
     gs->inim.rot = 0;
     gs->inim.hp = 8;
-    gs->inim.cor = (Color){0, 240, 0, 255};
-    gs->inim.framesCounter = 0;
+    gs->inim.timerAtq = -1;
 
     //[ CAMERA ]===============================================================
     gs->cam.rotation = 0;

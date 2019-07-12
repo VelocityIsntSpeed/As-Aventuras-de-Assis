@@ -55,10 +55,9 @@ typedef struct {
     float rot;
     /// Health Points.
     int hp;
-    /// Cor.
-    Color cor;
-    /// Frames que se passaram desde o inimigo ter comecado o ataque.
-    int framesCounter;
+    /** Tempo em segundos que faz que o inimigo estah atacando.
+        Se for negativo, o inimigo nao estah atacando. */
+    float timerAtq;
 }
 Inimigo; ///< Estado de um inimigo.
 
@@ -115,6 +114,9 @@ GameState; ///< Struct de estado do jogo.
 
 /// Alcance de ataque do inimigo, de borda a borda
 #define INIM_ATQ_DIST (20.0f)
+
+/// Segundos que demora do inimigo comecar o ataque ate ele causar dano.
+#define INIM_WARMUP (1.0f)
 
 /// Dano de ataque
 #define INIM_DANO (4)

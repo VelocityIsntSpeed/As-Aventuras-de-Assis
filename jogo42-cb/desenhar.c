@@ -103,6 +103,25 @@ static void DesenharHpJog(const GameState* gs)
 }
 
 
+/// Desenha o inimigo
+static void DesenharInimigo(const GameState* gs)
+{
+    DrawCircleV(gs->inim.pos, RAIO_INIM, DARKGREEN);
+
+    DrawCircleLines(gs->inim.pos.x, gs->inim.pos.y, INIM_MAX_DIST, WHITE);
+
+    if (gs->inim.timerAtq >= INIM_WARMUP)
+    {
+        DrawCircleV(gs->inim.pos, INIM_ATQ_DIST + RAIO_INIM, RED);
+    }
+    else if (gs->inim.timerAtq >= 0)
+    {
+        DrawCircleLines(gs->inim.pos.x, gs->inim.pos.y,
+                        INIM_ATQ_DIST + RAIO_INIM, RED);
+    }
+}
+
+
 
 void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 {
@@ -125,7 +144,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DesenharJogador(gs, spriteJog);
 
         // Inimigo
-        DrawCircleV(gs->inim.pos, RAIO_INIM, gs->inim.cor);
+        DesenharInimigo(gs);
 
         // Obstaculo retangular
         DrawRectangleRec(gs->obstRet, Fade(DARKGRAY, 0.5f));

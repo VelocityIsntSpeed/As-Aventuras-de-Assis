@@ -44,25 +44,39 @@ void AtaqueDoInimigo(GameState* gs)
     const float DIST_BORDAS =
         Vector2Distance(gs->inim.pos, gs->jog.pos) - RAIO_INIM - RAIO_JOG;
 
-    if (DIST_BORDAS < INIM_ATQ_DIST)
+    // Se o tempo do warmup ja passou
+    if (gs->inim.timerAtq >= INIM_WARMUP)
     {
-        gs->inim.framesCounter++;
-
-        // Mudanca de cor
-        gs->inim.cor = (Color){ (gs->inim.framesCounter) * 8,
-                                240 - 8 * (gs->inim.framesCounter),
-                                0,
-                                255 };
-
-        if (gs->inim.framesCounter >= 30)
+        // Causar dano
+        if (DIST_BORDAS < INIM_ATQ_DIST)
         {
-            gs->inim.framesCounter = 0;
             gs->jog.hp -= INIM_DANO;
         }
+
+        // Encerrar o ataque
+        gs->inim.timerAtq = -1;
     }
-    else
+
+    // Se ainda estamos no warmup
+    else if (gs->inim.timerAtq >= 0)
     {
-        gs->inim.framesCounter = 0;
-        gs->inim.cor = (Color){0, 240, 0, 255};
+        // Incrementar timer
+        gs->inim.timerAtq += GetFrameTime();
+    }
+
+    // Se nao estamos atacando
+    else if (gs->inim.timerAtq < 0)
+    {
+        // Se o player estiver sob alcance
+        if (DIST_BORDAS < INIM_ATQ_DIST)
+        {
+            // Comecar a atacar
+            gs->inim.timerAtq = 0;
+        }
     }
 }
+
+
+
+
+
