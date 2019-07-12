@@ -30,6 +30,9 @@ void MoverInimigo(GameState* gs)
 
         posFutura = Vector2Scale(posFutura, VEL_INIM * GetFrameTime());
 
+        // Rotacionar
+        gs->inim.rot = Vector2Angle(gs->inim.pos, gs->jog.pos);
+
         // Transformar para coordenadas world
         posFutura = Vector2Add(gs->inim.pos, posFutura);
 

@@ -106,10 +106,16 @@ static void DesenharHpJog(const GameState* gs)
 /// Desenha o inimigo
 static void DesenharInimigo(const GameState* gs)
 {
+    // Inimigo
     DrawCircleV(gs->inim.pos, RAIO_INIM, DARKGREEN);
-
+    // Indicador de direcao
+    const float ROT_AJUSTADA = -gs->inim.rot + 90.0f;
+    DrawCircleSectorLines(gs->inim.pos, RAIO_INIM,
+                          ROT_AJUSTADA - 2, ROT_AJUSTADA + 2,
+                          1, WHITE);
+    // Indicador de INIM_MAX_DIST
     DrawCircleLines(gs->inim.pos.x, gs->inim.pos.y, INIM_MAX_DIST, WHITE);
-
+    // Indicador de ataque
     if (gs->inim.timerAtq >= INIM_WARMUP)
     {
         DrawCircleV(gs->inim.pos, INIM_ATQ_DIST + RAIO_INIM, RED);
