@@ -107,11 +107,11 @@ static void DesenharHpJog(const GameState* gs)
 static void DesenharInimigo(const GameState* gs)
 {
     // Inimigo
-    DrawCircleV(gs->inim.pos, RAIO_INIM, DARKGREEN);
+    DrawCircleV(gs->inim.pos, INIM_RAIO, DARKGREEN);
 
     // Indicador de direcao
     const float ROT_AJUSTADA = -gs->inim.rot + 90.0f;
-    DrawCircleSectorLines(gs->inim.pos, RAIO_INIM,
+    DrawCircleSectorLines(gs->inim.pos, INIM_RAIO,
                           ROT_AJUSTADA - 2, ROT_AJUSTADA + 2,
                           1, WHITE);
 
@@ -122,13 +122,13 @@ static void DesenharInimigo(const GameState* gs)
     // Se o inimigo estiver em warmup
     if (gs->inim.timerAtq >= INIM_WARMUP)
     {
-        DrawCircleV(gs->inim.pos, INIM_ATQ_DIST + RAIO_INIM, RED);
+        DrawCircleV(gs->inim.pos, INIM_ATQ_DIST + INIM_RAIO, RED);
     }
     // Se estiver causando dano agora (soh dura um frame)
     else if (gs->inim.timerAtq >= 0)
     {
         DrawCircleLines(gs->inim.pos.x, gs->inim.pos.y,
-                        INIM_ATQ_DIST + RAIO_INIM, RED);
+                        INIM_ATQ_DIST + INIM_RAIO, RED);
     }
 }
 

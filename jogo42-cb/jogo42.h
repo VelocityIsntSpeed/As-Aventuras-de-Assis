@@ -99,10 +99,10 @@ GameState; ///< Struct de estado do jogo.
 
 //[ INIMIGO ]------------------------------------------------------------------
 /// Raio do inimigo.
-#define RAIO_INIM (17.0f)
+#define INIM_RAIO (17.0f)
 
 /// Velocidade de movimento do inimigo, por segundo.
-#define VEL_INIM (110.0f)
+#define INIM_VEL (110.0f)
 
 /** Distancia maxima na qual o inimigo vai seguir o jogador,
     de centro a centro. */
