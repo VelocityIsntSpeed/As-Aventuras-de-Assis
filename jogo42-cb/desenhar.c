@@ -101,12 +101,23 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DrawCircleV(gs->obstCircCentro, gs->obstCircRaio,
                     gs->obstCircTaAndando ? PURPLE : VIOLET);
 
+
         // Jogador
         DesenharJogador(gs, spriteJog);
+        if( IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+        {
+            if(CheckCollisionCircles(gs->jog.hitbox, 10,gs->inim.pos, 20))
+            {
+                DrawCircle(gs->inim.pos.x, gs->inim.pos.y, 40, RAYWHITE);
+            }
+        }
 
         // Inimigo
-        DrawCircleV(gs->inim.pos, 20, (Color){223, 0, 0, 255});
-
+        if(gs->inim.seguindo)
+        {
+            DrawCircleV(gs->inim.pos, 20, (Color){223, 0, 0, 255});
+            DrawText(gs->inim.vida,gs->inim.hpos.x, gs->inim.hpos.y, 20, RED );
+        }
         // Obstaculo retangular
         DrawRectangleRec(gs->obstRet, DARKGRAY);
 

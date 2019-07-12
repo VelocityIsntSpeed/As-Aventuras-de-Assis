@@ -40,6 +40,8 @@ Tile;
 typedef struct {
     /// Posicao world.
     Vector2 pos;
+    /// Hitbox do ataque
+    Vector2 hitbox;
     /// Rotacao em graus.
     float rot;
     /// Health Points.
@@ -55,6 +57,10 @@ typedef struct {
     float rot;
     /// Health Points.
     float hp;
+    /// A posicao do mostrador de hp
+    Vector2 hpos;
+    /// O texto q vai ser o hp do inimigo
+    char vida[5];
     /// Se estah seguindo o jogador.
     bool seguindo;
 }

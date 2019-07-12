@@ -75,6 +75,9 @@ void MoverJog(GameState* gs)
     if (!ColisaoJogLevel(posFutura, gs))
     {
         gs->jog.pos = posFutura;
+        gs->jog.hitbox = gs->jog.pos;
+        gs->jog.hitbox.x = gs->jog.hitbox.x + 60*cos(gs->jog.rot/60);
+        gs->jog.hitbox.y = gs->jog.hitbox.y + 60*sin(gs->jog.rot/60);
     }
 }
 
