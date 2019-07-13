@@ -40,43 +40,47 @@ typedef enum {
 Tile; ///< Tipos de tile.
 
 
-typedef struct {
-    /// Posicao world.
-    Vector2 pos;
-    /// Rotacao em graus.
-    float rot;
-    /// Health Points.
-    float hp;
-}
-Jog; ///< Estado do jogador.
-
-
-typedef struct {
-    /// Posicao world.
-    Vector2 pos;
-    /// Rotacao em graus.
-    float rot;
-    /// Health Points.
-    float hp;
-    /** Tempo em segundos que faz que o inimigo estah atacando.
-        Se for negativo, o inimigo nao estah atacando. */
-    float timerAtq;
-}
-Inimigo; ///< Estado de um inimigo.
-
-
-typedef struct {
+typedef struct // GameState
+{
     //[ JOGADOR ]--------------------------------------------------------------
-    Jog jog;
+    // Estado do jogador
+    struct Jog
+    {
+        /// Posicao world.
+        Vector2 pos;
+        /// Rotacao em graus.
+        float rot;
+        /// Health Points.
+        float hp;
+    }
+    jog;
+
+    // Camera
     Camera2D cam;
 
+
     //[ INIMIGOS ]-------------------------------------------------------------
-    // So tem um por enquanto, depois vai ter uma lista
-    /// O inimigo.
-    Inimigo inim;
+    // Estado de um inimigo
+    struct Inimigo
+    {
+        /// Posicao world.
+        Vector2 pos;
+        /// Rotacao em graus.
+        float rot;
+        /// Health Points.
+        float hp;
+        /** Tempo em segundos que faz que o inimigo estah atacando.
+            Se for negativo, o inimigo nao estah atacando. */
+        float timerAtq;
+    };
+
+    /// O inimigo. So tem um por enquanto, depois vai ter uma lista.
+    struct Inimigo inim;
+
 
     //[ LEVEL ]----------------------------------------------------------------
     Tile sala[TAM_SALA_Y][TAM_SALA_X];
+
 
     //[ OBSTACULOS ]-----------------------------------------------------------
     /// Obstaculo retangular.
