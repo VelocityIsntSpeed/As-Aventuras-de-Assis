@@ -27,8 +27,10 @@ Vector2 PosWorldDoCursor(const GameState* gs)
 
 Vector2 Vector2AndarAte(Vector2 origem, Vector2 destino, float dist)
 {
+    // Vetor que aponta de origem para destino
     Vector2 resultado = Vector2Subtract(destino, origem);
 
+    // Se o vetor for nulo (ou seja, origem e destino forem iguais)
     if (resultado.x == 0 && resultado.y == 0)
     {
         return Vector2Zero();
@@ -36,6 +38,9 @@ Vector2 Vector2AndarAte(Vector2 origem, Vector2 destino, float dist)
 
     resultado = Vector2Normalize(resultado);
     resultado = Vector2Scale(resultado, dist);
+
+    // Transformar para coordenadas world
     resultado = Vector2Add(origem, resultado);
+
     return resultado;
 }
