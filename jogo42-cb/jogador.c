@@ -84,17 +84,16 @@ void MoverJog(GameState* gs)
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    {       posFutura.y -= 1; }
     if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  {       posFutura.y += 1; }
 
-    posFutura = Vector2Scale(posFutura, JOG_VEL * GetFrameTime());
 
-    // Transformar para coordenadas world
+    if (posFutura.x == 0 && posFutura.y == 0) { return; }
+
+    // Transformar em coordenadas world
     posFutura = Vector2Add(gs->jog.pos, posFutura);
 
-    /* Note que com esse algoritmo, o jogador anda 41% mais rapido se
-       estiver andando na diagonal. Por exemplo: segurando D e S,
-       posFutura eh {1.0f, 1.0f} antes de ser escalado.
-       A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
+    posFutura = Vector2AndarAte(gs->jog.pos, posFutura,
+                                JOG_VEL * GetFrameTime());
 
-    // Colisao com o level
+    // Mover apenas se na posicao futura nao houver colisao com o level
     if (!ColisaoJogLevel(posFutura, gs))
     {
         gs->jog.pos = posFutura;
