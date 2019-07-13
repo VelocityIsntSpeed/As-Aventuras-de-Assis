@@ -34,7 +34,7 @@ static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
         os obstaculos moveis), e false caso contrario. */
 
     //[ CHECAR CONTRA O OBSTACULO RETANGULAR ]---------------------------------
-    if (CheckCollisionCircleRec(posJogTeste, RAIO_JOG, gs->obstRet))
+    if (CheckCollisionCircleRec(posJogTeste, JOG_RAIO, gs->obstRet))
     {
         return true;
     }
@@ -43,7 +43,7 @@ static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
     // A funcao de checar colisao buga se for fornecida raio menor que 0
     const float RAIO = (gs->obstCircRaio < 0) ? 0 : gs->obstCircRaio;
 
-    if (CheckCollisionCircles(posJogTeste, RAIO_JOG, gs->obstCircCentro, RAIO))
+    if (CheckCollisionCircles(posJogTeste, JOG_RAIO, gs->obstCircCentro, RAIO))
     {
         return true;
     }
@@ -56,7 +56,7 @@ static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
             const Tile* AQUI = &gs->sala[lin][col];
 
             if ((*AQUI == TILE_parede || *AQUI == TILE_paredeInvisivel)
-                && CheckCollisionCircleRec(posJogTeste, RAIO_JOG,
+                && CheckCollisionCircleRec(posJogTeste, JOG_RAIO,
                                            RectDaTile(col, lin)))
             {
                 return true;
@@ -65,7 +65,7 @@ static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
     }
 
     //[ CHECAR CONTRA O INIMIGO ]-----------------------------------------------
-    if (CheckCollisionCircles(gs->inim.pos, INIM_RAIO, posJogTeste, RAIO_JOG))
+    if (CheckCollisionCircles(gs->inim.pos, INIM_RAIO, posJogTeste, JOG_RAIO))
     {
         return true;
     }
@@ -84,7 +84,7 @@ void MoverJog(GameState* gs)
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    {       posFutura.y -= 1; }
     if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  {       posFutura.y += 1; }
 
-    posFutura = Vector2Scale(posFutura, VEL_JOG * GetFrameTime());
+    posFutura = Vector2Scale(posFutura, JOG_VEL * GetFrameTime());
 
     // Transformar para coordenadas world
     posFutura = Vector2Add(gs->jog.pos, posFutura);

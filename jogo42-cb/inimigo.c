@@ -17,7 +17,7 @@ void MoverInimigo(GameState* gs)
     // De centro a centro
     const float DIST_CENTROS = Vector2Distance(gs->inim.pos, gs->jog.pos);
     // De borda a borda
-    const float DIST_BORDAS = DIST_CENTROS - INIM_RAIO - RAIO_JOG;
+    const float DIST_BORDAS = DIST_CENTROS - INIM_RAIO - JOG_RAIO;
 
     if (DIST_CENTROS < INIM_MAX_DIST && DIST_BORDAS > INIM_MIN_DIST)
     {
@@ -45,7 +45,7 @@ void AtaqueDoInimigo(GameState* gs)
 {
     // Distancia entre o inimigo e o jogador, de borda a borda
     const float DIST_BORDAS =
-        Vector2Distance(gs->inim.pos, gs->jog.pos) - INIM_RAIO - RAIO_JOG;
+        Vector2Distance(gs->inim.pos, gs->jog.pos) - INIM_RAIO - JOG_RAIO;
 
     // Se o tempo do warmup ja passou
     if (gs->inim.timerAtq >= INIM_WARMUP)

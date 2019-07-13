@@ -94,9 +94,9 @@ GameState; ///< Struct de estado do jogo.
 
 //[ JOGADOR ]------------------------------------------------------------------
 /// Velocidade do jogador (por segundo).
-#define VEL_JOG (150.0f)
+#define JOG_VEL (150.0f)
 /// Raio do jogador.
-#define RAIO_JOG (20.0f)
+#define JOG_RAIO (20.0f)
 /// Distancia entre o centro da posicao da hitbox de ataque e o jogador.
 #define JOG_ATQ_DIST (50.0f)
 /// Raio da hitbox de ataque

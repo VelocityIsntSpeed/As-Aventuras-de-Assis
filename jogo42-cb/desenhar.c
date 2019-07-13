@@ -43,7 +43,7 @@ static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
 
     // Posicao e tamanho
     const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y,\
-                                RAIO_JOG * 2, RAIO_JOG * 2};
+                                JOG_RAIO * 2, JOG_RAIO * 2};
 
     /* Posicao do eixo de rotacao,
        onde {0, 0} eh no canto superior esquerdo do DEST_REC */
