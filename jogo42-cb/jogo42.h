@@ -191,7 +191,7 @@ void AtaqueJogador(GameState* gs);
 void MoverInimigo(struct Inimigo* inimigo, const GameState* gs);
 
 /** Ataque do inimigo. Deve ser chamada em cada frame. */
-void AtaqueInimigo(GameState* gs);
+void AtaqueInimigo(struct Inimigo* inimigo, GameState* gs);
 
 
 // level.c --------------------------------------------------------------------
