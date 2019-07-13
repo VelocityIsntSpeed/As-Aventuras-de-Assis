@@ -58,6 +58,8 @@ typedef struct {
     /** Tempo em segundos que faz que o inimigo estah atacando.
         Se for negativo, o inimigo nao estah atacando. */
     float timerAtq;
+    /// Bool de existencia dele
+    bool exis;
 }
 Inimigo; ///< Estado de um inimigo.
 

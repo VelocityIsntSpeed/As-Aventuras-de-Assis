@@ -13,6 +13,17 @@
 #include "stdlib.h" // Pelo malloc
 
 
+void MatarInimigo(GameState* gs)
+{
+    gs->inim.pos = (Vector2){-1, -1};
+    gs->inim.rot = 0;
+    gs->inim.hp = 0;
+    gs->inim.timerAtq = 0;
+    gs->inim.exis = false;
+}
+
+
+
 int main(void)
 {
     // [[[[[ INICIALIZACAO ]]]]]
@@ -44,8 +55,9 @@ int main(void)
     //[ INIMIGO ]==============================================================
     gs->inim.pos = (Vector2){1000, 200};
     gs->inim.rot = 0;
-    gs->inim.hp = 8;
+    gs->inim.hp = 80;
     gs->inim.timerAtq = -1;
+    gs->inim.exis = true;
 
     //[ CAMERA ]===============================================================
     gs->cam.rotation = 0;
@@ -69,6 +81,11 @@ int main(void)
 
         // Mover inimigo
         MoverInimigo(gs);
+        // Dano no inimigo
+        if(gs->inim.hp <= 0)
+        {
+            MatarInimigo(gs);
+        }
 
         // Ataque Inimigo
         AtaqueDoInimigo(gs);
