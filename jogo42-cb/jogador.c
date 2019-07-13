@@ -10,6 +10,24 @@
 
 #include "jogo42.h"
 
+void AtaqueJogador(GameState* gs)
+{
+    // Atacar quando clicar
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+    {
+        // Calcular posicao da hitbox de ataque
+        const Vector2 POS_HITBOX_ATQ =
+            Vector2AndarAte(gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
+
+        // Se acertar o inimigo
+        if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
+                                  gs->inim.pos, INIM_RAIO))
+        {
+            gs->inim.hp -= JOG_ATQ_DANO;
+        }
+    }
+}
+
 static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
 {
     /** Retorna true se o jogador estiver colidindo com o level (incluindo

@@ -82,6 +82,10 @@ int main(void)
         gs->cam.offset.y += GetScreenHeight() / 2;
         gs->cam.target = gs->jog.pos;
 
+        // Ataque do jogador
+        AtaqueJogador(gs);
+
+
         // [[[ FIM UPDATE ]]]
 
 

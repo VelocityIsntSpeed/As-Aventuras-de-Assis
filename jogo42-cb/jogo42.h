@@ -96,6 +96,12 @@ GameState; ///< Struct de estado do jogo.
 #define VEL_JOG (150.0f)
 /// Raio do jogador.
 #define RAIO_JOG (20.0f)
+/// Distancia entre o centro da posicao da hitbox de ataque e o jogador.
+#define JOG_ATQ_DIST (50.0f)
+/// Raio da hitbox de ataque
+#define JOG_ATQ_RAIO (10.0f)
+/// Dano de ataque.
+#define JOG_ATQ_DANO (20)
 
 //[ INIMIGO ]------------------------------------------------------------------
 /// Raio do inimigo.
@@ -139,6 +145,11 @@ Rectangle RectDaTile(int x, int y);
 /** Retorna a posicao do cursor em coordenadas world. */
 Vector2 PosWorldDoCursor(const GameState* gs);
 
+/** Pega 2 posicoes Vector2 e retorna outra, todas em coordenadas world.
+    Comecando em `v1`, comeca a andar em direcao a `v2` e so para quando tiver
+    andado uma distancia `dist` (mesmo que no caminho passe de v2). */
+Vector2 Vector2AndarAte(Vector2 v1, Vector2 v2, float dist);
+
 // desenhar.c -----------------------------------------------------------------
 /** Desenha tudo. */
 void Desenhar(const GameState* gs, const Texture2D* spriteJog);
@@ -146,6 +157,9 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog);
 // jogador.c ------------------------------------------------------------------
 /** Move o jogador. */
 void MoverJog(GameState* gs);
+
+/** Ataque do jogador. Deve ser chamada todo frame. */
+void AtaqueJogador(GameState* gs);
 
 // inimigo.c ------------------------------------------------------------------
 /** Move o inimigo. */

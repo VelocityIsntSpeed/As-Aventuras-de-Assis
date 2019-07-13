@@ -18,7 +18,18 @@ Rectangle RectDaTile(const int x, const int y)
                         .height = TAM_TILE };
 }
 
+
 Vector2 PosWorldDoCursor(const GameState* gs)
 {
     return Vector2Add(Vector2Negate(gs->cam.offset), GetMousePosition());
+}
+
+
+Vector2 Vector2AndarAte(Vector2 v1, Vector2 v2, float dist)
+{
+    Vector2 resultado = Vector2Subtract(v2, v1);
+    resultado = Vector2Normalize(resultado);
+    resultado = Vector2Scale(resultado, dist);
+    resultado = Vector2Add(v1, resultado);
+    return resultado;
 }
