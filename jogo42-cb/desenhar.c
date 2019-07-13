@@ -11,31 +11,35 @@
 #include "jogo42.h"
 
 
-/// Desenha o texto que diz os controles.
+//! Desenha no canto inferior esquerdo o texto que diz os controles.
 static void DesenharControles()
 {
     // Texto que vai aparecer
     const char TEXTO[] = "Controles:\n"
                          "WASD/Setas para andar\n"
+                         "Clique esquerdo para atacar\n"
                          "Espaco para movimentar obstaculos";
 
     // Tamanho da fonte
     const int TAM_FONTE = 20;
 
     // A altura de todo o texto
-    const float ALTURA_TEXTO =
+    const int ALTURA_TEXTO =
         MeasureTextEx(GetFontDefault(), TEXTO, TAM_FONTE, TAM_FONTE * 10).y;
 
     // Distancia entre o texto e as bordas da tela
     const int MARGEM = 10;
 
-    // Desenhar texto no canto inferior esquerdo
-    DrawText(TEXTO, MARGEM, GetScreenHeight() - ALTURA_TEXTO - MARGEM,
-             TAM_FONTE, BLACK);
+    // Posicao
+    const int POS_X = MARGEM;
+    const int POS_Y = GetScreenHeight() - ALTURA_TEXTO - MARGEM;
+
+    // Desenhar
+    DrawText(TEXTO, POS_X, POS_Y, TAM_FONTE, WHITE);
 }
 
 
-/// Desenha o jogador.
+//! Desenha o jogador.
 static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
 {
     // A parte da sprite a ser utilizada (nesse caso, tudo)
@@ -43,7 +47,7 @@ static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
 
     // Posicao e tamanho
     const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y,\
-                                RAIO_JOG * 2, RAIO_JOG * 2};
+                                JOG_RAIO * 2, JOG_RAIO * 2};
 
     /* Posicao do eixo de rotacao,
        onde {0, 0} eh no canto superior esquerdo do DEST_REC */
@@ -53,8 +57,8 @@ static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
 }
 
 
-/// Desenha o level.
-static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
+//! Desenha o level.
+static void DesenharLevel(const enum Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 {
     // Iterar sobre cada tile
     for (int lin = 0; lin < TAM_SALA_Y; lin++)
@@ -62,7 +66,7 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
         for (int col = 0; col < TAM_SALA_X; col++)
         {
             // Tile nas coordenadas atuais
-            const Tile AQUI = lvl[lin][col];
+            const enum Tile AQUI = lvl[lin][col];
 
             // Determinar grafico da tile (por enquanto eh so uma cor)
             Color cor;
@@ -93,17 +97,17 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 }
 
 
-/// Desenha o HP do jogador
+//! Desenha o HP do jogador
 static void DesenharHpJog(const GameState* gs)
 {
     const int POS_X = 10, POS_Y = 10, TAM_FONTE = 20;
 
-    DrawText(FormatText("HP: %d", gs->jog.hp),
+    DrawText(FormatText("HP: %d", (int)gs->jog.hp),
              POS_X, POS_Y, TAM_FONTE, WHITE);
 }
 
 
-/// Desenha o inimigo
+//! Desenha o inimigo
 static void DesenharInimigo(const GameState* gs)
 {
     // Inimigo
@@ -152,8 +156,8 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DesenharLevel(gs->sala);
 
         // Obstaculo circular
-        DrawCircleV(gs->obstCircCentro, gs->obstCircRaio,
-                    Fade(gs->obstCircTaAndando ? PURPLE : VIOLET, 0.5f));
+        DrawCircleV(gs->obst.circCentro, gs->obst.circRaio,
+                    Fade(gs->obst.circTaAndando ? PURPLE : VIOLET, 0.5f));
 
 
         // Jogador
@@ -166,7 +170,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
             // Calcular posicao da hitbox de ataque
-            const Vector2 POS_HITBOX_ATQ = Vector2AndarAte(
+            const Vector2 POS_HITBOX_ATQ = Vector2AndarDist(
                 gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
 
             // Desenhar contorno de circulo
@@ -175,11 +179,11 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         }
 
         // Obstaculo retangular
-        DrawRectangleRec(gs->obstRet, Fade(DARKGRAY, 0.5f));
+        DrawRectangleRec(gs->obst.ret, Fade(DARKGRAY, 0.5f));
 
         // Texto com raio do obstaculo
-        DrawText(TextFormat("Raio = %.1f", gs->obstCircRaio),
-                 gs->obstCircCentro.x, gs->obstCircCentro.y, 20, WHITE);
+        DrawText(TextFormat("Raio = %.1f", gs->obst.circRaio),
+                 gs->obst.circCentro.x, gs->obst.circCentro.y, 20, WHITE);
 
     EndMode2D(); //[[[ FIM MODO CAMERA ]]]-------------------------------------
 

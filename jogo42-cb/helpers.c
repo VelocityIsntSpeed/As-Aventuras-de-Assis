@@ -10,7 +10,7 @@
 
 #include "jogo42.h"
 
-Rectangle RectDaTile(const int x, const int y)
+Rectangle RectDaTile(int x, int y)
 {
     return (Rectangle){ .x = x * TAM_TILE,
                         .y = y * TAM_TILE,
@@ -25,11 +25,26 @@ Vector2 PosWorldDoCursor(const GameState* gs)
 }
 
 
-Vector2 Vector2AndarAte(Vector2 v1, Vector2 v2, float dist)
+Vector2 Vector2AndarDist(Vector2 origem, Vector2 destino, float dist)
 {
-    Vector2 resultado = Vector2Subtract(v2, v1);
+    // Vetor que aponta de origem para destino
+    Vector2 resultado = Vector2Subtract(destino, origem);
+
+    // Se o vetor for nulo (ou seja, origem e destino forem iguais)
+    if (resultado.x == 0 && resultado.y == 0)
+    {
+        return origem;
+    }
+
     resultado = Vector2Normalize(resultado);
     resultado = Vector2Scale(resultado, dist);
-    resultado = Vector2Add(v1, resultado);
+
+    // Transformar para coordenadas world
+    resultado = Vector2Add(origem, resultado);
+
     return resultado;
 }
+
+
+
+

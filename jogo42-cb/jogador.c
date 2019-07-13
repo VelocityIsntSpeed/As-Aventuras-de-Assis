@@ -10,6 +10,19 @@
 
 #include "jogo42.h"
 
+
+void InicializarJogador(GameState* gs)
+{
+    // Posicao
+    gs->jog.pos.x = RectDaTile(35, 5).x;
+    gs->jog.pos.y = RectDaTile(35, 5).y;
+    // Rotacao
+    gs->jog.rot = 0;
+    // HP
+    gs->jog.hp = 150;
+}
+
+
 void AtaqueJogador(GameState* gs)
 {
     // Atacar quando clicar
@@ -17,7 +30,7 @@ void AtaqueJogador(GameState* gs)
     {
         // Calcular posicao da hitbox de ataque
         const Vector2 POS_HITBOX_ATQ =
-            Vector2AndarAte(gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
+            Vector2AndarDist(gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
 
         // Se acertar o inimigo
         if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
@@ -28,54 +41,10 @@ void AtaqueJogador(GameState* gs)
     }
 }
 
-static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
-{
-    /** Retorna true se o jogador estiver colidindo com o level (incluindo
-        os obstaculos moveis), e false caso contrario. */
-
-    //[ CHECAR CONTRA O OBSTACULO RETANGULAR ]---------------------------------
-    if (CheckCollisionCircleRec(posJogTeste, RAIO_JOG, gs->obstRet))
-    {
-        return true;
-    }
-
-    //[ CHECAR CONTRA O OBSTACULO CIRCULAR ]-----------------------------------
-    // A funcao de checar colisao buga se for fornecida raio menor que 0
-    const float RAIO = (gs->obstCircRaio < 0) ? 0 : gs->obstCircRaio;
-
-    if (CheckCollisionCircles(posJogTeste, RAIO_JOG, gs->obstCircCentro, RAIO))
-    {
-        return true;
-    }
-
-    //[ CHECAR CONTRA AS TILES ]-----------------------------------------------
-    for (int lin = 0; lin < TAM_SALA_Y; lin++)
-    {
-        for (int col = 0; col < TAM_SALA_X; col++)
-        {
-            const Tile* AQUI = &gs->sala[lin][col];
-
-            if ((*AQUI == TILE_parede || *AQUI == TILE_paredeInvisivel)
-                && CheckCollisionCircleRec(posJogTeste, RAIO_JOG,
-                                           RectDaTile(col, lin)))
-            {
-                return true;
-            }
-        }
-    }
-
-    //[ CHECAR CONTRA O INIMIGO ]-----------------------------------------------
-    if (CheckCollisionCircles(gs->inim.pos, INIM_RAIO, posJogTeste, RAIO_JOG))
-    {
-        return true;
-    }
-
-    // Se chegou ate aqui entao n ta colidindo com nada
-    return false;
-}
 
 void MoverJog(GameState* gs)
 {
+    //[ CALCULAR POSICAO NOVA ]------------------------------------------------
     // Posicao futura do jogador em relacao ah posicao atual
     Vector2 posFutura = Vector2Zero();
 
@@ -84,21 +53,35 @@ void MoverJog(GameState* gs)
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    {       posFutura.y -= 1; }
     if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  {       posFutura.y += 1; }
 
-    posFutura = Vector2Scale(posFutura, VEL_JOG * GetFrameTime());
-
-    // Transformar para coordenadas world
+    // Transformar em coordenadas world
     posFutura = Vector2Add(gs->jog.pos, posFutura);
 
-    /* Note que com esse algoritmo, o jogador anda 41% mais rapido se
-       estiver andando na diagonal. Por exemplo: segurando D e S,
-       posFutura eh {1.0f, 1.0f} antes de ser escalado.
-       A magnitude desse vetor eh sqrt(1^2 + 1^2) = ~1.41 */
+    posFutura = Vector2AndarDist(gs->jog.pos, posFutura,
+                                JOG_VEL * GetFrameTime());
 
-    // Colisao com o level
-    if (!ColisaoJogLevel(posFutura, gs))
+    //[ VERIFICAR COLISAO NA POSICAO NOVA]-------------------------------------
+    bool colide = false;
+
+    // Colisao com level
+    if (ColisaoComLevel(posFutura, JOG_RAIO, gs))
+    {
+        colide = true;
+    }
+    // Colisao com inimigo
+    if (CheckCollisionCircles(posFutura, JOG_RAIO, gs->inim.pos, INIM_RAIO))
+    {
+        colide = true;
+    }
+
+    //-------------------------------------------------------------------------
+
+    if (!colide)
     {
         gs->jog.pos = posFutura;
     }
+
+    // Rotacionar
+    gs->jog.rot = Vector2Angle(gs->jog.pos, PosWorldDoCursor(gs));
 }
 
 

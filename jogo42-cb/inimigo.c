@@ -11,44 +11,37 @@
 #include "jogo42.h"
 
 
-void MoverInimigo(GameState* gs)
+void MoverInimigo(struct Inimigo* inimigo, const GameState* gs)
 {
     // Distancias entre o inimigo e o jogador
     // De centro a centro
-    const float DIST_CENTROS = Vector2Distance(gs->inim.pos, gs->jog.pos);
+    const float DIST_CENTROS = Vector2Distance(inimigo->pos, gs->jog.pos);
     // De borda a borda
-    const float DIST_BORDAS = DIST_CENTROS - INIM_RAIO - RAIO_JOG;
+    const float DIST_BORDAS = DIST_CENTROS - INIM_RAIO - JOG_RAIO;
 
+    // Se o jogador estiver na distancia certa
     if (DIST_CENTROS < INIM_MAX_DIST && DIST_BORDAS > INIM_MIN_DIST)
     {
         // Posicao para a qual moveremos
-        Vector2 posFutura;
-        // Vetor que aponta do inimigo para o jogador
-        posFutura = Vector2Subtract(gs->jog.pos, gs->inim.pos);
+        Vector2 posFutura = Vector2AndarDist(inimigo->pos, gs->jog.pos,
+                                            INIM_VEL * GetFrameTime());
 
-        posFutura = Vector2Normalize(posFutura);
-
-        posFutura = Vector2Scale(posFutura, INIM_VEL * GetFrameTime());
+        inimigo->pos = posFutura;
 
         // Rotacionar
-        gs->inim.rot = Vector2Angle(gs->inim.pos, gs->jog.pos);
-
-        // Transformar para coordenadas world
-        posFutura = Vector2Add(gs->inim.pos, posFutura);
-
-        gs->inim.pos = posFutura;
+        inimigo->rot = Vector2Angle(inimigo->pos, gs->jog.pos);
     }
 }
 
 
-void AtaqueDoInimigo(GameState* gs)
+void AtaqueInimigo(struct Inimigo* inimigo, GameState* gs)
 {
     // Distancia entre o inimigo e o jogador, de borda a borda
     const float DIST_BORDAS =
-        Vector2Distance(gs->inim.pos, gs->jog.pos) - INIM_RAIO - RAIO_JOG;
+        Vector2Distance(inimigo->pos, gs->jog.pos) - INIM_RAIO - JOG_RAIO;
 
     // Se o tempo do warmup ja passou
-    if (gs->inim.timerAtq >= INIM_WARMUP)
+    if (inimigo->timerAtq >= INIM_WARMUP)
     {
         // Causar dano
         if (DIST_BORDAS < INIM_ATQ_DIST)
@@ -57,24 +50,24 @@ void AtaqueDoInimigo(GameState* gs)
         }
 
         // Encerrar o ataque
-        gs->inim.timerAtq = -1;
+        inimigo->timerAtq = -1;
     }
 
     // Se ainda estamos no warmup
-    else if (gs->inim.timerAtq >= 0)
+    else if (inimigo->timerAtq >= 0)
     {
         // Incrementar timer
-        gs->inim.timerAtq += GetFrameTime();
+        inimigo->timerAtq += GetFrameTime();
     }
 
     // Se nao estamos atacando
-    else if (gs->inim.timerAtq < 0)
+    else if (inimigo->timerAtq < 0)
     {
         // Se o player estiver sob alcance
         if (DIST_BORDAS < INIM_ATQ_DIST)
         {
             // Comecar a atacar
-            gs->inim.timerAtq = 0;
+            inimigo->timerAtq = 0;
         }
     }
 }
