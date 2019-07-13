@@ -12,6 +12,7 @@
 
 void AtaqueJogador(GameState* gs)
 {
+    int i=0;
     // Atacar quando clicar
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
@@ -21,15 +22,16 @@ void AtaqueJogador(GameState* gs)
 
         // Se acertar o inimigo
         if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
-                                  gs->inim.pos, INIM_RAIO))
+                                  gs->inim[i].pos, INIM_RAIO))
         {
-            gs->inim.hp -= JOG_ATQ_DANO;
+            gs->inim[i].hp -= JOG_ATQ_DANO;
         }
     }
 }
 
 static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
 {
+    int i=0;
     /** Retorna true se o jogador estiver colidindo com o level (incluindo
         os obstaculos moveis), e false caso contrario. */
 
@@ -65,7 +67,7 @@ static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
     }
 
     //[ CHECAR CONTRA O INIMIGO ]-----------------------------------------------
-    if (CheckCollisionCircles(gs->inim.pos, INIM_RAIO, posJogTeste, RAIO_JOG))
+    if (CheckCollisionCircles(gs->inim[i].pos, INIM_RAIO, posJogTeste, RAIO_JOG))
     {
         return true;
     }

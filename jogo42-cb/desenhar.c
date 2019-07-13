@@ -104,42 +104,43 @@ static void DesenharHpJog(const GameState* gs)
 
 
 /// Desenha o inimigo
-static void DesenharInimigo(const GameState* gs)
+static void DesenharInimigo(const GameState* gs, int i)
 {
     // Inimigo
-    DrawCircleV(gs->inim.pos, INIM_RAIO, DARKGREEN);
+    DrawCircleV(gs->inim[i].pos, INIM_RAIO, DARKGREEN);
 
     // Indicador de direcao
-    const float ROT_AJUSTADA = -gs->inim.rot + 90.0f;
-    DrawCircleSectorLines(gs->inim.pos, INIM_RAIO,
+    const float ROT_AJUSTADA = -gs->inim[i].rot + 90.0f;
+    DrawCircleSectorLines(gs->inim[i].pos, INIM_RAIO,
                           ROT_AJUSTADA - 2, ROT_AJUSTADA + 2,
                           1, WHITE);
 
     // Indicador de INIM_MAX_DIST
-    DrawCircleLines(gs->inim.pos.x, gs->inim.pos.y, INIM_MAX_DIST, WHITE);
+    DrawCircleLines(gs->inim[i].pos.x, gs->inim[i].pos.y, INIM_MAX_DIST, WHITE);
 
     // Indicador de ataque
     // Se o inimigo estiver em warmup
-    if (gs->inim.timerAtq >= INIM_WARMUP)
+    if (gs->inim[i].timerAtq >= INIM_WARMUP)
     {
-        DrawCircleV(gs->inim.pos, INIM_ATQ_DIST + INIM_RAIO, RED);
+        DrawCircleV(gs->inim[i].pos, INIM_ATQ_DIST + INIM_RAIO, RED);
     }
     // Se estiver causando dano agora (soh dura um frame)
-    else if (gs->inim.timerAtq >= 0)
+    else if (gs->inim[i].timerAtq >= 0)
     {
-        DrawCircleLines(gs->inim.pos.x, gs->inim.pos.y,
+        DrawCircleLines(gs->inim[i].pos.x, gs->inim[i].pos.y,
                         INIM_ATQ_DIST + INIM_RAIO, RED);
     }
 
     // Indicador de HP
-    DrawText(TextFormat("%d", (int)gs->inim.hp),
-             gs->inim.pos.x - 7, gs->inim.pos.y + 23, 10, WHITE);
+    DrawText(TextFormat("%d", (int)gs->inim[i].hp),
+             gs->inim[i].pos.x - 7, gs->inim[i].pos.y + 23, 10, WHITE);
 }
 
 
 
 void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 {
+    int i = 0;
     // Pintar tudo (para formar o background)
     ClearBackground(MAGENTA);
 
@@ -160,9 +161,9 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DesenharJogador(gs, spriteJog);
 
         // Inimigo
-        if(gs->inim.exis)
+        if(gs->inim[i].exis)
         {
-            DesenharInimigo(gs);
+            DesenharInimigo(gs, 0);
         }
 
         // Indicador de ataque do jogador

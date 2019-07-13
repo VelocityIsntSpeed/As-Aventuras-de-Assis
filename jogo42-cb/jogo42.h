@@ -72,7 +72,7 @@ typedef struct {
     //[ INIMIGOS ]-------------------------------------------------------------
     // So tem um por enquanto, depois vai ter uma lista
     /// O inimigo.
-    Inimigo inim;
+    Inimigo inim[40];
 
     //[ LEVEL ]----------------------------------------------------------------
     Tile sala[TAM_SALA_Y][TAM_SALA_X];
