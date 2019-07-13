@@ -63,6 +63,9 @@ int main(void)
         // Mover jogador
         MoverJog(gs);
 
+        // Ataque do jogador
+        AtaqueJogador(gs);
+
         // Mover inimigo
         MoverInimigo(gs);
 
@@ -77,9 +80,6 @@ int main(void)
         gs->cam.offset.x += GetScreenWidth() / 2;
         gs->cam.offset.y += GetScreenHeight() / 2;
         gs->cam.target = gs->jog.pos;
-
-        // Ataque do jogador
-        AtaqueJogador(gs);
 
 
         // [[[ FIM UPDATE ]]]
