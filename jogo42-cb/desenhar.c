@@ -93,6 +93,50 @@ static void DesenharLevel(const Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 }
 
 
+/// Desenha o HP do jogador
+static void DesenharHpJog(const GameState* gs)
+{
+    const int POS_X = 10, POS_Y = 10, TAM_FONTE = 20;
+
+    DrawText(FormatText("HP: %d", gs->jog.hp),
+             POS_X, POS_Y, TAM_FONTE, WHITE);
+}
+
+
+/// Desenha o inimigo
+static void DesenharInimigo(const GameState* gs)
+{
+    // Inimigo
+    DrawCircleV(gs->inim.pos, INIM_RAIO, DARKGREEN);
+
+    // Indicador de direcao
+    const float ROT_AJUSTADA = -gs->inim.rot + 90.0f;
+    DrawCircleSectorLines(gs->inim.pos, INIM_RAIO,
+                          ROT_AJUSTADA - 2, ROT_AJUSTADA + 2,
+                          1, WHITE);
+
+    // Indicador de INIM_MAX_DIST
+    DrawCircleLines(gs->inim.pos.x, gs->inim.pos.y, INIM_MAX_DIST, WHITE);
+
+    // Indicador de ataque
+    // Se o inimigo estiver em warmup
+    if (gs->inim.timerAtq >= INIM_WARMUP)
+    {
+        DrawCircleV(gs->inim.pos, INIM_ATQ_DIST + INIM_RAIO, RED);
+    }
+    // Se estiver causando dano agora (soh dura um frame)
+    else if (gs->inim.timerAtq >= 0)
+    {
+        DrawCircleLines(gs->inim.pos.x, gs->inim.pos.y,
+                        INIM_ATQ_DIST + INIM_RAIO, RED);
+    }
+
+    // Indicador de HP
+    DrawText(TextFormat("%d", (int)gs->inim.hp),
+             gs->inim.pos.x - 7, gs->inim.pos.y + 23, 10, WHITE);
+}
+
+
 
 void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 {
@@ -116,9 +160,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DesenharJogador(gs, spriteJog);
 
         // Inimigo
-        DrawCircleV(gs->inim.pos, 20, (Color){223, 0, 0, 255});
-        DrawText(TextFormat("%d", (int)gs->inim.hp),
-                 gs->inim.pos.x - 7, gs->inim.pos.y + 23, 10, WHITE);
+        DesenharInimigo(gs);
 
         // Indicador de ataque do jogador
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -143,6 +185,9 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
     // Controles
     DesenharControles();
+
+    // HP do jogador
+    DesenharHpJog(gs);
 
     // Frames Por Segundo
     DrawFPS(GetScreenWidth() - 80, 10);

@@ -30,6 +30,8 @@ int main(void)
     gs->jog.pos.y = RectDaTile(35, 5).y;
     // Rotacao
     gs->jog.rot = 0;
+    // Vida
+    gs->jog.hp = 40;
     /// Sprite do jogador.
     const Texture2D SPRITE_JOG = LoadTexture("tex/protag.png");
 
@@ -42,7 +44,8 @@ int main(void)
     //[ INIMIGO ]==============================================================
     gs->inim.pos = (Vector2){1000, 200};
     gs->inim.rot = 0;
-    gs->inim.hp = 120;
+    gs->inim.hp = 8;
+    gs->inim.timerAtq = -1;
 
     //[ CAMERA ]===============================================================
     gs->cam.rotation = 0;
@@ -65,7 +68,10 @@ int main(void)
         gs->jog.rot = Vector2Angle(gs->jog.pos, PosWorldDoCursor(gs));
 
         // Mover inimigo
-        // TODO
+        MoverInimigo(gs);
+
+        // Ataque Inimigo
+        AtaqueDoInimigo(gs);
 
         // Mover obstaculos
         MoverObst(gs);

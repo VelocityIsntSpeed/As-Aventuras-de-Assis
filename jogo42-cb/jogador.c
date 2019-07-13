@@ -21,7 +21,7 @@ void AtaqueJogador(GameState* gs)
 
         // Se acertar o inimigo
         if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
-                                  gs->inim.pos, 20))
+                                  gs->inim.pos, INIM_RAIO))
         {
             gs->inim.hp -= JOG_ATQ_DANO;
         }
@@ -62,6 +62,12 @@ static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
                 return true;
             }
         }
+    }
+
+    //[ CHECAR CONTRA O INIMIGO ]-----------------------------------------------
+    if (CheckCollisionCircles(gs->inim.pos, INIM_RAIO, posJogTeste, RAIO_JOG))
+    {
+        return true;
     }
 
     // Se chegou ate aqui entao n ta colidindo com nada
