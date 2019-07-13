@@ -78,8 +78,8 @@ int main(void)
 
         // Atualizar camera
         gs->cam.offset = Vector2Negate(gs->jog.pos);
-        gs->cam.offset.x += GetScreenWidth() / 2;
-        gs->cam.offset.y += GetScreenHeight() / 2;
+        gs->cam.offset.x += GetScreenWidth() / 2.0f;
+        gs->cam.offset.y += GetScreenHeight() / 2.0f;
         gs->cam.target = gs->jog.pos;
 
 
