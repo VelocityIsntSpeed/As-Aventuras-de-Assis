@@ -13,21 +13,15 @@
 
 void AtaqueJogador(GameState* gs)
 {
+    // Atacar quando clicar
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
-        // Posicao da hitbox de ataque, inicialmente com origem no jogador
-        Vector2 posHitboxAtq = { .x = cos(gs->jog.rot * DEG2RAD),
-                                 .y = sin(gs->jog.rot * DEG2RAD)  };;
-
-        /* Agora posHitboxAtq aponta para a direcao certa mas tem
-           comprimento 1, entao o escalaremos para o comprimento certo */
-        posHitboxAtq = Vector2Scale(posHitboxAtq, JOG_ATQ_DIST);
-
-        // Transformar para coordenadas world
-        posHitboxAtq = Vector2Add(gs->jog.pos, posHitboxAtq);
+        // Calcular posicao da hitbox de ataque
+        const Vector2 POS_HITBOX_ATQ =
+            Vector2AndarAte(gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
 
         // Se acertar o inimigo
-        if (CheckCollisionCircles(posHitboxAtq, JOG_ATQ_RAIO,
+        if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
                                   gs->inim.pos, 20))
         {
             gs->inim.hp -= 20;
