@@ -67,7 +67,7 @@ int main(void)
         AtaqueJogador(gs);
 
         // Mover inimigo
-        MoverInimigo(gs);
+        MoverInimigo(&gs->inim, gs);
 
         // Ataque Inimigo
         AtaqueInimigo(gs);

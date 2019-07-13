@@ -11,11 +11,11 @@
 #include "jogo42.h"
 
 
-void MoverInimigo(GameState* gs)
+void MoverInimigo(struct Inimigo* inimigo, const GameState* gs)
 {
     // Distancias entre o inimigo e o jogador
     // De centro a centro
-    const float DIST_CENTROS = Vector2Distance(gs->inim.pos, gs->jog.pos);
+    const float DIST_CENTROS = Vector2Distance(inimigo->pos, gs->jog.pos);
     // De borda a borda
     const float DIST_BORDAS = DIST_CENTROS - INIM_RAIO - JOG_RAIO;
 
@@ -23,13 +23,13 @@ void MoverInimigo(GameState* gs)
     if (DIST_CENTROS < INIM_MAX_DIST && DIST_BORDAS > INIM_MIN_DIST)
     {
         // Posicao para a qual moveremos
-        Vector2 posFutura = Vector2AndarDist(gs->inim.pos, gs->jog.pos,
+        Vector2 posFutura = Vector2AndarDist(inimigo->pos, gs->jog.pos,
                                             INIM_VEL * GetFrameTime());
 
-        gs->inim.pos = posFutura;
+        inimigo->pos = posFutura;
 
         // Rotacionar
-        gs->inim.rot = Vector2Angle(gs->inim.pos, gs->jog.pos);
+        inimigo->rot = Vector2Angle(inimigo->pos, gs->jog.pos);
     }
 }
 
