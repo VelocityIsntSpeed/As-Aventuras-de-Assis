@@ -166,7 +166,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
             // Calcular posicao da hitbox de ataque
-            const Vector2 POS_HITBOX_ATQ = Vector2AndarAte(
+            const Vector2 POS_HITBOX_ATQ = Vector2AndarDist(
                 gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
 
             // Desenhar contorno de circulo

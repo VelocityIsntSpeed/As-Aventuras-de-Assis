@@ -23,7 +23,7 @@ void MoverInimigo(GameState* gs)
     if (DIST_CENTROS < INIM_MAX_DIST && DIST_BORDAS > INIM_MIN_DIST)
     {
         // Posicao para a qual moveremos
-        Vector2 posFutura = Vector2AndarAte(gs->inim.pos, gs->jog.pos,
+        Vector2 posFutura = Vector2AndarDist(gs->inim.pos, gs->jog.pos,
                                             INIM_VEL * GetFrameTime());
 
         gs->inim.pos = posFutura;

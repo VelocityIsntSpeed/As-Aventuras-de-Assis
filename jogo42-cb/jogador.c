@@ -17,7 +17,7 @@ void AtaqueJogador(GameState* gs)
     {
         // Calcular posicao da hitbox de ataque
         const Vector2 POS_HITBOX_ATQ =
-            Vector2AndarAte(gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
+            Vector2AndarDist(gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
 
         // Se acertar o inimigo
         if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
@@ -43,7 +43,7 @@ void MoverJog(GameState* gs)
     // Transformar em coordenadas world
     posFutura = Vector2Add(gs->jog.pos, posFutura);
 
-    posFutura = Vector2AndarAte(gs->jog.pos, posFutura,
+    posFutura = Vector2AndarDist(gs->jog.pos, posFutura,
                                 JOG_VEL * GetFrameTime());
 
     //[ VERIFICAR COLISAO NA POSICAO NOVA]-------------------------------------

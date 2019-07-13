@@ -25,7 +25,7 @@ Vector2 PosWorldDoCursor(const GameState* gs)
 }
 
 
-Vector2 Vector2AndarAte(Vector2 origem, Vector2 destino, float dist)
+Vector2 Vector2AndarDist(Vector2 origem, Vector2 destino, float dist)
 {
     // Vetor que aponta de origem para destino
     Vector2 resultado = Vector2Subtract(destino, origem);

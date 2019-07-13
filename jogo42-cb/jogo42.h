@@ -150,7 +150,7 @@ Vector2 PosWorldDoCursor(const GameState* gs);
     Comecando em `origem`, comeca a andar em direcao a `destino` e so pahra
     de andar quando tiver andado uma distancia `dist` (mesmo que no caminho
     passe de `destino`). */
-Vector2 Vector2AndarAte(Vector2 origem, Vector2 destino, float dist);
+Vector2 Vector2AndarDist(Vector2 origem, Vector2 destino, float dist);
 
 /** Verifica se ha colisao entre o circulo dado e o level. */
 bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);
