@@ -95,6 +95,10 @@ void MoverJog(GameState* gs)
     {
         gs->jog.pos = posFutura;
     }
+
+
+    // Rotacionar
+    gs->jog.rot = Vector2Angle(gs->jog.pos, PosWorldDoCursor(gs));
 }
 
 

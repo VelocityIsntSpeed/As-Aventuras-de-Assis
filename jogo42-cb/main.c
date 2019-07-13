@@ -63,9 +63,6 @@ int main(void)
         // Mover jogador
         MoverJog(gs);
 
-        // Rotacao do jogador
-        gs->jog.rot = Vector2Angle(gs->jog.pos, PosWorldDoCursor(gs));
-
         // Mover inimigo
         MoverInimigo(gs);
 
