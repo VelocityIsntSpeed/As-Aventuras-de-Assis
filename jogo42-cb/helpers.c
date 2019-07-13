@@ -10,7 +10,7 @@
 
 #include "jogo42.h"
 
-Rectangle RectDaTile(const int x, const int y)
+Rectangle RectDaTile(int x, int y)
 {
     return (Rectangle){ .x = x * TAM_TILE,
                         .y = y * TAM_TILE,
