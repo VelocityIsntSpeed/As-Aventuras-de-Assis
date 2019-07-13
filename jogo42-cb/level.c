@@ -11,7 +11,7 @@
 #include "jogo42.h"
 
 
-void InicializarLevel(Tile lvl[TAM_SALA_Y][TAM_SALA_X])
+void InicializarLevel(enum Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 {
     /*
     Esta string determina como vai ser o level. Isso eh provisorio, so
@@ -61,7 +61,7 @@ void InicializarLevel(Tile lvl[TAM_SALA_Y][TAM_SALA_X])
             const int INDICE_STR = lin * TAM_SALA_X + col;
 
             // Valor Tile que vai ser definido
-            Tile tile;
+            enum Tile tile;
             // Definir `tile` de acordo com o caractere
             switch (STRING_DO_LEVEL[INDICE_STR])
             {
@@ -114,7 +114,7 @@ bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs)
     {
         for (int col = 0; col < TAM_SALA_X; col++)
         {
-            const Tile* AQUI = &gs->sala[lin][col];
+            const enum Tile* AQUI = &gs->sala[lin][col];
 
             if ((*AQUI == TILE_parede || *AQUI == TILE_paredeInvisivel)
                 && CheckCollisionCircleRec(pos, raio,

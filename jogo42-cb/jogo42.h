@@ -27,7 +27,9 @@
 
 //[ DEFINICOES DE TIPOS ]======================================================
 
-typedef enum {
+// Tipos de tile
+enum Tile
+{
     /// Vazio (Nao contem nada, nem mesmo chao).
     TILE_vazio = 0,
     /// Mostra grafico de chao e nao colide.
@@ -36,8 +38,7 @@ typedef enum {
     TILE_parede,
     /// Mostra grafico de chao e colide.
     TILE_paredeInvisivel
-}
-Tile; ///< Tipos de tile.
+};
 
 
 // Guarda todo o estado do jogo
@@ -80,7 +81,7 @@ typedef struct // GameState
 
 
     //[ LEVEL ]----------------------------------------------------------------
-    Tile sala[TAM_SALA_Y][TAM_SALA_X];
+    enum Tile sala[TAM_SALA_Y][TAM_SALA_X];
 
 
     //[ OBSTACULOS ]-----------------------------------------------------------
@@ -198,7 +199,7 @@ void AtaqueDoInimigo(GameState* gs);
 void MoverObst(GameState* gs);
 
 /** Inicializa o level de acordo com a string na definicao desta funcao. */
-void InicializarLevel(Tile lvl[TAM_SALA_Y][TAM_SALA_X]);
+void InicializarLevel(enum Tile lvl[TAM_SALA_Y][TAM_SALA_X]);
 
 /** Inicializa os obstaculos. */
 void InicializarObst(GameState* gs);
