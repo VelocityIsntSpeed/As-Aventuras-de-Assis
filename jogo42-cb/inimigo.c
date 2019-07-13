@@ -34,7 +34,7 @@ void MoverInimigo(GameState* gs)
 }
 
 
-void AtaqueDoInimigo(GameState* gs)
+void AtaqueInimigo(GameState* gs)
 {
     // Distancia entre o inimigo e o jogador, de borda a borda
     const float DIST_BORDAS =

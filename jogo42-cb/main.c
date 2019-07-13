@@ -70,7 +70,7 @@ int main(void)
         MoverInimigo(gs);
 
         // Ataque Inimigo
-        AtaqueDoInimigo(gs);
+        AtaqueInimigo(gs);
 
         // Mover obstaculos
         MoverObst(gs);
