@@ -8,7 +8,6 @@
  Contem codigo do jogador.
 */
 
-#include "stdlib.h"
 #include "jogo42.h"
 
 void AtaqueJogador(GameState* gs)
