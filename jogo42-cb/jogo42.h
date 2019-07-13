@@ -44,7 +44,7 @@ typedef struct {
     /// Rotacao em graus.
     float rot;
     /// Health Points.
-    int hp;
+    float hp;
 }
 Jog; ///< Estado do jogador.
 
@@ -55,7 +55,7 @@ typedef struct {
     /// Rotacao em graus.
     float rot;
     /// Health Points.
-    int hp;
+    float hp;
     /** Tempo em segundos que faz que o inimigo estah atacando.
         Se for negativo, o inimigo nao estah atacando. */
     float timerAtq;
@@ -102,7 +102,7 @@ GameState; ///< Struct de estado do jogo.
 /// Raio da hitbox de ataque
 #define JOG_ATQ_RAIO (10.0f)
 /// Dano de ataque.
-#define JOG_ATQ_DANO (20)
+#define JOG_ATQ_DANO (20.0f)
 
 //[ INIMIGO ]------------------------------------------------------------------
 /// Raio do inimigo.
@@ -126,7 +126,7 @@ GameState; ///< Struct de estado do jogo.
 #define INIM_WARMUP (1.0f)
 
 /// Dano de ataque
-#define INIM_DANO (4)
+#define INIM_DANO (15.0f)
 
 //[ OUTROS ]-------------------------------------------------------------------
 /// Velocidade do obstaculo circular (por segundo).
