@@ -43,7 +43,7 @@ typedef struct {
     /// Rotacao em graus.
     float rot;
     /// Health Points.
-    float hp;
+    int hp;
 }
 Jog; ///< Estado do jogador.
 
@@ -54,9 +54,10 @@ typedef struct {
     /// Rotacao em graus.
     float rot;
     /// Health Points.
-    float hp;
-    /// Se estah seguindo o jogador.
-    bool seguindo;
+    int hp;
+    /** Tempo em segundos que faz que o inimigo estah atacando.
+        Se for negativo, o inimigo nao estah atacando. */
+    float timerAtq;
 }
 Inimigo; ///< Estado de um inimigo.
 
@@ -89,11 +90,38 @@ GameState; ///< Struct de estado do jogo.
 
 
 //[ DEFINICOES DE CONSTANTES ]=================================================
+
+//[ JOGADOR ]------------------------------------------------------------------
 /// Velocidade do jogador (por segundo).
 #define VEL_JOG (150.0f)
 /// Raio do jogador.
 #define RAIO_JOG (20.0f)
 
+//[ INIMIGO ]------------------------------------------------------------------
+/// Raio do inimigo.
+#define INIM_RAIO (17.0f)
+
+/// Velocidade de movimento do inimigo, por segundo.
+#define INIM_VEL (110.0f)
+
+/** Distancia maxima na qual o inimigo vai seguir o jogador,
+    de centro a centro. */
+#define INIM_MAX_DIST (120.0f)
+
+/** Distancia minima na qual o inimigo vai seguir o jogador,
+    de borda a borda. */
+#define INIM_MIN_DIST (10.0f)
+
+/// Alcance de ataque do inimigo, de borda a borda
+#define INIM_ATQ_DIST (20.0f)
+
+/// Segundos que demora do inimigo comecar o ataque ate ele causar dano.
+#define INIM_WARMUP (1.0f)
+
+/// Dano de ataque
+#define INIM_DANO (4)
+
+//[ OUTROS ]-------------------------------------------------------------------
 /// Velocidade do obstaculo circular (por segundo).
 #define VEL_CIRC (100.0f)
 
@@ -103,6 +131,7 @@ GameState; ///< Struct de estado do jogo.
 
 
 //[ DECLARACOES DE FUNCOES DEFINIDAS EM OUTROS ARQUIVOS ]======================
+
 // helpers.c ------------------------------------------------------------------
 /** Retorna o retangulo correspondente ah tile nas dimensoes fornecidas. */
 Rectangle RectDaTile(int x, int y);
@@ -117,6 +146,13 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog);
 // jogador.c ------------------------------------------------------------------
 /** Move o jogador. */
 void MoverJog(GameState* gs);
+
+// inimigo.c ------------------------------------------------------------------
+/** Move o inimigo. */
+void MoverInimigo(GameState* gs);
+
+/** Ataque do inimigo. Deve ser chamada em cada frame. */
+void AtaqueDoInimigo(GameState* gs);
 
 // level.c --------------------------------------------------------------------
 /** Move os obstaculos. */

@@ -46,6 +46,12 @@ static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
         }
     }
 
+    //[ CHECAR CONTRA O INIMIGO ]-----------------------------------------------
+    if (CheckCollisionCircles(gs->inim.pos, INIM_RAIO, posJogTeste, RAIO_JOG))
+    {
+        return true;
+    }
+
     // Se chegou ate aqui entao n ta colidindo com nada
     return false;
 }

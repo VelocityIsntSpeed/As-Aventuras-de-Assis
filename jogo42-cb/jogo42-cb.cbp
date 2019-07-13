@@ -45,6 +45,9 @@
 		<Unit filename="helpers.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="inimigo.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="jogador.c">
 			<Option compilerVar="CC" />
 		</Unit>
