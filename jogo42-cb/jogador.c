@@ -28,54 +28,10 @@ void AtaqueJogador(GameState* gs)
     }
 }
 
-static bool ColisaoJogLevel(const Vector2 posJogTeste, const GameState* gs)
-{
-    /** Retorna true se o jogador estiver colidindo com o level (incluindo
-        os obstaculos moveis), e false caso contrario. */
-
-    //[ CHECAR CONTRA O OBSTACULO RETANGULAR ]---------------------------------
-    if (CheckCollisionCircleRec(posJogTeste, JOG_RAIO, gs->obstRet))
-    {
-        return true;
-    }
-
-    //[ CHECAR CONTRA O OBSTACULO CIRCULAR ]-----------------------------------
-    // A funcao de checar colisao buga se for fornecida raio menor que 0
-    const float RAIO = (gs->obstCircRaio < 0) ? 0 : gs->obstCircRaio;
-
-    if (CheckCollisionCircles(posJogTeste, JOG_RAIO, gs->obstCircCentro, RAIO))
-    {
-        return true;
-    }
-
-    //[ CHECAR CONTRA AS TILES ]-----------------------------------------------
-    for (int lin = 0; lin < TAM_SALA_Y; lin++)
-    {
-        for (int col = 0; col < TAM_SALA_X; col++)
-        {
-            const Tile* AQUI = &gs->sala[lin][col];
-
-            if ((*AQUI == TILE_parede || *AQUI == TILE_paredeInvisivel)
-                && CheckCollisionCircleRec(posJogTeste, JOG_RAIO,
-                                           RectDaTile(col, lin)))
-            {
-                return true;
-            }
-        }
-    }
-
-    //[ CHECAR CONTRA O INIMIGO ]-----------------------------------------------
-    if (CheckCollisionCircles(gs->inim.pos, INIM_RAIO, posJogTeste, JOG_RAIO))
-    {
-        return true;
-    }
-
-    // Se chegou ate aqui entao n ta colidindo com nada
-    return false;
-}
 
 void MoverJog(GameState* gs)
 {
+    //[ CALCULAR POSICAO NOVA ]------------------------------------------------
     // Posicao futura do jogador em relacao ah posicao atual
     Vector2 posFutura = Vector2Zero();
 
@@ -90,12 +46,26 @@ void MoverJog(GameState* gs)
     posFutura = Vector2AndarAte(gs->jog.pos, posFutura,
                                 JOG_VEL * GetFrameTime());
 
-    // Mover apenas se na posicao futura nao houver colisao com o level
-    if (!ColisaoJogLevel(posFutura, gs))
+    //[ VERIFICAR COLISAO NA POSICAO NOVA]-------------------------------------
+    bool colide = false;
+
+    // Colisao com level
+    if (ColisaoComLevel(posFutura, JOG_RAIO, gs))
+    {
+        colide = true;
+    }
+    // Colisao com inimigo
+    if (CheckCollisionCircles(posFutura, JOG_RAIO, gs->inim.pos, INIM_RAIO))
+    {
+        colide = true;
+    }
+
+    //-------------------------------------------------------------------------
+
+    if (!colide)
     {
         gs->jog.pos = posFutura;
     }
-
 
     // Rotacionar
     gs->jog.rot = Vector2Angle(gs->jog.pos, PosWorldDoCursor(gs));

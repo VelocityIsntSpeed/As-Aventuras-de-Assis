@@ -152,6 +152,9 @@ Vector2 PosWorldDoCursor(const GameState* gs);
     passe de `destino`). */
 Vector2 Vector2AndarAte(Vector2 origem, Vector2 destino, float dist);
 
+/** Verifica se ha colisao entre o circulo dado e o level. */
+bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);
+
 // desenhar.c -----------------------------------------------------------------
 /** Desenha tudo. */
 void Desenhar(const GameState* gs, const Texture2D* spriteJog);

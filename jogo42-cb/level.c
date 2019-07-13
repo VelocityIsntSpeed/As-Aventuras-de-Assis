@@ -92,6 +92,44 @@ void InicializarObst(GameState* gs)
 }
 
 
+bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs)
+{
+    //[ OBSTACULO RETANGULAR ]-------------------------------------------------
+    if (CheckCollisionCircleRec(pos, raio, gs->obstRet))
+    {
+        return true;
+    }
+
+    //[ OBSTACULO CIRCULAR ]---------------------------------------------------
+    // A funcao de checar colisao buga se for fornecida raio menor que 0
+    const float OBST_RAIO = (gs->obstCircRaio < 0) ? 0 : gs->obstCircRaio;
+
+    if (CheckCollisionCircles(pos, raio, gs->obstCircCentro, OBST_RAIO))
+    {
+        return true;
+    }
+
+    //[ TILES ]----------------------------------------------------------------
+    for (int lin = 0; lin < TAM_SALA_Y; lin++)
+    {
+        for (int col = 0; col < TAM_SALA_X; col++)
+        {
+            const Tile* AQUI = &gs->sala[lin][col];
+
+            if ((*AQUI == TILE_parede || *AQUI == TILE_paredeInvisivel)
+                && CheckCollisionCircleRec(pos, raio,
+                                           RectDaTile(col, lin)))
+            {
+                return true;
+            }
+        }
+    }
+
+    // Se chegou ate aqui entao n ta colidindo com nada
+    return false;
+}
+
+
 void MoverObst(GameState* gs)
 {
     //[ OBSTACULO RETANGULAR ]=================================================
