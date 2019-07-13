@@ -28,7 +28,7 @@ int main(void)
     //[ JOGADOR ]==============================================================
     InicializarJogador(gs);
 
-    /// Sprite do jogador.
+    //! Sprite do jogador.
     const Texture2D SPRITE_JOG = LoadTexture("tex/protag.png");
 
 

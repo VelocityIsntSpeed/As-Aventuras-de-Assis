@@ -11,7 +11,7 @@
 #include "jogo42.h"
 
 
-/// Desenha no canto inferior esquerdo o texto que diz os controles.
+//! Desenha no canto inferior esquerdo o texto que diz os controles.
 static void DesenharControles()
 {
     // Texto que vai aparecer
@@ -39,7 +39,7 @@ static void DesenharControles()
 }
 
 
-/// Desenha o jogador.
+//! Desenha o jogador.
 static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
 {
     // A parte da sprite a ser utilizada (nesse caso, tudo)
@@ -57,7 +57,7 @@ static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
 }
 
 
-/// Desenha o level.
+//! Desenha o level.
 static void DesenharLevel(const enum Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 {
     // Iterar sobre cada tile
@@ -97,7 +97,7 @@ static void DesenharLevel(const enum Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 }
 
 
-/// Desenha o HP do jogador
+//! Desenha o HP do jogador
 static void DesenharHpJog(const GameState* gs)
 {
     const int POS_X = 10, POS_Y = 10, TAM_FONTE = 20;
@@ -107,7 +107,7 @@ static void DesenharHpJog(const GameState* gs)
 }
 
 
-/// Desenha o inimigo
+//! Desenha o inimigo
 static void DesenharInimigo(const GameState* gs)
 {
     // Inimigo
