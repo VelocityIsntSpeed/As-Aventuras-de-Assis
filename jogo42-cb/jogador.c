@@ -10,6 +10,19 @@
 
 #include "jogo42.h"
 
+
+void InicializarJogador(GameState* gs)
+{
+    // Posicao
+    gs->jog.pos.x = RectDaTile(35, 5).x;
+    gs->jog.pos.y = RectDaTile(35, 5).y;
+    // Rotacao
+    gs->jog.rot = 0;
+    // HP
+    gs->jog.hp = 150;
+}
+
+
 void AtaqueJogador(GameState* gs)
 {
     // Atacar quando clicar

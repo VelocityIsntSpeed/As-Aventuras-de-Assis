@@ -179,6 +179,9 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog);
 
 
 // jogador.c ------------------------------------------------------------------
+/** Inicializa o estado do jogador. */
+void InicializarJogador(GameState* gs);
+
 /** Move o jogador. */
 void MoverJog(GameState* gs);
 
