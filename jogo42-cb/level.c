@@ -84,27 +84,27 @@ void InicializarLevel(Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 void InicializarObst(GameState* gs)
 {
     // Obstaculo retangular
-    gs->obstRet = (Rectangle){100, 100, 150, 100};
+    gs->obst.ret = (Rectangle){100, 100, 150, 100};
     // Obstaculo circular
-    gs->obstCircCentro = (Vector2){1500, 350};
-    gs->obstCircRaio = 150;
-    gs->obstCircTaAndando = false;
+    gs->obst.circCentro = (Vector2){1500, 350};
+    gs->obst.circRaio = 150;
+    gs->obst.circTaAndando = false;
 }
 
 
 bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs)
 {
     //[ OBSTACULO RETANGULAR ]-------------------------------------------------
-    if (CheckCollisionCircleRec(pos, raio, gs->obstRet))
+    if (CheckCollisionCircleRec(pos, raio, gs->obst.ret))
     {
         return true;
     }
 
     //[ OBSTACULO CIRCULAR ]---------------------------------------------------
     // A funcao de checar colisao buga se for fornecida raio menor que 0
-    const float OBST_RAIO = (gs->obstCircRaio < 0) ? 0 : gs->obstCircRaio;
+    const float OBST_RAIO = (gs->obst.circRaio < 0) ? 0 : gs->obst.circRaio;
 
-    if (CheckCollisionCircles(pos, raio, gs->obstCircCentro, OBST_RAIO))
+    if (CheckCollisionCircles(pos, raio, gs->obst.circCentro, OBST_RAIO))
     {
         return true;
     }
@@ -135,19 +135,19 @@ void MoverObst(GameState* gs)
     //[ OBSTACULO RETANGULAR ]=================================================
     if (IsKeyPressed(KEY_SPACE))
     {
-        gs->obstRet.x += 35;
-        gs->obstRet.height += 35;
+        gs->obst.ret.x += 35;
+        gs->obst.ret.height += 35;
     }
 
     //[ OBSTACULO CIRCULAR ]===================================================
     if (IsKeyDown(KEY_SPACE))
     {
-        gs->obstCircTaAndando = true;
-        gs->obstCircCentro.x -= VEL_CIRC * GetFrameTime();
-        gs->obstCircRaio -= VEL_CIRC / 20.0f * GetFrameTime();
+        gs->obst.circTaAndando = true;
+        gs->obst.circCentro.x -= VEL_CIRC * GetFrameTime();
+        gs->obst.circRaio -= VEL_CIRC / 20.0f * GetFrameTime();
     }
     else
     {
-        gs->obstCircTaAndando = false;
+        gs->obst.circTaAndando = false;
     }
 }

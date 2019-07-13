@@ -40,6 +40,7 @@ typedef enum {
 Tile; ///< Tipos de tile.
 
 
+// Guarda todo o estado do jogo
 typedef struct // GameState
 {
     //[ JOGADOR ]--------------------------------------------------------------
@@ -83,16 +84,19 @@ typedef struct // GameState
 
 
     //[ OBSTACULOS ]-----------------------------------------------------------
-    /// Obstaculo retangular.
-    Rectangle obstRet;
-    /// Posicao do centro do obstaculo circular.
-    Vector2 obstCircCentro;
-    /// Raio do obstaculo circular.
-    float obstCircRaio;
-    /// Se o obstaculo circular ta andando.
-    bool obstCircTaAndando;
+    struct {
+        /// Obstaculo retangular.
+        Rectangle ret;
+
+        /// Posicao do centro do obstaculo circular.
+        Vector2 circCentro;
+        /// Raio do obstaculo circular.
+        float circRaio;
+        /// Se o obstaculo circular ta andando.
+        bool circTaAndando;
+    } obst;
 }
-GameState; ///< Struct de estado do jogo.
+GameState;
 
 
 

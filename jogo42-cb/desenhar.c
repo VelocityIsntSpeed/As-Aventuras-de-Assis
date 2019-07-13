@@ -152,8 +152,8 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DesenharLevel(gs->sala);
 
         // Obstaculo circular
-        DrawCircleV(gs->obstCircCentro, gs->obstCircRaio,
-                    Fade(gs->obstCircTaAndando ? PURPLE : VIOLET, 0.5f));
+        DrawCircleV(gs->obst.circCentro, gs->obst.circRaio,
+                    Fade(gs->obst.circTaAndando ? PURPLE : VIOLET, 0.5f));
 
 
         // Jogador
@@ -175,11 +175,11 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         }
 
         // Obstaculo retangular
-        DrawRectangleRec(gs->obstRet, Fade(DARKGRAY, 0.5f));
+        DrawRectangleRec(gs->obst.ret, Fade(DARKGRAY, 0.5f));
 
         // Texto com raio do obstaculo
-        DrawText(TextFormat("Raio = %.1f", gs->obstCircRaio),
-                 gs->obstCircCentro.x, gs->obstCircCentro.y, 20, WHITE);
+        DrawText(TextFormat("Raio = %.1f", gs->obst.circRaio),
+                 gs->obst.circCentro.x, gs->obst.circCentro.y, 20, WHITE);
 
     EndMode2D(); //[[[ FIM MODO CAMERA ]]]-------------------------------------
 
