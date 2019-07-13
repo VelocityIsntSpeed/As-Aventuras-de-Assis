@@ -120,6 +120,18 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DrawText(TextFormat("%d", (int)gs->inim.hp),
                  gs->inim.pos.x - 7, gs->inim.pos.y + 23, 10, WHITE);
 
+        // Indicador de ataque do jogador
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            // Calcular posicao da hitbox de ataque
+            const Vector2 POS_HITBOX_ATQ = Vector2AndarAte(
+                gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
+
+            // Desenhar contorno de circulo
+            DrawCircleLines(POS_HITBOX_ATQ.x, POS_HITBOX_ATQ.y,
+                            JOG_ATQ_RAIO, GREEN);
+        }
+
         // Obstaculo retangular
         DrawRectangleRec(gs->obstRet, Fade(DARKGRAY, 0.5f));
 
