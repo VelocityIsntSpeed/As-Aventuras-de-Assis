@@ -41,15 +41,15 @@ int main(void)
 
 
     //[ INIMIGO ]==============================================================
-    gs->inim.pos = (Vector2){1000, 200};
+    gs->inim.pos = (Vector2){RectDaTile(30, 5).x, RectDaTile(30, 5).y};
     gs->inim.rot = 0;
     gs->inim.hp = 60;
     gs->inim.timerAtq = -1;
 
 
     //[ CAMERA ]===============================================================
-    gs->cam.rotation = 0;
-    gs->cam.zoom = 1;
+    gs->cam.rotation = 0.0f;
+    gs->cam.zoom = 1.0f;
 
     // [[[ FIM INICIALIZACAO ]]]
 

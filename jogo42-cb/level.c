@@ -84,7 +84,7 @@ void InicializarLevel(enum Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 void InicializarObst(GameState* gs)
 {
     // Obstaculo retangular
-    gs->obst.ret = (Rectangle){100, 100, 150, 100};
+    gs->obst.ret = (Rectangle){0, 0, 150, 100};
     // Obstaculo circular
     gs->obst.circCentro = (Vector2){1500, 350};
     gs->obst.circRaio = 150;
