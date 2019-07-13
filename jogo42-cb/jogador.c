@@ -84,9 +84,6 @@ void MoverJog(GameState* gs)
     if (IsKeyDown(KEY_W) || IsKeyDown(KEY_UP))    {       posFutura.y -= 1; }
     if (IsKeyDown(KEY_S) || IsKeyDown(KEY_DOWN))  {       posFutura.y += 1; }
 
-
-    if (posFutura.x == 0 && posFutura.y == 0) { return; }
-
     // Transformar em coordenadas world
     posFutura = Vector2Add(gs->jog.pos, posFutura);
 
