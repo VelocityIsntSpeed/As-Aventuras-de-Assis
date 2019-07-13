@@ -16,11 +16,13 @@
 #include "stdio.h" // Para mandar mensagens de erro no console
 
 
+
 //[ DEFINICOES DE CONSTANTES UTILIZADAS NAS DEFINICOES DE TIPOS ]==============
-/// Tamanho de uma sala, em numero de tiles.
+/// Tamanho do level, em numero de tiles.
 #define TAM_SALA_X 39
-/// Tamanho de uma sala, em numero de tiles.
+/// Tamanho do level, em numero de tiles.
 #define TAM_SALA_Y 27
+
 
 
 //[ DEFINICOES DE TIPOS ]======================================================
@@ -95,14 +97,19 @@ GameState; ///< Struct de estado do jogo.
 //[ JOGADOR ]------------------------------------------------------------------
 /// Velocidade do jogador (por segundo).
 #define JOG_VEL (150.0f)
+
 /// Raio do jogador.
 #define JOG_RAIO (20.0f)
+
 /// Distancia entre o centro da posicao da hitbox de ataque e o jogador.
 #define JOG_ATQ_DIST (50.0f)
+
 /// Raio da hitbox de ataque
 #define JOG_ATQ_RAIO (10.0f)
+
 /// Dano de ataque.
 #define JOG_ATQ_DANO (20.0f)
+
 
 //[ INIMIGO ]------------------------------------------------------------------
 /// Raio do inimigo.
@@ -127,6 +134,7 @@ GameState; ///< Struct de estado do jogo.
 
 /// Dano de ataque
 #define INIM_DANO (15.0f)
+
 
 //[ OUTROS ]-------------------------------------------------------------------
 /// Velocidade do obstaculo circular (por segundo).
@@ -155,9 +163,11 @@ Vector2 Vector2AndarDist(Vector2 origem, Vector2 destino, float dist);
 /** Verifica se ha colisao entre o circulo dado e o level. */
 bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);
 
+
 // desenhar.c -----------------------------------------------------------------
 /** Desenha tudo. */
 void Desenhar(const GameState* gs, const Texture2D* spriteJog);
+
 
 // jogador.c ------------------------------------------------------------------
 /** Move o jogador. */
@@ -166,12 +176,14 @@ void MoverJog(GameState* gs);
 /** Ataque do jogador. Deve ser chamada todo frame. */
 void AtaqueJogador(GameState* gs);
 
+
 // inimigo.c ------------------------------------------------------------------
 /** Move o inimigo. */
 void MoverInimigo(GameState* gs);
 
 /** Ataque do inimigo. Deve ser chamada em cada frame. */
 void AtaqueDoInimigo(GameState* gs);
+
 
 // level.c --------------------------------------------------------------------
 /** Move os obstaculos. */
