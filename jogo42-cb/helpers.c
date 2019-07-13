@@ -25,11 +25,11 @@ Vector2 PosWorldDoCursor(const GameState* gs)
 }
 
 
-Vector2 Vector2AndarAte(Vector2 v1, Vector2 v2, float dist)
+Vector2 Vector2AndarAte(Vector2 origem, Vector2 destino, float dist)
 {
-    Vector2 resultado = Vector2Subtract(v2, v1);
+    Vector2 resultado = Vector2Subtract(destino, origem);
     resultado = Vector2Normalize(resultado);
     resultado = Vector2Scale(resultado, dist);
-    resultado = Vector2Add(v1, resultado);
+    resultado = Vector2Add(origem, resultado);
     return resultado;
 }

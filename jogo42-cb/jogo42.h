@@ -147,9 +147,10 @@ Rectangle RectDaTile(int x, int y);
 Vector2 PosWorldDoCursor(const GameState* gs);
 
 /** Pega 2 posicoes Vector2 e retorna outra, todas em coordenadas world.
-    Comecando em `v1`, comeca a andar em direcao a `v2` e so para quando tiver
-    andado uma distancia `dist` (mesmo que no caminho passe de v2). */
-Vector2 Vector2AndarAte(Vector2 v1, Vector2 v2, float dist);
+    Comecando em `origem`, comeca a andar em direcao a `destino` e so pahra
+    de andar quando tiver andado uma distancia `dist` (mesmo que no caminho
+    passe de `destino`). */
+Vector2 Vector2AndarAte(Vector2 origem, Vector2 destino, float dist);
 
 // desenhar.c -----------------------------------------------------------------
 /** Desenha tudo. */
