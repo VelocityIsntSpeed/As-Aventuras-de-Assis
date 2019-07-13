@@ -33,7 +33,7 @@ Vector2 Vector2AndarAte(Vector2 origem, Vector2 destino, float dist)
     // Se o vetor for nulo (ou seja, origem e destino forem iguais)
     if (resultado.x == 0 && resultado.y == 0)
     {
-        return Vector2Zero();
+        return origem;
     }
 
     resultado = Vector2Normalize(resultado);
@@ -44,3 +44,7 @@ Vector2 Vector2AndarAte(Vector2 origem, Vector2 destino, float dist)
 
     return resultado;
 }
+
+
+
+
