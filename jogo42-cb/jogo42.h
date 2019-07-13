@@ -13,6 +13,7 @@
 
 #include "raylib.h"
 #include "raymath.h"
+#include "stdio.h" // Para mandar mensagens de erro no console
 
 
 //[ DEFINICOES DE CONSTANTES UTILIZADAS NAS DEFINICOES DE TIPOS ]==============

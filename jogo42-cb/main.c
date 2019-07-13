@@ -9,7 +9,6 @@
 */
 
 #include "jogo42.h"
-#include "stdio.h" // Para mandar mensagens de erro no console
 #include "stdlib.h" // Pelo malloc
 
 
