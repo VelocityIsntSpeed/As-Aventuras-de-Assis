@@ -24,7 +24,7 @@ void AtaqueJogador(GameState* gs)
         if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
                                   gs->inim.pos, 20))
         {
-            gs->inim.hp -= 20;
+            gs->inim.hp -= JOG_ATQ_DANO;
         }
     }
 }

@@ -95,6 +95,8 @@ GameState; ///< Struct de estado do jogo.
 #define JOG_ATQ_DIST (50.0f)
 /// Raio da hitbox de ataque
 #define JOG_ATQ_RAIO (10.0f)
+/// Dano de ataque.
+#define JOG_ATQ_DANO (20.0f)
 
 /// Velocidade do obstaculo circular (por segundo).
 #define VEL_CIRC (100.0f)
