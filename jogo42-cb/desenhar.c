@@ -11,27 +11,31 @@
 #include "jogo42.h"
 
 
-/// Desenha o texto que diz os controles.
+/// Desenha no canto inferior esquerdo o texto que diz os controles.
 static void DesenharControles()
 {
     // Texto que vai aparecer
     const char TEXTO[] = "Controles:\n"
                          "WASD/Setas para andar\n"
+                         "Clique esquerdo para atacar\n"
                          "Espaco para movimentar obstaculos";
 
     // Tamanho da fonte
     const int TAM_FONTE = 20;
 
     // A altura de todo o texto
-    const float ALTURA_TEXTO =
+    const int ALTURA_TEXTO =
         MeasureTextEx(GetFontDefault(), TEXTO, TAM_FONTE, TAM_FONTE * 10).y;
 
     // Distancia entre o texto e as bordas da tela
     const int MARGEM = 10;
 
-    // Desenhar texto no canto inferior esquerdo
-    DrawText(TEXTO, MARGEM, GetScreenHeight() - ALTURA_TEXTO - MARGEM,
-             TAM_FONTE, BLACK);
+    // Posicao
+    const int POS_X = MARGEM;
+    const int POS_Y = GetScreenHeight() - ALTURA_TEXTO - MARGEM;
+
+    // Desenhar
+    DrawText(TEXTO, POS_X, POS_Y, TAM_FONTE, WHITE);
 }
 
 
