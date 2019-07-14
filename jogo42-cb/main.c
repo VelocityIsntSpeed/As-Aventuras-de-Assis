@@ -78,12 +78,24 @@ int main(void)
        // AtaqueJogador(gs);
 
         // Mover inimigo
-        MoverInimigo(&gs->inimigos[0], gs);
-        MoverInimigo(&gs->inimigos[1], gs);
+        for(int i=0; i<4; i++)
+        {
+            if(gs->inimigos[i].existe)
+            {
+                MoverInimigo(&gs->inimigos[i], gs);
+            }
+        }
+
 
         // Ataque Inimigo
-        AtaqueInimigo(&gs->inimigos[0], gs);
-        AtaqueInimigo(&gs->inimigos[1], gs);
+        for(int i=0; i<4; i++)
+        {
+            if(gs->inimigos[i].existe)
+            {
+                AtaqueInimigo(&gs->inimigos[i], gs);
+            }
+        }
+
 
         // Mover obstaculos
         MoverObst(gs);

@@ -164,8 +164,15 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DesenharJogador(gs, spriteJog);
 
         // Inimigo
-        DesenharInimigo(&gs->inimigos[0]);
-        DesenharInimigo(&gs->inimigos[1]);
+        for(int i=0; i<4; i++)
+        {
+            if(gs->inimigos[i].existe)
+            {
+                DesenharInimigo(&gs->inimigos[i]);
+            }
+        }
+
+
 
         // Indicador de ataque do jogador
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
