@@ -73,6 +73,29 @@ void AtaqueInimigo(struct Inimigo* inimigo, GameState* gs)
 }
 
 
+bool SpawnarInimigo(Vector2 pos, GameState* gs)
+{
+    // Iterar sobre todos os espacos livres do array de inimigos
+    for (int i = 0; i < INIM_QTD_MAX; i++)
+    {
+        // Checar se esse espaco no array estah livre
+        if (gs->inimigos[i].existe == false)
+        {
+            gs->inimigos[i].pos = pos;
+            gs->inimigos[i].rot = 0;
+            gs->inimigos[i].hp = 60;
+            gs->inimigos[i].timerAtq = -1;
+            gs->inimigos[i].existe = true;
+            return true;
+        }
+    }
+
+    // Se nao tinha espaco livre, retornar false
+    return false;
+}
+
+
+
 
 
 

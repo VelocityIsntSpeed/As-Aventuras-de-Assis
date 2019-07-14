@@ -23,6 +23,9 @@
 //! Tamanho do level, em numero de tiles.
 #define TAM_SALA_Y 27
 
+//! Quatidade maxima de inimigos */
+#define INIM_QTD_MAX (4)
+
 
 
 //[ DEFINICOES DE TIPOS ]======================================================
@@ -74,10 +77,12 @@ typedef struct // GameState
         /*! Tempo em segundos que faz que o inimigo estah atacando.
             Se for negativo, o inimigo nao estah atacando. */
         float timerAtq;
+        /// Bool da existencia do inimigo
+        bool existe;
     };
 
     //! O inimigo. So tem um por enquanto, depois vai ter uma lista.
-    struct Inimigo inim;
+    struct Inimigo inimigos[INIM_QTD_MAX];
 
 
     //[ LEVEL ]----------------------------------------------------------------
@@ -121,6 +126,7 @@ GameState;
 
 
 //[ INIMIGO ]------------------------------------------------------------------
+
 //! Raio do inimigo.
 #define INIM_RAIO (17.0f)
 
@@ -195,6 +201,10 @@ void MoverInimigo(struct Inimigo* inimigo, const GameState* gs);
 
 /*! Ataque do inimigo. Deve ser chamada em cada frame. */
 void AtaqueInimigo(struct Inimigo* inimigo, GameState* gs);
+
+/*! Spawna um inimigo na posicao dada. Retorna true se o spawn foi realizado
+    com sucesso, e false se nao havia espaco livre no array de inimigos. */
+bool SpawnarInimigo(Vector2 pos, GameState* gs);
 
 
 // level.c --------------------------------------------------------------------

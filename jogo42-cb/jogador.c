@@ -25,19 +25,30 @@ void InicializarJogador(GameState* gs)
 
 void AtaqueJogador(GameState* gs)
 {
-    // Atacar quando clicar
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
         // Calcular posicao da hitbox de ataque
         const Vector2 POS_HITBOX_ATQ =
             Vector2AndarDist(gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
 
-        // Se acertar o inimigo
-        if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
-                                  gs->inim.pos, INIM_RAIO))
+        // Iterar sobre todos os inimigos
+        for (int i = 0; i < INIM_QTD_MAX; i++)
         {
-            gs->inim.hp -= JOG_ATQ_DANO;
+            // Verificar colisao
+            if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
+                                      gs->inimigos[i].pos, INIM_RAIO))
+            {
+                // Causar dano
+                gs->inimigos[i].hp -= JOG_ATQ_DANO;
+
+                // Matar inimigo, se necessario
+                if (gs->inimigos[i].hp <= 0)
+                {
+                    gs->inimigos[i].existe = false;
+                }
+            }
         }
+
     }
 }
 
@@ -57,7 +68,7 @@ void MoverJog(GameState* gs)
     posFutura = Vector2Add(gs->jog.pos, posFutura);
 
     posFutura = Vector2AndarDist(gs->jog.pos, posFutura,
-                                JOG_VEL * GetFrameTime());
+                                 JOG_VEL * GetFrameTime());
 
     //[ VERIFICAR COLISAO NA POSICAO NOVA]-------------------------------------
     bool colide = false;
@@ -67,11 +78,21 @@ void MoverJog(GameState* gs)
     {
         colide = true;
     }
+
     // Colisao com inimigo
-    if (CheckCollisionCircles(posFutura, JOG_RAIO, gs->inim.pos, INIM_RAIO))
+    for (int i = 0; i < INIM_QTD_MAX; i++)
     {
-        colide = true;
+        if (gs->inimigos[i].existe)
+        {
+            if (CheckCollisionCircles(posFutura, JOG_RAIO,
+                                      gs->inimigos[i].pos, INIM_RAIO))
+            {
+                colide = true;
+            }
+        }
+
     }
+
 
     //-------------------------------------------------------------------------
 

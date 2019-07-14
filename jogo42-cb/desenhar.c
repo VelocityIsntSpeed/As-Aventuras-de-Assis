@@ -108,36 +108,36 @@ static void DesenharHpJog(const GameState* gs)
 
 
 //! Desenha o inimigo
-static void DesenharInimigo(const GameState* gs)
+static void DesenharInimigo(const struct Inimigo* inimigo)
 {
     // Inimigo
-    DrawCircleV(gs->inim.pos, INIM_RAIO, DARKGREEN);
+    DrawCircleV(inimigo->pos, INIM_RAIO, DARKGREEN);
 
     // Indicador de direcao
-    const float ROT_AJUSTADA = -gs->inim.rot + 90.0f;
-    DrawCircleSectorLines(gs->inim.pos, INIM_RAIO,
+    const float ROT_AJUSTADA = -inimigo->rot + 90.0f;
+    DrawCircleSectorLines(inimigo->pos, INIM_RAIO,
                           ROT_AJUSTADA - 2, ROT_AJUSTADA + 2,
                           1, WHITE);
 
     // Indicador de INIM_MAX_DIST
-    DrawCircleLines(gs->inim.pos.x, gs->inim.pos.y, INIM_MAX_DIST, WHITE);
+    DrawCircleLines(inimigo->pos.x, inimigo->pos.y, INIM_MAX_DIST, WHITE);
 
     // Indicador de ataque
     // Se o inimigo estiver em warmup
-    if (gs->inim.timerAtq >= INIM_WARMUP)
+    if (inimigo->timerAtq >= INIM_WARMUP)
     {
-        DrawCircleV(gs->inim.pos, INIM_ATQ_DIST + INIM_RAIO, RED);
+        DrawCircleV(inimigo->pos, INIM_ATQ_DIST + INIM_RAIO, RED);
     }
     // Se estiver causando dano agora (soh dura um frame)
-    else if (gs->inim.timerAtq >= 0)
+    else if (inimigo->timerAtq >= 0)
     {
-        DrawCircleLines(gs->inim.pos.x, gs->inim.pos.y,
+        DrawCircleLines(inimigo->pos.x, inimigo->pos.y,
                         INIM_ATQ_DIST + INIM_RAIO, RED);
     }
 
     // Indicador de HP
-    DrawText(TextFormat("%d", (int)gs->inim.hp),
-             gs->inim.pos.x - 7, gs->inim.pos.y + 23, 10, WHITE);
+    DrawText(TextFormat("%d", (int)inimigo->hp),
+             inimigo->pos.x - 7, inimigo->pos.y + 23, 10, WHITE);
 }
 
 
@@ -163,8 +163,14 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         // Jogador
         DesenharJogador(gs, spriteJog);
 
-        // Inimigo
-        DesenharInimigo(gs);
+        // Inimigos
+        for (int i = 0; i < INIM_QTD_MAX; i++)
+        {
+            if (gs->inimigos[i].existe)
+            {
+                DesenharInimigo(&gs->inimigos[i]);
+            }
+        }
 
         // Indicador de ataque do jogador
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
