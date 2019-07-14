@@ -48,6 +48,10 @@ void AtaqueJogador(GameState* gs)
                                   gs->inimigos[i].pos, INIM_RAIO))
                 {
                     gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                    if (gs->inimigos[i].hp <= 0)
+                    {
+                        gs->inimigos[i].existe = false;
+                    }
                 }
             }
         }
@@ -84,10 +88,14 @@ void MoverJog(GameState* gs)
     // Colisao com inimigo
     for (int i = 0; i<INIM_QTD_MAX; i++)
     {
-        if (CheckCollisionCircles(posFutura, JOG_RAIO, gs->inimigos[i].pos, INIM_RAIO))
+        if (gs->inimigos[i].existe)
+        {
+            if (CheckCollisionCircles(posFutura, JOG_RAIO, gs->inimigos[i].pos, INIM_RAIO))
             {
                 colide = true;
             }
+        }
+
     }
 
 
