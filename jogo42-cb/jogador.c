@@ -23,35 +23,28 @@ void InicializarJogador(GameState* gs)
 }
 
 
-
 void AtaqueJogador(GameState* gs)
 {
-    bool atingido[INIM_QTD_MAX];
-    for (int i = 0; i<INIM_QTD_MAX; i++)
-    {
-        atingido[i] = false;
-    }
-
-    // Atacar quando clicar
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
         // Calcular posicao da hitbox de ataque
         const Vector2 POS_HITBOX_ATQ =
             Vector2AndarDist(gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
 
-        // Se acertar o inimigo
-         for (int i = 0; i<INIM_QTD_MAX; i++)
+        // Iterar sobre todos os inimigos
+        for (int i = 0; i < INIM_QTD_MAX; i++)
         {
-            if(!atingido[i])
+            // Verificar colisao
+            if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
+                                      gs->inimigos[i].pos, INIM_RAIO))
             {
-                if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
-                                  gs->inimigos[i].pos, INIM_RAIO))
+                // Causar dano
+                gs->inimigos[i].hp -= JOG_ATQ_DANO;
+
+                // Matar inimigo, se necessario
+                if (gs->inimigos[i].hp <= 0)
                 {
-                    gs->inimigos[i].hp -= JOG_ATQ_DANO;
-                    if (gs->inimigos[i].hp <= 0)
-                    {
-                        gs->inimigos[i].existe = false;
-                    }
+                    gs->inimigos[i].existe = false;
                 }
             }
         }
@@ -85,12 +78,14 @@ void MoverJog(GameState* gs)
     {
         colide = true;
     }
+
     // Colisao com inimigo
-    for (int i = 0; i<INIM_QTD_MAX; i++)
+    for (int i = 0; i < INIM_QTD_MAX; i++)
     {
         if (gs->inimigos[i].existe)
         {
-            if (CheckCollisionCircles(posFutura, JOG_RAIO, gs->inimigos[i].pos, INIM_RAIO))
+            if (CheckCollisionCircles(posFutura, JOG_RAIO,
+                                      gs->inimigos[i].pos, INIM_RAIO))
             {
                 colide = true;
             }

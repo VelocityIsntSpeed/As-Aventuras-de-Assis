@@ -41,16 +41,16 @@ int main(void)
 
 
     //[ INIMIGO ]==============================================================
-    for(int i = 0; i < INIM_QTD_MAX; i++)
+
+    // Inicializar array de inimigos
+    for (int i = 0; i < INIM_QTD_MAX; i++)
     {
         gs->inimigos[i].existe = false;
     }
-    Vector2 pos1 = {RectDaTile(30, 4).x, RectDaTile(30, 4).y};
-    SpawnarInimigo(pos1, gs);
-    Vector2 pos2 = {RectDaTile(30, 6).x, RectDaTile(30, 6).y};
-    SpawnarInimigo(pos2, gs);
 
-
+    // Spawnar 2 inimigos:
+    SpawnarInimigo((Vector2){RectDaTile(30, 4).x, RectDaTile(30, 4).y}, gs);
+    SpawnarInimigo((Vector2){RectDaTile(30, 6).x, RectDaTile(30, 6).y}, gs);
 
 
     //[ CAMERA ]===============================================================
@@ -74,9 +74,9 @@ int main(void)
         AtaqueJogador(gs);
 
         // Mover inimigo
-        for(int i=0; i<INIM_QTD_MAX; i++)
+        for (int i = 0; i < INIM_QTD_MAX; i++)
         {
-            if(gs->inimigos[i].existe)
+            if (gs->inimigos[i].existe)
             {
                 MoverInimigo(&gs->inimigos[i], gs);
             }
@@ -84,9 +84,9 @@ int main(void)
 
 
         // Ataque Inimigo
-        for(int i=0; i<INIM_QTD_MAX; i++)
+        for (int i = 0; i < INIM_QTD_MAX; i++)
         {
-            if(gs->inimigos[i].existe)
+            if (gs->inimigos[i].existe)
             {
                 AtaqueInimigo(&gs->inimigos[i], gs);
             }
