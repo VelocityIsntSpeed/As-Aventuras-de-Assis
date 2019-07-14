@@ -76,7 +76,7 @@ bool SpawnarInimigo(Vector2 pos, GameState* gs)
 {
     for (int i = 0; i<INIM_QTD_MAX; i++)
     {
-        if (gs->inimigos[i].existe = false)
+        if (!gs->inimigos[i].existe)
         {
             gs->inimigos[i].pos = pos;
             gs->inimigos[i].rot = 0;
@@ -86,12 +86,10 @@ bool SpawnarInimigo(Vector2 pos, GameState* gs)
             return true;
 
         }
-        else
-        {
-            return false;
-        }
     }
+    return false;
 }
+
 
 
 
