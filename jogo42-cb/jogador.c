@@ -26,6 +26,11 @@ void InicializarJogador(GameState* gs)
 
 void AtaqueJogador(GameState* gs)
 {
+    bool atingido[INIM_QTD_MAX];
+    for (int i = 0; i<INIM_QTD_MAX; i++)
+    {
+        atingido[i] = false;
+    }
 
     // Atacar quando clicar
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
@@ -35,11 +40,18 @@ void AtaqueJogador(GameState* gs)
             Vector2AndarDist(gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
 
         // Se acertar o inimigo
-        if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
-                                  gs->inimigos[0].pos, INIM_RAIO))
+         for (int i = 0; i<INIM_QTD_MAX; i++)
         {
-            gs->inimigos[0].hp -= JOG_ATQ_DANO;
+            if(!atingido[i])
+            {
+                if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
+                                  gs->inimigos[i].pos, INIM_RAIO))
+                {
+                    gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                }
+            }
         }
+
     }
 }
 
