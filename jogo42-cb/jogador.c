@@ -34,9 +34,9 @@ void AtaqueJogador(GameState* gs)
 
         // Se acertar o inimigo
         if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
-                                  gs->inim.pos, INIM_RAIO))
+                                  gs->inimigos[0].pos, INIM_RAIO))
         {
-            gs->inim.hp -= JOG_ATQ_DANO;
+            gs->inimigos[0].hp -= JOG_ATQ_DANO;
         }
     }
 }
@@ -68,7 +68,7 @@ void MoverJog(GameState* gs)
         colide = true;
     }
     // Colisao com inimigo
-    if (CheckCollisionCircles(posFutura, JOG_RAIO, gs->inim.pos, INIM_RAIO))
+    if (CheckCollisionCircles(posFutura, JOG_RAIO, gs->inimigos[0].pos, INIM_RAIO))
     {
         colide = true;
     }

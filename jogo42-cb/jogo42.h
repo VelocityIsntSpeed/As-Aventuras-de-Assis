@@ -74,10 +74,12 @@ typedef struct // GameState
         /*! Tempo em segundos que faz que o inimigo estah atacando.
             Se for negativo, o inimigo nao estah atacando. */
         float timerAtq;
+        /// Bool da existencia do inimigo
+        bool existe;
     };
 
     //! O inimigo. So tem um por enquanto, depois vai ter uma lista.
-    struct Inimigo inim;
+    struct Inimigo inimigos[4];
 
 
     //[ LEVEL ]----------------------------------------------------------------

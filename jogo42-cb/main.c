@@ -41,11 +41,14 @@ int main(void)
 
 
     //[ INIMIGO ]==============================================================
-    gs->inim.pos = (Vector2){RectDaTile(30, 5).x, RectDaTile(30, 5).y};
-    gs->inim.rot = 0;
-    gs->inim.hp = 60;
-    gs->inim.timerAtq = -1;
-
+    for(int i=0; i<4; i++){
+        gs->inimigos[i].existe = false;
+    }
+    gs->inimigos[0].pos = (Vector2){RectDaTile(30, 5).x, RectDaTile(30, 5).y};
+    gs->inimigos[0].rot = 0;
+    gs->inimigos[0].hp = 60;
+    gs->inimigos[0].timerAtq = -1;
+    gs->inimigos[0].existe = true;
 
     //[ CAMERA ]===============================================================
     gs->cam.rotation = 0.0f;
@@ -68,10 +71,10 @@ int main(void)
         AtaqueJogador(gs);
 
         // Mover inimigo
-        MoverInimigo(&gs->inim, gs);
+        MoverInimigo(&gs->inimigos[0], gs);
 
         // Ataque Inimigo
-        AtaqueInimigo(&gs->inim, gs);
+        AtaqueInimigo(&gs->inimigos[0], gs);
 
         // Mover obstaculos
         MoverObst(gs);
