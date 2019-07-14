@@ -143,6 +143,10 @@ static void DesenharInimigo(const struct Inimigo* inimigo)
 
 // Variavel global temporaria:
 float atqAnguloDiferenca = -30.0f;
+//mais uma
+bool atqAtivo = false;
+//outra
+float inicAtq;
 
 void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 {
@@ -175,6 +179,20 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         }
 
         // Indicador de ataque do jogador -------------------------------------
+        //"Inicia o ataque"
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            inicAtq = gs->jog.rot;
+            atqAnguloDiferenca = gs->jog.rot;
+            atqAtivo = true;
+        }
+
+        //"fecha o ataque" qnd o circulo andar a distancia em graus q eu quero
+        if (atqAnguloDiferenca > inicAtq+60)
+        {
+            atqAtivo = false;
+        }
+
         // Incrementar atqAnguloDiferenca 60 graus por segundo
         atqAnguloDiferenca += 60 * GetFrameTime();
 
@@ -185,8 +203,13 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
         posHitbox = Vector2Add(gs->jog.pos, posHitbox);
 
-        // Desenhar contorno de circulo
-        DrawCircleLines(posHitbox.x, posHitbox.y, JOG_ATQ_RAIO, GREEN);
+
+        // Desenhar contorno de circulo se o ataque estiver ativo
+        if (atqAtivo)
+        {
+            DrawCircleLines(posHitbox.x, posHitbox.y, JOG_ATQ_RAIO, GREEN);
+        }
+
         //---------------------------------------------------------------------
 
         // Obstaculo retangular
