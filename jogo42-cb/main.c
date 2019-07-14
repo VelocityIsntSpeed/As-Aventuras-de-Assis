@@ -45,17 +45,11 @@ int main(void)
     {
         gs->inimigos[i].existe = false;
     }
-    gs->inimigos[0].pos = (Vector2){RectDaTile(30, 4).x, RectDaTile(30, 4).y};
-    gs->inimigos[0].rot = 0;
-    gs->inimigos[0].hp = 60;
-    gs->inimigos[0].timerAtq = -1;
-    gs->inimigos[0].existe = true;
+    Vector2 pos1 = {RectDaTile(30, 4).x, RectDaTile(30, 4).y};
+    SpawnarInimigo(pos1, gs);
+    Vector2 pos2 = {RectDaTile(30, 6).x, RectDaTile(30, 6).y};
+    SpawnarInimigo(pos2, gs);
 
-    gs->inimigos[1].pos = (Vector2){RectDaTile(30, 6).x, RectDaTile(30, 6).y};
-    gs->inimigos[1].rot = 0;
-    gs->inimigos[1].hp = 60;
-    gs->inimigos[1].timerAtq = -1;
-    gs->inimigos[1].existe = true;
 
 
     //[ CAMERA ]===============================================================

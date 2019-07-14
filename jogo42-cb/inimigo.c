@@ -72,6 +72,27 @@ void AtaqueInimigo(struct Inimigo* inimigo, GameState* gs)
     }
 }
 
+bool SpawnarInimigo(Vector2 pos, GameState* gs)
+{
+    for (int i = 0; i<INIM_QTD_MAX; i++)
+    {
+        if (gs->inimigos[i].existe = false)
+        {
+            gs->inimigos[i].pos = pos;
+            gs->inimigos[i].rot = 0;
+            gs->inimigos[i].hp = 60;
+            gs->inimigos[i].timerAtq = -1;
+            gs->inimigos[i].existe = true;
+            return true;
+
+        }
+        else
+        {
+            return false;
+        }
+    }
+}
+
 
 
 
