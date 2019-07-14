@@ -26,12 +26,6 @@ void InicializarJogador(GameState* gs)
 
 void AtaqueJogador(GameState* gs)
 {
-    bool atingido[INIM_QTD_MAX];
-    for (int i = 0; i<INIM_QTD_MAX; i++)
-    {
-        atingido[i] = false;
-    }
-
     // Atacar quando clicar
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
@@ -40,6 +34,10 @@ void AtaqueJogador(GameState* gs)
                               JOG_ATQ_DIST * sinf(gs->jog.rot * DEG2RAD) };
 
         posHitbox = Vector2Add(gs->jog.pos, posHitbox);
+
+        /* Guarda quais inimigos ja foram atingidos nesse ataque (para nao
+           causar dano neles novamente no mesmo ataque) */
+        bool atingido[INIM_QTD_MAX] = { 0 };
 
         // Se acertar o inimigo
          for (int i = 0; i<INIM_QTD_MAX; i++)
