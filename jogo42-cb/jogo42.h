@@ -125,6 +125,8 @@ GameState;
 #define JOG_ATQ_DANO (20.0f)
 
 
+
+
 //[ INIMIGO ]------------------------------------------------------------------
 
 //! Raio do inimigo.

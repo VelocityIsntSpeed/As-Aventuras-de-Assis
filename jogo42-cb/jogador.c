@@ -35,9 +35,12 @@ void AtaqueJogador(GameState* gs)
     // Atacar quando clicar
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
+
         // Calcular posicao da hitbox de ataque
         Vector2 hitboxpos = { gs->jog.pos.x + JOG_ATQ_DIST*cos(gs->jog.rot /60),
-        gs->jog.pos.y - JOG_ATQ_DIST*sin(gs->jog.rot /60)};
+        gs->jog.pos.y + JOG_ATQ_DIST*sin(gs->jog.rot /60)};
+        // Calcula e move a hitbox no arco de ataque
+
 
         // Se acertar o inimigo
          for (int i = 0; i<INIM_QTD_MAX; i++)
