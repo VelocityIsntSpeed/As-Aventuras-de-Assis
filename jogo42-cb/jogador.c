@@ -36,8 +36,8 @@ void AtaqueJogador(GameState* gs)
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
         // Calcular posicao da hitbox de ataque
-        Vector2 posHitbox = { JOG_ATQ_DIST * cos(gs->jog.rot * DEG2RAD),
-                              JOG_ATQ_DIST * sin(gs->jog.rot * DEG2RAD) };
+        Vector2 posHitbox = { JOG_ATQ_DIST * cosf(gs->jog.rot * DEG2RAD),
+                              JOG_ATQ_DIST * sinf(gs->jog.rot * DEG2RAD) };
 
         posHitbox = Vector2Add(gs->jog.pos, posHitbox);
 
