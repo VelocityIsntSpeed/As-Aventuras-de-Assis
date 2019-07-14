@@ -23,23 +23,23 @@ void InicializarJogador(GameState* gs)
 }
 
 
-void AtaqueJogador(GameState* gs)
-{
+//void AtaqueJogador(GameState* gs)
+//{
     // Atacar quando clicar
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-    {
+ //   if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+ //   {
         // Calcular posicao da hitbox de ataque
-        const Vector2 POS_HITBOX_ATQ =
-            Vector2AndarDist(gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
+//        const Vector2 POS_HITBOX_ATQ =
+//            Vector2AndarDist(gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
 
         // Se acertar o inimigo
-        if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
-                                  gs->inimigos[0].pos, INIM_RAIO))
-        {
-            gs->inimigos[0].hp -= JOG_ATQ_DANO;
-        }
-    }
-}
+//        if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
+//                                  gs->inimigos[0].pos, INIM_RAIO))
+//        {
+//            gs->inimigos[0].hp -= JOG_ATQ_DANO;
+//        }
+//    }
+//}
 
 
 void MoverJog(GameState* gs)
@@ -68,10 +68,10 @@ void MoverJog(GameState* gs)
         colide = true;
     }
     // Colisao com inimigo
-    if (CheckCollisionCircles(posFutura, JOG_RAIO, gs->inimigos[0].pos, INIM_RAIO))
-    {
-        colide = true;
-    }
+    //if (CheckCollisionCircles(posFutura, JOG_RAIO, gs->inimigos[0].pos, INIM_RAIO))
+    //{
+    //    colide = true;
+    //}
 
     //-------------------------------------------------------------------------
 
