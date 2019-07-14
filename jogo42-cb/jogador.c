@@ -36,15 +36,15 @@ void AtaqueJogador(GameState* gs)
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
         // Calcular posicao da hitbox de ataque
-        const Vector2 POS_HITBOX_ATQ =
-            Vector2AndarDist(gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
+        Vector2 hitboxpos = { gs->jog.pos.x + JOG_ATQ_DIST*cos(gs->jog.rot /60),
+        gs->jog.pos.y - JOG_ATQ_DIST*sin(gs->jog.rot /60)};
 
         // Se acertar o inimigo
          for (int i = 0; i<INIM_QTD_MAX; i++)
         {
             if(!atingido[i])
             {
-                if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
+                if (CheckCollisionCircles(hitboxpos, JOG_ATQ_RAIO,
                                   gs->inimigos[i].pos, INIM_RAIO))
                 {
                     gs->inimigos[i].hp -= JOG_ATQ_DANO;
