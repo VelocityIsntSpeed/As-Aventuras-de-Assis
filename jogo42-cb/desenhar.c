@@ -108,7 +108,7 @@ static void DesenharHpJog(const GameState* gs)
 
 
 //! Desenha o inimigo
-static void DesenharInimigo(const struct Inimigo* inimigo,const GameState* gs)
+static void DesenharInimigo(const struct Inimigo* inimigo)
 {
     // Inimigo
     DrawCircleV(inimigo->pos, INIM_RAIO, DARKGREEN);
@@ -164,7 +164,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DesenharJogador(gs, spriteJog);
 
         // Inimigo
-        DesenharInimigo(&gs->inim,gs);
+        DesenharInimigo(&gs->inim);
 
         // Indicador de ataque do jogador
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
