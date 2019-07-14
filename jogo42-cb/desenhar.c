@@ -141,6 +141,8 @@ static void DesenharInimigo(const struct Inimigo* inimigo)
 }
 
 
+// Variavel global temporaria:
+float atqAnguloDiferenca = -30.0f;
 
 void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 {
@@ -173,9 +175,13 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         }
 
         // Indicador de ataque do jogador -------------------------------------
+        // Incrementar atqAnguloDiferenca 60 graus por segundo
+        atqAnguloDiferenca += 60 * GetFrameTime();
+
         // Calcular posicao da hitbox de ataque
-        Vector2 posHitbox = { JOG_ATQ_DIST * cosf(gs->jog.rot * DEG2RAD),
-                              JOG_ATQ_DIST * sinf(gs->jog.rot * DEG2RAD) };
+
+        Vector2 posHitbox = { JOG_ATQ_DIST * cosf(atqAnguloDiferenca * DEG2RAD),
+                              JOG_ATQ_DIST * sinf(atqAnguloDiferenca * DEG2RAD) };
 
         posHitbox = Vector2Add(gs->jog.pos, posHitbox);
 
