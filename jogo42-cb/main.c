@@ -71,7 +71,7 @@ int main(void)
         MoverJog(gs);
 
         // Ataque do jogador
-        //AtaqueJogador(gs);
+        AtaqueJogador(gs);
 
         // Mover inimigo
         for(int i=0; i<INIM_QTD_MAX; i++)

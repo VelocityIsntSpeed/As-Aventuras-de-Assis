@@ -22,10 +22,11 @@ void InicializarJogador(GameState* gs)
     gs->jog.hp = 150;
 }
 
-/* DESATIVADO TEMPORARIAMENTE
+
 
 void AtaqueJogador(GameState* gs)
 {
+
     // Atacar quando clicar
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
     {
@@ -41,7 +42,7 @@ void AtaqueJogador(GameState* gs)
         }
     }
 }
-*/
+
 
 void MoverJog(GameState* gs)
 {
