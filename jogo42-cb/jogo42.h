@@ -201,7 +201,9 @@ void MoverInimigo(struct Inimigo* inimigo, const GameState* gs);
 
 /*! Ataque do inimigo. Deve ser chamada em cada frame. */
 void AtaqueInimigo(struct Inimigo* inimigo, GameState* gs);
-/*! Spawnar inimigos*/
+
+/*! Spawna um inimigo na posicao dada. Retorna true se o spawn foi realizado
+    com sucesso, e false se nao havia espaco livre no array de inimigos. */
 bool SpawnarInimigo(Vector2 pos, GameState* gs);
 
 
