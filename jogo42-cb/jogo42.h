@@ -23,6 +23,9 @@
 //! Tamanho do level, em numero de tiles.
 #define TAM_SALA_Y 27
 
+//! Quatidade maxima de inimigos */
+#define INIM_QTD_MAX (4)
+
 
 
 //[ DEFINICOES DE TIPOS ]======================================================
@@ -79,7 +82,7 @@ typedef struct // GameState
     };
 
     //! O inimigo. So tem um por enquanto, depois vai ter uma lista.
-    struct Inimigo inimigos[4];
+    struct Inimigo inimigos[INIM_QTD_MAX];
 
 
     //[ LEVEL ]----------------------------------------------------------------
@@ -123,6 +126,7 @@ GameState;
 
 
 //[ INIMIGO ]------------------------------------------------------------------
+
 //! Raio do inimigo.
 #define INIM_RAIO (17.0f)
 

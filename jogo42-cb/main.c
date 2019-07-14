@@ -41,7 +41,8 @@ int main(void)
 
 
     //[ INIMIGO ]==============================================================
-    for(int i=0; i<4; i++){
+    for(int i = 0; i < INIM_QTD_MAX; i++)
+    {
         gs->inimigos[i].existe = false;
     }
     gs->inimigos[0].pos = (Vector2){RectDaTile(30, 4).x, RectDaTile(30, 4).y};
@@ -75,10 +76,10 @@ int main(void)
         MoverJog(gs);
 
         // Ataque do jogador
-       // AtaqueJogador(gs);
+        //AtaqueJogador(gs);
 
         // Mover inimigo
-        for(int i=0; i<4; i++)
+        for(int i=0; i<INIM_QTD_MAX; i++)
         {
             if(gs->inimigos[i].existe)
             {
@@ -88,7 +89,7 @@ int main(void)
 
 
         // Ataque Inimigo
-        for(int i=0; i<4; i++)
+        for(int i=0; i<INIM_QTD_MAX; i++)
         {
             if(gs->inimigos[i].existe)
             {

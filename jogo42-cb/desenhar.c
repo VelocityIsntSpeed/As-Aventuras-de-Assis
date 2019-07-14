@@ -164,9 +164,9 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DesenharJogador(gs, spriteJog);
 
         // Inimigo
-        for(int i=0; i<4; i++)
+        for (int i = 0; i < INIM_QTD_MAX; i++)
         {
-            if(gs->inimigos[i].existe)
+            if (gs->inimigos[i].existe)
             {
                 DesenharInimigo(&gs->inimigos[i]);
             }
