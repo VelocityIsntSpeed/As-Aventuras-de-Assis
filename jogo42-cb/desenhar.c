@@ -174,12 +174,13 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
         // Indicador de ataque do jogador -------------------------------------
         // Calcular posicao da hitbox de ataque
-        const Vector2 POS_HITBOX_ATQ = Vector2AndarDist(
-            gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
+        Vector2 posHitbox = { JOG_ATQ_DIST * cosf(gs->jog.rot * DEG2RAD),
+                              JOG_ATQ_DIST * sinf(gs->jog.rot * DEG2RAD) };
+
+        posHitbox = Vector2Add(gs->jog.pos, posHitbox);
 
         // Desenhar contorno de circulo
-        DrawCircleLines(POS_HITBOX_ATQ.x, POS_HITBOX_ATQ.y,
-                        JOG_ATQ_RAIO, GREEN);
+        DrawCircleLines(posHitbox.x, posHitbox.y, JOG_ATQ_RAIO, GREEN);
         //---------------------------------------------------------------------
 
         // Obstaculo retangular
