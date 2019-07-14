@@ -69,12 +69,14 @@ void MoverJog(GameState* gs)
         colide = true;
     }
     // Colisao com inimigo
-    /* DESATIVADO TEMPORARIAMENTE
-    if (CheckCollisionCircles(posFutura, JOG_RAIO, gs->inimigos[0].pos, INIM_RAIO))
+    for (int i = 0; i<INIM_QTD_MAX; i++)
     {
-        colide = true;
+        if (CheckCollisionCircles(posFutura, JOG_RAIO, gs->inimigos[i].pos, INIM_RAIO))
+            {
+                colide = true;
+            }
     }
-    */
+
 
     //-------------------------------------------------------------------------
 
