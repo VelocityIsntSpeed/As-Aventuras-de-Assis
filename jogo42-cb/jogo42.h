@@ -131,6 +131,11 @@ GameState;
 //! Dano de ataque.
 #define JOG_ATQ_DANO (20.0f)
 
+//! Velocidade do ataque do jogador
+#define JOG_ATQ_VEL (900.0f)
+
+//! Arco do ataque
+#define JOG_ATQ_ARQ (110.0)
 
 
 
@@ -202,6 +207,9 @@ void MoverJog(GameState* gs);
 
 /*! Ataque do jogador. Deve ser chamada todo frame. */
 void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX]);
+
+
+
 
 
 // inimigo.c ------------------------------------------------------------------

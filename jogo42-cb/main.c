@@ -79,14 +79,16 @@ int main(void)
         // Ataque do jogador
 
 
-        gs->jog.atqAnguloDiferenca += 60 * GetFrameTime();
+        gs->jog.atqAnguloDiferenca += JOG_ATQ_VEL * GetFrameTime();
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
-            gs->jog.inicAtq = gs->jog.rot;
-            gs->jog.atqAnguloDiferenca = gs->jog.rot;
+            // Aqui sao setadas as posicoes angulares originais do ataque
+            gs->jog.inicAtq = gs->jog.rot-JOG_ATQ_ARQ/2;
+            gs->jog.atqAnguloDiferenca = gs->jog.rot-JOG_ATQ_ARQ/2;
             gs->jog.atqAtivo = true;
         }
-        if (gs->jog.atqAnguloDiferenca > gs->jog.inicAtq+60)
+        // Aqui e marcada a posicao angular final do ataque
+        if (gs->jog.atqAnguloDiferenca > gs->jog.inicAtq+JOG_ATQ_ARQ)
         {
             gs->jog.atqAtivo = false;
             for (int i = 0; i<INIM_QTD_MAX; i++)
