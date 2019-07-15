@@ -147,6 +147,9 @@ GameState;
 //! Velocidade de movimento do inimigo, por segundo.
 #define INIM_VEL (110.0f)
 
+//! HP maximo e inicial do inimigo.
+#define INIM_HP_MAX (60.0f)
+
 /*! Distancia maxima na qual o inimigo vai seguir o jogador,
     de centro a centro. */
 #define INIM_MAX_DIST (120.0f)
