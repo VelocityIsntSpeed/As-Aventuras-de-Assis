@@ -57,6 +57,13 @@ typedef struct // GameState
         float rot;
         //! Health Points.
         float hp;
+        // Variavel q vai ser o angulo q muda com o ataque
+        float atqAnguloDiferenca ;
+        // Variavel que determina se o ataque esta ativo
+        bool atqAtivo;
+        // Variavel q grava onde o arco de ataque comecou
+        float inicAtq;
+
     }
     jog;
 
@@ -194,7 +201,7 @@ void InicializarJogador(GameState* gs);
 void MoverJog(GameState* gs);
 
 /*! Ataque do jogador. Deve ser chamada todo frame. */
-void AtaqueJogador(GameState* gs);
+void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX]);
 
 
 // inimigo.c ------------------------------------------------------------------

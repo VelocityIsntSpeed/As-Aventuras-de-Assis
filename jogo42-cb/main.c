@@ -12,6 +12,8 @@
 #include "stdlib.h" // Pelo malloc
 
 
+
+
 int main(void)
 {
     // [[[[[ INICIALIZACAO ]]]]]
@@ -49,6 +51,9 @@ int main(void)
     SpawnarInimigo(pos1, gs);
     Vector2 pos2 = {RectDaTile(30, 6).x, RectDaTile(30, 6).y};
     SpawnarInimigo(pos2, gs);
+    /* Guarda quais inimigos ja foram atingidos nesse ataque (para nao
+           causar dano neles novamente no mesmo ataque) */
+        bool atingido[INIM_QTD_MAX] = { 0 };
 
 
 
@@ -70,8 +75,32 @@ int main(void)
         // Mover jogador
         MoverJog(gs);
 
+        /// Tudo que os arquivos precisam pra processar o ataque numa posicao temporaria
         // Ataque do jogador
-        AtaqueJogador(gs);
+
+
+        gs->jog.atqAnguloDiferenca += 60 * GetFrameTime();
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            gs->jog.inicAtq = gs->jog.rot;
+            gs->jog.atqAnguloDiferenca = gs->jog.rot;
+            gs->jog.atqAtivo = true;
+        }
+        if (gs->jog.atqAnguloDiferenca > gs->jog.inicAtq+60)
+        {
+            gs->jog.atqAtivo = false;
+            for (int i = 0; i<INIM_QTD_MAX; i++)
+            {
+                atingido[i] = false;
+            }
+        }
+
+        if (gs->jog.atqAtivo)
+        {
+        AtaqueJogador(gs, atingido);
+        }
+
+
 
         // Mover inimigo
         for(int i=0; i<INIM_QTD_MAX; i++)
@@ -81,6 +110,7 @@ int main(void)
                 MoverInimigo(&gs->inimigos[i], gs);
             }
         }
+
 
 
         // Ataque Inimigo

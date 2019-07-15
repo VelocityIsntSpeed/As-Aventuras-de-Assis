@@ -20,40 +20,38 @@ void InicializarJogador(GameState* gs)
     gs->jog.rot = 0;
     // HP
     gs->jog.hp = 150;
+    gs->jog.atqAtivo = false;
 }
 
 
 
-void AtaqueJogador(GameState* gs)
+void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX])
 {
-    // Atacar quando clicar
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
-    {
-        // Calcular posicao da hitbox de ataque
-        Vector2 posHitbox = { JOG_ATQ_DIST * cosf(gs->jog.rot * DEG2RAD),
-                              JOG_ATQ_DIST * sinf(gs->jog.rot * DEG2RAD) };
+
+    // Calcular posicao da hitbox de ataque
+        Vector2 posHitbox = { JOG_ATQ_DIST * cosf(gs->jog.atqAnguloDiferenca * DEG2RAD),
+                              JOG_ATQ_DIST * sinf(gs->jog.atqAnguloDiferenca * DEG2RAD) };
 
         posHitbox = Vector2Add(gs->jog.pos, posHitbox);
 
-        /* Guarda quais inimigos ja foram atingidos nesse ataque (para nao
-           causar dano neles novamente no mesmo ataque) */
-        bool atingido[INIM_QTD_MAX] = { 0 };
 
-        // Se acertar o inimigo
-         for (int i = 0; i<INIM_QTD_MAX; i++)
+     // Se acertar o inimigo
+
+    for (int i = 0; i<INIM_QTD_MAX; i++)
+    {
+        if(!atingido[i])
         {
-            if(!atingido[i])
-            {
                 if (CheckCollisionCircles(posHitbox, JOG_ATQ_RAIO,
                                   gs->inimigos[i].pos, INIM_RAIO))
                 {
                     gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                    atingido[i] = true;
                     if (gs->inimigos[i].hp <= 0)
                     {
                         gs->inimigos[i].existe = false;
                     }
                 }
-            }
+
         }
 
     }
