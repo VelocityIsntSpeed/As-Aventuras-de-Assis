@@ -91,6 +91,14 @@ bool SpawnarInimigo(Vector2 pos, GameState* gs)
     // Se nao tinha espaco livre, retornar false
     return false;
 }
+// Isso elimina tanto a existencia dele como a posicao dele
+void matarInimigo(GameState* gs, int i)
+{
+    gs->inimigos[i].existe = false;
+    gs->inimigos[i].pos.x = -20;
+    gs->inimigos[i].pos.y = -20;
+
+}
 
 
 

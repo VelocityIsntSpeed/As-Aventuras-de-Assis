@@ -26,7 +26,7 @@ void InicializarJogador(GameState* gs)
 
 
 
-void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX])
+void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX], bool* varou)
 {
     if (gs->jog.arma)
     {
@@ -60,6 +60,12 @@ void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX])
     }
     else
     {
+        // Se ele detectar q o tiro ja pegou em alguma coisa ele retorna e acaba com a animacao
+        if(*varou)
+        {
+            return;
+        }
+
         gs->jog.posHit.x = gs->jog.atqAnguloDiferenca * cosf(gs->jog.rot * DEG2RAD);
         gs->jog.posHit.y = gs->jog.atqAnguloDiferenca * sinf(gs->jog.rot * DEG2RAD);
         gs->jog.posHit = Vector2Add(gs->jog.pos, gs->jog.posHit);
@@ -70,11 +76,13 @@ void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX])
                     if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
                                       gs->inimigos[i].pos, INIM_RAIO))
                     {
+
                         gs->inimigos[i].hp -= JOG_ATQ_DANO;
                         atingido[i] = true;
+                        *varou = true;
                         if (gs->inimigos[i].hp <= 0)
                         {
-                            gs->inimigos[i].existe = false;
+                            matarInimigo(gs, i);
                         }
 
                     }
@@ -82,6 +90,7 @@ void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX])
             }
 
         }
+
 
     }
 }

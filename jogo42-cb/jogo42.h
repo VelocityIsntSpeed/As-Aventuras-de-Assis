@@ -213,7 +213,7 @@ void InicializarJogador(GameState* gs);
 void MoverJog(GameState* gs);
 
 /*! Ataque do jogador. Deve ser chamada todo frame. */
-void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX]);
+void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX], bool* varou);
 
 
 
@@ -229,6 +229,9 @@ void AtaqueInimigo(struct Inimigo* inimigo, GameState* gs);
 /*! Spawna um inimigo na posicao dada. Retorna true se o spawn foi realizado
     com sucesso, e false se nao havia espaco livre no array de inimigos. */
 bool SpawnarInimigo(Vector2 pos, GameState* gs);
+
+/*! Seta todos os valores que importam do inimigo pra um estado q n afeta a atividade do jogo*/
+void matarInimigo(GameState* gs, int i);
 
 
 // level.c --------------------------------------------------------------------

@@ -56,6 +56,8 @@ int main(void)
     /* Guarda quais inimigos ja foram atingidos nesse ataque (para nao
            causar dano neles novamente no mesmo ataque) */
         bool atingido[INIM_QTD_MAX] = { 0 };
+        // Bool pra dizer se o tiro ja fez contado com alguma coisa
+        bool varou = false;
 
 
 
@@ -97,6 +99,7 @@ int main(void)
             // Aqui sao setadas as posicoes angulares originais do ataque
             gs->jog.atqAnguloDiferenca = 1;
             gs->jog.atqAtivo = true;
+            varou = false;
 
         }
         // Aqui e marcada a posicao angular final do ataque
@@ -106,12 +109,13 @@ int main(void)
             for (int i = 0; i<INIM_QTD_MAX; i++)
             {
                 atingido[i] = false;
+                varou = false;
             }
         }
 
         if (gs->jog.atqAtivo)
         {
-        AtaqueJogador(gs, atingido);
+        AtaqueJogador(gs, atingido, &varou);
         }
 
 
