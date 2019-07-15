@@ -213,7 +213,7 @@ void InicializarJogador(GameState* gs);
 void MoverJog(GameState* gs);
 
 /*! Ataque do jogador. Deve ser chamada todo frame. */
-void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX], bool* varou);
+void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX], bool* varou, float ang, Vector2 atqin);
 
 
 

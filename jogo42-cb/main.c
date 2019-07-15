@@ -11,7 +11,9 @@
 #include "jogo42.h"
 #include "stdlib.h" // Pelo malloc
 
-
+// Variagel flobal temporaria
+float ang;
+Vector2 atqin;
 
 
 int main(void)
@@ -112,10 +114,16 @@ int main(void)
                 varou = false;
             }
         }
+        // Serve pra impedir q a "bala" do tiro curve
+        if(!gs->jog.atqAtivo)
+        {
+            ang = gs->jog.rot;
+            atqin = gs->jog.pos;
+        }
 
         if (gs->jog.atqAtivo)
         {
-        AtaqueJogador(gs, atingido, &varou);
+        AtaqueJogador(gs, atingido, &varou, ang, atqin);
         }
 
 

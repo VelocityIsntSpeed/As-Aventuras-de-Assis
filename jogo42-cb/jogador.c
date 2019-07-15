@@ -26,7 +26,7 @@ void InicializarJogador(GameState* gs)
 
 
 
-void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX], bool* varou)
+void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX], bool* varou, float ang, Vector2 atqin)
 {
     if (gs->jog.arma)
     {
@@ -66,9 +66,9 @@ void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX], bool* varou)
             return;
         }
 
-        gs->jog.posHit.x = gs->jog.atqAnguloDiferenca * cosf(gs->jog.rot * DEG2RAD);
-        gs->jog.posHit.y = gs->jog.atqAnguloDiferenca * sinf(gs->jog.rot * DEG2RAD);
-        gs->jog.posHit = Vector2Add(gs->jog.pos, gs->jog.posHit);
+        gs->jog.posHit.x = gs->jog.atqAnguloDiferenca * cosf(ang * DEG2RAD);
+        gs->jog.posHit.y = gs->jog.atqAnguloDiferenca * sinf(ang * DEG2RAD);
+        gs->jog.posHit = Vector2Add(atqin, gs->jog.posHit);
         for (int i = 0; i<INIM_QTD_MAX; i++)
         {
             if(!atingido[i])
