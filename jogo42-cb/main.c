@@ -81,45 +81,8 @@ int main(void)
         // Mover jogador
         MoverJog(gs);
 
-        /// Tudo que os arquivos precisam pra processar o ataque numa posicao temporaria
         // Ataque do jogador
-
-        if(IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
-        {
-            gs->jog.arma = !gs->jog.arma;
-        }
-
-        gs->jog.atqAnguloDiferenca += JOG_ATQ_VEL * GetFrameTime();
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && gs->jog.arma)
-        {
-            // Aqui sao setadas as posicoes angulares originais do ataque
-            gs->jog.inicAtq = gs->jog.rot-JOG_ATQ_ARQ/2;
-            gs->jog.atqAnguloDiferenca = gs->jog.rot-JOG_ATQ_ARQ/2;
-            gs->jog.atqAtivo = true;
-        }else if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->jog.arma)
-        {
-            // Aqui sao setadas as posicoes angulares originais do ataque
-            gs->jog.atqAnguloDiferenca = 1;
-            gs->jog.atqAtivo = true;
-            varou = false;
-
-        }
-        // Aqui e marcada a posicao angular final do ataque
-        if (gs->jog.atqAnguloDiferenca > gs->jog.inicAtq+JOG_ATQ_ARQ)
-        {
-            gs->jog.atqAtivo = false;
-            for (int i = 0; i<INIM_QTD_MAX; i++)
-            {
-                atingido[i] = false;
-                varou = false;
-            }
-        }
-        // Serve pra impedir q a "bala" do tiro curve
-        if(!gs->jog.atqAtivo)
-        {
-            ang = gs->jog.rot;
-            atqin = gs->jog.pos;
-        }
+        ataqueSet(gs, &varou, atingido, &ang, &atqin);
 
         if (gs->jog.atqAtivo)
         {
