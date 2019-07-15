@@ -173,23 +173,13 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         }
 
         // Indicador de ataque do jogador -------------------------------------
-        //"Inicia o ataque"
 
-        // Incrementar atqAnguloDiferenca 60 graus por segundo
-
-
-        // Calcular posicao da hitbox de ataque
-
-        Vector2 posHitbox = { JOG_ATQ_DIST * cosf(gs->jog.atqAnguloDiferenca * DEG2RAD),
-                              JOG_ATQ_DIST * sinf(gs->jog.atqAnguloDiferenca * DEG2RAD) };
-
-        posHitbox = Vector2Add(gs->jog.pos, posHitbox);
 
 
         // Desenhar contorno de circulo se o ataque estiver ativo
         if (gs->jog.atqAtivo)
         {
-            DrawCircleLines(posHitbox.x, posHitbox.y, JOG_ATQ_RAIO, GREEN);
+            DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, GREEN);
         }
 
         //---------------------------------------------------------------------

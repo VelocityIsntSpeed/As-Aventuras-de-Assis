@@ -49,8 +49,10 @@ int main(void)
     }
     Vector2 pos1 = {RectDaTile(30, 4).x, RectDaTile(30, 4).y};
     SpawnarInimigo(pos1, gs);
-    Vector2 pos2 = {RectDaTile(30, 6).x, RectDaTile(30, 6).y};
+    Vector2 pos2 = {RectDaTile(30, 7).x, RectDaTile(30, 7).y};
     SpawnarInimigo(pos2, gs);
+    Vector2 pos3 = {RectDaTile(28, 7).x, RectDaTile(28, 7).y};
+    SpawnarInimigo(pos3, gs);
     /* Guarda quais inimigos ja foram atingidos nesse ataque (para nao
            causar dano neles novamente no mesmo ataque) */
         bool atingido[INIM_QTD_MAX] = { 0 };
@@ -78,14 +80,24 @@ int main(void)
         /// Tudo que os arquivos precisam pra processar o ataque numa posicao temporaria
         // Ataque do jogador
 
+        if(IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
+        {
+            gs->jog.arma = !gs->jog.arma;
+        }
 
         gs->jog.atqAnguloDiferenca += JOG_ATQ_VEL * GetFrameTime();
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && gs->jog.arma)
         {
             // Aqui sao setadas as posicoes angulares originais do ataque
             gs->jog.inicAtq = gs->jog.rot-JOG_ATQ_ARQ/2;
             gs->jog.atqAnguloDiferenca = gs->jog.rot-JOG_ATQ_ARQ/2;
             gs->jog.atqAtivo = true;
+        }else if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->jog.arma)
+        {
+            // Aqui sao setadas as posicoes angulares originais do ataque
+            gs->jog.atqAnguloDiferenca = 1;
+            gs->jog.atqAtivo = true;
+
         }
         // Aqui e marcada a posicao angular final do ataque
         if (gs->jog.atqAnguloDiferenca > gs->jog.inicAtq+JOG_ATQ_ARQ)

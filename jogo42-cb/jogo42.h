@@ -53,16 +53,20 @@ typedef struct // GameState
     {
         //! Posicao world.
         Vector2 pos;
+        //! Posicao da hitbox
+        Vector2 posHit;
         //! Rotacao em graus.
         float rot;
         //! Health Points.
         float hp;
-        // Variavel q vai ser o angulo q muda com o ataque
+        //! Variavel q vai ser o angulo q muda com o ataque
         float atqAnguloDiferenca ;
-        // Variavel que determina se o ataque esta ativo
+        //! Variavel que determina se o ataque esta ativo
         bool atqAtivo;
-        // Variavel q grava onde o arco de ataque comecou
+        //! Variavel q grava onde o arco de ataque comecou
         float inicAtq;
+        //! Variavel q diz qual arma o jogador esta usando
+        bool arma;
 
     }
     jog;

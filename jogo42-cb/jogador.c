@@ -21,36 +21,65 @@ void InicializarJogador(GameState* gs)
     // HP
     gs->jog.hp = 150;
     gs->jog.atqAtivo = false;
+    gs->jog.arma = true;
 }
 
 
 
 void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX])
 {
-
-    // Calcular posicao da hitbox de ataque
-        Vector2 posHitbox = { JOG_ATQ_DIST * cosf(gs->jog.atqAnguloDiferenca * DEG2RAD),
-                              JOG_ATQ_DIST * sinf(gs->jog.atqAnguloDiferenca * DEG2RAD) };
-
-        posHitbox = Vector2Add(gs->jog.pos, posHitbox);
-
-
-     // Se acertar o inimigo
-
-    for (int i = 0; i<INIM_QTD_MAX; i++)
+    if (gs->jog.arma)
     {
-        if(!atingido[i])
+        // Calcular posicao da hitbox de ataque
+            gs->jog.posHit.x = JOG_ATQ_DIST * cosf(gs->jog.atqAnguloDiferenca * DEG2RAD);
+            gs->jog.posHit.y = JOG_ATQ_DIST * sinf(gs->jog.atqAnguloDiferenca * DEG2RAD);
+
+            gs->jog.posHit = Vector2Add(gs->jog.pos, gs->jog.posHit);
+
+
+         // Se acertar o inimigo
+
+        for (int i = 0; i<INIM_QTD_MAX; i++)
         {
-                if (CheckCollisionCircles(posHitbox, JOG_ATQ_RAIO,
-                                  gs->inimigos[i].pos, INIM_RAIO))
-                {
-                    gs->inimigos[i].hp -= JOG_ATQ_DANO;
-                    atingido[i] = true;
-                    if (gs->inimigos[i].hp <= 0)
+            if(!atingido[i])
+            {
+                    if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
+                                      gs->inimigos[i].pos, INIM_RAIO))
                     {
-                        gs->inimigos[i].existe = false;
+                        gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                        atingido[i] = true;
+                        if (gs->inimigos[i].hp <= 0)
+                        {
+                            gs->inimigos[i].existe = false;
+                        }
                     }
-                }
+
+            }
+
+        }
+    }
+    else
+    {
+        gs->jog.posHit.x = gs->jog.atqAnguloDiferenca * cosf(gs->jog.rot * DEG2RAD);
+        gs->jog.posHit.y = gs->jog.atqAnguloDiferenca * sinf(gs->jog.rot * DEG2RAD);
+        gs->jog.posHit = Vector2Add(gs->jog.pos, gs->jog.posHit);
+        for (int i = 0; i<INIM_QTD_MAX; i++)
+        {
+            if(!atingido[i])
+            {
+                    if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
+                                      gs->inimigos[i].pos, INIM_RAIO))
+                    {
+                        gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                        atingido[i] = true;
+                        if (gs->inimigos[i].hp <= 0)
+                        {
+                            gs->inimigos[i].existe = false;
+                        }
+
+                    }
+
+            }
 
         }
 
