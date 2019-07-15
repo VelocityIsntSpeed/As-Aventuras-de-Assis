@@ -58,12 +58,12 @@ static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
 
 
 //! Desenha o level.
-static void DesenharLevel(const enum Tile lvl[TAM_SALA_Y][TAM_SALA_X])
+static void DesenharLevel(const enum Tile lvl[MAPA_MAX_Y][MAPA_MAX_X])
 {
     // Iterar sobre cada tile
-    for (int lin = 0; lin < TAM_SALA_Y; lin++)
+    for (int lin = 0; lin < MAPA_MAX_Y; lin++)
     {
-        for (int col = 0; col < TAM_SALA_X; col++)
+        for (int col = 0; col < MAPA_MAX_X; col++)
         {
             // Tile nas coordenadas atuais
             const enum Tile AQUI = lvl[lin][col];

@@ -11,7 +11,7 @@
 #include "jogo42.h"
 
 
-void InicializarLevel(enum Tile lvl[TAM_SALA_Y][TAM_SALA_X])
+void InicializarLevel(enum Tile lvl[MAPA_MAX_Y][MAPA_MAX_X])
 {
     /*
     Esta string determina como vai ser o level. Isso eh provisorio, so
@@ -51,14 +51,14 @@ void InicializarLevel(enum Tile lvl[TAM_SALA_Y][TAM_SALA_X])
     "...#...#...#...#......................#" //26
     "................#######################";//27
 
-    /* Iterar sobre cada elemento de lvl, setando-os de acordo com os
-       caracteres correspondentes em STRING_DO_LEVEL. */
-    for (int lin = 0; lin < TAM_SALA_Y; lin++)
+
+    // Iterar sobre cada elemento de lvl
+    for (int lin = 0; lin < MAPA_MAX_Y; lin++)
     {
-        for (int col = 0; col < TAM_SALA_X; col++)
+        for (int col = 0; col < MAPA_MAX_X; col++)
         {
             // Indice em STRING_DO_LEVEL correspondente ahs lin e col atuais
-            const int INDICE_STR = lin * TAM_SALA_X + col;
+            const int INDICE_STR = lin * MAPA_MAX_X + col;
 
             // Valor Tile que vai ser definido
             enum Tile tile;
@@ -110,9 +110,9 @@ bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs)
     }
 
     //[ TILES ]----------------------------------------------------------------
-    for (int lin = 0; lin < TAM_SALA_Y; lin++)
+    for (int lin = 0; lin < MAPA_MAX_Y; lin++)
     {
-        for (int col = 0; col < TAM_SALA_X; col++)
+        for (int col = 0; col < MAPA_MAX_X; col++)
         {
             const enum Tile* AQUI = &gs->sala[lin][col];
 

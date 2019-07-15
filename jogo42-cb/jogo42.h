@@ -18,10 +18,10 @@
 
 
 //[ DEFINICOES DE CONSTANTES UTILIZADAS NAS DEFINICOES DE TIPOS ]==============
-//! Tamanho do level, em numero de tiles.
-#define TAM_SALA_X 39
-//! Tamanho do level, em numero de tiles.
-#define TAM_SALA_Y 27
+//! TODO
+#define MAPA_MAX_X 39
+//! TODO
+#define MAPA_MAX_Y 27
 
 //! Quatidade maxima de inimigos */
 #define INIM_QTD_MAX (4)
@@ -86,7 +86,7 @@ typedef struct // GameState
 
 
     //[ LEVEL ]----------------------------------------------------------------
-    enum Tile sala[TAM_SALA_Y][TAM_SALA_X];
+    enum Tile sala[MAPA_MAX_Y][MAPA_MAX_X];
 
 
     //[ OBSTACULOS ]-----------------------------------------------------------
@@ -215,7 +215,7 @@ bool SpawnarInimigo(Vector2 pos, GameState* gs);
 void MoverObst(GameState* gs);
 
 /*! Inicializa o level de acordo com a string na definicao desta funcao. */
-void InicializarLevel(enum Tile lvl[TAM_SALA_Y][TAM_SALA_X]);
+void InicializarLevel(enum Tile lvl[MAPA_MAX_Y][MAPA_MAX_X]);
 
 /*! Inicializa os obstaculos. */
 void InicializarObst(GameState* gs);
