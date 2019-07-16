@@ -13,7 +13,7 @@
 #include "estagios.h"
 
 
-void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
+void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameState* gs)
 {
     // Inicializar matriz_lvl para zero
     for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
@@ -50,6 +50,16 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
             {
                 case '.':
                     matriz_lvl[lin][col] = TILE_chao; break;
+
+                case 'E':
+                    matriz_lvl[lin][col] = TILE_chao;
+                    // Adicionar inimigos:
+                    if (!SpawnarInimigo(CentroDaTile(col, lin), gs))
+                    {
+                        // TODO ERRO: Nao foi possivel spawnar inimigo especificado pelo mapa porque o array de inimigos estava cheio!
+                    }
+                break;
+
                 case '#':
                     matriz_lvl[lin][col] = TILE_parede; break;
                 case 'I':
@@ -57,6 +67,9 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
                 default:
                     matriz_lvl[lin][col] = TILE_vazio; break;
             }
+
+
+
             col++;
         }
 

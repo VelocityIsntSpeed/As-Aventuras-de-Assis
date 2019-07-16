@@ -171,6 +171,9 @@ GameState;
 /*! Retorna o retangulo correspondente ah tile nas dimensoes fornecidas. */
 Rectangle RectDaTile(int x, int y);
 
+/*! Retorna a posicao do centro da tile de coordenadas dadas. */
+Vector2 CentroDaTile(int col, int lin);
+
 /*! Retorna a posicao do cursor em coordenadas world. */
 Vector2 PosWorldDoCursor(const GameState* gs);
 
@@ -216,8 +219,9 @@ bool SpawnarInimigo(Vector2 pos, GameState* gs);
 /*! Move os obstaculos. */
 void MoverObst(GameState* gs);
 
-/*! Inicializa o level de acordo com a string na definicao desta funcao. */
-void InicializarLevel(enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COLS]);
+/*! Inicializa o level de acordo com a string do estagio */
+void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS],
+                      GameState* gs);
 
 /*! Inicializa os obstaculos. */
 void InicializarObst(GameState* gs);
