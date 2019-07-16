@@ -177,7 +177,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
 
         // Desenhar contorno de circulo se o ataque estiver ativo
-        if (gs->jog.atqAtivo)
+        if (gs->atq.atqAtivo)
         {
             DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, GREEN);
         }

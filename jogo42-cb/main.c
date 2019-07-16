@@ -11,9 +11,7 @@
 #include "jogo42.h"
 #include "stdlib.h" // Pelo malloc
 
-// Variagel flobal temporaria
-float ang;
-Vector2 atqin;
+
 
 
 int main(void)
@@ -82,11 +80,11 @@ int main(void)
         MoverJog(gs);
 
         // Ataque do jogador
-        ataqueSet(gs, &varou, atingido, &ang, &atqin);
+        ataqueSet(gs);
 
-        if (gs->jog.atqAtivo)
+        if (gs->atq.atqAtivo)
         {
-        AtaqueJogador(gs, atingido, &varou, ang, atqin);
+        AtaqueJogador(gs);
         }
 
 

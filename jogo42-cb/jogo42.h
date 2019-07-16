@@ -59,17 +59,31 @@ typedef struct // GameState
         float rot;
         //! Health Points.
         float hp;
-        //! Variavel q vai ser o angulo q muda com o ataque
-        float atqAnguloDiferenca ;
+
+    }
+    jog;
+
+    // Estado do ataque do jogador
+    struct Atq
+    {
+        //! Variavel q vai ser o quanto o ataque ja andou (distancia na circunferencia , ou de distancia real)
+        float DistDiferenca ;
         //! Variavel que determina se o ataque esta ativo
         bool atqAtivo;
         //! Variavel q grava onde o arco de ataque comecou
         float inicAtq;
         //! Variavel q diz qual arma o jogador esta usando
         bool arma;
+        //! Bool pra ver se o tiro ja atingiu alguma coisa
+        bool varou;
+        //! Float pra pegar o angulo q o ataque vai usar
+        float ang;
+        //! Vetor pra pegar a posicao q o ataque vai usar
+        Vector2 atqin;
+
 
     }
-    jog;
+    atq;
 
     // Camera
     Camera2D cam;
@@ -90,6 +104,8 @@ typedef struct // GameState
         float timerAtq;
         /// Bool da existencia do inimigo
         bool existe;
+        //! Bool pra ver se o inimigo ja foi atingido pelo ataque
+        bool atingido[INIM_QTD_MAX];
     };
 
     //! O inimigo. So tem um por enquanto, depois vai ter uma lista.
@@ -213,10 +229,27 @@ void InicializarJogador(GameState* gs);
 void MoverJog(GameState* gs);
 
 /*! Ataque do jogador. Deve ser chamada todo frame. */
-void AtaqueJogador(GameState* gs, bool atingido[INIM_QTD_MAX], bool* varou, float ang, Vector2 atqin);
+void AtaqueJogador(GameState* gs);
 
 /*! Seta as coisas pra AtaqueJogador funcionar*/
-void ataqueSet(GameState* gs, bool* varou, bool atingido[INIM_QTD_MAX], float* ang, Vector2* atqin);
+void ataqueSet(GameState* gs);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
