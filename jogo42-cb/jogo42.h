@@ -55,6 +55,8 @@ typedef struct // GameState
     {
         //! Posicao world.
         Vector2 pos;
+        //! Posicao da hitbox
+        Vector2 posHit;
         //! Rotacao em graus.
         float rot;
         //! Health Points.
@@ -62,6 +64,26 @@ typedef struct // GameState
     }
     jog;
 
+    // Estado do ataque do jogador
+    struct Atq
+    {
+
+        //! Variavel q vai ser o progresso do ataque
+        float DistDiferenca ;
+        //! Variavel que determina se o ataque esta ativo
+        bool atqAtivo;
+        //! Variavel q grava onde o arco de ataque comecou
+        float inicAtq;
+        //! Variavel q diz qual arma o jogador esta usando
+        bool arma;
+        //! Float pra pegar o angulo q o ataque vai usar
+        float ang;
+        //! Vetor pra pegar a posicao q o ataque vai usar
+        Vector2 atqin;
+
+
+    }
+    atq;
     // Camera
     Camera2D cam;
 
@@ -81,6 +103,8 @@ typedef struct // GameState
         float timerAtq;
         /// Bool da existencia do inimigo
         bool existe;
+        //! Bool pra ver se o inimigo ja foi atingido pelo ataque
+        bool atingido[INIM_QTD_MAX];
     };
 
     //! O inimigo. So tem um por enquanto, depois vai ter uma lista.
@@ -120,11 +144,25 @@ GameState;
 //! Distancia entre o centro da posicao da hitbox de ataque e o jogador.
 #define JOG_ATQ_DIST (50.0f)
 
+
 //! Raio da hitbox de ataque
 #define JOG_ATQ_RAIO (10.0f)
 
 //! Dano de ataque.
 #define JOG_ATQ_DANO (20.0f)
+
+//! Velocidade da espada
+#define JOG_ESP_VEL (900.0f)
+
+//! Arco da espada
+#define JOG_ESP_ARC (110.0)
+
+//! Velocidade do tiro
+#define JOG_TIR_VEL (900.0f)
+
+//! Alcance do tiro
+#define JOG_TIR_ALC (220.0f)
+
 
 
 //[ INIMIGO ]------------------------------------------------------------------
@@ -202,6 +240,10 @@ void MoverJog(GameState* gs);
 /*! Ataque do jogador. Deve ser chamada todo frame. */
 void AtaqueJogador(GameState* gs);
 
+/*! Seta as coisas pra AtaqueJogador funcionar*/
+void ataqueSet(GameState* gs);
+
+
 
 // inimigo.c ------------------------------------------------------------------
 /*! Move o inimigo. */
@@ -214,6 +256,8 @@ void AtaqueInimigo(struct Inimigo* inimigo, GameState* gs);
     com sucesso, e false se nao havia espaco livre no array de inimigos. */
 bool SpawnarInimigo(Vector2 pos, GameState* gs);
 
+/*! Seta todos os valores que importam do inimigo pra um estado q n afeta a atividade do jogo*/
+void matarInimigo(GameState* gs, int i);
 
 // level.c --------------------------------------------------------------------
 /*! Move os obstaculos. */
