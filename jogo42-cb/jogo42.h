@@ -22,6 +22,8 @@
 #define MAPA_QTD_COLS 75
 //! Quantidade maxima de linhas de um estagio
 #define MAPA_QTD_LINS 75
+//! Tamanho maximo da string de inicializacao de level
+#define STR_LVL_TAM_MAX ((MAPA_QTD_COLS + 1) * MAPA_QTD_LINS + 1)
 
 //! Quatidade maxima de inimigos */
 #define INIM_QTD_MAX (4)

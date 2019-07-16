@@ -10,50 +10,11 @@
 
 #include "jogo42.h"
 
+#include "estagios.h"
+
 
 void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
 {
-    // TODO comentario explicando a implementacao dessa funcao
-
-    /*
-    Esta string determina como vai ser o level. Isso eh provisorio, so
-    enquanto nao tivermos um editor de mapa.
-     '.'  = TILE_chao
-     '#'  = TILE_parede
-     'I'  = TILE_paredeInvisivel
-    Resto = TILE_vazio
-    */
-    const char STR_LVL[] =
-//   123456789|123456789|123456789|123456789|
-    "#######################################\n" // 1
-    "........#.......#.....#.....#.....#####\n" // 2
-    ".  ..  .#............................##\n" // 3
-    ".  ..  .#............................##\n" // 4
-    "...  ...#...###...###...###..........##\n" // 5
-    "..    ..#...###...###...###..........##\n" // 6
-    "..    ..#............................##\n" // 7
-    ".. .. ..#............................##\n" // 8
-    "........#.......#.....#.....#.....#####\n" // 9
-    "#..#######...######.###################\n" //10
-    "#.......I......##.....#################\n" //11
-    "#.......I.......#......##........#....#\n" //12
-    "###########.....##......##.......#....#\n" //13
-    "#........###....##.......##...........#\n" //14
-    "#.........###....##.......###.........#\n" //15
-    "#..........#......##.......#####..##..#\n" //16
-    "#......#...#.......##.........#....#..#\n" //17
-    "#......#............#.................#\n" //18
-    ".......#...#..........................#\n" //19
-    "......................##......#....#..#\n" //20
-    ".#...#...#...#...#.....#########..##..#\n" //21
-    "...#...#...#...#...#..........#....#..#\n" //22
-    "......................................#\n" //23
-    ".#...#...#...#...#....................#\n" //24
-    "......................................#\n" //25
-    "...#...#...#...#......................#\n" //26
-    "................#######################\n";//27
-
-
     // Inicializar matriz_lvl para zero
     for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
     {
@@ -63,21 +24,20 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
         }
     }
 
+    /* Define qual level vai ser carregado. Isso eh temporario, ate ter o codigo
+       de troca de level. */
+    #define ESTAGIO estagio1
 
-    // Iterar sobre a string:
-
-    // Se a string for a maior possivel, esse valor vai ate o NUL no final dela
-    const int ITERAR_ATE = (MAPA_QTD_COLS + 1) * MAPA_QTD_LINS + 1;
-
-    for (int i=0, lin=0, col=0; i<ITERAR_ATE; i++)
+    // Iterar sobre a string
+    for (int i=0, lin=0, col=0; i<STR_LVL_TAM_MAX; i++)
     {
         // Se a string acabou
-        if (STR_LVL[i] == '\0')
+        if (ESTAGIO.stringDeLevel[i] == '\0')
         {
             break; // Sair do loop
         }
         // Se essa linha da string acabou
-        else if (STR_LVL[i] == '\n')
+        else if (ESTAGIO.stringDeLevel[i] == '\n')
         {
             // Pular para a proxima linha da matriz
             lin++;
@@ -86,7 +46,7 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
         else
         {
             // Setar caractere na matriz
-            switch (STR_LVL[i])
+            switch (ESTAGIO.stringDeLevel[i])
             {
                 case '.':
                     matriz_lvl[lin][col] = TILE_chao; break;
