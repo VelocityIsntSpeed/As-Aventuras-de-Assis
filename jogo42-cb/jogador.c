@@ -72,7 +72,7 @@ void AtaqueJogador(GameState* gs)
         {
             if(!gs->inimigos->atingido[i])
             {
-                    if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
+                    if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO/10,
                                       gs->inimigos[i].pos, INIM_RAIO))
                     {
 
@@ -94,8 +94,9 @@ void AtaqueJogador(GameState* gs)
 }
 
 
-void ataqueSet(GameState* gs)
+void ataqueSet(GameState* gs, Sound espadada, Sound pistola)
 {
+
 
 
 
@@ -113,12 +114,14 @@ void ataqueSet(GameState* gs)
             gs->atq.inicAtq = gs->jog.rot-JOG_ESP_ARC/2;
             gs->atq.DistDiferenca = gs->jog.rot-JOG_ESP_ARC/2;
             gs->atq.atqAtivo = true;
+            PlaySound(espadada);
         }else if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo)
         {
             // Aqui sao setadas as posicoes angulares originais do ataque
             gs->atq.inicAtq = 0;
             gs->atq.DistDiferenca = 1;
             gs->atq.atqAtivo = true;
+            PlaySound(pistola);
 
         }
         // Aqui e marcada a posicao angular final do ataque
@@ -145,7 +148,6 @@ void ataqueSet(GameState* gs)
             gs->atq.ang = gs->jog.rot;
             gs->atq.atqin = gs->jog.pos;
         }
-
 
 }
 

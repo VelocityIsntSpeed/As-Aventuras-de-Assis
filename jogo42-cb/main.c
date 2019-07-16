@@ -20,6 +20,11 @@ int main(void)
     InitWindow(1024, 576, "Jogo42");
     SetTargetFPS(60);
 
+    //[ AUDIO ]================================================================
+    InitAudioDevice();
+    Sound espadada = LoadSound("som/efeitos/espada/160756__cosmicembers__fast-swing-air-woosh.wav");
+    Sound pistola = LoadSound("som/efeitos/pistola/pistol.wav");
+
 
     //[ STRUCT DE ESTADO DO JOGO ]=============================================
     GameState* gs = malloc(sizeof(GameState));
@@ -62,14 +67,13 @@ int main(void)
     while (!WindowShouldClose())
     {
 
-
         // [[[[[ UPDATE ]]]]]
 
         // Mover jogador
         MoverJog(gs);
 
         // Ataque do jogador
-        ataqueSet(gs);
+        ataqueSet(gs, espadada, pistola);
 
         if (gs->atq.atqAtivo)
         {
@@ -118,6 +122,8 @@ int main(void)
 
 
     // Desinicializacao
+    UnloadSound(espadada);
+    CloseAudioDevice();
     CloseWindow(); // Close window and OpenGL context
     return 0;
 }

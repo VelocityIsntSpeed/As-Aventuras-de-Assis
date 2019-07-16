@@ -152,16 +152,16 @@ GameState;
 #define JOG_ATQ_DANO (20.0f)
 
 //! Velocidade da espada
-#define JOG_ESP_VEL (900.0f)
+#define JOG_ESP_VEL (500.0f)
 
 //! Arco da espada
-#define JOG_ESP_ARC (110.0)
+#define JOG_ESP_ARC (130.0)
 
 //! Velocidade do tiro
 #define JOG_TIR_VEL (900.0f)
 
 //! Alcance do tiro
-#define JOG_TIR_ALC (220.0f)
+#define JOG_TIR_ALC (800.0f)
 
 
 
@@ -241,7 +241,7 @@ void MoverJog(GameState* gs);
 void AtaqueJogador(GameState* gs);
 
 /*! Seta as coisas pra AtaqueJogador funcionar*/
-void ataqueSet(GameState* gs);
+void ataqueSet(GameState* gs, Sound espadada, Sound pistola);
 
 
 
