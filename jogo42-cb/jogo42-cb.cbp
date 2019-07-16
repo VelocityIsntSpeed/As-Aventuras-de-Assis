@@ -42,6 +42,7 @@
 		<Unit filename="desenhar.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="estagios.h" />
 		<Unit filename="helpers.c">
 			<Option compilerVar="CC" />
 		</Unit>
