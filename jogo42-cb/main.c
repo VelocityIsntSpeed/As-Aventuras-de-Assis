@@ -10,6 +10,9 @@
 
 #include "jogo42.h"
 #include "stdlib.h" // Pelo malloc
+#include "raymath.h"
+#define RAYGUI_IMPLEMENTATION //Header de Interface
+#include "raygui.h"
 
 
 int main(void)
@@ -112,6 +115,7 @@ int main(void)
         // [[[[[ DESENHAR ]]]]]
         BeginDrawing();
         Desenhar(gs, &SPRITE_JOG);
+        DesenharLoja();
         EndDrawing();
         // [[[ FIM DESENHAR ]]]
     }
