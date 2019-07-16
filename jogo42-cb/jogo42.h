@@ -156,7 +156,7 @@ GameState;
 
 //[ OUTROS ]-------------------------------------------------------------------
 //! Velocidade do obstaculo circular (por segundo).
-#define VEL_CIRC (100.0f)
+#define VEL_CIRC (200.0f)
 
 //! Tamanho de uma tile.
 #define TAM_TILE (47)

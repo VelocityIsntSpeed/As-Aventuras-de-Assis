@@ -121,9 +121,9 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
 void InicializarObst(GameState* gs)
 {
     // Obstaculo retangular
-    gs->obst.ret = (Rectangle){0, 0, 150, 100};
+    gs->obst.ret = (Rectangle){-150, 0, 100, 600};
     // Obstaculo circular
-    gs->obst.circCentro = (Vector2){1500, 350};
+    gs->obst.circCentro = (Vector2){RectDaTile(20, -4).x, RectDaTile(20, -4).y};
     gs->obst.circRaio = 150;
     gs->obst.circTaAndando = false;
 }
@@ -180,7 +180,7 @@ void MoverObst(GameState* gs)
     if (IsKeyDown(KEY_SPACE))
     {
         gs->obst.circTaAndando = true;
-        gs->obst.circCentro.x -= VEL_CIRC * GetFrameTime();
+        gs->obst.circCentro.y += VEL_CIRC * GetFrameTime();
         gs->obst.circRaio -= VEL_CIRC / 20.0f * GetFrameTime();
     }
     else
