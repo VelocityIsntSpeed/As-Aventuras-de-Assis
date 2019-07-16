@@ -53,11 +53,7 @@ int main(void)
     SpawnarInimigo(pos2, gs);
     Vector2 pos3 = {RectDaTile(28, 7).x, RectDaTile(28, 7).y};
     SpawnarInimigo(pos3, gs);
-    /* Guarda quais inimigos ja foram atingidos nesse ataque (para nao
-           causar dano neles novamente no mesmo ataque) */
-        bool atingido[INIM_QTD_MAX] = { 0 };
-        // Bool pra dizer se o tiro ja fez contado com alguma coisa
-        bool varou = false;
+
 
 
 
