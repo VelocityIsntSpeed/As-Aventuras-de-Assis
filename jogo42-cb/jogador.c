@@ -107,13 +107,13 @@ void ataqueSet(GameState* gs)
         }
 
         gs->atq.DistDiferenca += JOG_ATQ_VEL * GetFrameTime();
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && gs->atq.arma)
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && gs->atq.arma && !gs->atq.atqAtivo)
         {
             // Aqui sao setadas as posicoes angulares originais do ataque
             gs->atq.inicAtq = gs->jog.rot-JOG_ATQ_ARQ/2;
             gs->atq.DistDiferenca = gs->jog.rot-JOG_ATQ_ARQ/2;
             gs->atq.atqAtivo = true;
-        }else if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma)
+        }else if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo)
         {
             // Aqui sao setadas as posicoes angulares originais do ataque
             gs->atq.DistDiferenca = 1;
