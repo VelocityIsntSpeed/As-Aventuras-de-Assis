@@ -44,6 +44,7 @@ void AtaqueJogador(GameState* gs)
                     if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
                                       gs->inimigos[i].pos, INIM_RAIO))
                     {
+
                         gs->inimigos[i].hp -= JOG_ATQ_DANO;
                         gs->inimigos->atingido[i] = true;
                         if (gs->inimigos[i].hp <= 0)
@@ -63,6 +64,10 @@ void AtaqueJogador(GameState* gs)
         gs->jog.posHit.x = gs->atq.DistDiferenca * cosf(gs->atq.ang * DEG2RAD);
         gs->jog.posHit.y = gs->atq.DistDiferenca * sinf(gs->atq.ang * DEG2RAD);
         gs->jog.posHit = Vector2Add(gs->atq.atqin, gs->jog.posHit);
+        if(ColisaoComLevel(gs->jog.posHit, JOG_ATQ_RAIO, gs))
+        {
+            gs->atq.DistDiferenca = gs->atq.DistDiferenca +1000;
+        }
         for (int i = 0; i<INIM_QTD_MAX; i++)
         {
             if(!gs->inimigos->atingido[i])
