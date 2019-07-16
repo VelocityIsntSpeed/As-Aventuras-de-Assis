@@ -26,7 +26,7 @@
 #define STR_LVL_TAM_MAX ((MAPA_QTD_COLS + 1) * MAPA_QTD_LINS + 1)
 
 //! Quatidade maxima de inimigos */
-#define INIM_QTD_MAX (4)
+#define INIM_QTD_MAX (80)
 
 
 

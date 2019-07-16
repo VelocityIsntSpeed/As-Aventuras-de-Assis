@@ -13,9 +13,8 @@
 
 void InicializarJogador(GameState* gs)
 {
-    // Posicao
-    gs->jog.pos.x = RectDaTile(35, 5).x;
-    gs->jog.pos.y = RectDaTile(35, 5).y;
+    // Posicao OBS: A INICIALIZACAO DO MAPA IRA DEFINIR A POSICAO INICIAL DO JOGADOR
+    gs->jog.pos = Vector2Zero();
     // Rotacao
     gs->jog.rot = 0;
     // HP

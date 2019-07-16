@@ -10,11 +10,16 @@
 
 #include "jogo42.h"
 
-#include "estagios.h"
-
 
 void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameState* gs)
 {
+    #include "estagios.h"
+
+
+
+    // Colocar o jogador na posicao certa
+    gs->jog.pos = ESTAGIO.spawnPos;
+
     // Inicializar matriz_lvl para zero
     for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
     {
@@ -23,10 +28,6 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameSt
             matriz_lvl[lin][col] = TILE_vazio;
         }
     }
-
-    /* Define qual level vai ser carregado. Isso eh temporario, ate ter o codigo
-       de troca de level. */
-    #define ESTAGIO estagio1
 
     // Iterar sobre a string
     for (int i=0, lin=0, col=0; i<STR_LVL_TAM_MAX; i++)
