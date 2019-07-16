@@ -19,9 +19,9 @@
 
 //[ DEFINICOES DE CONSTANTES UTILIZADAS NAS DEFINICOES DE TIPOS ]==============
 //! Quantidade maxima de colunas de um estagio
-#define MAPA_QTD_COLS 39
+#define MAPA_QTD_COLS 75
 //! Quantidade maxima de linhas de um estagio
-#define MAPA_QTD_LINS 27
+#define MAPA_QTD_LINS 75
 
 //! Quatidade maxima de inimigos */
 #define INIM_QTD_MAX (4)
@@ -159,7 +159,7 @@ GameState;
 #define VEL_CIRC (100.0f)
 
 //! Tamanho de uma tile.
-#define TAM_TILE (35)
+#define TAM_TILE (47)
 
 
 
