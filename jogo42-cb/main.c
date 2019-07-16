@@ -20,14 +20,18 @@ int main(void)
     InitWindow(1024, 576, "Jogo42");
     SetTargetFPS(60);
 
-    //[ AUDIO ]================================================================
-    InitAudioDevice();
-    Sound espadada = LoadSound("som/efeitos/espada/160756__cosmicembers__fast-swing-air-woosh.wav");
-    Sound pistola = LoadSound("som/efeitos/pistola/pistol.wav");
 
 
     //[ STRUCT DE ESTADO DO JOGO ]=============================================
     GameState* gs = malloc(sizeof(GameState));
+
+
+    //[ AUDIO ]================================================================
+    InitAudioDevice();
+    gs->efet[0] = LoadSound("som/efeitos/espada/160756__cosmicembers__fast-swing-air-woosh.wav");
+    gs->efet[1] = LoadSound("som/efeitos/pistola/pistol.wav");
+    gs->efet[2] = LoadSound("som/efeitos/monstro/creature_hurt_01.ogg");
+    gs->efet[3] = LoadSound("som/efeitos/monstro/creature_roar_03.ogg");
 
 
     //[ JOGADOR ]==============================================================
@@ -73,7 +77,7 @@ int main(void)
         MoverJog(gs);
 
         // Ataque do jogador
-        ataqueSet(gs, espadada, pistola);
+        ataqueSet(gs);
 
         if (gs->atq.atqAtivo)
         {
@@ -122,7 +126,10 @@ int main(void)
 
 
     // Desinicializacao
-    UnloadSound(espadada);
+    for (int i = 0; i<QTD_FX; i++)
+    {
+        UnloadSound(gs->efet[i]);
+    }
     CloseAudioDevice();
     CloseWindow(); // Close window and OpenGL context
     return 0;

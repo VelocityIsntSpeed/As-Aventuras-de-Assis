@@ -28,6 +28,9 @@
 //! Quatidade maxima de inimigos */
 #define INIM_QTD_MAX (80)
 
+//! Quantidade de efeitos q agt ta usando*/
+#define QTD_FX 9
+
 
 
 //[ DEFINICOES DE TIPOS ]======================================================
@@ -87,6 +90,9 @@ typedef struct // GameState
     // Camera
     Camera2D cam;
 
+    // [ SONS ]----------------------------------------------------------------
+    Sound efet[QTD_FX];
+
 
     //[ INIMIGOS ]-------------------------------------------------------------
     // Estado de um inimigo
@@ -133,6 +139,8 @@ GameState;
 
 
 //[ DEFINICOES DE CONSTANTES ]=================================================
+
+
 
 //[ JOGADOR ]------------------------------------------------------------------
 //! Velocidade do jogador (por segundo).
@@ -203,6 +211,7 @@ GameState;
 
 
 
+
 //[ DECLARACOES DE FUNCOES DEFINIDAS EM OUTROS ARQUIVOS ]======================
 
 // helpers.c ------------------------------------------------------------------
@@ -241,7 +250,7 @@ void MoverJog(GameState* gs);
 void AtaqueJogador(GameState* gs);
 
 /*! Seta as coisas pra AtaqueJogador funcionar*/
-void ataqueSet(GameState* gs, Sound espadada, Sound pistola);
+void ataqueSet(GameState* gs);
 
 
 

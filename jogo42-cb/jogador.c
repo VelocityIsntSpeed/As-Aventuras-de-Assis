@@ -44,11 +44,16 @@ void AtaqueJogador(GameState* gs)
                     if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
                                       gs->inimigos[i].pos, INIM_RAIO))
                     {
-
+                        PlaySound(gs->efet[2]);
                         gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                        if (gs->inimigos[i].hp )
+                        {
+                            PlaySound(gs->efet[2]);
+                        }
                         gs->inimigos->atingido[i] = true;
                         if (gs->inimigos[i].hp <= 0)
                         {
+                            PlaySound(gs->efet[3]);
                             gs->inimigos[i].existe = false;
                         }
                     }
@@ -77,9 +82,14 @@ void AtaqueJogador(GameState* gs)
                     {
 
                         gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                        if (gs->inimigos[i].hp )
+                        {
+                            PlaySound(gs->efet[2]);
+                        }
                         gs->inimigos->atingido[i] = true;
                         if (gs->inimigos[i].hp <= 0)
                         {
+                            PlaySound(gs->efet[3]);
                             matarInimigo(gs, i);
                         }
 
@@ -94,7 +104,7 @@ void AtaqueJogador(GameState* gs)
 }
 
 
-void ataqueSet(GameState* gs, Sound espadada, Sound pistola)
+void ataqueSet(GameState* gs)
 {
 
 
@@ -114,14 +124,14 @@ void ataqueSet(GameState* gs, Sound espadada, Sound pistola)
             gs->atq.inicAtq = gs->jog.rot-JOG_ESP_ARC/2;
             gs->atq.DistDiferenca = gs->jog.rot-JOG_ESP_ARC/2;
             gs->atq.atqAtivo = true;
-            PlaySound(espadada);
+            PlaySound(gs->efet[0]);
         }else if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo)
         {
             // Aqui sao setadas as posicoes angulares originais do ataque
             gs->atq.inicAtq = 0;
             gs->atq.DistDiferenca = 1;
             gs->atq.atqAtivo = true;
-            PlaySound(pistola);
+            PlaySound(gs->efet[1]);
 
         }
         // Aqui e marcada a posicao angular final do ataque
