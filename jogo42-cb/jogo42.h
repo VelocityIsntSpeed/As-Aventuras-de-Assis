@@ -67,7 +67,8 @@ typedef struct // GameState
     // Estado do ataque do jogador
     struct Atq
     {
-        //! Variavel q vai ser o quanto o ataque ja andou (distancia na circunferencia , ou de distancia real)
+
+        //! Variavel q vai ser o progresso do ataque
         float DistDiferenca ;
         //! Variavel que determina se o ataque esta ativo
         bool atqAtivo;
@@ -75,8 +76,6 @@ typedef struct // GameState
         float inicAtq;
         //! Variavel q diz qual arma o jogador esta usando
         bool arma;
-        //! Bool pra ver se o tiro ja atingiu alguma coisa
-        bool varou;
         //! Float pra pegar o angulo q o ataque vai usar
         float ang;
         //! Vetor pra pegar a posicao q o ataque vai usar
@@ -145,17 +144,25 @@ GameState;
 //! Distancia entre o centro da posicao da hitbox de ataque e o jogador.
 #define JOG_ATQ_DIST (50.0f)
 
+
 //! Raio da hitbox de ataque
 #define JOG_ATQ_RAIO (10.0f)
 
 //! Dano de ataque.
 #define JOG_ATQ_DANO (20.0f)
 
-//! Velocidade do ataque do jogador
-#define JOG_ATQ_VEL (900.0f)
+//! Velocidade da espada
+#define JOG_ESP_VEL (900.0f)
 
-//! Arco do ataque
-#define JOG_ATQ_ARQ (110.0)
+//! Arco da espada
+#define JOG_ESP_ARC (110.0)
+
+//! Velocidade do tiro
+#define JOG_TIR_VEL (900.0f)
+
+//! Alcance do tiro
+#define JOG_TIR_ALC (220.0f)
+
 
 
 //[ INIMIGO ]------------------------------------------------------------------

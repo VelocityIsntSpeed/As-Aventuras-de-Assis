@@ -59,10 +59,6 @@ void AtaqueJogador(GameState* gs)
     else
     {
         // Se ele detectar q o tiro ja pegou em alguma coisa ele retorna e acaba com a animacao
-        if(gs->atq.varou)
-        {
-            return;
-        }
 
         gs->jog.posHit.x = gs->atq.DistDiferenca * cosf(gs->atq.ang * DEG2RAD);
         gs->jog.posHit.y = gs->atq.DistDiferenca * sinf(gs->atq.ang * DEG2RAD);
@@ -77,7 +73,6 @@ void AtaqueJogador(GameState* gs)
 
                         gs->inimigos[i].hp -= JOG_ATQ_DANO;
                         gs->inimigos->atingido[i] = true;
-                        gs->atq.varou = true;
                         if (gs->inimigos[i].hp <= 0)
                         {
                             matarInimigo(gs, i);
@@ -97,37 +92,46 @@ void AtaqueJogador(GameState* gs)
 void ataqueSet(GameState* gs)
 {
 
-    /// Tudo que os arquivos precisam pra processar o ataque numa posicao temporaria
-        // Ataque do jogador
+
+
 
         if(IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
         {
             gs->atq.arma = !gs->atq.arma;
         }
 
-        gs->atq.DistDiferenca += JOG_ATQ_VEL * GetFrameTime();
+        gs->atq.DistDiferenca += JOG_ESP_VEL * GetFrameTime();
+        gs->atq.DistDiferenca += JOG_TIR_VEL * GetFrameTime();
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && gs->atq.arma && !gs->atq.atqAtivo)
         {
             // Aqui sao setadas as posicoes angulares originais do ataque
-            gs->atq.inicAtq = gs->jog.rot-JOG_ATQ_ARQ/2;
-            gs->atq.DistDiferenca = gs->jog.rot-JOG_ATQ_ARQ/2;
+            gs->atq.inicAtq = gs->jog.rot-JOG_ESP_ARC/2;
+            gs->atq.DistDiferenca = gs->jog.rot-JOG_ESP_ARC/2;
             gs->atq.atqAtivo = true;
         }else if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo)
         {
             // Aqui sao setadas as posicoes angulares originais do ataque
+            gs->atq.inicAtq = 0;
             gs->atq.DistDiferenca = 1;
             gs->atq.atqAtivo = true;
-            gs->atq.varou = false;
 
         }
         // Aqui e marcada a posicao angular final do ataque
-        if (gs->atq.DistDiferenca > gs->atq.inicAtq+JOG_ATQ_ARQ)
+        if (gs->atq.arma && gs->atq.DistDiferenca > gs->atq.inicAtq+JOG_ESP_ARC)
         {
             gs->atq.atqAtivo = false;
             for (int i = 0; i<INIM_QTD_MAX; i++)
             {
                 gs->inimigos->atingido[i] = false;
-                gs->atq.varou = false;
+            }
+        }
+         // Aqui e marcada a posicao angular final do ataque
+        if ( !gs->atq.arma && gs->atq.DistDiferenca > gs->atq.inicAtq+JOG_TIR_ALC)
+        {
+            gs->atq.atqAtivo = false;
+            for (int i = 0; i<INIM_QTD_MAX; i++)
+            {
+                gs->inimigos->atingido[i] = false;
             }
         }
         // Serve pra impedir q a "bala" do tiro curve
