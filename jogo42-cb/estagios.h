@@ -5,11 +5,22 @@ struct Estagio
     const char stringDeLevel[STR_LVL_TAM_MAX];
     /*
 
+    ============================================================================
+    ================[[[[ INSTRUCOES DE EDICAO DE MAPA ]]]]======================
+    ============================================================================
+
      '.'     =   TILE_chao
      '#'     =   TILE_parede
      'I'     =   TILE_paredeInvisivel
      'E'     =   TILE_chao com inimigo inicialmente
     Resto    =   TILE_vazio
+
+
+    A string do mapa pode ser de qualquer tamanho (existe tamanho maximo, mas ele eh grande).
+    Eh recomendado editar este arquivo com um editor de texto utilizando uma fonte quadrada.
+
+    Se tiver algo de errado com a string, pode aparecer mensagens de erro
+    no terminal, entao preste atencao nisso.
 
     */
 
