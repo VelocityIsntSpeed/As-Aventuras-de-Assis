@@ -11,8 +11,10 @@
 #include "jogo42.h"
 
 
-void InicializarLevel(enum Tile lvl[MAPA_MAX_Y][MAPA_MAX_X])
+void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
 {
+    // TODO comentario explicando a implementacao dessa funcao
+
     /*
     Esta string determina como vai ser o level. Isso eh provisorio, so
     enquanto nao tivermos um editor de mapa.
@@ -21,61 +23,96 @@ void InicializarLevel(enum Tile lvl[MAPA_MAX_Y][MAPA_MAX_X])
      'I'  = TILE_paredeInvisivel
     Resto = TILE_vazio
     */
-    const char STRING_DO_LEVEL[] =
+    const char STR_LVL[] =
 //   123456789|123456789|123456789|123456789|
-    "#######################################" // 1
-    "........#.......#.....#.....#.....#####" // 2
-    ".  ..  .#............................##" // 3
-    ".  ..  .#............................##" // 4
-    "...  ...#...###...###...###..........##" // 5
-    "..    ..#...###...###...###..........##" // 6
-    "..    ..#............................##" // 7
-    ".. .. ..#............................##" // 8
-    "........#.......#.....#.....#.....#####" // 9
-    "#..#######...######.###################" //10
-    "#.......I......##.....#################" //11
-    "#.......I.......#......##........#....#" //12
-    "###########.....##......##.......#....#" //13
-    "#........###....##.......##...........#" //14
-    "#.........###....##.......###.........#" //15
-    "#..........#......##.......#####..##..#" //16
-    "#......#...#.......##.........#....#..#" //17
-    "#......#............#.................#" //18
-    ".......#...#..........................#" //19
-    "......................##......#....#..#" //20
-    ".#...#...#...#...#.....#########..##..#" //21
-    "...#...#...#...#...#..........#....#..#" //22
-    "......................................#" //23
-    ".#...#...#...#...#....................#" //24
-    "......................................#" //25
-    "...#...#...#...#......................#" //26
-    "................#######################";//27
+    "#######################################\n" // 1
+    "........#.......#.....#.....#.....#####\n" // 2
+    ".  ..  .#............................##\n" // 3
+    ".  ..  .#............................##\n" // 4
+    "...  ...#...###...###...###..........##\n" // 5
+    "..    ..#...###...###...###..........##\n" // 6
+    "..    ..#............................##\n" // 7
+    ".. .. ..#............................##\n" // 8
+    "........#.......#.....#.....#.....#####\n" // 9
+    "#..#######...######.###################\n" //10
+    "#.......I......##.....#################\n" //11
+    "#.......I.......#......##........#....#\n" //12
+    "###########.....##......##.......#....#\n" //13
+    "#........###....##.......##...........#\n" //14
+    "#.........###....##.......###.........#\n" //15
+    "#..........#......##.......#####..##..#\n" //16
+    "#......#...#.......##.........#....#..#\n" //17
+    "#......#............#.................#\n" //18
+    ".......#...#..........................#\n" //19
+    "......................##......#....#..#\n" //20
+    ".#...#...#...#...#.....#########..##..#\n" //21
+    "...#...#...#...#...#..........#....#..#\n" //22
+    "......................................#\n" //23
+    ".#...#...#...#...#....................#\n" //24
+    "......................................#\n" //25
+    "...#...#...#...#......................#\n" //26
+    "................#######################\n";//27
 
 
-    // Iterar sobre cada elemento de lvl
-    for (int lin = 0; lin < MAPA_MAX_Y; lin++)
+    // Inicializar matriz_lvl para zero
+    for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
     {
-        for (int col = 0; col < MAPA_MAX_X; col++)
+        for (int col = 0; col < MAPA_QTD_COLS; col++)
         {
-            // Indice em STRING_DO_LEVEL correspondente ahs lin e col atuais
-            const int INDICE_STR = lin * MAPA_MAX_X + col;
+            matriz_lvl[lin][col] = TILE_vazio;
+        }
+    }
 
-            // Valor Tile que vai ser definido
-            enum Tile tile;
-            // Definir `tile` de acordo com o caractere
-            switch (STRING_DO_LEVEL[INDICE_STR])
+
+    // Iterar sobre a string:
+
+    // Se a string for a maior possivel, esse valor vai ate o NUL no final dela
+    const int ITERAR_ATE = (MAPA_QTD_COLS + 1) * MAPA_QTD_LINS + 1;
+
+    for (int i=0, lin=0, col=0; i<ITERAR_ATE; i++)
+    {
+        // Se a string acabou
+        if (STR_LVL[i] == '\0')
+        {
+            break; // Sair do loop
+        }
+        // Se essa linha da string acabou
+        else if (STR_LVL[i] == '\n')
+        {
+            // Pular para a proxima linha da matriz
+            lin++;
+            col = 0;
+        }
+        else
+        {
+            // Setar caractere na matriz
+            switch (STR_LVL[i])
             {
                 case '.':
-                    tile = TILE_chao; break;
+                    matriz_lvl[lin][col] = TILE_chao; break;
                 case '#':
-                    tile = TILE_parede; break;
+                    matriz_lvl[lin][col] = TILE_parede; break;
                 case 'I':
-                    tile = TILE_paredeInvisivel; break;
-                case ' ': default:
-                    tile = TILE_vazio;
+                    matriz_lvl[lin][col] = TILE_paredeInvisivel; break;
+                default:
+                    matriz_lvl[lin][col] = TILE_vazio; break;
             }
+            col++;
+        }
 
-            lvl[lin][col] = tile;
+
+        // Deteccao de erros na string:
+        if (lin >= MAPA_QTD_LINS + 1)
+        {
+            fprintf(stderr, "ERRO: A string de inicializacao de level contem "
+                            "mais linhas do que o maximo!\n");
+            break;
+        }
+        if (col >= MAPA_QTD_COLS + 1)
+        {
+            fprintf(stderr, "ERRO: A linha %d da string de inicializacao de "
+                            "level eh maior do que o tamanho maximo!\n", lin);
+            break;
         }
     }
 }
@@ -110,9 +147,9 @@ bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs)
     }
 
     //[ TILES ]----------------------------------------------------------------
-    for (int lin = 0; lin < MAPA_MAX_Y; lin++)
+    for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
     {
-        for (int col = 0; col < MAPA_MAX_X; col++)
+        for (int col = 0; col < MAPA_QTD_COLS; col++)
         {
             const enum Tile* AQUI = &gs->sala[lin][col];
 
