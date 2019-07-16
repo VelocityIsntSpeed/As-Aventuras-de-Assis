@@ -9,6 +9,8 @@
 */
 
 #include "jogo42.h"
+#define RAYGUI_IMPLEMENTATION
+#include "raygui.h"
 
 
 //! Desenha no canto inferior esquerdo o texto que diz os controles.

@@ -10,9 +10,6 @@
 
 #include "jogo42.h"
 #include "stdlib.h" // Pelo malloc
-#include "raymath.h"
-#define RAYGUI_IMPLEMENTATION //Header de Interface
-#include "raygui.h"
 
 
 int main(void)
