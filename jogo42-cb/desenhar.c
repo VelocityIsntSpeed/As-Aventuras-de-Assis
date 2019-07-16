@@ -202,31 +202,34 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
     // Frames Por Segundo
     DrawFPS(GetScreenWidth() - 80, 10);
 }
+
+
+
 void DesenharLoja()
 {
-    int moedas=1000;
-    int valorbarrahp=0;
-    float hp=10.0;
-    float valorminimo=0;
-    float valormaximo=100;
+    int moedas = 1000;
+    int valorbarrahp = 0;
+    float hp = 10.0;
+    float valorminimo = 0;
+    float valormaximo = 100;
 
-    bool continuar=false;
-    bool comprarhp=false;
-    bool infopotion=false;
-    bool lifepotion=false;
-    bool infoatiradora=false;
-    bool atiradora=false;
-    int atiradora1=0;
+    bool continuar = false;
+    bool comprarhp = false;
+    bool infopotion = false;
+    bool lifepotion = false;
+    bool infoatiradora = false;
+    bool atiradora = false;
+    int atiradora1 = 0;
 
     //ComboBox
     Rectangle TamInv;
-    TamInv.x=10;
-    TamInv.y=15;
-    TamInv.width=GetScreenWidth()/6;
-    TamInv.height=GetScreenHeight()/10;
-    char *TextInv[2]={"POCOES DE VIDA;ATIRADORAS"};
-    int opcoes[]={0,0};
-    int ActiveInv=0; //0-Op1;1-Op2;...
+    TamInv.x = 10;
+    TamInv.y = 15;
+    TamInv.width = GetScreenWidth() / 6;
+    TamInv.height = GetScreenHeight() / 10;
+    char* TextInv[2] = {"POCOES DE VIDA;ATIRADORAS"};
+    int opcoes[] = {0, 0};
+    int ActiveInv = 0; //0-Op1;1-Op2;...
 
     //..................
 
