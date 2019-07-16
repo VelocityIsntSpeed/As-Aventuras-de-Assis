@@ -19,37 +19,127 @@ void InicializarJogador(GameState* gs)
     gs->jog.rot = 0;
     // HP
     gs->jog.hp = 150;
+    gs->atq.atqAtivo = false;
+    gs->atq.arma = true;
 }
 
 
 void AtaqueJogador(GameState* gs)
 {
-    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+    if (gs->atq.arma)
     {
         // Calcular posicao da hitbox de ataque
-        const Vector2 POS_HITBOX_ATQ =
-            Vector2AndarDist(gs->jog.pos, PosWorldDoCursor(gs), JOG_ATQ_DIST);
+            gs->jog.posHit.x = JOG_ATQ_DIST * cosf(gs->atq.DistDiferenca * DEG2RAD);
+            gs->jog.posHit.y = JOG_ATQ_DIST * sinf(gs->atq.DistDiferenca * DEG2RAD);
 
-        // Iterar sobre todos os inimigos
-        for (int i = 0; i < INIM_QTD_MAX; i++)
+            gs->jog.posHit = Vector2Add(gs->jog.pos, gs->jog.posHit);
+
+
+         // Se acertar o inimigo
+
+        for (int i = 0; i<INIM_QTD_MAX; i++)
         {
-            // Verificar colisao
-            if (CheckCollisionCircles(POS_HITBOX_ATQ, JOG_ATQ_RAIO,
-                                      gs->inimigos[i].pos, INIM_RAIO))
+            if(!gs->inimigos->atingido[i])
             {
-                // Causar dano
-                gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                    if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
+                                      gs->inimigos[i].pos, INIM_RAIO))
+                    {
+                        gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                        gs->inimigos->atingido[i] = true;
+                        if (gs->inimigos[i].hp <= 0)
+                        {
+                            gs->inimigos[i].existe = false;
+                        }
+                    }
 
-                // Matar inimigo, se necessario
-                if (gs->inimigos[i].hp <= 0)
-                {
-                    gs->inimigos[i].existe = false;
-                }
             }
+
         }
+    }
+    else
+    {
+        // Se ele detectar q o tiro ja pegou em alguma coisa ele retorna e acaba com a animacao
+        if(gs->atq.varou)
+        {
+            return;
+        }
+
+        gs->jog.posHit.x = gs->atq.DistDiferenca * cosf(gs->atq.ang * DEG2RAD);
+        gs->jog.posHit.y = gs->atq.DistDiferenca * sinf(gs->atq.ang * DEG2RAD);
+        gs->jog.posHit = Vector2Add(gs->atq.atqin, gs->jog.posHit);
+        for (int i = 0; i<INIM_QTD_MAX; i++)
+        {
+            if(!gs->inimigos->atingido[i])
+            {
+                    if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
+                                      gs->inimigos[i].pos, INIM_RAIO))
+                    {
+
+                        gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                        gs->inimigos->atingido[i] = true;
+                        gs->atq.varou = true;
+                        if (gs->inimigos[i].hp <= 0)
+                        {
+                            matarInimigo(gs, i);
+                        }
+
+                    }
+
+            }
+
+        }
+
 
     }
 }
+
+
+void ataqueSet(GameState* gs)
+{
+
+    /// Tudo que os arquivos precisam pra processar o ataque numa posicao temporaria
+        // Ataque do jogador
+
+        if(IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
+        {
+            gs->atq.arma = !gs->atq.arma;
+        }
+
+        gs->atq.DistDiferenca += JOG_ATQ_VEL * GetFrameTime();
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && gs->atq.arma && !gs->atq.atqAtivo)
+        {
+            // Aqui sao setadas as posicoes angulares originais do ataque
+            gs->atq.inicAtq = gs->jog.rot-JOG_ATQ_ARQ/2;
+            gs->atq.DistDiferenca = gs->jog.rot-JOG_ATQ_ARQ/2;
+            gs->atq.atqAtivo = true;
+        }else if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo)
+        {
+            // Aqui sao setadas as posicoes angulares originais do ataque
+            gs->atq.DistDiferenca = 1;
+            gs->atq.atqAtivo = true;
+            gs->atq.varou = false;
+
+        }
+        // Aqui e marcada a posicao angular final do ataque
+        if (gs->atq.DistDiferenca > gs->atq.inicAtq+JOG_ATQ_ARQ)
+        {
+            gs->atq.atqAtivo = false;
+            for (int i = 0; i<INIM_QTD_MAX; i++)
+            {
+                gs->inimigos->atingido[i] = false;
+                gs->atq.varou = false;
+            }
+        }
+        // Serve pra impedir q a "bala" do tiro curve
+        if(!gs->atq.atqAtivo)
+        {
+            gs->atq.ang = gs->jog.rot;
+            gs->atq.atqin = gs->jog.pos;
+        }
+
+
+}
+
 
 
 void MoverJog(GameState* gs)

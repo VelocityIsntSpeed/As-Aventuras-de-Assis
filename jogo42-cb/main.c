@@ -69,7 +69,12 @@ int main(void)
         MoverJog(gs);
 
         // Ataque do jogador
+        ataqueSet(gs);
+
+        if (gs->atq.atqAtivo)
+        {
         AtaqueJogador(gs);
+        }
 
         // Mover inimigo
         for (int i = 0; i < INIM_QTD_MAX; i++)
