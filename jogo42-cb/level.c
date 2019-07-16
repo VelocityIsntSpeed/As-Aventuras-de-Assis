@@ -11,71 +11,82 @@
 #include "jogo42.h"
 
 
-void InicializarLevel(enum Tile lvl[TAM_SALA_Y][TAM_SALA_X])
+void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameState* gs)
 {
-    /*
-    Esta string determina como vai ser o level. Isso eh provisorio, so
-    enquanto nao tivermos um editor de mapa.
-     '.'  = TILE_chao
-     '#'  = TILE_parede
-     'I'  = TILE_paredeInvisivel
-    Resto = TILE_vazio
-    */
-    const char STRING_DO_LEVEL[] =
-//   123456789|123456789|123456789|123456789|
-    "#######################################" // 1
-    "........#.......#.....#.....#.....#####" // 2
-    ".  ..  .#............................##" // 3
-    ".  ..  .#............................##" // 4
-    "...  ...#...###...###...###..........##" // 5
-    "..    ..#...###...###...###..........##" // 6
-    "..    ..#............................##" // 7
-    ".. .. ..#............................##" // 8
-    "........#.......#.....#.....#.....#####" // 9
-    "#..#######...######.###################" //10
-    "#.......I......##.....#################" //11
-    "#.......I.......#......##........#....#" //12
-    "###########.....##......##.......#....#" //13
-    "#........###....##.......##...........#" //14
-    "#.........###....##.......###.........#" //15
-    "#..........#......##.......#####..##..#" //16
-    "#......#...#.......##.........#....#..#" //17
-    "#......#............#.................#" //18
-    ".......#...#..........................#" //19
-    "......................##......#....#..#" //20
-    ".#...#...#...#...#.....#########..##..#" //21
-    "...#...#...#...#...#..........#....#..#" //22
-    "......................................#" //23
-    ".#...#...#...#...#....................#" //24
-    "......................................#" //25
-    "...#...#...#...#......................#" //26
-    "................#######################";//27
+    #include "estagios.h"
 
-    /* Iterar sobre cada elemento de lvl, setando-os de acordo com os
-       caracteres correspondentes em STRING_DO_LEVEL. */
-    for (int lin = 0; lin < TAM_SALA_Y; lin++)
+
+
+    // Colocar o jogador na posicao certa
+    gs->jog.pos = ESTAGIO.spawnPos;
+
+    // Inicializar matriz_lvl para zero
+    for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
     {
-        for (int col = 0; col < TAM_SALA_X; col++)
+        for (int col = 0; col < MAPA_QTD_COLS; col++)
         {
-            // Indice em STRING_DO_LEVEL correspondente ahs lin e col atuais
-            const int INDICE_STR = lin * TAM_SALA_X + col;
+            matriz_lvl[lin][col] = TILE_vazio;
+        }
+    }
 
-            // Valor Tile que vai ser definido
-            enum Tile tile;
-            // Definir `tile` de acordo com o caractere
-            switch (STRING_DO_LEVEL[INDICE_STR])
+    // Iterar sobre a string
+    for (int i=0, lin=0, col=0; i<STR_LVL_TAM_MAX; i++)
+    {
+        // Se a string acabou
+        if (ESTAGIO.stringDeLevel[i] == '\0')
+        {
+            break; // Sair do loop
+        }
+        // Se essa linha da string acabou
+        else if (ESTAGIO.stringDeLevel[i] == '\n')
+        {
+            // Pular para a proxima linha da matriz
+            lin++;
+            col = 0;
+        }
+        else
+        {
+            // Setar caractere na matriz
+            switch (ESTAGIO.stringDeLevel[i])
             {
                 case '.':
-                    tile = TILE_chao; break;
+                    matriz_lvl[lin][col] = TILE_chao; break;
+
+                case 'E':
+                    matriz_lvl[lin][col] = TILE_chao;
+                    // Adicionar inimigos:
+                    if (!SpawnarInimigo(CentroDaTile(col, lin), gs))
+                    {
+                        // TODO ERRO: Nao foi possivel spawnar inimigo especificado pelo mapa porque o array de inimigos estava cheio!
+                    }
+                break;
+
                 case '#':
-                    tile = TILE_parede; break;
+                    matriz_lvl[lin][col] = TILE_parede; break;
                 case 'I':
-                    tile = TILE_paredeInvisivel; break;
-                case ' ': default:
-                    tile = TILE_vazio;
+                    matriz_lvl[lin][col] = TILE_paredeInvisivel; break;
+                default:
+                    matriz_lvl[lin][col] = TILE_vazio; break;
             }
 
-            lvl[lin][col] = tile;
+
+
+            col++;
+        }
+
+
+        // Deteccao de erros na string:
+        if (lin >= MAPA_QTD_LINS + 1)
+        {
+            fprintf(stderr, "ERRO: A string de inicializacao de level contem "
+                            "mais linhas do que o maximo!\n");
+            break;
+        }
+        if (col >= MAPA_QTD_COLS + 1)
+        {
+            fprintf(stderr, "ERRO: A linha %d da string de inicializacao de "
+                            "level eh maior do que o tamanho maximo!\n", lin);
+            break;
         }
     }
 }
@@ -84,9 +95,9 @@ void InicializarLevel(enum Tile lvl[TAM_SALA_Y][TAM_SALA_X])
 void InicializarObst(GameState* gs)
 {
     // Obstaculo retangular
-    gs->obst.ret = (Rectangle){0, 0, 150, 100};
+    gs->obst.ret = (Rectangle){-150, 0, 100, 600};
     // Obstaculo circular
-    gs->obst.circCentro = (Vector2){1500, 350};
+    gs->obst.circCentro = (Vector2){RectDaTile(20, -4).x, RectDaTile(20, -4).y};
     gs->obst.circRaio = 150;
     gs->obst.circTaAndando = false;
 }
@@ -110,9 +121,9 @@ bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs)
     }
 
     //[ TILES ]----------------------------------------------------------------
-    for (int lin = 0; lin < TAM_SALA_Y; lin++)
+    for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
     {
-        for (int col = 0; col < TAM_SALA_X; col++)
+        for (int col = 0; col < MAPA_QTD_COLS; col++)
         {
             const enum Tile* AQUI = &gs->sala[lin][col];
 
@@ -143,7 +154,7 @@ void MoverObst(GameState* gs)
     if (IsKeyDown(KEY_SPACE))
     {
         gs->obst.circTaAndando = true;
-        gs->obst.circCentro.x -= VEL_CIRC * GetFrameTime();
+        gs->obst.circCentro.y += VEL_CIRC * GetFrameTime();
         gs->obst.circRaio -= VEL_CIRC / 20.0f * GetFrameTime();
     }
     else

@@ -32,15 +32,7 @@ int main(void)
     const Texture2D SPRITE_JOG = LoadTexture("tex/protag.png");
 
 
-    //[ LEVEL ]================================================================
-    InicializarLevel(gs->sala);
-
-
-    //[ OBSTACULOS ]===========================================================
-    InicializarObst(gs);
-
-
-    //[ INIMIGO ]==============================================================
+    //[ INIMIGOS ]=============================================================
 
     // Inicializar array de inimigos
     for (int i = 0; i < INIM_QTD_MAX; i++)
@@ -48,9 +40,15 @@ int main(void)
         gs->inimigos[i].existe = false;
     }
 
-    // Spawnar 2 inimigos:
-    SpawnarInimigo((Vector2){RectDaTile(30, 4).x, RectDaTile(30, 4).y}, gs);
-    SpawnarInimigo((Vector2){RectDaTile(30, 6).x, RectDaTile(30, 6).y}, gs);
+    // Os inimigos sao spawnados pela inicializacao do mapa.
+
+
+    //[ LEVEL ]================================================================
+    InicializarLevel(gs->sala, gs);
+
+
+    //[ OBSTACULOS ]===========================================================
+    InicializarObst(gs);
 
 
     //[ CAMERA ]===============================================================

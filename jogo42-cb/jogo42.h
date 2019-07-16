@@ -18,13 +18,15 @@
 
 
 //[ DEFINICOES DE CONSTANTES UTILIZADAS NAS DEFINICOES DE TIPOS ]==============
-//! Tamanho do level, em numero de tiles.
-#define TAM_SALA_X 39
-//! Tamanho do level, em numero de tiles.
-#define TAM_SALA_Y 27
+//! Quantidade maxima de colunas de um estagio
+#define MAPA_QTD_COLS 75
+//! Quantidade maxima de linhas de um estagio
+#define MAPA_QTD_LINS 75
+//! Tamanho maximo da string de inicializacao de level
+#define STR_LVL_TAM_MAX ((MAPA_QTD_COLS + 1) * MAPA_QTD_LINS + 1)
 
 //! Quatidade maxima de inimigos */
-#define INIM_QTD_MAX (4)
+#define INIM_QTD_MAX (80)
 
 
 
@@ -86,7 +88,7 @@ typedef struct // GameState
 
 
     //[ LEVEL ]----------------------------------------------------------------
-    enum Tile sala[TAM_SALA_Y][TAM_SALA_X];
+    enum Tile sala[MAPA_QTD_LINS][MAPA_QTD_COLS];
 
 
     //[ OBSTACULOS ]-----------------------------------------------------------
@@ -156,10 +158,10 @@ GameState;
 
 //[ OUTROS ]-------------------------------------------------------------------
 //! Velocidade do obstaculo circular (por segundo).
-#define VEL_CIRC (100.0f)
+#define VEL_CIRC (200.0f)
 
 //! Tamanho de uma tile.
-#define TAM_TILE (35)
+#define TAM_TILE (47)
 
 
 
@@ -168,6 +170,9 @@ GameState;
 // helpers.c ------------------------------------------------------------------
 /*! Retorna o retangulo correspondente ah tile nas dimensoes fornecidas. */
 Rectangle RectDaTile(int x, int y);
+
+/*! Retorna a posicao do centro da tile de coordenadas dadas. */
+Vector2 CentroDaTile(int col, int lin);
 
 /*! Retorna a posicao do cursor em coordenadas world. */
 Vector2 PosWorldDoCursor(const GameState* gs);
@@ -214,8 +219,9 @@ bool SpawnarInimigo(Vector2 pos, GameState* gs);
 /*! Move os obstaculos. */
 void MoverObst(GameState* gs);
 
-/*! Inicializa o level de acordo com a string na definicao desta funcao. */
-void InicializarLevel(enum Tile lvl[TAM_SALA_Y][TAM_SALA_X]);
+/*! Inicializa o level de acordo com a string do estagio */
+void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS],
+                      GameState* gs);
 
 /*! Inicializa os obstaculos. */
 void InicializarObst(GameState* gs);

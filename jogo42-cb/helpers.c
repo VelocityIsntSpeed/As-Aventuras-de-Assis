@@ -19,6 +19,13 @@ Rectangle RectDaTile(int x, int y)
 }
 
 
+Vector2 CentroDaTile(int col, int lin)
+{
+    return (Vector2){ col * TAM_TILE + TAM_TILE / 2.0f,
+                      lin * TAM_TILE + TAM_TILE / 2.0f };
+}
+
+
 Vector2 PosWorldDoCursor(const GameState* gs)
 {
     return Vector2Add(Vector2Negate(gs->cam.offset), GetMousePosition());
