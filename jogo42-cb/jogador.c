@@ -54,7 +54,7 @@ void AtaqueJogador(GameState* gs)
                         if (gs->inimigos[i].hp <= 0)
                         {
                             PlaySound(gs->efet[3]);
-                            gs->inimigos[i].existe = false;
+                            matarInimigo(gs,i);
                         }
                     }
 
