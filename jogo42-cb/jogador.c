@@ -22,10 +22,7 @@ void InicializarJogador(GameState* gs)
     gs->atq.atqAtivo = false;
     gs->atq.arma = true;
     gs->atq.bala = -1;
-    for (int i=0; i<6; i++)
-    {
-        gs->atq.barr[i] = true;
-    }
+
 }
 
 
@@ -51,11 +48,7 @@ void AtaqueJogador(GameState* gs)
                     {
                         gs->inimigos[i].hp -= JOG_ATQ_DANO;
                         // Recarrega uma bala no revolver
-                        if (!gs->atq.barr[gs->atq.bala])
-                            {
-                                gs->atq.barr[gs->atq.bala] = true;
-                                gs->atq.bala--;
-                            }
+                        gs->atq.bala--;
                         if (gs->inimigos[i].hp )
                         {
                             PlaySound(gs->efet[2]);
@@ -79,11 +72,7 @@ void AtaqueJogador(GameState* gs)
         gs->jog.posHit.x = gs->atq.DistDiferenca * cosf(gs->atq.ang * DEG2RAD);
         gs->jog.posHit.y = gs->atq.DistDiferenca * sinf(gs->atq.ang * DEG2RAD);
         gs->jog.posHit = Vector2Add(gs->atq.atqin, gs->jog.posHit);
-        // "Atira" a bala e faz o cartucho perder uma bala
-            if (gs->atq.barr[gs->atq.bala])
-                {
-                    gs->atq.barr[gs->atq.bala] = false;
-                }
+
 
         if(ColisaoComLevel(gs->jog.posHit, JOG_ATQ_RAIO, gs))
         {
@@ -156,7 +145,7 @@ void ataqueSet(GameState* gs)
             PlaySound(gs->efet[0]);
         }
             // O ultimo parametro checa se o ultimo espaco do barril esta com uma bala
-            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.barr[5])
+            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.bala>=-1 && gs->atq.bala<5)
             {
                 // Aqui sao setadas as posicoes angulares originais do ataque
                 gs->atq.inicAtq = 0;
