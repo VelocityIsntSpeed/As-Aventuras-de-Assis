@@ -92,33 +92,13 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameSt
 }
 
 
-void InicializarObst(GameState* gs)
-{
-    // Obstaculo retangular
-    gs->obst.ret = (Rectangle){-150, 0, 100, 600};
-    // Obstaculo circular
-    gs->obst.circCentro = (Vector2){RectDaTile(20, -4).x, RectDaTile(20, -4).y};
-    gs->obst.circRaio = 150;
-    gs->obst.circTaAndando = false;
-}
 
 
 bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs)
 {
-    //[ OBSTACULO RETANGULAR ]-------------------------------------------------
-    if (CheckCollisionCircleRec(pos, raio, gs->obst.ret))
-    {
-        return true;
-    }
 
-    //[ OBSTACULO CIRCULAR ]---------------------------------------------------
-    // A funcao de checar colisao buga se for fornecida raio menor que 0
-    const float OBST_RAIO = (gs->obst.circRaio < 0) ? 0 : gs->obst.circRaio;
 
-    if (CheckCollisionCircles(pos, raio, gs->obst.circCentro, OBST_RAIO))
-    {
-        return true;
-    }
+
 
     //[ TILES ]----------------------------------------------------------------
     for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
@@ -141,24 +121,3 @@ bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs)
 }
 
 
-void MoverObst(GameState* gs)
-{
-    //[ OBSTACULO RETANGULAR ]=================================================
-    if (IsKeyPressed(KEY_SPACE))
-    {
-        gs->obst.ret.x += 35;
-        gs->obst.ret.height += 35;
-    }
-
-    //[ OBSTACULO CIRCULAR ]===================================================
-    if (IsKeyDown(KEY_SPACE))
-    {
-        gs->obst.circTaAndando = true;
-        gs->obst.circCentro.y += VEL_CIRC * GetFrameTime();
-        gs->obst.circRaio -= VEL_CIRC / 20.0f * GetFrameTime();
-    }
-    else
-    {
-        gs->obst.circTaAndando = false;
-    }
-}

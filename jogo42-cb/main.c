@@ -59,8 +59,7 @@ int main(void)
     InicializarLevel(gs->sala, gs);
 
 
-    //[ OBSTACULOS ]===========================================================
-    InicializarObst(gs);
+
 
 
     //[ CAMERA ]===============================================================
@@ -113,8 +112,6 @@ int main(void)
         }
 
 
-        // Mover obstaculos
-        MoverObst(gs);
 
         // Atualizar camera
         gs->cam.offset = Vector2Negate(gs->jog.pos);
