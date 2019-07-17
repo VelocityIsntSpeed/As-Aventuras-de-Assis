@@ -205,7 +205,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
 
 
-void DesenharLoja()
+void DesenharLoja(GameState* gs)
 {
     int moedas = 1000;
     int valorbarrahp = 0;

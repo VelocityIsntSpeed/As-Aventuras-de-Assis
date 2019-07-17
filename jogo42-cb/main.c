@@ -112,7 +112,7 @@ int main(void)
         // [[[[[ DESENHAR ]]]]]
         BeginDrawing();
         Desenhar(gs, &SPRITE_JOG);
-        DesenharLoja();
+        DesenharLoja(gs);
         EndDrawing();
         // [[[ FIM DESENHAR ]]]
     }

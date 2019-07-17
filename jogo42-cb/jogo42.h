@@ -229,6 +229,9 @@ bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);
 /*! Desenha tudo. */
 void Desenhar(const GameState* gs, const Texture2D* spriteJog);
 
+/*! Desenha a loja. */
+void DesenharLoja(GameState* gs);
+
 
 // jogador.c ------------------------------------------------------------------
 /*! Inicializa o estado do jogador. */
