@@ -64,6 +64,8 @@ typedef struct // GameState
         float rot;
         //! Health Points.
         float hp;
+        //! Gold Points
+        float gold;
     }
     jog;
 
