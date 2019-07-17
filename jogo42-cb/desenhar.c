@@ -119,8 +119,7 @@ static void DesenharInimigo(const struct Inimigo* inimigo)
                           ROT_AJUSTADA - 2, ROT_AJUSTADA + 2,
                           1, WHITE);
 
-    // Indicador de INIM_MAX_DIST
-    DrawCircleLines(inimigo->pos.x, inimigo->pos.y, INIM_MAX_DIST, WHITE);
+
 
     // Indicador de ataque
     // Se o inimigo estiver em warmup
@@ -155,15 +154,24 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         // Level
         DesenharLevel(gs->sala);
 
-        // Obstaculo circular
-        DrawCircleV(gs->obst.circCentro, gs->obst.circRaio,
-                    Fade(gs->obst.circTaAndando ? PURPLE : VIOLET, 0.5f));
+
 
 
         // Jogador
         DesenharJogador(gs, spriteJog);
 
-        // Inimigos
+
+
+        // Desenhar contorno de circulo se o ataque estiver ativo
+        if (gs->atq.atqAtivo && gs->atq.arma)
+        {
+            DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, BLUE);
+        }
+        else if (gs->atq.atqAtivo && !gs->atq.arma)
+        {
+            DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO/9, GOLD);
+        }
+          // Inimigos
         for (int i = 0; i < INIM_QTD_MAX; i++)
         {
             if (gs->inimigos[i].existe)
@@ -172,22 +180,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
             }
         }
 
-        // Desenhar contorno de circulo se o ataque estiver ativo
-        if (gs->atq.atqAtivo && gs->atq.arma)
-        {
-            DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, GREEN);
-        }
-        else if (gs->atq.atqAtivo && !gs->atq.arma)
-        {
-            DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO/10, GREEN);
-        }
 
-        // Obstaculo retangular
-        DrawRectangleRec(gs->obst.ret, Fade(DARKGRAY, 0.5f));
-
-        // Texto com raio do obstaculo
-        DrawText(TextFormat("Raio = %.1f", gs->obst.circRaio),
-                 gs->obst.circCentro.x, gs->obst.circCentro.y, 20, WHITE);
 
     EndMode2D(); //[[[ FIM MODO CAMERA ]]]-------------------------------------
 
