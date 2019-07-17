@@ -179,7 +179,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         }
         else if (gs->atq.atqAtivo && !gs->atq.arma)
         {
-            DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO/10, GREEN);
+            DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, GREEN);
         }
 
         // Obstaculo retangular
