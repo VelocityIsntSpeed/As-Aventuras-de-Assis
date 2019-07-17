@@ -162,17 +162,21 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
 
 
-        // Desenhar contorno de circulo se o ataque estiver ativo
-        if (gs->atq.atqAtivo && gs->atq.arma)
+        // ATAQUE DO JOGADOR
+        if (gs->atq.atqAtivo && gs->atq.arma) // Se for a arma branca
         {
-            Rectangle espada = {gs->jog.posHit.x, gs->jog.posHit.y, 35, 2};
-            DrawRectanglePro(espada, (Vector2) {30,1}, gs->atq.DistDiferenca, BLUE);
+            // Hitbox de ataque (remover depois da sprite do machado estiver pronta)
+            DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, RED);
+
+            // Sprite do machado
+            //TODO
         }
-        else if (gs->atq.atqAtivo && !gs->atq.arma)
+        else if (gs->atq.atqAtivo && !gs->atq.arma) // Se for a pistola
         {
             DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO/9, GOLD);
         }
-          // Inimigos
+
+        // Inimigos
         for (int i = 0; i < INIM_QTD_MAX; i++)
         {
             if (gs->inimigos[i].existe)
