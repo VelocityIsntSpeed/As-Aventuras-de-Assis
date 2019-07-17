@@ -174,7 +174,7 @@ void Desenhar(const GameState* gs)
 
             // Posicao e tamanho
             const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y,\
-                                JOG_ATQ_RAIO * 4.5, JOG_ATQ_RAIO * 2};
+                                  45,   18};
 
             const Vector2 ORIGEM = { -18.0f,  1.2f};
 
