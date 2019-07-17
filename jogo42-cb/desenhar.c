@@ -170,6 +170,11 @@ void Desenhar(const GameState* gs)
 
             // Sprite do machado
             //TODO
+            const Rectangle SRC_REC = {0, 0, gs->SPRITE_MACHADO.width, gs->SPRITE_MACHADO.height};
+
+            // Posicao e tamanho
+            const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y,\
+                                JOG_ATQ_RAIO * 1.4, JOG_ATQ_RAIO * 2};
         }
         else if (gs->atq.atqAtivo && !gs->atq.arma) // Se for a pistola
         {
