@@ -32,6 +32,9 @@ int main(void)
     gs->efet[1] = LoadSound("som/efeitos/pistola/pistol.wav");
     gs->efet[2] = LoadSound("som/efeitos/monstro/creature_hurt_01.ogg");
     gs->efet[3] = LoadSound("som/efeitos/monstro/creature_roar_03.ogg");
+    Sound marte = LoadSound("som/musicas/mars.wav");
+    PlaySound(marte);
+    float timePlayed = 0.0f;
 
 
     //[ JOGADOR ]==============================================================
@@ -72,6 +75,12 @@ int main(void)
     {
 
         // [[[[[ UPDATE ]]]]]
+        if (!IsSoundPlaying(marte))
+        {
+            PlaySound(marte);
+        }
+
+
 
         // Mover jogador
         MoverJog(gs);
@@ -130,6 +139,8 @@ int main(void)
     {
         UnloadSound(gs->efet[i]);
     }
+
+    UnloadSound(marte);
     CloseAudioDevice();
     CloseWindow(); // Close window and OpenGL context
     return 0;

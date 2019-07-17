@@ -129,7 +129,7 @@ void ataqueSet(GameState* gs)
         {
             // Aqui sao setadas as posicoes angulares originais do ataque
             gs->atq.inicAtq = 0;
-            gs->atq.DistDiferenca = 1;
+            gs->atq.DistDiferenca = JOG_RAIO;
             gs->atq.atqAtivo = true;
             PlaySound(gs->efet[1]);
 
