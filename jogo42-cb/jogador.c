@@ -78,7 +78,7 @@ void AtaqueJogador(GameState* gs)
         {
             if(!gs->inimigos->atingido[i])
             {
-                    if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO/10,
+                    if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO/9,
                                       gs->inimigos[i].pos, INIM_RAIO))
                     {
 
