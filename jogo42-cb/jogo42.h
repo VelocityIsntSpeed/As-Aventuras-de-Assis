@@ -160,7 +160,7 @@ GameState;
 #define JOG_ATQ_DANO (20.0f)
 
 //! Velocidade da espada
-#define JOG_ESP_VEL (500.0f)
+#define JOG_ESP_VEL (80.0f)
 
 //! Arco da espada
 #define JOG_ESP_ARC (130.0)
