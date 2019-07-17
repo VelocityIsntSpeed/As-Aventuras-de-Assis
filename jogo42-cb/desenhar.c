@@ -174,9 +174,9 @@ void Desenhar(const GameState* gs)
 
             // Posicao e tamanho
             const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y,\
-                                JOG_ATQ_RAIO * 6.5, JOG_ATQ_RAIO * 2};
+                                JOG_ATQ_RAIO * 4.5, JOG_ATQ_RAIO * 2};
 
-            const Vector2 ORIGEM = {DEST_REC.width / 11.0f, DEST_REC.height / 1.2f};
+            const Vector2 ORIGEM = { -18.0f,  1.2f};
 
             DrawTexturePro(gs->SPRITE_MACHADO, SRC_REC, DEST_REC, ORIGEM, gs->jog.rot, WHITE);
 
