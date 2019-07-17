@@ -31,8 +31,9 @@ void AtaqueJogador(GameState* gs)
     if (gs->atq.arma)
     {
         // Calcular posicao da hitbox de ataque
-            gs->jog.posHit.x = JOG_ATQ_DIST * cosf(gs->atq.DistDiferenca * DEG2RAD);
-            gs->jog.posHit.y = JOG_ATQ_DIST * sinf(gs->atq.DistDiferenca * DEG2RAD);
+        // O 1.25 e pra aumentar o range da espada sem mudar nada no revolver
+            gs->jog.posHit.x = 1.25*JOG_ATQ_DIST * cosf(gs->atq.DistDiferenca * DEG2RAD);
+            gs->jog.posHit.y = 1.25*JOG_ATQ_DIST * sinf(gs->atq.DistDiferenca * DEG2RAD);
 
             gs->jog.posHit = Vector2Add(gs->jog.pos, gs->jog.posHit);
 
