@@ -21,9 +21,21 @@ int main(void)
     SetTargetFPS(60);
 
 
+
     //[ STRUCT DE ESTADO DO JOGO ]=============================================
     GameState* gs = malloc(sizeof(GameState));
 
+
+    //[ AUDIO ]================================================================
+    InitAudioDevice();
+    gs->efet[0] = LoadSound("som/efeitos/espada/seax-unsheathe-03.wav");
+    gs->efet[1] = LoadSound("som/efeitos/pistola/pistol.wav");
+    gs->efet[2] = LoadSound("som/efeitos/monstro/creature_hurt_01.ogg");
+    gs->efet[3] = LoadSound("som/efeitos/monstro/creature_roar_03.ogg");
+    gs->efet[4] = LoadSound("som/efeitos/jog/pain1.wav");
+    Sound marte = LoadSound("som/musicas/mars.wav");
+    PlaySound(marte);
+    SetSoundVolume(marte, 0.70);
 
     //[ JOGADOR ]==============================================================
     InicializarJogador(gs);
@@ -62,8 +74,13 @@ int main(void)
     while (!WindowShouldClose())
     {
 
-
         // [[[[[ UPDATE ]]]]]
+        if (!IsSoundPlaying(marte))
+        {
+            PlaySound(marte);
+        }
+
+
 
         // Mover jogador
         MoverJog(gs);
@@ -118,6 +135,13 @@ int main(void)
 
 
     // Desinicializacao
+    for (int i = 0; i<QTD_FX; i++)
+    {
+        UnloadSound(gs->efet[i]);
+    }
+
+    UnloadSound(marte);
+    CloseAudioDevice();
     CloseWindow(); // Close window and OpenGL context
     return 0;
 }

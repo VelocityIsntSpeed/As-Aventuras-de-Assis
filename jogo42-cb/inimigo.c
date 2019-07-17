@@ -69,6 +69,7 @@ void AtaqueInimigo(struct Inimigo* inimigo, GameState* gs)
         if (DIST_BORDAS < INIM_ATQ_DIST)
         {
             gs->jog.hp -= INIM_DANO;
+            PlaySound(gs->efet[4]);
         }
 
         // Encerrar o ataque
