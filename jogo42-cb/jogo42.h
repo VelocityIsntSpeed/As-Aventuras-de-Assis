@@ -147,7 +147,7 @@ GameState;
 #define JOG_ATQ_RAIO (10.0f)
 
 //! Dano de ataque.
-#define JOG_ATQ_DANO (20.0f)
+#define JOG_ATQ_DANO (10.0f)
 
 //! Velocidade da espada
 #define JOG_ESP_VEL (700.0f)
@@ -159,7 +159,7 @@ GameState;
 #define JOG_TIR_VEL (900.0f)
 
 //! Alcance do tiro
-#define JOG_TIR_ALC (500.0f)
+#define JOG_TIR_ALC (185.0f)
 
 
 
