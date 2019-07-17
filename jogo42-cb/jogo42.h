@@ -169,7 +169,7 @@ GameState;
 #define INIM_RAIO (17.0f)
 
 //! Velocidade de movimento do inimigo, por segundo.
-#define INIM_VEL (110.0f)
+#define INIM_VEL (135.0f)
 
 //! HP maximo e inicial do inimigo.
 #define INIM_HP_MAX (60.0f)
