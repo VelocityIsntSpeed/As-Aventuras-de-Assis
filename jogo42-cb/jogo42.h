@@ -93,6 +93,8 @@ typedef struct // GameState
     //[ LOJA ]-----------------------------------------------------------------
     // Contem tudo relacionado a loja
     struct {
+        // Se a loja estah mostrando
+        bool mostrar;
         // Dinheiro atual do jogador
         int ouro;
 

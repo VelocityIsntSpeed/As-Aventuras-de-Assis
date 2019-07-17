@@ -67,7 +67,9 @@ int main(void)
     gs->cam.zoom = 1.0f;
 
     //[ LOJA ]=================================================================
+    gs->loja.mostrar = false;
     gs->loja.ouro = 500; // Ta 500 so pra teste, dps tem q setar pra 0
+
 
     // [[[ FIM INICIALIZACAO ]]]
 
@@ -123,13 +125,26 @@ int main(void)
         gs->cam.target = gs->jog.pos;
 
 
+        // Controlar mostragem da loja
+        if (IsKeyPressed(KEY_L))
+        {
+            gs->loja.mostrar = !gs->loja.mostrar;
+        }
+
+
         // [[[ FIM UPDATE ]]]
 
 
         // [[[[[ DESENHAR ]]]]]
         BeginDrawing();
-        Desenhar(gs, &SPRITE_JOG);
-        DesenharLoja(gs);
+
+            Desenhar(gs, &SPRITE_JOG);
+
+            if (gs->loja.mostrar)
+            {
+                DesenharLoja(gs);
+            }
+
         EndDrawing();
         // [[[ FIM DESENHAR ]]]
     }
