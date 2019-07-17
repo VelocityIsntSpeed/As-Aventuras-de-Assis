@@ -71,6 +71,7 @@ void AtaqueJogador(GameState* gs)
         gs->jog.posHit = Vector2Add(gs->atq.atqin, gs->jog.posHit);
         if(ColisaoComLevel(gs->jog.posHit, JOG_ATQ_RAIO, gs))
         {
+
             gs->atq.DistDiferenca = gs->atq.DistDiferenca +1000;
         }
         for (int i = 0; i<INIM_QTD_MAX; i++)

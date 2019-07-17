@@ -28,14 +28,14 @@ int main(void)
 
     //[ AUDIO ]================================================================
     InitAudioDevice();
-    gs->efet[0] = LoadSound("som/efeitos/espada/160756__cosmicembers__fast-swing-air-woosh.wav");
+    gs->efet[0] = LoadSound("som/efeitos/espada/seax-unsheathe-03.wav");
     gs->efet[1] = LoadSound("som/efeitos/pistola/pistol.wav");
     gs->efet[2] = LoadSound("som/efeitos/monstro/creature_hurt_01.ogg");
     gs->efet[3] = LoadSound("som/efeitos/monstro/creature_roar_03.ogg");
+    gs->efet[4] = LoadSound("som/efeitos/jog/pain1.wav");
     Sound marte = LoadSound("som/musicas/mars.wav");
     PlaySound(marte);
-    float timePlayed = 0.0f;
-
+    SetSoundVolume(marte, 0.70);
 
     //[ JOGADOR ]==============================================================
     InicializarJogador(gs);
