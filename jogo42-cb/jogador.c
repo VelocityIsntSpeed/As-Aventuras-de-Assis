@@ -117,8 +117,15 @@ void ataqueSet(GameState* gs)
             gs->atq.arma = !gs->atq.arma;
         }
 
-        gs->atq.DistDiferenca += JOG_ESP_VEL * GetFrameTime();
-        gs->atq.DistDiferenca += JOG_TIR_VEL * GetFrameTime();
+        if (gs->atq.arma && gs->atq.atqAtivo)
+            {
+                gs->atq.DistDiferenca += JOG_ESP_VEL * GetFrameTime();
+            }
+        else if (!gs->atq.arma && gs->atq.atqAtivo)
+            {
+                gs->atq.DistDiferenca += JOG_TIR_VEL * GetFrameTime();
+            }
+
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && gs->atq.arma && !gs->atq.atqAtivo)
         {
             // Aqui sao setadas as posicoes angulares originais do ataque
