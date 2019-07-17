@@ -21,7 +21,7 @@ void InicializarJogador(GameState* gs)
     gs->jog.hp = 150;
     gs->atq.atqAtivo = false;
     gs->atq.arma = true;
-    gs->atq.bala = -1;
+    gs->atq.bala = 6;
 
 }
 
@@ -48,7 +48,7 @@ void AtaqueJogador(GameState* gs)
                     {
                         gs->inimigos[i].hp -= JOG_ATQ_DANO;
                         // Recarrega uma bala no revolver
-                        gs->atq.bala--;
+                        gs->atq.bala++;
                         if (gs->inimigos[i].hp )
                         {
                             PlaySound(gs->efet[2]);
@@ -113,12 +113,12 @@ void AtaqueJogador(GameState* gs)
 void ataqueSet(GameState* gs)
 {
     // Esses dois ifs garantem q a posicao do barril nunca vai sair dos limites das 6 cargas
-        if (gs->atq.bala>5)
+        if (gs->atq.bala>6)
         {
-            gs->atq.bala = 5;
-        }else if ( gs->atq.bala<-1)
+            gs->atq.bala = 6;
+        }else if ( gs->atq.bala<0)
         {
-            gs->atq.bala = -1;
+            gs->atq.bala = 0;
         }
 
         // Alterna entre armas
@@ -145,14 +145,14 @@ void ataqueSet(GameState* gs)
             PlaySound(gs->efet[0]);
         }
             // O ultimo parametro checa se o ultimo espaco do barril esta com uma bala
-            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.bala>=-1 && gs->atq.bala<5)
+            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.bala>0)
             {
                 // Aqui sao setadas as posicoes angulares originais do ataque
                 gs->atq.inicAtq = 0;
                 gs->atq.DistDiferenca = JOG_RAIO;
                 gs->atq.atqAtivo = true;
                 PlaySound(gs->efet[1]);
-                gs->atq.bala++;
+                gs->atq.bala--;
             }
 
         // Aqui e marcada a posicao angular final do ataque
