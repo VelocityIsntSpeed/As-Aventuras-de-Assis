@@ -150,7 +150,7 @@ GameState;
 #define JOG_ATQ_DANO (20.0f)
 
 //! Velocidade da espada
-#define JOG_ESP_VEL (50.0f)
+#define JOG_ESP_VEL (700.0f)
 
 //! Arco da espada
 #define JOG_ESP_ARC (130.0)
@@ -183,10 +183,10 @@ GameState;
 #define INIM_MIN_DIST (10.0f)
 
 //! Alcance de ataque do inimigo, de borda a borda
-#define INIM_ATQ_DIST (20.0f)
+#define INIM_ATQ_DIST (30.0f)
 
 //! Segundos que demora do inimigo comecar o ataque ate ele causar dano.
-#define INIM_WARMUP (1.65f)
+#define INIM_WARMUP (0.65f)
 
 //! Dano de ataque
 #define INIM_DANO (15.0f)
