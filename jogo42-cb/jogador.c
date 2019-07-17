@@ -67,13 +67,13 @@ void AtaqueJogador(GameState* gs)
     }
     else
     {
-        // Se ele detectar q o tiro ja pegou em alguma coisa ele retorna e acaba com a animacao
+
 
         gs->jog.posHit.x = gs->atq.DistDiferenca * cosf(gs->atq.ang * DEG2RAD);
         gs->jog.posHit.y = gs->atq.DistDiferenca * sinf(gs->atq.ang * DEG2RAD);
         gs->jog.posHit = Vector2Add(gs->atq.atqin, gs->jog.posHit);
 
-
+        // Se a bala pegar na parede ele termina o ataque
         if(ColisaoComLevel(gs->jog.posHit, JOG_ATQ_RAIO, gs))
         {
 
@@ -112,7 +112,7 @@ void AtaqueJogador(GameState* gs)
 
 void ataqueSet(GameState* gs)
 {
-    // Esses dois ifs garantem q a posicao do barril nunca vai sair dos limites das 6 cargas
+    // Esses dois ifs garantem q a qtd de balas nunca passe de 6 cargas, nem menos de 0
         if (gs->atq.bala>6)
         {
             gs->atq.bala = 6;
@@ -144,7 +144,7 @@ void ataqueSet(GameState* gs)
             gs->atq.atqAtivo = true;
             PlaySound(gs->efet[0]);
         }
-            // O ultimo parametro checa se o ultimo espaco do barril esta com uma bala
+            // O ultimo parametro checa se ainda tem alguma bala
             if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.bala>0)
             {
                 // Aqui sao setadas as posicoes angulares originais do ataque
@@ -152,6 +152,7 @@ void ataqueSet(GameState* gs)
                 gs->atq.DistDiferenca = JOG_RAIO;
                 gs->atq.atqAtivo = true;
                 PlaySound(gs->efet[1]);
+                // Desconta uma bala
                 gs->atq.bala--;
             }
 

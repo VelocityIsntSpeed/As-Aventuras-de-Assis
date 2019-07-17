@@ -83,7 +83,7 @@ typedef struct // GameState
         float ang;
         //! Vetor pra pegar a posicao q o ataque vai usar
         Vector2 atqin;
-        //! Posicao no barril q vai atirar a bala
+        //! Quantidade de balas
         int bala;
 
 
