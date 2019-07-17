@@ -28,6 +28,9 @@
 //! Quatidade maxima de inimigos */
 #define INIM_QTD_MAX (80)
 
+//! Quantidade de efeitos q agt ta usando*/
+#define QTD_FX 9
+
 
 
 //[ DEFINICOES DE TIPOS ]======================================================
@@ -87,6 +90,9 @@ typedef struct // GameState
     // Camera
     Camera2D cam;
 
+    // [ SONS ]----------------------------------------------------------------
+    Sound efet[QTD_FX];
+
 
     //[ INIMIGOS ]-------------------------------------------------------------
     // Estado de um inimigo
@@ -134,6 +140,8 @@ GameState;
 
 //[ DEFINICOES DE CONSTANTES ]=================================================
 
+
+
 //[ JOGADOR ]------------------------------------------------------------------
 //! Velocidade do jogador (por segundo).
 #define JOG_VEL (150.0f)
@@ -152,16 +160,16 @@ GameState;
 #define JOG_ATQ_DANO (20.0f)
 
 //! Velocidade da espada
-#define JOG_ESP_VEL (900.0f)
+#define JOG_ESP_VEL (500.0f)
 
 //! Arco da espada
-#define JOG_ESP_ARC (110.0)
+#define JOG_ESP_ARC (130.0)
 
 //! Velocidade do tiro
 #define JOG_TIR_VEL (900.0f)
 
 //! Alcance do tiro
-#define JOG_TIR_ALC (220.0f)
+#define JOG_TIR_ALC (500.0f)
 
 
 
@@ -200,6 +208,7 @@ GameState;
 
 //! Tamanho de uma tile.
 #define TAM_TILE (47)
+
 
 
 
