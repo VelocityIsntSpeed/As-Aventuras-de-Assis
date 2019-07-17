@@ -44,12 +44,17 @@ void AtaqueJogador(GameState* gs)
                     if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
                                       gs->inimigos[i].pos, INIM_RAIO))
                     {
-
+                        PlaySound(gs->efet[2]);
                         gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                        if (gs->inimigos[i].hp )
+                        {
+                            PlaySound(gs->efet[2]);
+                        }
                         gs->inimigos->atingido[i] = true;
                         if (gs->inimigos[i].hp <= 0)
                         {
-                            gs->inimigos[i].existe = false;
+                            PlaySound(gs->efet[3]);
+                            matarInimigo(gs,i);
                         }
                     }
 
@@ -66,20 +71,26 @@ void AtaqueJogador(GameState* gs)
         gs->jog.posHit = Vector2Add(gs->atq.atqin, gs->jog.posHit);
         if(ColisaoComLevel(gs->jog.posHit, JOG_ATQ_RAIO, gs))
         {
+
             gs->atq.DistDiferenca = gs->atq.DistDiferenca +1000;
         }
         for (int i = 0; i<INIM_QTD_MAX; i++)
         {
             if(!gs->inimigos->atingido[i])
             {
-                    if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
+                    if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO/9,
                                       gs->inimigos[i].pos, INIM_RAIO))
                     {
 
                         gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                        if (gs->inimigos[i].hp )
+                        {
+                            PlaySound(gs->efet[2]);
+                        }
                         gs->inimigos->atingido[i] = true;
                         if (gs->inimigos[i].hp <= 0)
                         {
+                            PlaySound(gs->efet[3]);
                             matarInimigo(gs, i);
                         }
 
@@ -100,25 +111,35 @@ void ataqueSet(GameState* gs)
 
 
 
+
         if(IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
         {
             gs->atq.arma = !gs->atq.arma;
         }
 
-        gs->atq.DistDiferenca += JOG_ESP_VEL * GetFrameTime();
-        gs->atq.DistDiferenca += JOG_TIR_VEL * GetFrameTime();
+        if (gs->atq.arma && gs->atq.atqAtivo)
+            {
+                gs->atq.DistDiferenca += JOG_ESP_VEL * GetFrameTime();
+            }
+        else if (!gs->atq.arma && gs->atq.atqAtivo)
+            {
+                gs->atq.DistDiferenca += JOG_TIR_VEL * GetFrameTime();
+            }
+
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && gs->atq.arma && !gs->atq.atqAtivo)
         {
             // Aqui sao setadas as posicoes angulares originais do ataque
             gs->atq.inicAtq = gs->jog.rot-JOG_ESP_ARC/2;
             gs->atq.DistDiferenca = gs->jog.rot-JOG_ESP_ARC/2;
             gs->atq.atqAtivo = true;
+            PlaySound(gs->efet[0]);
         }else if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo)
         {
             // Aqui sao setadas as posicoes angulares originais do ataque
             gs->atq.inicAtq = 0;
-            gs->atq.DistDiferenca = 1;
+            gs->atq.DistDiferenca = JOG_RAIO;
             gs->atq.atqAtivo = true;
+            PlaySound(gs->efet[1]);
 
         }
         // Aqui e marcada a posicao angular final do ataque
@@ -145,7 +166,6 @@ void ataqueSet(GameState* gs)
             gs->atq.ang = gs->jog.rot;
             gs->atq.atqin = gs->jog.pos;
         }
-
 
 }
 

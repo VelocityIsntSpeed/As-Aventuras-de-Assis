@@ -28,6 +28,9 @@
 //! Quatidade maxima de inimigos */
 #define INIM_QTD_MAX (80)
 
+//! Quantidade de efeitos q agt ta usando*/
+#define QTD_FX 9
+
 
 
 //[ DEFINICOES DE TIPOS ]======================================================
@@ -96,6 +99,10 @@ typedef struct // GameState
     } loja;
 
 
+    // [ SONS ]----------------------------------------------------------------
+    Sound efet[QTD_FX];
+
+
     //[ INIMIGOS ]-------------------------------------------------------------
     // Estado de um inimigo
     struct Inimigo
@@ -124,23 +131,15 @@ typedef struct // GameState
 
 
     //[ OBSTACULOS ]-----------------------------------------------------------
-    struct {
-        //! Obstaculo retangular.
-        Rectangle ret;
 
-        //! Posicao do centro do obstaculo circular.
-        Vector2 circCentro;
-        //! Raio do obstaculo circular.
-        float circRaio;
-        //! Se o obstaculo circular ta andando.
-        bool circTaAndando;
-    } obst;
 }
 GameState;
 
 
 
 //[ DEFINICOES DE CONSTANTES ]=================================================
+
+
 
 //[ JOGADOR ]------------------------------------------------------------------
 //! Velocidade do jogador (por segundo).
@@ -157,19 +156,19 @@ GameState;
 #define JOG_ATQ_RAIO (10.0f)
 
 //! Dano de ataque.
-#define JOG_ATQ_DANO (20.0f)
+#define JOG_ATQ_DANO (10.0f)
 
 //! Velocidade da espada
-#define JOG_ESP_VEL (900.0f)
+#define JOG_ESP_VEL (700.0f)
 
 //! Arco da espada
-#define JOG_ESP_ARC (110.0)
+#define JOG_ESP_ARC (130.0)
 
 //! Velocidade do tiro
 #define JOG_TIR_VEL (900.0f)
 
 //! Alcance do tiro
-#define JOG_TIR_ALC (220.0f)
+#define JOG_TIR_ALC (185.0f)
 
 
 
@@ -179,24 +178,24 @@ GameState;
 #define INIM_RAIO (17.0f)
 
 //! Velocidade de movimento do inimigo, por segundo.
-#define INIM_VEL (110.0f)
+#define INIM_VEL (135.0f)
 
 //! HP maximo e inicial do inimigo.
 #define INIM_HP_MAX (60.0f)
 
 /*! Distancia maxima na qual o inimigo vai seguir o jogador,
     de centro a centro. */
-#define INIM_MAX_DIST (120.0f)
+#define INIM_MAX_DIST (195.0f)
 
 /*! Distancia minima na qual o inimigo vai seguir o jogador,
     de borda a borda. */
 #define INIM_MIN_DIST (10.0f)
 
 //! Alcance de ataque do inimigo, de borda a borda
-#define INIM_ATQ_DIST (20.0f)
+#define INIM_ATQ_DIST (30.0f)
 
 //! Segundos que demora do inimigo comecar o ataque ate ele causar dano.
-#define INIM_WARMUP (1.0f)
+#define INIM_WARMUP (0.65f)
 
 //! Dano de ataque
 #define INIM_DANO (15.0f)
@@ -208,6 +207,7 @@ GameState;
 
 //! Tamanho de uma tile.
 #define TAM_TILE (47)
+
 
 
 

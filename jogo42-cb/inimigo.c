@@ -47,8 +47,11 @@ void MoverInimigo(struct Inimigo* inimigo, const GameState* gs)
         // Posicao para a qual moveremos
         Vector2 posFutura = Vector2AndarDist(inimigo->pos, gs->jog.pos,
                                             INIM_VEL * GetFrameTime());
+        if(!ColisaoComLevel(posFutura, INIM_RAIO, gs))
+        {
+            inimigo->pos = posFutura;
+        }
 
-        inimigo->pos = posFutura;
 
         // Rotacionar
         inimigo->rot = Vector2Angle(inimigo->pos, gs->jog.pos);
@@ -69,6 +72,7 @@ void AtaqueInimigo(struct Inimigo* inimigo, GameState* gs)
         if (DIST_BORDAS < INIM_ATQ_DIST)
         {
             gs->jog.hp -= INIM_DANO;
+            PlaySound(gs->efet[4]);
         }
 
         // Encerrar o ataque
