@@ -33,7 +33,7 @@ struct Estagio
 
 /* Define qual level vai ser carregado. Isso eh temporario, ate ter o codigo
        de troca de level. */
-    #define ESTAGIO estagio3
+    #define ESTAGIO estagio1
 
 
 
