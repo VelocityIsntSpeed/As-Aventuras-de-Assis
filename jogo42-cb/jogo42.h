@@ -87,6 +87,14 @@ typedef struct // GameState
     // Camera
     Camera2D cam;
 
+    //[ LOJA ]-----------------------------------------------------------------
+    // Contem tudo relacionado a loja
+    struct {
+        // Dinheiro atual do jogador
+        int ouro;
+
+    } loja;
+
 
     //[ INIMIGOS ]-------------------------------------------------------------
     // Estado de um inimigo

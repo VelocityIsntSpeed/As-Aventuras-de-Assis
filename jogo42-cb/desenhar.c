@@ -207,7 +207,6 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
 void DesenharLoja(GameState* gs)
 {
-    int moedas = 1000;
     int valorbarrahp = 0;
     float hp = 10.0;
     float valorminimo = 0;
@@ -263,7 +262,7 @@ void DesenharLoja(GameState* gs)
         continuar=GuiButton((Rectangle){(int)GetScreenWidth()*0.799,(int)GetScreenHeight()*0.8,100,
                               50}, "CONTINUAR" );
         DrawCircle(GetScreenWidth()/20,GetScreenHeight()/4,15,GOLD); //Moedas
-        DrawText(FormatText("%i",moedas),(GetScreenWidth()/20)+20,(GetScreenHeight()/4)-10,20,RAYWHITE);
+        DrawText(FormatText("%i",gs->loja.ouro),(GetScreenWidth()/20)+20,(GetScreenHeight()/4)-10,20,RAYWHITE);
         DrawCircle(GetScreenWidth()/20,(GetScreenHeight()/4)+42,15,RED); //HP
         DrawText(FormatText("%.1f%%",hp),(GetScreenWidth()/20)+20,(GetScreenHeight()/4)+35,20,RAYWHITE);
         //Comprar HP
@@ -284,9 +283,9 @@ void DesenharLoja(GameState* gs)
                              20,GOLD);
                 }*/
             if(comprarhp){
-                if((hp+valorbarrahp)<=100&&moedas>=(valorbarrahp*5)){
+                if((hp+valorbarrahp)<=100&&gs->loja.ouro>=(valorbarrahp*5)){
                     hp+=valorbarrahp;
-                    moedas-=(valorbarrahp*5);
+                    gs->loja.ouro-=(valorbarrahp*5);
                 }
             }
         //Comprar Pocao de Vida
@@ -302,9 +301,9 @@ void DesenharLoja(GameState* gs)
                             0.25,1,Fade(RAYWHITE,0.7));
             DrawText("Aqui fica o texto.",10,245,15,BLACK);
         }
-        if(lifepotion&&moedas>=100)
+        if(lifepotion&&gs->loja.ouro>=100)
         {
-            moedas-=100;
+            gs->loja.ouro-=100;
             opcoes[0]+=1;
         }
         //Comprar Atiradora
@@ -322,9 +321,9 @@ void DesenharLoja(GameState* gs)
             atiradora=GuiButton((Rectangle){(int)GetScreenWidth()*0.255,(int)GetScreenHeight()*0.79,200,
                               25},"Comprar Atiradora(400 moedas)");
         }
-        if(atiradora&&moedas>=400)
+        if(atiradora&&gs->loja.ouro>=400)
         {
-            moedas-=400;
+            gs->loja.ouro-=400;
             opcoes[1]+=1;
             atiradora1=1;
         }

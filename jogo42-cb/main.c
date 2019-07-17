@@ -55,6 +55,9 @@ int main(void)
     gs->cam.rotation = 0.0f;
     gs->cam.zoom = 1.0f;
 
+    //[ LOJA ]=================================================================
+    gs->loja.ouro = 500; // Ta 500 so pra teste, dps tem q setar pra 0
+
     // [[[ FIM INICIALIZACAO ]]]
 
 
