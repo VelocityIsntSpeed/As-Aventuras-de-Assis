@@ -40,10 +40,10 @@ static void DesenharControles()
 
 
 //! Desenha o jogador.
-static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
+static void DesenharJogador(const GameState* gs)
 {
     // A parte da sprite a ser utilizada (nesse caso, tudo)
-    const Rectangle SRC_REC = {0, 0, sprite->width, sprite->height};
+    const Rectangle SRC_REC = {0, 0, gs->SPRITE_JOG.width, gs->SPRITE_JOG.height};
 
     // Posicao e tamanho
     const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y,\
@@ -53,7 +53,7 @@ static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
        onde {0, 0} eh no canto superior esquerdo do DEST_REC */
     const Vector2 ORIGEM = {DEST_REC.width / 2.0f, DEST_REC.height / 2.0f};
 
-    DrawTexturePro(*sprite, SRC_REC, DEST_REC, ORIGEM, gs->jog.rot, WHITE);
+    DrawTexturePro(gs->SPRITE_JOG, SRC_REC, DEST_REC, ORIGEM, gs->jog.rot, WHITE);
 }
 
 
@@ -141,7 +141,7 @@ static void DesenharInimigo(const struct Inimigo* inimigo)
 
 
 
-void Desenhar(const GameState* gs, const Texture2D* spriteJog)
+void Desenhar(const GameState* gs)
 {
     // Pintar tudo (para formar o background)
     ClearBackground(DARKGRAY);
@@ -158,7 +158,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
 
         // Jogador
-        DesenharJogador(gs, spriteJog);
+        DesenharJogador(gs);
 
 
 

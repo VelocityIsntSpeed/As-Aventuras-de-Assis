@@ -41,7 +41,10 @@ int main(void)
     InicializarJogador(gs);
 
     //! Sprite do jogador.
-    const Texture2D SPRITE_JOG = LoadTexture("tex/protag.png");
+    gs->SPRITE_JOG = LoadTexture("tex/protag.png");
+
+    //! Sprite do machado.
+    gs->SPRITE_MACHADO = LoadTexture("tex/machado.png");
 
 
     //[ INIMIGOS ]=============================================================
@@ -125,7 +128,7 @@ int main(void)
 
         // [[[[[ DESENHAR ]]]]]
         BeginDrawing();
-        Desenhar(gs, &SPRITE_JOG);
+        Desenhar(gs);
         EndDrawing();
         // [[[ FIM DESENHAR ]]]
     }
