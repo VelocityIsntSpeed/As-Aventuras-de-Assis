@@ -98,12 +98,14 @@ static void DesenharLevel(const enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
 
 
 //! Desenha o HP do jogador
-static void DesenharHpJog(const GameState* gs)
+static void DesenharHUD(const GameState* gs)
 {
-    const int POS_X = 10, POS_Y = 10, TAM_FONTE = 20;
+    const int POS_X = 10, POS_Y = 10, TAM_FONTE = 20, POS_A = 10, POS_B = 40;
 
     DrawText(FormatText("HP: %d", (int)gs->jog.hp),
              POS_X, POS_Y, TAM_FONTE, WHITE);
+    DrawText(FormatText("Balas: %d", (int)gs->atq.bala),
+             POS_A, POS_B, TAM_FONTE, WHITE);
 }
 
 
@@ -162,6 +164,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
 
 
+
         // Desenhar contorno de circulo se o ataque estiver ativo
         if (gs->atq.atqAtivo && gs->atq.arma)
         {
@@ -188,8 +191,8 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
     // Controles
     DesenharControles();
 
-    // HP do jogador
-    DesenharHpJog(gs);
+    // HUD do jogador
+    DesenharHUD(gs);
 
     // Frames Por Segundo
     DrawFPS(GetScreenWidth() - 80, 10);
