@@ -18,7 +18,7 @@ static void DesenharControles()
     const char TEXTO[] = "Controles:\n"
                          "WASD/Setas para andar\n"
                          "Clique esquerdo para atacar\n"
-                         "Espaco para movimentar obstaculos";
+                         "Clique direito para trocar de arma";
 
     // Tamanho da fonte
     const int TAM_FONTE = 20;
@@ -144,7 +144,7 @@ static void DesenharInimigo(const struct Inimigo* inimigo)
 void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 {
     // Pintar tudo (para formar o background)
-    ClearBackground(MAGENTA);
+    ClearBackground(DARKGRAY);
 
     /* Tudo dentro deste bloco serah desenhado em modo camera (i.e. as
        coordenadas serao interpretadas como coordenadas world). Fora dele,
