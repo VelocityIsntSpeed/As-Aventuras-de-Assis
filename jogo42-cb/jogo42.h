@@ -122,17 +122,7 @@ typedef struct // GameState
 
 
     //[ OBSTACULOS ]-----------------------------------------------------------
-    struct {
-        //! Obstaculo retangular.
-        Rectangle ret;
 
-        //! Posicao do centro do obstaculo circular.
-        Vector2 circCentro;
-        //! Raio do obstaculo circular.
-        float circRaio;
-        //! Se o obstaculo circular ta andando.
-        bool circTaAndando;
-    } obst;
 }
 GameState;
 
