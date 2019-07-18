@@ -129,6 +129,27 @@ int main(void)
                 }
             }
 
+            // Saciedade
+            if(!(gs->jog.timerSac > GetFPS()))
+            {
+                gs->jog.timerSac++;
+            }
+            else
+            {
+                if(gs->jog.sac > 0)
+                {
+                    // Reduzir saciedade
+                    gs->jog.timerSac = 0;
+                    gs->jog.sac--;
+                }
+                else
+                {
+                    // Dano de saciedade
+                    gs->jog.timerSac = 0;
+                    gs->jog.hp -= JOG_HP_MAX/100;
+                }
+
+            }
 
 
             // Atualizar camera

@@ -69,6 +69,10 @@ typedef struct // GameState
         float rot;
         //! Health Points.
         float hp;
+        //! Medidor de Saciedade
+        float sac;
+        //! Variavel usada para descrescer a saciedade
+        float timerSac;
     }
     jog;
 
@@ -267,7 +271,6 @@ void AtaqueJogador(GameState* gs);
 
 /*! Seta as coisas pra AtaqueJogador funcionar*/
 void ataqueSet(GameState* gs);
-
 
 
 // inimigo.c ------------------------------------------------------------------
