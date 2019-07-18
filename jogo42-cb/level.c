@@ -131,6 +131,10 @@ void PassarDeEstagio(GameState* gs)
 {
     gs->estagioAtual++;
 
+    // Resetar saciedade
+    gs->jog.sac = SAC_INICIAL;
+    gs->jog.timerSac = 0;
+
     if (gs->estagioAtual > 3)
     {
         //TODO: VENCER O JOGO!!!!!!!1111!!1!!
