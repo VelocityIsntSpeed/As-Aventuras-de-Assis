@@ -94,6 +94,19 @@ typedef struct // GameState
     // Camera
     Camera2D cam;
 
+    //[ LOJA ]-----------------------------------------------------------------
+    // Contem tudo relacionado a loja
+    struct {
+        // Se a loja estah mostrando
+        bool mostrar;
+        // Dinheiro atual do jogador
+        int ouro;
+        // Se a atiradora estah comprada
+        bool atiradoraComprada;
+
+    } loja;
+
+
     // [ SONS ]----------------------------------------------------------------
     Sound efet[QTD_FX];
 
@@ -114,10 +127,10 @@ typedef struct // GameState
         /// Bool da existencia do inimigo
         bool existe;
         //! Bool pra ver se o inimigo ja foi atingido pelo ataque
-        bool atingido[INIM_QTD_MAX];
+        bool atingido;
     };
 
-    //! O inimigo. So tem um por enquanto, depois vai ter uma lista.
+    //! Array de inimigos
     struct Inimigo inimigos[INIM_QTD_MAX];
 
 
@@ -125,8 +138,9 @@ typedef struct // GameState
     enum Tile sala[MAPA_QTD_LINS][MAPA_QTD_COLS];
 
 
-    //[ OBSTACULOS ]-----------------------------------------------------------
-
+    //[ SPRITES ]--------------------------------------------------------------
+    Texture2D SPRITE_JOG;
+    Texture2D SPRITE_MACHADO;
 }
 GameState;
 
@@ -230,7 +244,10 @@ bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);
 
 // desenhar.c -----------------------------------------------------------------
 /*! Desenha tudo. */
-void Desenhar(const GameState* gs, const Texture2D* spriteJog);
+void Desenhar(const GameState* gs);
+
+/*! Desenha a loja. */
+void DesenharLoja(GameState* gs);
 
 
 // jogador.c ------------------------------------------------------------------
