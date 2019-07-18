@@ -268,9 +268,15 @@ void Desenhar(const GameState* gs)
 
 void DesenharLoja(GameState* gs)
 {
-    static float valorBarraHp = 0; // Valor atual do slider de compra de HP
+    const float precoDe1Hp = 5.0f;
+    const int precoAtiradora = 400;
+
+    // Valor atual do slider
+    static float valorBarraHp = 0;
+    // Valor minimo do slider
     const float valorminimo = 0;
-    const float valormaximo = 150;
+    // Valor maximo do slider
+    const float valormaximo = JOG_HP_MAX - gs->jog.hp;
 
     bool continuarClicado = false;
     bool comprarHpClicado = false;
@@ -282,7 +288,7 @@ void DesenharLoja(GameState* gs)
     DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), DARKBLUE);
 
     // Barra lateral
-    DrawRectangleRounded((Rectangle){-10, -10, GetScreenWidth()/5, GetScreenHeight()+10}, 0.25, 1, BLUE);
+    DrawRectangleRounded((Rectangle){10, 10, 230, GetScreenHeight()-20}, 0.25, 1, BLUE);
 
     // Titulo
     DrawText("[ LOJA ]",(int)GetScreenWidth()*0.55,(int)GetScreenHeight()*0.03, 30, RAYWHITE);
@@ -302,41 +308,57 @@ void DesenharLoja(GameState* gs)
 
     // HP
     DrawCircle(GetScreenWidth()/20, (GetScreenHeight()/4)+42, 15, RED);
-    DrawText(FormatText("HP = %.1f", gs->jog.hp), (GetScreenWidth()/20)+20, (GetScreenHeight()/4)+35, 20, RAYWHITE);
+    DrawText(FormatText("HP = %.1f/%.1f", gs->jog.hp, JOG_HP_MAX), (GetScreenWidth()/20)+20, (GetScreenHeight()/4)+35, 20, RAYWHITE);
 
 
     // Comprar HP
     // Titulo
-    DrawText("[ Comprar HP ]", (int)GetScreenWidth()*0.25, (int)GetScreenHeight()*0.13, 20, (Color){255, 0, 0, 255});
+    DrawText("[ Comprar HP ]", GetScreenWidth()*0.25, GetScreenHeight()*0.13, 20, (Color){255, 0, 0, 255});
     // Caixa de fundo
-    DrawRectangleRounded((Rectangle){(int)GetScreenWidth()*0.26, (int)GetScreenHeight()*0.18, 700, 120}, 0.25, 1, Fade(RAYWHITE, 0.7));
+    DrawRectangleRounded((Rectangle){GetScreenWidth()*0.26, GetScreenHeight()*0.18, 700, 120}, 0.25, 1, Fade(RAYWHITE, 0.7));
     // Slider
-    valorBarraHp = GuiSlider((Rectangle){(int)GetScreenWidth()*0.27, (int)GetScreenHeight()*0.2, 600, 50 }, "", valorBarraHp, valorminimo, valormaximo, true);
+    valorBarraHp = GuiSlider((Rectangle){GetScreenWidth()*0.27, GetScreenHeight()*0.2, 600, 50}, "",
+                             valorBarraHp, valorminimo, valormaximo, true);
     // Texto da quantidade a ser comprada
-    DrawText(TextFormat("%.1f de HP", valorBarraHp), (int)GetScreenWidth()*0.3, (int)GetScreenHeight()*0.32, 20, (Color){255, 0, 0, 255});
+    DrawText(TextFormat("%.1f de HP", valorBarraHp), GetScreenWidth()*0.3, GetScreenHeight()*0.32, 20, WHITE);
     // Botao de comprar
-    comprarHpClicado = GuiButton((Rectangle){(int)GetScreenWidth()*0.725,(int)GetScreenHeight()*0.32,200, 25}, FormatText("COMPRAR (%d moedas)",(valorBarraHp*5)));
+    comprarHpClicado = GuiButton((Rectangle){GetScreenWidth()*0.725, GetScreenHeight()*0.32, 200, 25},
+                                 FormatText("COMPRAR (%d moedas)", (valorBarraHp * precoDe1Hp)));
 
     if (comprarHpClicado)
     {
-        if ((gs->jog.hp + valorBarraHp) <= 100 && gs->loja.ouro >= (valorBarraHp*5))
+        if (gs->loja.ouro >= (valorBarraHp * precoDe1Hp))
         {
             gs->jog.hp += valorBarraHp;
-            gs->loja.ouro -= (valorBarraHp*5);
+            gs->loja.ouro -= (valorBarraHp * precoDe1Hp);
         }
     }
 
+
     // Atiradora
-    DrawText("[ Revolver ]", (int)GetScreenWidth()*0.25, (int)GetScreenHeight()*0.675, 20, BLACK);
-    DrawRectangleRounded((Rectangle){(int)GetScreenWidth()*0.25, (int)GetScreenHeight()*0.72, 250, 98},0.25, 1, Fade(RAYWHITE, 0.7));
-
-    // Botao de comprar atiradora
-    atiradoraClicada = GuiButton((Rectangle){(int)GetScreenWidth()*0.255, (int)GetScreenHeight()*0.79, 200, 25}, "Comprar Atiradora (400 moedas)");
-
-    if (atiradoraClicada && !gs->loja.atiradoraComprada && gs->loja.ouro >= 400)
+    if (gs->loja.atiradoraComprada == false)
     {
-        gs->loja.ouro -= 400;
-        gs->loja.atiradoraComprada = true;
+        DrawText("[ Revolver ]", GetScreenWidth()*0.25, GetScreenHeight()*0.45, 20, BLACK);
+        DrawRectangleRounded((Rectangle){GetScreenWidth()*0.25, GetScreenHeight()*0.5, 700, 98}, 0.25, 1, Fade(RAYWHITE, 0.7));
+
+        DrawText("Balas sao adiquiridas ao acertar inimigos com o machado.", GetScreenWidth()*0.3, GetScreenHeight()*0.52,
+                 20, BLACK);
+
+        // Botao de comprar atiradora
+        atiradoraClicada = GuiButton((Rectangle){GetScreenWidth()*0.5, GetScreenHeight()*0.6, 200, 25},
+                                     TextFormat("Comprar revolver (%d moedas)", precoAtiradora));
+
+        if (atiradoraClicada && gs->loja.ouro >= precoAtiradora)
+        {
+            gs->loja.ouro -= precoAtiradora;
+            gs->loja.atiradoraComprada = true;
+        }
+    }
+
+    // Continuar
+    if (continuarClicado)
+    {
+        gs->loja.mostrar = false;
     }
 }
 
