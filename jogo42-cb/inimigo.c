@@ -106,7 +106,7 @@ void matarInimigo(GameState* gs, int i)
     gs->inimigos[i].existe = false;
     gs->inimigos[i].pos.x = -20;
     gs->inimigos[i].pos.y = -20;
-    gs->loja.ouro += 10;
+    gs->loja.ouro += 30;
 
 }
 
