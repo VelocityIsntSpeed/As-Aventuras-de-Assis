@@ -21,7 +21,7 @@ static void DesenharControles()
                          "Clique esquerdo para atacar\n"
                          "Clique direito para trocar de arma\n"
                          "P para pausar\n"
-                         "L para abrir/fechar loja";
+                         "L para abrir a loja (temporario)";
 
     // Tamanho da fonte
     const int TAM_FONTE = 20;
