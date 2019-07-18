@@ -294,7 +294,7 @@ void Desenhar(const GameState* gs)
         {
             if (gs->spwn[i].ativo)
                     {
-                        Color cor = {0, 121, 241, 40};
+                        Color cor = {0, 121, 241, 23};
                         DrawCircle(gs->spwn[i].pos.x, gs->spwn[i].pos.y, SPWN_DIST_ATV, cor);
                     }
         }
