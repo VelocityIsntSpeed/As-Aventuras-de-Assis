@@ -135,6 +135,18 @@ typedef struct // GameState
 
     //! Array de inimigos
     struct Inimigo inimigos[INIM_QTD_MAX];
+    struct Spawn
+    {
+        //! Posicao do spawn
+        Vector2 pos;
+        //! indicador de vida do spawn
+        float hp;
+        //! cooldown pra um novo spawn
+        float cooldown;
+        //! existencia do spawn
+        bool existe;
+
+    }spwn;//um so pra testar
 
 
     //[ LEVEL ]----------------------------------------------------------------
