@@ -41,20 +41,29 @@ void MoverInimigo(struct Inimigo* inimigo, const GameState* gs)
     // De borda a borda
     const float DIST_BORDAS = DIST_CENTROS - INIM_RAIO - JOG_RAIO;
 
-    // Se o jogador estiver na distancia certa
-    if (DIST_CENTROS < INIM_MAX_DIST && DIST_BORDAS > INIM_MIN_DIST)
+
+
+    // Posicao para a qual moveremos
+    Vector2 posFutura = inimigo->pos;
+
+    // Se o jogador estiver em visao
+    if (DIST_CENTROS < INIM_MAX_DIST)
     {
-        // Posicao para a qual moveremos
-        Vector2 posFutura = Vector2AndarDist(inimigo->pos, gs->jog.pos,
-                                            INIM_VEL * GetFrameTime());
-        if(!ColisaoComLevel(posFutura, INIM_RAIO, gs))
-        {
-            inimigo->pos = posFutura;
-        }
-
-
         // Rotacionar
         inimigo->rot = Vector2Angle(inimigo->pos, gs->jog.pos);
+
+        // Se o jogador nao estiver muito perto
+        if (DIST_BORDAS > INIM_MIN_DIST)
+        {
+            // Andar ate o jogador
+            posFutura = Vector2AndarDist(posFutura, gs->jog.pos, INIM_VEL * GetFrameTime());
+        }
+    }
+
+    // Mover se nao colidir
+    if (!ColisaoComLevel(posFutura, INIM_RAIO, gs))
+    {
+        inimigo->pos = posFutura;
     }
 }
 
