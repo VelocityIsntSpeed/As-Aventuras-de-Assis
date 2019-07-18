@@ -91,21 +91,28 @@ int main(void)
     {
 
         // [[[[[ UPDATE ]]]]]
-
-        if (!IsSoundPlaying(marte))
+        // Musica
+        if (!IsSoundPlaying(marte) && !gs->pausado)
         {
             PlaySound(marte);
         }
+        if (IsKeyPressed('P') && gs->pausado)
+        {
+            ResumeSound(marte);
+        }
+
 
         // Controle de pausa
         if (IsKeyPressed('P') && gs->loja.mostrar == false)
         {
             gs->pausado = !gs->pausado;
+            ResumeSound(marte);
         }
 
         // [[[[[ UPDATE-PAUSAR ]]]]]
         if (!gs->pausado)
         {
+
             // Atalho para imediatamente passar para proxima fase
             if (IsKeyPressed(KEY_EQUAL))
             {
@@ -238,10 +245,12 @@ int main(void)
             if (gs->loja.mostrar)
             {
                 DesenharLoja(gs);
+                PauseSound(marte);
             }
             else if (gs->pausado)
             {
                 DrawText("JOGO PAUSADO", GetScreenWidth()/2 - MeasureText("JOGO PAUSADO", 40)/2, GetScreenHeight()/2 - 40, 40, LIGHTGRAY);
+                PauseSound(marte);
             }
 
         EndDrawing();
