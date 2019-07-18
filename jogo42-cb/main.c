@@ -14,6 +14,7 @@
 
 int main(void)
 {
+
     // [[[[[ INICIALIZACAO ]]]]]
 
     //[ JANELA ]===============================================================
@@ -25,6 +26,7 @@ int main(void)
     GameState* gs = malloc(sizeof(GameState));
 
     gs->pausado = false;
+    gs->gameover = false;
 
     //[ AUDIO ]================================================================
     InitAudioDevice();
@@ -79,130 +81,148 @@ int main(void)
             PlaySound(marte);
         }
 
-        // Controle de pausa
-        if (IsKeyPressed('P') && gs->loja.mostrar == false)
+        if(!gs->gameover)
         {
-            gs->pausado = !gs->pausado;
-        }
-
-        // [[[[[ UPDATE-PAUSAR ]]]]]
-        if (!gs->pausado)
-        {
-            // Atalho para imediatamente passar para proxima fase
-            if (IsKeyPressed(KEY_EQUAL))
+            // Controle de pausa
+            if (IsKeyPressed('P') && gs->loja.mostrar == false)
             {
-                PassarDeEstagio(gs);
+                gs->pausado = !gs->pausado;
             }
 
-
-            // Quando chegar ao final do estagio, passar para proxima fase
-            for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
+            // [[[[[ UPDATE-PAUSAR ]]]]]
+            if (!gs->pausado)
             {
-                for (int col = 0; col < MAPA_QTD_COLS; col++)
+                // Atalho para imediatamente passar para proxima fase
+                if (IsKeyPressed(KEY_EQUAL))
                 {
-                    if ((gs->sala[lin][col] == TILE_final)
-                        && CheckCollisionCircleRec(gs->jog.pos, JOG_RAIO, RectDaTile(col, lin)))
-                    {
-                        PassarDeEstagio(gs);
-                    }
+                    PassarDeEstagio(gs);
                 }
-            }
 
 
-            // Mover jogador
-            MoverJog(gs);
-
-            // Potion
-            if(gs->jog.usingPot)
-            {
-                if(gs->jog.timerPot >= 5 * GetFPS())
+                // Quando chegar ao final do estagio, passar para proxima fase
+                for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
                 {
-                    gs->jog.usingPot = false;
-                }
-                else
-                {
-                    gs->jog.timerPot++;
-                    if((int)gs->jog.timerPot % 12 == 0)
+                    for (int col = 0; col < MAPA_QTD_COLS; col++)
                     {
-                        if(!(gs->jog.hp >= JOG_HP_MAX))
+                        if ((gs->sala[lin][col] == TILE_final)
+                            && CheckCollisionCircleRec(gs->jog.pos, JOG_RAIO, RectDaTile(col, lin)))
                         {
-                            gs->jog.hp += JOG_HP_MAX/100;
+                            PassarDeEstagio(gs);
                         }
                     }
                 }
-            }
-            else
-            {
-                if(IsKeyPressed(KEY_Q))
+
+
+                // Mover jogador
+                MoverJog(gs);
+
+                // Potion
+                if(gs->jog.usingPot)
                 {
-                    gs->jog.pots--;
-                    gs->jog.timerPot = 0;
-                    gs->jog.usingPot = true;
-                }
-            }
-
-            // Ataque do jogador
-            ataqueSet(gs);
-
-            if (gs->atq.atqAtivo)
-            {
-                AtaqueJogador(gs);
-            }
-
-            // Mover inimigo
-            for (int i = 0; i < INIM_QTD_MAX; i++)
-            {
-                if (gs->inimigos[i].existe)
-                {
-                    MoverInimigo(&gs->inimigos[i], gs);
-                }
-            }
-
-
-            // Ataque Inimigo
-            for (int i = 0; i < INIM_QTD_MAX; i++)
-            {
-                if (gs->inimigos[i].existe)
-                {
-                    AtaqueInimigo(&gs->inimigos[i], gs);
-                }
-            }
-
-            // Saciedade
-            if(!(gs->jog.timerSac > GetFPS()))
-            {
-                gs->jog.timerSac++;
-            }
-            else
-            {
-                if(gs->jog.sac > 0)
-                {
-                    // Reduzir saciedade
-                    gs->jog.timerSac = 0;
-                    gs->jog.sac--;
+                    if(gs->jog.timerPot >= 5 * GetFPS())
+                    {
+                        gs->jog.usingPot = false;
+                    }
+                    else
+                    {
+                        gs->jog.timerPot++;
+                        if((int)gs->jog.timerPot % 12 == 0)
+                        {
+                            if(!(gs->jog.hp >= JOG_HP_MAX))
+                            {
+                                gs->jog.hp += JOG_HP_MAX/100;
+                            }
+                        }
+                    }
                 }
                 else
                 {
-                    // Dano de saciedade
-                    gs->jog.timerSac = 0;
-                    gs->jog.hp -= JOG_HP_MAX/100;
+                    if(IsKeyPressed(KEY_Q))
+                    {
+                        gs->jog.pots--;
+                        gs->jog.timerPot = 0;
+                        gs->jog.usingPot = true;
+                    }
                 }
 
+                // Ataque do jogador
+                ataqueSet(gs);
+
+                if (gs->atq.atqAtivo)
+                {
+                    AtaqueJogador(gs);
+                }
+
+                // Mover inimigo
+                for (int i = 0; i < INIM_QTD_MAX; i++)
+                {
+                    if (gs->inimigos[i].existe)
+                    {
+                        MoverInimigo(&gs->inimigos[i], gs);
+                    }
+                }
+
+
+                // Ataque Inimigo
+                for (int i = 0; i < INIM_QTD_MAX; i++)
+                {
+                    if (gs->inimigos[i].existe)
+                    {
+                        AtaqueInimigo(&gs->inimigos[i], gs);
+                    }
+                }
+
+                // Saciedade
+                if(!(gs->jog.timerSac > GetFPS()))
+                {
+                    gs->jog.timerSac++;
+                }
+                else
+                {
+                    if(gs->jog.sac > 0)
+                    {
+                        // Reduzir saciedade
+                        gs->jog.timerSac = 0;
+                        gs->jog.sac--;
+                    }
+                    else
+                    {
+                        // Dano de saciedade
+                        gs->jog.timerSac = 0;
+                        gs->jog.hp -= JOG_HP_MAX/100;
+                    }
+
+                }
+
+                // Abrir a loja com a tecla L (temporario)
+                if (IsKeyPressed(KEY_L))
+                {
+                    gs->loja.mostrar = true;
+                }
+
+                //Jogador Morrer
+                if(gs->jog.hp<=0)
+                {
+                    gs->gameover = true;
+                }
+              }
             }
-
-
-            // Atualizar camera
-            gs->cam.offset = Vector2Negate(gs->jog.pos);
-            gs->cam.offset.x += GetScreenWidth() / 2.0f;
-            gs->cam.offset.y += GetScreenHeight() / 2.0f;
-            gs->cam.target = gs->jog.pos;
-
-
-            // Abrir a loja com a tecla L (temporario)
-            if (IsKeyPressed(KEY_L))
+            else
             {
-                gs->loja.mostrar = true;
+                if(IsKeyPressed(KEY_ENTER))
+                {
+                    InicializarLevel(gs->sala,gs);
+                    gs->jog.hp=150.0;
+                    gs->estagioAtual = 1;
+                    gs->gameover = false;
+
+                }
             }
+            // Atualizar camera
+                gs->cam.offset = Vector2Negate(gs->jog.pos);
+                gs->cam.offset.x += GetScreenWidth() / 2.0f;
+                gs->cam.offset.y += GetScreenHeight() / 2.0f;
+                gs->cam.target = gs->jog.pos;
         }
 
         // [[[ FIM UPDATE-PAUSAR ]]]
@@ -213,8 +233,9 @@ int main(void)
         // [[[[[ DESENHAR ]]]]]
         BeginDrawing();
 
-            Desenhar(gs);
-
+        Desenhar(gs);
+        if(!gs->gameover)
+        {
             if (gs->loja.mostrar)
             {
                 DesenharLoja(gs);
@@ -223,10 +244,16 @@ int main(void)
             {
                 DrawText("JOGO PAUSADO", GetScreenWidth()/2 - MeasureText("JOGO PAUSADO", 40)/2, GetScreenHeight()/2 - 40, 40, LIGHTGRAY);
             }
-
+        }
+        else
+        {
+            DrawRectangle(0,0,GetScreenWidth(),GetScreenHeight(),MAROON);
+            DrawText("GAME OVER. Tecle [ENTER] para JOGAR DE NOVO.", GetScreenWidth()/2 - MeasureText("GAME OVER. Tecle [ENTER] para JOGAR DE NOVO.", 20)/2,
+                        GetScreenHeight()/2 - 50, 20, GRAY);
+        }
         EndDrawing();
         // [[[ FIM DESENHAR ]]]
-    }
+
 
 
     // Desinicializacao

@@ -56,6 +56,9 @@ enum Tile
 // Guarda todo o estado do jogo
 typedef struct // GameState
 {
+    //!Game Over
+    bool gameover;
+
     //! Se o jogo estah pausado.
     bool pausado;
 
