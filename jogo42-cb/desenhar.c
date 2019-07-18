@@ -210,8 +210,6 @@ void DesenharLoja(GameState* gs)
 
     bool continuar = false;
     bool comprarHp = false;
-    bool infopotion = false;
-    bool lifepotion = false;
     bool infoatiradora = false;
     bool atiradora = false;
     int atiradora1 = 0;
@@ -236,11 +234,7 @@ void DesenharLoja(GameState* gs)
 
     if (ActiveInv >= 0 && ActiveInv < 7)
     {
-        if (ActiveInv == 0)
-        {
-            DrawText(FormatText("Pocoes de Vida\nEm estoque:%i",opcoes[0]), TamInv.x+10, (TamInv.y)+70, 10, RAYWHITE);
-        }
-        else if (ActiveInv == 1)
+        if (ActiveInv == 1)
         {
             DrawText(FormatText("Atiradoras\nEm estoque:%i",opcoes[1]), TamInv.x+10, (TamInv.y)+70, 10, RAYWHITE);
         }
@@ -289,24 +283,6 @@ void DesenharLoja(GameState* gs)
         }
     }
 
-    //Comprar Pocao de Vida
-    DrawText("[ Comprar Pocao de Vida ]",(int)GetScreenWidth()*0.25,(int)GetScreenHeight()*0.43,
-                        20,GREEN);
-    DrawRectangleRounded((Rectangle){(int)GetScreenWidth()*0.25,(int)GetScreenHeight()*0.48,250,100},0.25,1,Fade(RAYWHITE,0.7));
-    infopotion=GuiCheckBox((Rectangle){(int)GetScreenWidth()*0.255,(int)GetScreenHeight()*0.5,20,20},"INFO", infopotion);
-    lifepotion=GuiButton((Rectangle){(int)GetScreenWidth()*0.255,(int)GetScreenHeight()*0.55,200,
-                          25},"Comprar Pocao de Vida(100 moedas)");
-    if(infopotion)
-    {
-        DrawRectangleRounded((Rectangle){-20,240,GetScreenWidth()/5,(int)GetScreenHeight()*0.57},
-                        0.25,1,Fade(RAYWHITE,0.7));
-        DrawText("Aqui fica o texto.",10,245,15,BLACK);
-    }
-    if(lifepotion&&gs->loja.ouro>=100)
-    {
-        gs->loja.ouro-=100;
-        opcoes[0]+=1;
-    }
     //Comprar Atiradora
     DrawText("[ Comprar Atiradora ]",(int)GetScreenWidth()*0.25,(int)GetScreenHeight()*0.675,
                         20,PURPLE);
