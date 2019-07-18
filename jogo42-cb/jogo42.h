@@ -69,6 +69,12 @@ typedef struct // GameState
         float rot;
         //! Health Points.
         float hp;
+        //! Potions
+        float pots;
+        //! Variavel que determina se a pocao estah sendo usada
+        bool usingPot;
+        //! Varaivel usada para contar o tempo de ativacao da potion
+        float timerPot;
     }
     jog;
 
@@ -267,8 +273,6 @@ void AtaqueJogador(GameState* gs);
 
 /*! Seta as coisas pra AtaqueJogador funcionar*/
 void ataqueSet(GameState* gs);
-
-
 
 // inimigo.c ------------------------------------------------------------------
 /*! Move o inimigo. */
