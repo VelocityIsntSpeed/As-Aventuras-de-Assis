@@ -136,12 +136,14 @@ static void DesenharEsconderijos(const enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COL
 static void DesenharHUD(const GameState* gs)
 {
     const int POS_HP_X = 10, POS_HP_Y = 10, TAM_FONTE = 20, POS_BAL_X = 10,POS_BAL_Y= 40,
-                        POS_ARMA_X = 100, POS_ARMA_Y = 10;
+                        POS_ARMA_X = 100, POS_ARMA_Y = 10, POS_SAC_X = 10, POS_SAC_Y = 70;
 
     DrawText(FormatText("HP: %d", (int)gs->jog.hp),
              POS_HP_X, POS_HP_Y, TAM_FONTE, WHITE);
     DrawText(FormatText("Balas: %d", (int)gs->atq.bala),
              POS_BAL_X, POS_BAL_Y, TAM_FONTE, WHITE);
+    DrawText(FormatText("Saciedade: %d", (int)gs->jog.sac),
+             POS_SAC_X, POS_SAC_Y, TAM_FONTE, WHITE);
     if (gs->atq.arma)
     {
         DrawText("MACHADO",POS_ARMA_X, POS_ARMA_Y, TAM_FONTE, WHITE );
