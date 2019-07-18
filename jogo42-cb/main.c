@@ -16,17 +16,15 @@ int main(void)
 {
     // [[[[[ INICIALIZACAO ]]]]]
 
-    static bool pause = false;
-
     //[ JANELA ]===============================================================
     InitWindow(1024, 576, "Jogo42");
     SetTargetFPS(60);
 
 
-
     //[ STRUCT DE ESTADO DO JOGO ]=============================================
     GameState* gs = malloc(sizeof(GameState));
 
+    gs->pausado = false;
 
     //[ AUDIO ]================================================================
     InitAudioDevice();
@@ -94,11 +92,11 @@ int main(void)
 
         if (IsKeyPressed('P'))
         {
-            pause = !pause;
+            gs->pausado = !gs->pausado;
         }
 
         // [[[[[ UPDATE-PAUSAR ]]]]]
-        if (!pause)
+        if (!gs->pausado)
         {
             // Mover jogador
             MoverJog(gs);
@@ -160,7 +158,7 @@ int main(void)
             {
                 DesenharLoja(gs);
             }
-            else if (pause)
+            else if (gs->pausado)
             {
                 DrawText("JOGO PAUSADO", GetScreenWidth()/2 - MeasureText("JOGO PAUSADO", 40)/2, GetScreenHeight()/2 - 40, 40, LIGHTGRAY);
             }
