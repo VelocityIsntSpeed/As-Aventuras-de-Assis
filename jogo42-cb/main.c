@@ -12,6 +12,8 @@
 #include "stdlib.h" // Pelo malloc
 
 
+
+
 int main(void)
 {
     // [[[[[ INICIALIZACAO ]]]]]
@@ -23,6 +25,13 @@ int main(void)
 
     //[ STRUCT DE ESTADO DO JOGO ]=============================================
     GameState* gs = malloc(sizeof(GameState));
+    void SpawnarSpawn(GameState* gs, Vector2 pos)
+        {
+            gs->spwn.pos = pos;
+            gs->spwn.existe = true;
+            gs->spwn.hp = 200;
+
+        }
 
     gs->pausado = false;
 
@@ -62,8 +71,10 @@ int main(void)
     //spawn
 
 
+
     //[ LEVEL ]================================================================
     InicializarLevel(gs->sala, gs);
+
 
 
 
@@ -80,7 +91,7 @@ int main(void)
 
 
     // [[[ FIM INICIALIZACAO ]]]
-
+    SpawnarSpawn(gs, gs->jog.pos);
 
     // Loop principal
     while (!WindowShouldClose())
@@ -91,7 +102,7 @@ int main(void)
         {
             PlaySound(marte);
         }
-            gs->spwn.pos = gs->jog.pos;
+
         // Controle de pausa
         if (IsKeyPressed('P') && gs->loja.mostrar == false)
         {
