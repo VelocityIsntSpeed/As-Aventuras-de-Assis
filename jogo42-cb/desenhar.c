@@ -22,7 +22,8 @@ static void DesenharControles()
                          "Clique direito para trocar de arma\n"
                          "P para pausar\n"
                          "L para abrir a loja (temporario)\n"
-                         "Q para usar pocao";
+                         "Q para usar pocao"
+                         "= para pular estagio";
 
     // Tamanho da fonte
     const int TAM_FONTE = 20;
@@ -85,6 +86,9 @@ static void DesenharLevel(const enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
 
                 case TILE_parede:
                     cor = GRAY; break;
+
+                case TILE_final:
+                    cor = GREEN; break;
             }
 
             // Desenhar tile
@@ -136,10 +140,13 @@ static void DesenharEsconderijos(const enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COL
 //! Desenha o HP do jogador
 static void DesenharHUD(const GameState* gs)
 {
-    const int POS_HP_X = 10, POS_HP_Y = 10, TAM_FONTE = 20, POS_BAL_X = 10,POS_BAL_Y= 40,
-              POS_ARMA_X = 100, POS_ARMA_Y = 10, POS_SAC_X = 10, POS_SAC_Y = 70,
+    const int TAM_FONTE = 20,
+              POS_HP_X = 10, POS_HP_Y = 10,
+              POS_BAL_X = 10,POS_BAL_Y = 40,
+              POS_ARMA_X = 100, POS_ARMA_Y = 10,
+              POS_SAC_X = 10, POS_SAC_Y = 70,
               POS_POTS_X = 10, POS_POTS_Y = 100;
-
+              POS_LVL_X = 10, POS_LVL_Y = 130;
     DrawText(FormatText("HP: %d", (int)gs->jog.hp),
              POS_HP_X, POS_HP_Y, TAM_FONTE, WHITE);
     DrawText(FormatText("Balas: %d", (int)gs->atq.bala),
@@ -148,6 +155,8 @@ static void DesenharHUD(const GameState* gs)
              POS_SAC_X, POS_SAC_Y, TAM_FONTE, WHITE);
     DrawText(FormatText("Pocoes: %d", (int)gs->jog.pots),
              POS_POTS_X, POS_POTS_Y, TAM_FONTE, WHITE);
+    DrawText(TextFormat("Estagio %d", gs->estagioAtual),
+             POS_LVL_X, POS_LVL_Y, TAM_FONTE, WHITE);
     if (gs->atq.arma)
     {
         DrawText("MACHADO",POS_ARMA_X, POS_ARMA_Y, TAM_FONTE, WHITE );
@@ -338,7 +347,7 @@ void DesenharLoja(GameState* gs)
     DrawText(TextFormat("%.1f de HP", valorBarraHp), GetScreenWidth()*0.3, GetScreenHeight()*0.32, 20, WHITE);
     // Botao de comprar
     comprarHpClicado = GuiButton((Rectangle){GetScreenWidth()*0.725, GetScreenHeight()*0.32, 200, 25},
-                                 FormatText("COMPRAR (%d moedas)", (valorBarraHp * precoDe1Hp)));
+                                 FormatText("COMPRAR (%d moedas)", (int)(valorBarraHp * precoDe1Hp)));
 
     if (comprarHpClicado)
     {

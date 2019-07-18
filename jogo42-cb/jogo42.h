@@ -47,7 +47,9 @@ enum Tile
     //! Mostra grafico de chao e colide.
     TILE_paredeInvisivel,
     //! Mostra grafico de parede e nao colide
-    TILE_esconderijo
+    TILE_esconderijo,
+    //! Final de estagio, passa para o proximo
+    TILE_final
 };
 
 
@@ -56,6 +58,9 @@ typedef struct // GameState
 {
     //! Se o jogo estah pausado.
     bool pausado;
+
+    //! Estagio atual
+    int estagioAtual;
 
     //[ JOGADOR ]--------------------------------------------------------------
     // Estado do jogador
@@ -232,6 +237,9 @@ GameState;
 //! Tamanho de uma tile.
 #define TAM_TILE (47)
 
+//! A saciedade inicial.
+#define SAC_INICIAL (100.0f)
+
 
 
 
@@ -252,9 +260,6 @@ Vector2 PosWorldDoCursor(const GameState* gs);
     de andar quando tiver andado uma distancia `dist` (mesmo que no caminho
     passe de `destino`). */
 Vector2 Vector2AndarDist(Vector2 origem, Vector2 destino, float dist);
-
-/*! Verifica se ha colisao entre o circulo dado e o level. */
-bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);
 
 
 // desenhar.c -----------------------------------------------------------------
@@ -293,15 +298,14 @@ bool SpawnarInimigo(Vector2 pos, GameState* gs);
 void matarInimigo(GameState* gs, int i);
 
 // level.c --------------------------------------------------------------------
-/*! Move os obstaculos. */
-void MoverObst(GameState* gs);
-
 /*! Inicializa o level de acordo com a string do estagio */
-void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS],
-                      GameState* gs);
+void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameState* gs);
 
-/*! Inicializa os obstaculos. */
-void InicializarObst(GameState* gs);
+/*! Passa para o proximo estagio (ou vence o jogo) */
+void PassarDeEstagio(GameState* gs);
+
+/*! Verifica se ha colisao entre o circulo dado e o level. */
+bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);
 
 
 #endif // JOGO42_H_INCLUDED
