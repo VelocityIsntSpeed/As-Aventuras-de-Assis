@@ -45,7 +45,9 @@ enum Tile
     //! Mostra grafico de parede e colide.
     TILE_parede,
     //! Mostra grafico de chao e colide.
-    TILE_paredeInvisivel
+    TILE_paredeInvisivel,
+    //! Mostra grafico de parede e nao colide
+    TILE_esconderijo
 };
 
 
