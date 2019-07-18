@@ -263,7 +263,7 @@ GameState;
 #define VEL_CIRC (200.0f)
 
 //! Tamanho de uma tile.
-#define TAM_TILE (47)
+#define TAM_TILE (55)
 
 //! A saciedade inicial.
 #define SAC_INICIAL (120.0f)
