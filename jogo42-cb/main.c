@@ -21,10 +21,10 @@ int main(void)
     SetTargetFPS(60);
 
 
-
     //[ STRUCT DE ESTADO DO JOGO ]=============================================
     GameState* gs = malloc(sizeof(GameState));
 
+    gs->pausado = false;
 
     //[ AUDIO ]================================================================
     InitAudioDevice();
@@ -90,53 +90,62 @@ int main(void)
             PlaySound(marte);
         }
 
-
-
-        // Mover jogador
-        MoverJog(gs);
-
-        // Ataque do jogador
-        ataqueSet(gs);
-
-        if (gs->atq.atqAtivo)
+        // Controle de pausa
+        if (IsKeyPressed('P') && gs->loja.mostrar == false)
         {
-        AtaqueJogador(gs);
+            gs->pausado = !gs->pausado;
         }
 
-        // Mover inimigo
-        for (int i = 0; i < INIM_QTD_MAX; i++)
+        // [[[[[ UPDATE-PAUSAR ]]]]]
+        if (!gs->pausado)
         {
-            if (gs->inimigos[i].existe)
+            // Mover jogador
+            MoverJog(gs);
+
+            // Ataque do jogador
+            ataqueSet(gs);
+
+            if (gs->atq.atqAtivo)
             {
-                MoverInimigo(&gs->inimigos[i], gs);
+                AtaqueJogador(gs);
+            }
+
+            // Mover inimigo
+            for (int i = 0; i < INIM_QTD_MAX; i++)
+            {
+                if (gs->inimigos[i].existe)
+                {
+                    MoverInimigo(&gs->inimigos[i], gs);
+                }
+            }
+
+
+            // Ataque Inimigo
+            for (int i = 0; i < INIM_QTD_MAX; i++)
+            {
+                if (gs->inimigos[i].existe)
+                {
+                    AtaqueInimigo(&gs->inimigos[i], gs);
+                }
+            }
+
+
+
+            // Atualizar camera
+            gs->cam.offset = Vector2Negate(gs->jog.pos);
+            gs->cam.offset.x += GetScreenWidth() / 2.0f;
+            gs->cam.offset.y += GetScreenHeight() / 2.0f;
+            gs->cam.target = gs->jog.pos;
+
+
+            // Controlar mostragem da loja (temporario)
+            if (IsKeyPressed(KEY_L))
+            {
+                gs->loja.mostrar = !gs->loja.mostrar;
             }
         }
 
-
-        // Ataque Inimigo
-        for (int i = 0; i < INIM_QTD_MAX; i++)
-        {
-            if (gs->inimigos[i].existe)
-            {
-                AtaqueInimigo(&gs->inimigos[i], gs);
-            }
-        }
-
-
-
-        // Atualizar camera
-        gs->cam.offset = Vector2Negate(gs->jog.pos);
-        gs->cam.offset.x += GetScreenWidth() / 2.0f;
-        gs->cam.offset.y += GetScreenHeight() / 2.0f;
-        gs->cam.target = gs->jog.pos;
-
-
-        // Controlar mostragem da loja
-        if (IsKeyPressed(KEY_L))
-        {
-            gs->loja.mostrar = !gs->loja.mostrar;
-        }
-
+        // [[[ FIM UPDATE-PAUSAR ]]]
 
         // [[[ FIM UPDATE ]]]
 
@@ -149,6 +158,10 @@ int main(void)
             if (gs->loja.mostrar)
             {
                 DesenharLoja(gs);
+            }
+            else if (gs->pausado)
+            {
+                DrawText("JOGO PAUSADO", GetScreenWidth()/2 - MeasureText("JOGO PAUSADO", 40)/2, GetScreenHeight()/2 - 40, 40, LIGHTGRAY);
             }
 
         EndDrawing();

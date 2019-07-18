@@ -17,10 +17,10 @@
 static void DesenharControles()
 {
     // Texto que vai aparecer
-    const char TEXTO[] = "Controles:\n"
-                         "WASD/Setas para andar\n"
+    const char TEXTO[] = "WASD/Setas para andar\n"
                          "Clique esquerdo para atacar\n"
                          "Clique direito para trocar de arma\n"
+                         "P para pausar\n"
                          "L para abrir/fechar loja";
 
     // Tamanho da fonte
