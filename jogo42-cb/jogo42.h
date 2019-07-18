@@ -31,6 +31,9 @@
 //! Quantidade de efeitos q agt ta usando*/
 #define QTD_FX 9
 
+//! Quantidade maxima de spaws
+#define SPWN_QTD_MAX (10)
+
 
 
 //[ DEFINICOES DE TIPOS ]======================================================
@@ -78,6 +81,12 @@ typedef struct // GameState
         float sac;
         //! Variavel usada para descrescer a saciedade
         float timerSac;
+        //! Potions
+        int pots;
+        //! Variavel que determina se a pocao estah sendo usada
+        bool usingPot;
+        //! Varaivel usada para contar o tempo de ativacao da potion
+        float timerPot;
     }
     jog;
 
@@ -144,6 +153,22 @@ typedef struct // GameState
 
     //! Array de inimigos
     struct Inimigo inimigos[INIM_QTD_MAX];
+    struct Spawn
+    {
+        //! Posicao do spawn
+        Vector2 pos;
+        //! Indicador de vida do spawn
+        float hp;
+        //! Cooldown pra um novo spawn
+        float cooldown;
+        //! Existencia do spawn
+        bool existe;
+        //! Se o spawn esta ativo
+        bool ativo;
+        //! Se o spawner foi atingido
+        bool atingido;
+
+    }spwn[SPWN_QTD_MAX];//um so pra testar
 
 
     //[ LEVEL ]----------------------------------------------------------------
@@ -223,6 +248,15 @@ GameState;
 //! Dano de ataque
 #define INIM_DANO (15.0f)
 
+//! Cooldown do spawner
+#define SPWN_CLDN (98.0f)
+
+//! Velocidade do spawn
+#define SPWN_VEL (30.0f)
+
+//! Distancia de ativacao do spawner
+#define SPWN_DIST_ATV (270.0f)
+
 
 //[ OUTROS ]-------------------------------------------------------------------
 //! Velocidade do obstaculo circular (por segundo).
@@ -277,7 +311,6 @@ void AtaqueJogador(GameState* gs);
 /*! Seta as coisas pra AtaqueJogador funcionar*/
 void ataqueSet(GameState* gs);
 
-
 // inimigo.c ------------------------------------------------------------------
 /*! Move o inimigo. */
 void MoverInimigo(struct Inimigo* inimigo, const GameState* gs);
@@ -291,6 +324,19 @@ bool SpawnarInimigo(Vector2 pos, GameState* gs);
 
 /*! Seta todos os valores que importam do inimigo pra um estado q n afeta a atividade do jogo*/
 void matarInimigo(GameState* gs, int i);
+
+/*! Spawna os spawn*/
+bool SpawnarSpawn( Vector2 pos,GameState* gs);
+
+/*! Spawner prepara pra spawnar um inimigo*/
+void SpawnSet(GameState* gs);
+
+/*! Spawner spawna um inimigo*/
+void SpawnarAtivo(GameState* gs, int i);
+
+/*! Mata o spawner*/
+void MatarSpawn(GameState* gs, int i);
+
 
 // level.c --------------------------------------------------------------------
 /*! Inicializa o level de acordo com a string do estagio */

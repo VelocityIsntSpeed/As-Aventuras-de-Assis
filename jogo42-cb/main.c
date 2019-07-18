@@ -12,6 +12,8 @@
 #include "stdlib.h" // Pelo malloc
 
 
+
+
 int main(void)
 {
     // [[[[[ INICIALIZACAO ]]]]]
@@ -23,6 +25,7 @@ int main(void)
 
     //[ STRUCT DE ESTADO DO JOGO ]=============================================
     GameState* gs = malloc(sizeof(GameState));
+
 
     gs->pausado = false;
 
@@ -49,10 +52,25 @@ int main(void)
     gs->SPRITE_MACHADO = LoadTexture("tex/machado.png");
 
 
+    // Inicializar array de inimigos
+    for (int i = 0; i < INIM_QTD_MAX; i++)
+    {
+        gs->inimigos[i].existe = false;
+    }
+
+    // Os inimigos sao spawnados pela inicializacao do mapa.
+
+    //spawn
+    for (int i=0; i< SPWN_QTD_MAX; i++)
+    {
+        gs->spwn[i].existe = false;
+    }
+
 
     //[ LEVEL E INIMIGOS ]=====================================================
     gs->estagioAtual = 1;
     InicializarLevel(gs->sala, gs);
+
 
 
     //[ CAMERA ]===============================================================
@@ -61,7 +79,7 @@ int main(void)
 
     //[ LOJA ]=================================================================
     gs->loja.mostrar = false;
-    gs->loja.ouro = 1000; // Dps tem q setar pra 0
+    gs->loja.ouro = 200;
     gs->loja.atiradoraComprada = false;
 
 
@@ -112,6 +130,35 @@ int main(void)
             // Mover jogador
             MoverJog(gs);
 
+            // Potion
+            if(gs->jog.usingPot)
+            {
+                if(gs->jog.timerPot >= 5 * GetFPS())
+                {
+                    gs->jog.usingPot = false;
+                }
+                else
+                {
+                    gs->jog.timerPot++;
+                    if((int)gs->jog.timerPot % 12 == 0)
+                    {
+                        if(!(gs->jog.hp >= JOG_HP_MAX))
+                        {
+                            gs->jog.hp += JOG_HP_MAX/100;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if(IsKeyPressed(KEY_Q))
+                {
+                    gs->jog.pots--;
+                    gs->jog.timerPot = 0;
+                    gs->jog.usingPot = true;
+                }
+            }
+
             // Ataque do jogador
             ataqueSet(gs);
 
@@ -128,6 +175,8 @@ int main(void)
                     MoverInimigo(&gs->inimigos[i], gs);
                 }
             }
+            // Logica do spawner
+            SpawnSet(gs);
 
 
             // Ataque Inimigo

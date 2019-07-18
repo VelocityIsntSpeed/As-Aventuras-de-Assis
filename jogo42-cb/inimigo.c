@@ -154,7 +154,70 @@ void matarInimigo(GameState* gs, int i)
     gs->inimigos[i].existe = false;
     gs->inimigos[i].pos.x = -20;
     gs->inimigos[i].pos.y = -20;
+    gs->loja.ouro += 30;
 
 }
 
+//spawna spawn
+bool SpawnarSpawn(Vector2 pos, GameState* gs)
+        {
+            for( int i=0; i< SPWN_QTD_MAX; i++)
+            {
+                if(!gs->spwn[i].existe)
+                {
+                    gs->spwn[i].existe = true;
+                    gs->spwn[i].pos = pos;
+                    gs->spwn[i].hp = 200;
+                    gs->spwn[i].cooldown = 0;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+
+void SpawnarAtivo(GameState* gs, int i)
+{
+        if (gs->spwn[i].existe)
+        {
+            SpawnarInimigo(gs->spwn[i].pos, gs);
+        }
+
+}
+
+
+void SpawnSet(GameState* gs)
+{
+
+    for(int i=0; i< SPWN_QTD_MAX; i++)
+    {
+        if(Vector2Distance(gs->spwn[i].pos, gs->jog.pos)< SPWN_DIST_ATV)
+        {
+            gs->spwn[i].ativo = true;
+            gs->spwn[i].cooldown += SPWN_VEL*GetFrameTime();
+            if (gs->spwn[i].cooldown >=SPWN_CLDN)
+            {
+                gs->spwn[i].cooldown = 0;
+                SpawnarAtivo(gs, i);
+
+            }
+
+        }else
+        {
+            gs->spwn[i].ativo = false;
+        }
+
+    }
+
+}
+
+void MatarSpawn(GameState* gs, int i)
+{
+    gs->spwn[i].existe = false;
+    gs->spwn[i].pos.x = -20;
+    gs->spwn[i].pos.y = -20;
+    gs->loja.ouro += 75;
+
+}
 
