@@ -9,6 +9,7 @@
 */
 
 #include "jogo42.h"
+#include "stdlib.h"
 
 
 void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameState* gs)
