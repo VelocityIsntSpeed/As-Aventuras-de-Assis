@@ -348,6 +348,9 @@ void PassarDeEstagio(GameState* gs);
 /*! Verifica se ha colisao entre o circulo dado e o level. */
 bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);
 
+/*!GAME OVER*/
+void GameOver();
+
 
 #endif // JOGO42_H_INCLUDED
 
