@@ -204,7 +204,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
 void DesenharLoja(GameState* gs)
 {
-    int valorbarrahp = 0;
+    int valorBarraHp = 0;
     float hp = 10.0;
     float valorminimo = 0;
     float valormaximo = 100;
@@ -248,41 +248,49 @@ void DesenharLoja(GameState* gs)
                          (TamInv.y)+70,10,RAYWHITE);
             }
         }
-        DrawText("[ LOJA ]",(int)GetScreenWidth()*0.55,(int)GetScreenHeight()*0.03,
-                             25,RAYWHITE);
-        DrawLine((int)GetScreenWidth()*0.25, (int)GetScreenHeight()*0.1,
-                             (int)GetScreenWidth()*0.9, (int)GetScreenHeight()*0.1, RAYWHITE); //Header
-        DrawLine((int)GetScreenWidth()*0.25, (int)GetScreenHeight()*0.9,
-                             (int)GetScreenWidth()*0.9, (int)GetScreenHeight()*0.9, RAYWHITE); //Footer
-        DrawRectangleRounded((Rectangle){(int)GetScreenWidth()*0.783,(int)GetScreenHeight()*0.77,130,
-                              80},0.25,1,GREEN);
-        continuar=GuiButton((Rectangle){(int)GetScreenWidth()*0.799,(int)GetScreenHeight()*0.8,100,
-                              50}, "CONTINUAR" );
+
+        // Titulo
+        DrawText("[ LOJA ]",(int)GetScreenWidth()*0.55,(int)GetScreenHeight()*0.03, 30, RAYWHITE);
+
+        // Header e Footer
+        DrawLine((int)GetScreenWidth()*0.25, (int)GetScreenHeight()*0.1, (int)GetScreenWidth()*0.9, (int)GetScreenHeight()*0.1, RAYWHITE);
+        DrawLine((int)GetScreenWidth()*0.25, (int)GetScreenHeight()*0.9, (int)GetScreenWidth()*0.9, (int)GetScreenHeight()*0.9, RAYWHITE);
+
+
+        // Botão continuar
+        DrawRectangleRounded((Rectangle){(int)GetScreenWidth()*0.783,(int)GetScreenHeight()*0.77,130,80},0.25,1,GREEN);
+        continuar = GuiButton((Rectangle){(int)GetScreenWidth()*0.799,(int)GetScreenHeight()*0.8,100,50}, "CONTINUAR" );
+
+
         DrawCircle(GetScreenWidth()/20,GetScreenHeight()/4,15,GOLD); //Moedas
         DrawText(FormatText("%i",gs->loja.ouro),(GetScreenWidth()/20)+20,(GetScreenHeight()/4)-10,20,RAYWHITE);
+
+
         DrawCircle(GetScreenWidth()/20,(GetScreenHeight()/4)+42,15,RED); //HP
         DrawText(FormatText("%.1f%%",hp),(GetScreenWidth()/20)+20,(GetScreenHeight()/4)+35,20,RAYWHITE);
+
+
         //Comprar HP
         DrawText("[ Comprar HP ]",(int)GetScreenWidth()*0.25,(int)GetScreenHeight()*0.2,
                             20,MAGENTA);
         DrawRectangleRounded((Rectangle){(int)GetScreenWidth()*0.26,(int)GetScreenHeight()*0.25,700,90},0.25,1,Fade(RAYWHITE,0.7));
-        valorbarrahp = GuiSlider((Rectangle){(int)GetScreenWidth()*0.33,(int)GetScreenHeight()*0.28, 400, 50 },
-                            "Comprar HP", valorbarrahp, valorminimo, valormaximo, true);
-        DrawText(FormatText("[ %i%% de HP - %i moedas ]",valorbarrahp,(valorbarrahp*5)),(int)GetScreenWidth()*0.4,(int)GetScreenHeight()*0.2,
+        valorBarraHp = GuiSlider((Rectangle){(int)GetScreenWidth()*0.33,(int)GetScreenHeight()*0.28, 400, 50 },
+                            "Comprar HP", valorBarraHp, valorminimo, valormaximo, true);
+        DrawText(FormatText("[ %i%% de HP - %i moedas ]",valorBarraHp,(valorBarraHp*5)),(int)GetScreenWidth()*0.4,(int)GetScreenHeight()*0.2,
                              20,GOLD);
         comprarhp=GuiButton((Rectangle){(int)GetScreenWidth()*0.725,(int)GetScreenHeight()*0.3,200,
-                              25}, FormatText("COMPRAR HP(%i moedas)",(valorbarrahp*5)));
-        /*DrawText(FormatText("[ %i moedas ]",(valorbarrahp*5)),(int)GetScreenWidth()*0.775,(int)GetScreenHeight()*0.328,
+                              25}, FormatText("COMPRAR HP(%i moedas)",(valorBarraHp*5)));
+        /*DrawText(FormatText("[ %i moedas ]",(valorBarraHp*5)),(int)GetScreenWidth()*0.775,(int)GetScreenHeight()*0.328,
                              20,GOLD);*/
-                /*if(valorbarrahp<10){
+                /*if(valorBarraHp<10){
                     DrawRectangle((int)GetScreenWidth()*0.775,(int)GetScreenHeight()*0.328,133,50,(Color){ 133, 33, 55, 255 });
                     DrawText("[ 10 moedas ]",(int)GetScreenWidth()*0.775,(int)GetScreenHeight()*0.328,
                              20,GOLD);
                 }*/
             if(comprarhp){
-                if((hp+valorbarrahp)<=100&&gs->loja.ouro>=(valorbarrahp*5)){
-                    hp+=valorbarrahp;
-                    gs->loja.ouro-=(valorbarrahp*5);
+                if((hp+valorBarraHp)<=100&&gs->loja.ouro>=(valorBarraHp*5)){
+                    hp+=valorBarraHp;
+                    gs->loja.ouro-=(valorBarraHp*5);
                 }
             }
         //Comprar Pocao de Vida
@@ -291,7 +299,7 @@ void DesenharLoja(GameState* gs)
         DrawRectangleRounded((Rectangle){(int)GetScreenWidth()*0.25,(int)GetScreenHeight()*0.48,250,100},0.25,1,Fade(RAYWHITE,0.7));
         infopotion=GuiCheckBox((Rectangle){(int)GetScreenWidth()*0.255,(int)GetScreenHeight()*0.5,20,20},"INFO", infopotion);
         lifepotion=GuiButton((Rectangle){(int)GetScreenWidth()*0.255,(int)GetScreenHeight()*0.55,200,
-                              25},"Comprar Pocao de Vida(100 moedas)");;
+                              25},"Comprar Pocao de Vida(100 moedas)");
         if(infopotion)
         {
             DrawRectangleRounded((Rectangle){-20,240,GetScreenWidth()/5,(int)GetScreenHeight()*0.57},
