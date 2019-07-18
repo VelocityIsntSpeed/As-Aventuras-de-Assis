@@ -267,16 +267,12 @@ void DesenharLoja(GameState* gs)
     DrawText(FormatText("%.1f", gs->jog.hp),(GetScreenWidth()/20)+20,(GetScreenHeight()/4)+35,20,RAYWHITE);
 
 
-    //Comprar HP
-    DrawText("[ Comprar HP ]",(int)GetScreenWidth()*0.25,(int)GetScreenHeight()*0.2,
-                        20,MAGENTA);
+    // Comprar HP
+    DrawText("[ Comprar HP ]",(int)GetScreenWidth()*0.25,(int)GetScreenHeight()*0.2, 20,MAGENTA);
     DrawRectangleRounded((Rectangle){(int)GetScreenWidth()*0.26,(int)GetScreenHeight()*0.25,700,90},0.25,1,Fade(RAYWHITE,0.7));
-    valorBarraHp = GuiSlider((Rectangle){(int)GetScreenWidth()*0.33,(int)GetScreenHeight()*0.28, 400, 50 },
-                        "Comprar HP", valorBarraHp, valorminimo, valormaximo, true);
-    DrawText(FormatText("[ %i%% de HP - %i moedas ]",valorBarraHp,(valorBarraHp*5)),(int)GetScreenWidth()*0.4,(int)GetScreenHeight()*0.2,
-                         20,GOLD);
-    comprarHp = GuiButton((Rectangle){(int)GetScreenWidth()*0.725,(int)GetScreenHeight()*0.3,200,
-                          25}, FormatText("COMPRAR HP(%i moedas)",(valorBarraHp*5)));
+    valorBarraHp = GuiSlider((Rectangle){(int)GetScreenWidth()*0.33,(int)GetScreenHeight()*0.28, 400, 50 }, "Comprar HP", valorBarraHp, valorminimo, valormaximo, true);
+    DrawText(FormatText("[ %i%% de HP - %i moedas ]",valorBarraHp,(valorBarraHp*5)),(int)GetScreenWidth()*0.4,(int)GetScreenHeight()*0.2, 20,GOLD);
+    comprarHp = GuiButton((Rectangle){(int)GetScreenWidth()*0.725,(int)GetScreenHeight()*0.3,200, 25}, FormatText("COMPRAR HP(%i moedas)",(valorBarraHp*5)));
     /*DrawText(FormatText("[ %i moedas ]",(valorBarraHp*5)),(int)GetScreenWidth()*0.775,(int)GetScreenHeight()*0.328,
                          20,GOLD);*/
             /*if(valorBarraHp<10){
@@ -284,12 +280,15 @@ void DesenharLoja(GameState* gs)
                 DrawText("[ 10 moedas ]",(int)GetScreenWidth()*0.775,(int)GetScreenHeight()*0.328,
                          20,GOLD);
             }*/
-        if(comprarHp){
-            if((gs->jog.hp + valorBarraHp)<=100&&gs->loja.ouro>=(valorBarraHp*5)){
-                gs->jog.hp += valorBarraHp;
-                gs->loja.ouro-=(valorBarraHp*5);
-            }
+    if (comprarHp)
+    {
+        if ((gs->jog.hp + valorBarraHp) <= 100 && gs->loja.ouro >= (valorBarraHp*5))
+        {
+            gs->jog.hp += valorBarraHp;
+            gs->loja.ouro -= (valorBarraHp*5);
         }
+    }
+
     //Comprar Pocao de Vida
     DrawText("[ Comprar Pocao de Vida ]",(int)GetScreenWidth()*0.25,(int)GetScreenHeight()*0.43,
                         20,GREEN);
