@@ -79,7 +79,7 @@ int main(void)
 
     //[ LOJA ]=================================================================
     gs->loja.mostrar = false;
-    gs->loja.ouro = 0;
+    gs->loja.ouro = 200;
     gs->loja.atiradoraComprada = false;
 
 

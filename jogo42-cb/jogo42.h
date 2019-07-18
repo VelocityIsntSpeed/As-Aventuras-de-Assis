@@ -255,7 +255,7 @@ GameState;
 #define SPWN_VEL (30.0f)
 
 //! Distancia de ativacao do spawner
-#define SPWN_DIST_ATV (290.0f)
+#define SPWN_DIST_ATV (270.0f)
 
 
 //[ OUTROS ]-------------------------------------------------------------------
