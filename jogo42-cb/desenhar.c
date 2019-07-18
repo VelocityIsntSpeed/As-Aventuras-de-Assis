@@ -21,7 +21,7 @@ static void DesenharControles()
                          "WASD/Setas para andar\n"
                          "Clique esquerdo para atacar\n"
                          "Clique direito para trocar de arma\n"
-                         "L para abrir/fechar loja;
+                         "L para abrir/fechar loja";
 
     // Tamanho da fonte
     const int TAM_FONTE = 20;
