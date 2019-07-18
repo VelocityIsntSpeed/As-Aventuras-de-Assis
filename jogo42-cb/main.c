@@ -90,13 +90,15 @@ int main(void)
         {
             PlaySound(marte);
         }
-        //[[[UPDATE-PAUSAR]]]
-        if(IsKeyPressed('P'))
-            {
-                pause=!pause;
-            }
 
-        if(!pause)
+        // [[[[[ UPDATE-PAUSAR ]]]]]
+
+        if (IsKeyPressed('P'))
+        {
+            pause = !pause;
+        }
+
+        if (!pause)
         {
             // Mover jogador
             MoverJog(gs);
@@ -142,14 +144,16 @@ int main(void)
             {
                 gs->loja.mostrar = !gs->loja.mostrar;
             }
-
-
-            // [[[ FIM UPDATE ]]]
         }
+
+        // [[[ FIM UPDATE-PAUSAR ]]]
+
+        // [[[ FIM UPDATE ]]]
+
 
         // [[[[[ DESENHAR ]]]]]
         BeginDrawing();
-            if(!pause)
+            if (!pause)
             {
                 Desenhar(gs);
 
