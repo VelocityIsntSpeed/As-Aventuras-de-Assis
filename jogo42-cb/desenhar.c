@@ -188,6 +188,9 @@ static void DesenharInimigo(const struct Inimigo* inimigo)
 
 void Desenhar(const GameState* gs)
 {
+    // Pausa o jogo
+    gs->pausado = true;
+
     // Pintar tudo (para formar o background)
     ClearBackground(DARKGRAY);
 
@@ -365,6 +368,7 @@ void DesenharLoja(GameState* gs)
     if (continuarClicado)
     {
         gs->loja.mostrar = false;
+        gs->pausado = false;
     }
 }
 
