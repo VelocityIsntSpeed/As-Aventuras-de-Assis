@@ -348,7 +348,7 @@ void DesenharLoja(GameState* gs)
     DrawText(TextFormat("%.1f de HP", valorBarraHp), GetScreenWidth()*0.3, GetScreenHeight()*0.32, 20, WHITE);
     // Botao de comprar
     comprarHpClicado = GuiButton((Rectangle){GetScreenWidth()*0.725, GetScreenHeight()*0.32, 200, 25},
-                                 FormatText("COMPRAR (%d moedas)", (valorBarraHp * precoDe1Hp)));
+                                 FormatText("COMPRAR (%d moedas)", (int)(valorBarraHp * precoDe1Hp)));
 
     if (comprarHpClicado)
     {
