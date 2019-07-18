@@ -160,9 +160,11 @@ GameState;
 //! Raio do jogador.
 #define JOG_RAIO (20.0f)
 
+//! HP maximo e inicial do jogador.
+#define JOG_HP_MAX (150.0f)
+
 //! Distancia entre o centro da posicao da hitbox de ataque e o jogador.
 #define JOG_ATQ_DIST (50.0f)
-
 
 //! Raio da hitbox de ataque
 #define JOG_ATQ_RAIO (10.0f)
