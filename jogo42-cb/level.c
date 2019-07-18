@@ -65,6 +65,17 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameSt
                     matriz_lvl[lin][col] = TILE_parede; break;
                 case 'I':
                     matriz_lvl[lin][col] = TILE_paredeInvisivel; break;
+                case 'h':
+                    matriz_lvl[lin][col] = TILE_esconderijo;break;
+                case 'H':
+                    matriz_lvl[lin][col] = TILE_esconderijo;
+                    // Adicionar inimigos:
+                    if (!SpawnarInimigo(CentroDaTile(col, lin), gs))
+                    {
+                        // TODO ERRO: Nao foi possivel spawnar inimigo especificado pelo mapa porque o array de inimigos estava cheio!
+                    }
+                break;
+
                 default:
                     matriz_lvl[lin][col] = TILE_vazio; break;
             }
