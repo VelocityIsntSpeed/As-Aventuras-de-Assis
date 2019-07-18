@@ -114,7 +114,7 @@ typedef struct // GameState
         /// Bool da existencia do inimigo
         bool existe;
         //! Bool pra ver se o inimigo ja foi atingido pelo ataque
-        bool atingido[INIM_QTD_MAX];
+        bool atingido;
     };
 
     //! Array de inimigos
