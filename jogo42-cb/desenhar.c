@@ -204,7 +204,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
 void DesenharLoja(GameState* gs)
 {
-    static int valorBarraHp = 0;
+    static int valorBarraHp = 0; // Valor atual do slider de compra de HP
     float valorminimo = 0;
     float valormaximo = 100;
 
@@ -234,15 +234,15 @@ void DesenharLoja(GameState* gs)
     ActiveInv=GuiComboBox((Rectangle){TamInv.x,TamInv.y,TamInv.width,TamInv.height},
                           *TextInv,ActiveInv); // "Inventário"
 
-    if(ActiveInv>=0&&ActiveInv<7)
+    if (ActiveInv >= 0 && ActiveInv < 7)
     {
-        if(ActiveInv==0)
+        if (ActiveInv == 0)
         {
-            DrawText(FormatText("Pocoes de Vida\nEm estoque:%i",opcoes[0]),TamInv.x+10, (TamInv.y)+70,10,RAYWHITE);
+            DrawText(FormatText("Pocoes de Vida\nEm estoque:%i",opcoes[0]), TamInv.x+10, (TamInv.y)+70, 10, RAYWHITE);
         }
-        else if(ActiveInv==1)
+        else if (ActiveInv == 1)
         {
-            DrawText(FormatText("Atiradoras\nEm estoque:%i",opcoes[1]),TamInv.x+10, (TamInv.y)+70,10,RAYWHITE);
+            DrawText(FormatText("Atiradoras\nEm estoque:%i",opcoes[1]), TamInv.x+10, (TamInv.y)+70, 10, RAYWHITE);
         }
     }
 
