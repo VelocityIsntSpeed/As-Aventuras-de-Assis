@@ -204,8 +204,7 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 
 void DesenharLoja(GameState* gs)
 {
-    int valorBarraHp = 0;
-    float hp = 10.0;
+    static int valorBarraHp = 0;
     float valorminimo = 0;
     float valormaximo = 100;
 
@@ -263,11 +262,11 @@ void DesenharLoja(GameState* gs)
 
 
         DrawCircle(GetScreenWidth()/20,GetScreenHeight()/4,15,GOLD); //Moedas
-        DrawText(FormatText("%i",gs->loja.ouro),(GetScreenWidth()/20)+20,(GetScreenHeight()/4)-10,20,RAYWHITE);
+        DrawText(FormatText("%i", gs->loja.ouro),(GetScreenWidth()/20)+20,(GetScreenHeight()/4)-10,20,RAYWHITE);
 
 
         DrawCircle(GetScreenWidth()/20,(GetScreenHeight()/4)+42,15,RED); //HP
-        DrawText(FormatText("%.1f%%",hp),(GetScreenWidth()/20)+20,(GetScreenHeight()/4)+35,20,RAYWHITE);
+        DrawText(FormatText("%.1f", gs->jog.hp),(GetScreenWidth()/20)+20,(GetScreenHeight()/4)+35,20,RAYWHITE);
 
 
         //Comprar HP
@@ -288,8 +287,8 @@ void DesenharLoja(GameState* gs)
                              20,GOLD);
                 }*/
             if(comprarHp){
-                if((hp+valorBarraHp)<=100&&gs->loja.ouro>=(valorBarraHp*5)){
-                    hp+=valorBarraHp;
+                if((gs->jog.hp + valorBarraHp)<=100&&gs->loja.ouro>=(valorBarraHp*5)){
+                    gs->jog.hp += valorBarraHp;
                     gs->loja.ouro-=(valorBarraHp*5);
                 }
             }
