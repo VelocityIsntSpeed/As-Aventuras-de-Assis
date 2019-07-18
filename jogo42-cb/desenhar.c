@@ -275,7 +275,6 @@ void DesenharLoja(GameState* gs)
     bool comprarHp = false;
     bool infoatiradora = false;
     bool atiradoraClicada = false;
-    int atiradora1 = 0;
 
 
 
@@ -329,7 +328,7 @@ void DesenharLoja(GameState* gs)
         }
     }
 
-    //Comprar Atiradora
+    // Atiradora
     DrawText("[ Comprar Atiradora ]", (int)GetScreenWidth()*0.25, (int)GetScreenHeight()*0.675, 20, PURPLE);
     DrawRectangleRounded((Rectangle){(int)GetScreenWidth()*0.25, (int)GetScreenHeight()*0.72, 250, 98},0.25, 1, Fade(RAYWHITE, 0.7));
     infoatiradora = GuiCheckBox((Rectangle){(int)GetScreenWidth()*0.255, (int)GetScreenHeight()*0.74, 20, 20}, "INFO", infoatiradora);
@@ -338,14 +337,14 @@ void DesenharLoja(GameState* gs)
         DrawRectangleRounded((Rectangle){-20, 240, GetScreenWidth()/5, (int)GetScreenHeight()*0.57}, 0.25, 1, Fade(RAYWHITE, 0.7));
         DrawText("Aqui fica o texto.", 10, 245, 15, BLACK);
     }
-    if (atiradora1 == 0)
-    {
-        atiradoraClicada = GuiButton((Rectangle){(int)GetScreenWidth()*0.255, (int)GetScreenHeight()*0.79, 200, 25}, "Comprar Atiradora(400 moedas)");
-    }
-    if (atiradoraClicada && gs->loja.ouro >= 400)
+
+    // Botao de comprar atiradora
+    atiradoraClicada = GuiButton((Rectangle){(int)GetScreenWidth()*0.255, (int)GetScreenHeight()*0.79, 200, 25}, "Comprar Atiradora (400 moedas)");
+
+    if (atiradoraClicada && !gs->loja.atiradoraComprada && gs->loja.ouro >= 400)
     {
         gs->loja.ouro -= 400;
-        atiradora1 = 1;
+        gs->loja.atiradoraComprada = true;
     }
 }
 

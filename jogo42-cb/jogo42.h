@@ -101,6 +101,8 @@ typedef struct // GameState
         bool mostrar;
         // Dinheiro atual do jogador
         int ouro;
+        // Se a atiradora estah comprada
+        bool atiradoraComprada;
 
     } loja;
 

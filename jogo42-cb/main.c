@@ -73,7 +73,8 @@ int main(void)
 
     //[ LOJA ]=================================================================
     gs->loja.mostrar = true;
-    gs->loja.ouro = 500; // Ta 500 so pra teste, dps tem q setar pra 0
+    gs->loja.ouro = 1000; // Ta 500 so pra teste, dps tem q setar pra 0
+    gs->loja.atiradoraComprada = false;
 
 
     // [[[ FIM INICIALIZACAO ]]]
