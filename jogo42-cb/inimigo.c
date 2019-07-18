@@ -109,4 +109,12 @@ void matarInimigo(GameState* gs, int i)
 
 }
 
+//spawna spawn
+void SpawnarSpawn(GameState* gs, Vector2 pos)
+        {
+            gs->spwn[0].pos = pos;
+            gs->spwn[0].existe = true;
+            gs->spwn[0].hp = 200;
+            gs->spwn[0].cooldown = 0;
 
+        }

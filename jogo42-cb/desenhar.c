@@ -202,7 +202,7 @@ void Desenhar(const GameState* gs)
 
         // Jogador
         DesenharJogador(gs);
-        DrawCircleGradient(gs->spwn.pos.x, gs->spwn.pos.y, INIM_RAIO, YELLOW, BEIGE);
+        DrawCircleGradient(gs->spwn[0].pos.x, gs->spwn[0].pos.y, INIM_RAIO, YELLOW, BEIGE);
 
 
         // ATAQUE DO JOGADOR

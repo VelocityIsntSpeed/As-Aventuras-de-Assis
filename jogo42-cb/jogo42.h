@@ -146,7 +146,7 @@ typedef struct // GameState
         //! existencia do spawn
         bool existe;
 
-    }spwn;//um so pra testar
+    }spwn[10];//um so pra testar
 
 
     //[ LEVEL ]----------------------------------------------------------------
@@ -295,6 +295,9 @@ bool SpawnarInimigo(Vector2 pos, GameState* gs);
 
 /*! Seta todos os valores que importam do inimigo pra um estado q n afeta a atividade do jogo*/
 void matarInimigo(GameState* gs, int i);
+
+/*! spawna spawn
+void SpawnarSpawn(GameState* gs, Vector2 pos);
 
 // level.c --------------------------------------------------------------------
 /*! Move os obstaculos. */

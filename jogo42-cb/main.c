@@ -25,13 +25,7 @@ int main(void)
 
     //[ STRUCT DE ESTADO DO JOGO ]=============================================
     GameState* gs = malloc(sizeof(GameState));
-    void SpawnarSpawn(GameState* gs, Vector2 pos)
-        {
-            gs->spwn.pos = pos;
-            gs->spwn.existe = true;
-            gs->spwn.hp = 200;
 
-        }
 
     gs->pausado = false;
 
