@@ -52,8 +52,6 @@ int main(void)
     gs->SPRITE_MACHADO = LoadTexture("tex/machado.png");
 
 
-    //[ INIMIGOS ]=============================================================
-
     // Inicializar array de inimigos
     for (int i = 0; i < INIM_QTD_MAX; i++)
     {
@@ -69,12 +67,9 @@ int main(void)
     }
 
 
-
-    //[ LEVEL ]================================================================
+    //[ LEVEL E INIMIGOS ]=====================================================
+    gs->estagioAtual = 1;
     InicializarLevel(gs->sala, gs);
-
-
-
 
 
 
@@ -84,7 +79,7 @@ int main(void)
 
     //[ LOJA ]=================================================================
     gs->loja.mostrar = false;
-    gs->loja.ouro = 1000; // Ta 500 so pra teste, dps tem q setar pra 0
+    gs->loja.ouro = 0;
     gs->loja.atiradoraComprada = false;
 
 
@@ -96,6 +91,7 @@ int main(void)
     {
 
         // [[[[[ UPDATE ]]]]]
+
         if (!IsSoundPlaying(marte))
         {
             PlaySound(marte);
@@ -110,8 +106,58 @@ int main(void)
         // [[[[[ UPDATE-PAUSAR ]]]]]
         if (!gs->pausado)
         {
+            // Atalho para imediatamente passar para proxima fase
+            if (IsKeyPressed(KEY_EQUAL))
+            {
+                PassarDeEstagio(gs);
+            }
+
+
+            // Quando chegar ao final do estagio, passar para proxima fase
+            for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
+            {
+                for (int col = 0; col < MAPA_QTD_COLS; col++)
+                {
+                    if ((gs->sala[lin][col] == TILE_final)
+                        && CheckCollisionCircleRec(gs->jog.pos, JOG_RAIO, RectDaTile(col, lin)))
+                    {
+                        PassarDeEstagio(gs);
+                    }
+                }
+            }
+
+
             // Mover jogador
             MoverJog(gs);
+
+            // Potion
+            if(gs->jog.usingPot)
+            {
+                if(gs->jog.timerPot >= 5 * GetFPS())
+                {
+                    gs->jog.usingPot = false;
+                }
+                else
+                {
+                    gs->jog.timerPot++;
+                    if((int)gs->jog.timerPot % 12 == 0)
+                    {
+                        if(!(gs->jog.hp >= JOG_HP_MAX))
+                        {
+                            gs->jog.hp += JOG_HP_MAX/100;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if(IsKeyPressed(KEY_Q))
+                {
+                    gs->jog.pots--;
+                    gs->jog.timerPot = 0;
+                    gs->jog.usingPot = true;
+                }
+            }
 
             // Ataque do jogador
             ataqueSet(gs);
@@ -142,6 +188,27 @@ int main(void)
                 }
             }
 
+            // Saciedade
+            if(!(gs->jog.timerSac > GetFPS()))
+            {
+                gs->jog.timerSac++;
+            }
+            else
+            {
+                if(gs->jog.sac > 0)
+                {
+                    // Reduzir saciedade
+                    gs->jog.timerSac = 0;
+                    gs->jog.sac--;
+                }
+                else
+                {
+                    // Dano de saciedade
+                    gs->jog.timerSac = 0;
+                    gs->jog.hp -= JOG_HP_MAX/100;
+                }
+
+            }
 
 
             // Atualizar camera

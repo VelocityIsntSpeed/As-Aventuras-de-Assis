@@ -19,10 +19,17 @@ void InicializarJogador(GameState* gs)
     gs->jog.rot = 0;
     // HP
     gs->jog.hp = 150;
+    // Pocoes
+    gs->jog.pots = 6;
+    gs->jog.usingPot = false;
+    gs->jog.timerPot = 0;
+
     gs->atq.atqAtivo = false;
     gs->atq.arma = true;
     gs->atq.bala = 6;
-
+    // Saciedade
+    gs->jog.sac = SAC_INICIAL;
+    gs->jog.timerSac = 0;
 }
 
 
@@ -306,7 +313,6 @@ void MoverJog(GameState* gs)
     // Rotacionar
     gs->jog.rot = Vector2Angle(gs->jog.pos, PosWorldDoCursor(gs));
 }
-
 
 
 

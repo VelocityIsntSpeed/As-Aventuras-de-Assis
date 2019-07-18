@@ -13,14 +13,13 @@
 
 void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameState* gs)
 {
-    #include "estagios.h"
+    // Zerar array de inimigos
+    for (int i = 0; i < INIM_QTD_MAX; i++)
+    {
+        gs->inimigos[i].existe = false;
+    }
 
-
-
-    // Colocar o jogador na posicao certa
-    gs->jog.pos = ESTAGIO.spawnPos;
-
-    // Inicializar matriz_lvl para zero
+    // Zerar a matriz do level
     for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
     {
         for (int col = 0; col < MAPA_QTD_COLS; col++)
@@ -28,6 +27,25 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameSt
             matriz_lvl[lin][col] = TILE_vazio;
         }
     }
+
+
+    #include "estagios.h"
+
+    // Selecionar estagio certo:
+    struct Estagio ESTAGIO;
+    if      (gs->estagioAtual == 1) { ESTAGIO = estagio1; }
+    else if (gs->estagioAtual == 2) { ESTAGIO = estagio2; }
+    else if (gs->estagioAtual == 3) { ESTAGIO = estagio3; }
+    else
+    {
+        fprintf(stderr, "ERRO: gs->estagioAtual tem valor invalido: %d\n"
+                        "      Carregando estagio 1.\n",
+                        gs->estagioAtual);
+        ESTAGIO = estagio1;
+    }
+
+    // Colocar o jogador na posicao certa
+    gs->jog.pos = ESTAGIO.spawnPos;
 
     // Iterar sobre a string
     for (int i=0, lin=0, col=0; i<STR_LVL_TAM_MAX; i++)
@@ -84,6 +102,9 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameSt
                     }
                 break;
 
+                case 'f':
+                    matriz_lvl[lin][col] = TILE_final; break;
+
                 default:
                     matriz_lvl[lin][col] = TILE_vazio; break;
             }
@@ -113,12 +134,33 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameSt
 
 
 
+
+void PassarDeEstagio(GameState* gs)
+{
+    gs->estagioAtual++;
+
+    // Resetar saciedade
+    gs->jog.sac = SAC_INICIAL;
+    gs->jog.timerSac = 0;
+
+    if (gs->estagioAtual > 3)
+    {
+        //TODO: VENCER O JOGO!!!!!!!1111!!1!!
+        gs->estagioAtual = 1;
+    }
+
+    // Abrir loja
+    gs->loja.mostrar = true;
+
+    InicializarLevel(gs->sala, gs);
+}
+
+
+
+
+
 bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs)
 {
-
-
-
-
     //[ TILES ]----------------------------------------------------------------
     for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
     {

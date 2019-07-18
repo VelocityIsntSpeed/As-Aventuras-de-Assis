@@ -50,7 +50,9 @@ enum Tile
     //! Mostra grafico de chao e colide.
     TILE_paredeInvisivel,
     //! Mostra grafico de parede e nao colide
-    TILE_esconderijo
+    TILE_esconderijo,
+    //! Final de estagio, passa para o proximo
+    TILE_final
 };
 
 
@@ -59,6 +61,9 @@ typedef struct // GameState
 {
     //! Se o jogo estah pausado.
     bool pausado;
+
+    //! Estagio atual
+    int estagioAtual;
 
     //[ JOGADOR ]--------------------------------------------------------------
     // Estado do jogador
@@ -72,6 +77,16 @@ typedef struct // GameState
         float rot;
         //! Health Points.
         float hp;
+        //! Medidor de Saciedade
+        float sac;
+        //! Variavel usada para descrescer a saciedade
+        float timerSac;
+        //! Potions
+        int pots;
+        //! Variavel que determina se a pocao estah sendo usada
+        bool usingPot;
+        //! Varaivel usada para contar o tempo de ativacao da potion
+        float timerPot;
     }
     jog;
 
@@ -250,6 +265,9 @@ GameState;
 //! Tamanho de uma tile.
 #define TAM_TILE (47)
 
+//! A saciedade inicial.
+#define SAC_INICIAL (100.0f)
+
 
 
 
@@ -270,9 +288,6 @@ Vector2 PosWorldDoCursor(const GameState* gs);
     de andar quando tiver andado uma distancia `dist` (mesmo que no caminho
     passe de `destino`). */
 Vector2 Vector2AndarDist(Vector2 origem, Vector2 destino, float dist);
-
-/*! Verifica se ha colisao entre o circulo dado e o level. */
-bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);
 
 
 // desenhar.c -----------------------------------------------------------------
@@ -295,8 +310,6 @@ void AtaqueJogador(GameState* gs);
 
 /*! Seta as coisas pra AtaqueJogador funcionar*/
 void ataqueSet(GameState* gs);
-
-
 
 // inimigo.c ------------------------------------------------------------------
 /*! Move o inimigo. */
@@ -323,15 +336,14 @@ void SpawnarAtivo(GameState* gs, int i);
 
 
 // level.c --------------------------------------------------------------------
-/*! Move os obstaculos. */
-void MoverObst(GameState* gs);
-
 /*! Inicializa o level de acordo com a string do estagio */
-void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS],
-                      GameState* gs);
+void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameState* gs);
 
-/*! Inicializa os obstaculos. */
-void InicializarObst(GameState* gs);
+/*! Passa para o proximo estagio (ou vence o jogo) */
+void PassarDeEstagio(GameState* gs);
+
+/*! Verifica se ha colisao entre o circulo dado e o level. */
+bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);
 
 
 #endif // JOGO42_H_INCLUDED
