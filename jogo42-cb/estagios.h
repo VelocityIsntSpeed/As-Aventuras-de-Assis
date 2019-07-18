@@ -2,7 +2,7 @@
 struct Estagio
 {
     // String que define como vai ser o level
-    const char stringDeLevel[STR_LVL_TAM_MAX];
+    char stringDeLevel[STR_LVL_TAM_MAX];
     /*
 
     ============================================================================
@@ -30,12 +30,6 @@ struct Estagio
     // Posicao na qual o jogador comeca
     Vector2 spawnPos;
 };
-
-
-
-/* Define qual level vai ser carregado. Isso eh temporario, ate ter o codigo
-       de troca de level. */
-    #define ESTAGIO estagio3
 
 
 

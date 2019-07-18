@@ -57,6 +57,9 @@ typedef struct // GameState
     //! Se o jogo estah pausado.
     bool pausado;
 
+    //! Estagio atual
+    int estagioAtual;
+
     //[ JOGADOR ]--------------------------------------------------------------
     // Estado do jogador
     struct Jog
@@ -243,9 +246,6 @@ Vector2 PosWorldDoCursor(const GameState* gs);
     passe de `destino`). */
 Vector2 Vector2AndarDist(Vector2 origem, Vector2 destino, float dist);
 
-/*! Verifica se ha colisao entre o circulo dado e o level. */
-bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);
-
 
 // desenhar.c -----------------------------------------------------------------
 /*! Desenha tudo. */
@@ -285,15 +285,14 @@ bool SpawnarInimigo(Vector2 pos, GameState* gs);
 void matarInimigo(GameState* gs, int i);
 
 // level.c --------------------------------------------------------------------
-/*! Move os obstaculos. */
-void MoverObst(GameState* gs);
-
 /*! Inicializa o level de acordo com a string do estagio */
-void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS],
-                      GameState* gs);
+void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameState* gs);
 
-/*! Inicializa os obstaculos. */
-void InicializarObst(GameState* gs);
+/*! Passa para o proximo estagio (ou vence o jogo) */
+void PassarDeEstagio(GameState* gs);
+
+/*! Verifica se ha colisao entre o circulo dado e o level. */
+bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);
 
 
 #endif // JOGO42_H_INCLUDED

@@ -49,22 +49,10 @@ int main(void)
     gs->SPRITE_MACHADO = LoadTexture("tex/machado.png");
 
 
-    //[ INIMIGOS ]=============================================================
 
-    // Inicializar array de inimigos
-    for (int i = 0; i < INIM_QTD_MAX; i++)
-    {
-        gs->inimigos[i].existe = false;
-    }
-
-    // Os inimigos sao spawnados pela inicializacao do mapa.
-
-
-    //[ LEVEL ]================================================================
+    //[ LEVEL E INIMIGOS ]=====================================================
+    gs->estagioAtual = 1;
     InicializarLevel(gs->sala, gs);
-
-
-
 
 
     //[ CAMERA ]===============================================================
@@ -73,7 +61,7 @@ int main(void)
 
     //[ LOJA ]=================================================================
     gs->loja.mostrar = false;
-    gs->loja.ouro = 1000; // Ta 500 so pra teste, dps tem q setar pra 0
+    gs->loja.ouro = 1000; // Dps tem q setar pra 0
     gs->loja.atiradoraComprada = false;
 
 
@@ -85,6 +73,7 @@ int main(void)
     {
 
         // [[[[[ UPDATE ]]]]]
+
         if (!IsSoundPlaying(marte))
         {
             PlaySound(marte);
@@ -99,6 +88,12 @@ int main(void)
         // [[[[[ UPDATE-PAUSAR ]]]]]
         if (!gs->pausado)
         {
+            // Passar para proxima fase TODO: temporario
+            if (IsKeyPressed(KEY_EQUAL))
+            {
+                PassarDeEstagio(gs);
+            }
+
             // Mover jogador
             MoverJog(gs);
 
