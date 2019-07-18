@@ -60,6 +60,8 @@ void MoverInimigo(struct Inimigo* inimigo, const GameState* gs)
         }
     }
 
+    // TODO: fazer inimigos se afastarem
+
     // Mover se nao colidir
     if (!ColisaoComLevel(posFutura, INIM_RAIO, gs))
     {
