@@ -192,6 +192,11 @@ void GameOver()
              GetScreenHeight()/2 - 50, 20, GRAY);
 
         EndDrawing();
+
+        if (WindowShouldClose() || IsKeyDown(KEY_ENTER))
+        {
+            exit(0);
+        }
     }
 
     //
