@@ -186,6 +186,14 @@ void Desenhar(const GameState* gs)
         else if (gs->atq.atqAtivo && !gs->atq.arma)
         {
             DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO/9, GOLD);
+
+
+            const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y, 20, 10};
+
+            const Vector2 ORIGEM = { -18.0f,  2.0f};
+
+            DrawRectanglePro(DEST_REC, ORIGEM, gs->jog.rot, BLACK);
+
         }
 
         // Inimigos
