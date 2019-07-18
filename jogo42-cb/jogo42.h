@@ -69,6 +69,10 @@ typedef struct // GameState
         float rot;
         //! Health Points.
         float hp;
+        //! Medidor de Saciedade
+        float sac;
+        //! Variavel usada para descrescer a saciedade
+        float timerSac;
         //! Potions
         float pots;
         //! Variavel que determina se a pocao estah sendo usada

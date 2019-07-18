@@ -27,7 +27,9 @@ void InicializarJogador(GameState* gs)
     gs->atq.atqAtivo = false;
     gs->atq.arma = true;
     gs->atq.bala = 6;
-
+    // Saciedade
+    gs->jog.sac = 5;
+    gs->jog.timerSac = 0;
 }
 
 
