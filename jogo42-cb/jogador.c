@@ -84,21 +84,21 @@ void AtaqueJogador(GameState* gs)
                     gs->spwn[i].atingido = true;
                     if (gs->spwn[i].hp <= 0)
                     {
-                      //  PlaySound(gs->efet[3]);
+                        PlaySound(gs->efet[8]);
                         MatarSpawn(gs,i);
                     }
                     // Recarrega uma bala no revolver
-                    /*if(gs->atq.bala <6)
+                    if(gs->atq.bala <6)
                     {
                         PlaySound(gs->efet[6]);
                     }
 
                     if (gs->spwn[i].hp )
                     {
-                        PlaySound(gs->efet[2]);
+                        PlaySound(gs->efet[7]);
                     }
 
-                    */
+
                 }
             }
 
@@ -153,15 +153,15 @@ void AtaqueJogador(GameState* gs)
                     gs->spwn[i].atingido = true;
                     if (gs->spwn[i].hp <= 0)
                     {
-                        //PlaySound(gs->efet[3]);
+                        PlaySound(gs->efet[8]);
                         MatarSpawn(gs, i);
                     }
-                    /*if (gs->spwn[i].hp )
+                    if (gs->spwn[i].hp )
                     {
-                        PlaySound(gs->efet[2]);
+                        PlaySound(gs->efet[7]);
                     }
 
-                    */
+
                 }
             }
         }
