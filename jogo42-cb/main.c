@@ -17,7 +17,6 @@ int main(void)
     // [[[[[ INICIALIZACAO ]]]]]
 
     static bool pause = false;
-    pause = false;
 
     //[ JANELA ]===============================================================
     InitWindow(1024, 576, "Jogo42");
@@ -93,13 +92,12 @@ int main(void)
             PlaySound(marte);
         }
 
-        // [[[[[ UPDATE-PAUSAR ]]]]]
-
         if (IsKeyPressed('P'))
         {
             pause = !pause;
         }
 
+        // [[[[[ UPDATE-PAUSAR ]]]]]
         if (!pause)
         {
             // Mover jogador
@@ -110,7 +108,7 @@ int main(void)
 
             if (gs->atq.atqAtivo)
             {
-            AtaqueJogador(gs);
+                AtaqueJogador(gs);
             }
 
             // Mover inimigo
