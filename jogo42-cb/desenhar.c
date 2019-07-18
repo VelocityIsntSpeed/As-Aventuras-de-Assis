@@ -190,9 +190,13 @@ void DesenharSpawn(GameState* gs)
         {
             if(gs->spwn[i].existe)
                {
-                   DrawCircleGradient(gs->spwn[i].pos.x, gs->spwn[i].pos.y, INIM_RAIO, BEIGE, YELLOW);
+                    DrawCircleGradient(gs->spwn[i].pos.x, gs->spwn[i].pos.y, INIM_RAIO, BEIGE, YELLOW);
+                    // Indicador de HP
+                    DrawText(TextFormat("%d", (int)gs->spwn[i].hp),
+                    gs->spwn[i].pos.x - 7, gs->spwn[i].pos.y + 23, 10, WHITE);
                }
         }
+
 }
 
 
@@ -213,7 +217,6 @@ void Desenhar(const GameState* gs)
 
         // Jogador
         DesenharJogador(gs);
-        DrawCircleGradient(gs->spwn[0].pos.x, gs->spwn[0].pos.y, INIM_RAIO, YELLOW, BEIGE);
 
 
         // ATAQUE DO JOGADOR
@@ -251,6 +254,7 @@ void Desenhar(const GameState* gs)
 
         }
         // Spawns
+        DesenharSpawn(gs);
 
 
 
@@ -269,6 +273,14 @@ void Desenhar(const GameState* gs)
         }
         // Esconderijos
         DesenharEsconderijos(gs->sala);
+        for(int i = 0; i< SPWN_QTD_MAX; i++)
+        {
+            if (gs->spwn[i].ativo)
+                    {
+                        Color cor = {0, 121, 241, 40};
+                        DrawCircle(gs->spwn[i].pos.x, gs->spwn[i].pos.y, SPWN_DIST_ATV, cor);
+                    }
+        }
 
 
 

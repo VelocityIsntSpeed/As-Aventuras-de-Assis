@@ -145,13 +145,18 @@ void SpawnSet(GameState* gs)
     {
         if(Vector2Distance(gs->spwn[i].pos, gs->jog.pos)< SPWN_DIST_ATV)
         {
+            gs->spwn[i].ativo = true;
             gs->spwn[i].cooldown += SPWN_VEL*GetFrameTime();
-            if (gs->spwn[i].cooldown > SPWN_CLDN)
+            if (gs->spwn[i].cooldown >=SPWN_CLDN)
             {
                 gs->spwn[i].cooldown = 0;
                 SpawnarAtivo(gs, i);
+
             }
 
+        }else
+        {
+            gs->spwn[i].ativo = false;
         }
 
     }

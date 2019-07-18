@@ -142,12 +142,14 @@ typedef struct // GameState
     {
         //! Posicao do spawn
         Vector2 pos;
-        //! indicador de vida do spawn
+        //! Indicador de vida do spawn
         float hp;
-        //! cooldown pra um novo spawn
+        //! Cooldown pra um novo spawn
         float cooldown;
-        //! existencia do spawn
+        //! Existencia do spawn
         bool existe;
+        //! Se o spawn esta ativo
+        bool ativo;
 
     }spwn[SPWN_QTD_MAX];//um so pra testar
 
@@ -233,10 +235,10 @@ GameState;
 #define SPWN_CLDN (98.0f)
 
 //! Velocidade do spawn
-#define SPWN_VEL (15.0f)
+#define SPWN_VEL (19.0f)
 
 //! Distancia de ativacao do spawner
-#define SPWN_DIST_ATV (400.0f)
+#define SPWN_DIST_ATV (270.0f)
 
 
 //[ OUTROS ]-------------------------------------------------------------------
