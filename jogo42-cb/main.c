@@ -223,6 +223,14 @@ int main(void)
             {
                 gs->loja.mostrar = true;
             }
+
+            //Player Morre
+
+            if(gs->jog.hp<=0)
+            {
+                GameOver();
+
+            }
         }
 
         // [[[ FIM UPDATE-PAUSAR ]]]
@@ -243,6 +251,7 @@ int main(void)
             {
                 DrawText("JOGO PAUSADO", GetScreenWidth()/2 - MeasureText("JOGO PAUSADO", 40)/2, GetScreenHeight()/2 - 40, 40, LIGHTGRAY);
             }
+
 
         EndDrawing();
         // [[[ FIM DESENHAR ]]]

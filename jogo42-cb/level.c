@@ -181,4 +181,19 @@ bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs)
     return false;
 }
 
+void GameOver()
+{
+    CloseAudioDevice();
+    while(1)
+    {
+        BeginDrawing();
+        DrawRectangle(0,0,GetScreenWidth(),GetScreenHeight(),RED);
+        DrawText("GAME OVER.", GetScreenWidth()/2 - MeasureText("GAME OVER.", 20)/2,
+             GetScreenHeight()/2 - 50, 20, GRAY);
 
+        EndDrawing();
+    }
+
+    //
+
+}
