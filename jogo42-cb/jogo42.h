@@ -125,8 +125,9 @@ typedef struct // GameState
     enum Tile sala[MAPA_QTD_LINS][MAPA_QTD_COLS];
 
 
-    //[ OBSTACULOS ]-----------------------------------------------------------
-
+    //[ SPRITES ]--------------------------------------------------------------
+    Texture2D SPRITE_JOG;
+    Texture2D SPRITE_MACHADO;
 }
 GameState;
 
@@ -230,7 +231,7 @@ bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);
 
 // desenhar.c -----------------------------------------------------------------
 /*! Desenha tudo. */
-void Desenhar(const GameState* gs, const Texture2D* spriteJog);
+void Desenhar(const GameState* gs);
 
 
 // jogador.c ------------------------------------------------------------------

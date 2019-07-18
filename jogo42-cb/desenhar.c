@@ -40,10 +40,10 @@ static void DesenharControles()
 
 
 //! Desenha o jogador.
-static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
+static void DesenharJogador(const GameState* gs)
 {
     // A parte da sprite a ser utilizada (nesse caso, tudo)
-    const Rectangle SRC_REC = {0, 0, sprite->width, sprite->height};
+    const Rectangle SRC_REC = {0, 0, gs->SPRITE_JOG.width, gs->SPRITE_JOG.height};
 
     // Posicao e tamanho
     const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y,\
@@ -53,7 +53,7 @@ static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
        onde {0, 0} eh no canto superior esquerdo do DEST_REC */
     const Vector2 ORIGEM = {DEST_REC.width / 2.0f, DEST_REC.height / 2.0f};
 
-    DrawTexturePro(*sprite, SRC_REC, DEST_REC, ORIGEM, gs->jog.rot, WHITE);
+    DrawTexturePro(gs->SPRITE_JOG, SRC_REC, DEST_REC, ORIGEM, gs->jog.rot, WHITE);
 }
 
 
@@ -183,7 +183,7 @@ static void DesenharInimigo(const struct Inimigo* inimigo)
 
 
 
-void Desenhar(const GameState* gs, const Texture2D* spriteJog)
+void Desenhar(const GameState* gs)
 {
     // Pintar tudo (para formar o background)
     ClearBackground(DARKGRAY);
@@ -197,25 +197,46 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DesenharLevel(gs->sala);
 
 
-
-
         // Jogador
-        DesenharJogador(gs, spriteJog);
+        DesenharJogador(gs);
 
 
-
-
-        // Desenhar contorno de circulo se o ataque estiver ativo
+        // ATAQUE DO JOGADOR
+        // Se for a arma branca
         if (gs->atq.atqAtivo && gs->atq.arma)
         {
-            Rectangle espada = {gs->jog.posHit.x, gs->jog.posHit.y, 35, 2};
-            DrawRectanglePro(espada, (Vector2) {30,1}, gs->atq.DistDiferenca, BLUE);
+            // Hitbox de ataque (remover depois da sprite do machado estiver pronta)
+            //DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, RED);
+
+
+            //[ Desenhar sprite do machado ]------------------------------------
+
+            // Qual parte da sprite utilizar (nesse caso, ela toda)
+            const Rectangle SRC_REC = {0, 0, gs->SPRITE_MACHADO.width, gs->SPRITE_MACHADO.height};
+
+            // Posicao e tamanho
+            const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y, 55, 19};
+
+            const Vector2 ORIGEM = { -18.0f,  1.2f};
+
+            DrawTexturePro(gs->SPRITE_MACHADO, SRC_REC, DEST_REC, ORIGEM, gs->atq.DistDiferenca, WHITE);
+
         }
+        // Se for a pistola
         else if (gs->atq.atqAtivo && !gs->atq.arma)
         {
             DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO/9, GOLD);
+
+
+            const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y, 20, 10};
+
+            const Vector2 ORIGEM = { -18.0f,  2.0f};
+
+            DrawRectanglePro(DEST_REC, ORIGEM, gs->jog.rot, BLACK);
+
         }
-          // Inimigos
+
+        // Inimigos
         for (int i = 0; i < INIM_QTD_MAX; i++)
         {
             if (gs->inimigos[i].existe)
