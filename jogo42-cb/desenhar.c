@@ -179,7 +179,7 @@ void Desenhar(const GameState* gs)
 
             const Vector2 ORIGEM = { -18.0f,  1.2f};
 
-            DrawTexturePro(gs->SPRITE_MACHADO, SRC_REC, DEST_REC, ORIGEM, gs->jog.rot, WHITE);
+            DrawTexturePro(gs->SPRITE_MACHADO, SRC_REC, DEST_REC, ORIGEM, gs->atq.DistDiferenca, WHITE);
 
         }
         // Se for a pistola
