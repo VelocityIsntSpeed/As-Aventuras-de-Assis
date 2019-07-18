@@ -33,6 +33,8 @@ int main(void)
     gs->efet[2] = LoadSound("som/efeitos/monstro/creature_hurt_01.ogg");
     gs->efet[3] = LoadSound("som/efeitos/monstro/creature_roar_03.ogg");
     gs->efet[4] = LoadSound("som/efeitos/jog/pain1.wav");
+    gs->efet[5] = LoadSound("som/efeitos/pistola/outofammo.wav");
+    gs->efet[6] = LoadSound("som/efeitos/pistola/weapload.wav");
     Sound marte = LoadSound("som/musicas/mars.wav");
     PlaySound(marte);
     SetSoundVolume(marte, 0.70);

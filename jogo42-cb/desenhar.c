@@ -97,15 +97,55 @@ static void DesenharLevel(const enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
 }
 
 
+static void DesenharEsconderijos(const enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
+{
+    // Iterar sobre cada tile
+    for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
+    {
+        for (int col = 0; col < MAPA_QTD_COLS; col++)
+        {
+            // Tile nas coordenadas atuais
+            const enum Tile AQUI = lvl[lin][col];
+
+            // Determinar grafico da tile (por enquanto eh so uma cor)
+            Color cor;
+            switch (AQUI)
+            {
+
+                case TILE_esconderijo:
+                    cor = GRAY;
+                    // Desenhar tile
+                    DrawRectangleRec(RectDaTile(col, lin), cor);
+                    //Contorno da mesma cor so que mais escuro um pouco
+                    const float coeficiente = 0.85f;
+                    cor.r *= coeficiente;
+                    cor.g *= coeficiente;
+                    cor.b *= coeficiente;
+                    DrawRectangleLinesEx(RectDaTile(col, lin), 1, cor);break;
+            }
+        }
+    }
+}
+
+
+
 //! Desenha o HP do jogador
 static void DesenharHUD(const GameState* gs)
 {
-    const int POS_X = 10, POS_Y = 10, TAM_FONTE = 20, POS_A = 10, POS_B = 40;
+    const int POS_HP_X = 10, POS_HP_Y = 10, TAM_FONTE = 20, POS_BAL_X = 10,POS_BAL_Y= 40,
+                        POS_ARMA_X = 100, POS_ARMA_Y = 10;
 
     DrawText(FormatText("HP: %d", (int)gs->jog.hp),
-             POS_X, POS_Y, TAM_FONTE, WHITE);
+             POS_HP_X, POS_HP_Y, TAM_FONTE, WHITE);
     DrawText(FormatText("Balas: %d", (int)gs->atq.bala),
-             POS_A, POS_B, TAM_FONTE, WHITE);
+             POS_BAL_X, POS_BAL_Y, TAM_FONTE, WHITE);
+    if (gs->atq.arma)
+    {
+        DrawText("MACHADO",POS_ARMA_X, POS_ARMA_Y, TAM_FONTE, WHITE );
+    } else
+    {
+        DrawText("REVOLVER",POS_ARMA_X, POS_ARMA_Y, TAM_FONTE, WHITE );
+    }
 }
 
 
@@ -204,6 +244,8 @@ void Desenhar(const GameState* gs)
                 DesenharInimigo(&gs->inimigos[i]);
             }
         }
+        // Esconderijos
+        DesenharEsconderijos(gs->sala);
 
 
 
