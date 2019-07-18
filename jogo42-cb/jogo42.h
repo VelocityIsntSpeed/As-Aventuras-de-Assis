@@ -117,7 +117,7 @@ typedef struct // GameState
         bool atingido[INIM_QTD_MAX];
     };
 
-    //! O inimigo. So tem um por enquanto, depois vai ter uma lista.
+    //! Array de inimigos
     struct Inimigo inimigos[INIM_QTD_MAX];
 
 
