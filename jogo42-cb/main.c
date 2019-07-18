@@ -90,7 +90,8 @@ int main(void)
             PlaySound(marte);
         }
 
-        if (IsKeyPressed('P'))
+        // Controle de pausa
+        if (IsKeyPressed('P') && gs->loja.mostrar == false)
         {
             gs->pausado = !gs->pausado;
         }
@@ -137,7 +138,7 @@ int main(void)
             gs->cam.target = gs->jog.pos;
 
 
-            // Controlar mostragem da loja
+            // Controlar mostragem da loja (temporario)
             if (IsKeyPressed(KEY_L))
             {
                 gs->loja.mostrar = !gs->loja.mostrar;
