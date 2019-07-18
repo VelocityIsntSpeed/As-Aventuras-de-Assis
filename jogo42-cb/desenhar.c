@@ -274,7 +274,7 @@ void DesenharLoja(GameState* gs)
     bool continuar = false;
     bool comprarHp = false;
     bool infoatiradora = false;
-    bool atiradora = false;
+    bool atiradoraClicada = false;
     int atiradora1 = 0;
 
 
@@ -340,9 +340,9 @@ void DesenharLoja(GameState* gs)
     }
     if (atiradora1 == 0)
     {
-        atiradora = GuiButton((Rectangle){(int)GetScreenWidth()*0.255, (int)GetScreenHeight()*0.79, 200, 25}, "Comprar Atiradora(400 moedas)");
+        atiradoraClicada = GuiButton((Rectangle){(int)GetScreenWidth()*0.255, (int)GetScreenHeight()*0.79, 200, 25}, "Comprar Atiradora(400 moedas)");
     }
-    if (atiradora && gs->loja.ouro >= 400)
+    if (atiradoraClicada && gs->loja.ouro >= 400)
     {
         gs->loja.ouro -= 400;
         atiradora1 = 1;
