@@ -94,6 +94,19 @@ typedef struct // GameState
     // Camera
     Camera2D cam;
 
+    //[ LOJA ]-----------------------------------------------------------------
+    // Contem tudo relacionado a loja
+    struct {
+        // Se a loja estah mostrando
+        bool mostrar;
+        // Dinheiro atual do jogador
+        int ouro;
+        // Se a atiradora estah comprada
+        bool atiradoraComprada;
+
+    } loja;
+
+
     // [ SONS ]----------------------------------------------------------------
     Sound efet[QTD_FX];
 
@@ -232,6 +245,9 @@ bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);
 // desenhar.c -----------------------------------------------------------------
 /*! Desenha tudo. */
 void Desenhar(const GameState* gs);
+
+/*! Desenha a loja. */
+void DesenharLoja(GameState* gs);
 
 
 // jogador.c ------------------------------------------------------------------
