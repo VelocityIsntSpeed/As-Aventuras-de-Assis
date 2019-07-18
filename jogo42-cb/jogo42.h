@@ -177,7 +177,7 @@ GameState;
 #define JOG_TIR_VEL (900.0f)
 
 //! Alcance do tiro
-#define JOG_TIR_ALC (185.0f)
+#define JOG_TIR_ALC (231.0f)
 
 
 
