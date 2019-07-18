@@ -240,7 +240,7 @@ void Desenhar(const GameState* gs)
         }
 
 
-        // Inimigos    DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, RED);
+        // Inimigos
         for (int i = 0; i < INIM_QTD_MAX; i++)
         {
             if (gs->inimigos[i].existe)
