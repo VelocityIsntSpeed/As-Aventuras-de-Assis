@@ -210,7 +210,7 @@ void DesenharLoja(GameState* gs)
     float valormaximo = 100;
 
     bool continuar = false;
-    bool comprarhp = false;
+    bool comprarHp = false;
     bool infopotion = false;
     bool lifepotion = false;
     bool infoatiradora = false;
@@ -278,7 +278,7 @@ void DesenharLoja(GameState* gs)
                             "Comprar HP", valorBarraHp, valorminimo, valormaximo, true);
         DrawText(FormatText("[ %i%% de HP - %i moedas ]",valorBarraHp,(valorBarraHp*5)),(int)GetScreenWidth()*0.4,(int)GetScreenHeight()*0.2,
                              20,GOLD);
-        comprarhp=GuiButton((Rectangle){(int)GetScreenWidth()*0.725,(int)GetScreenHeight()*0.3,200,
+        comprarHp = GuiButton((Rectangle){(int)GetScreenWidth()*0.725,(int)GetScreenHeight()*0.3,200,
                               25}, FormatText("COMPRAR HP(%i moedas)",(valorBarraHp*5)));
         /*DrawText(FormatText("[ %i moedas ]",(valorBarraHp*5)),(int)GetScreenWidth()*0.775,(int)GetScreenHeight()*0.328,
                              20,GOLD);*/
@@ -287,7 +287,7 @@ void DesenharLoja(GameState* gs)
                     DrawText("[ 10 moedas ]",(int)GetScreenWidth()*0.775,(int)GetScreenHeight()*0.328,
                              20,GOLD);
                 }*/
-            if(comprarhp){
+            if(comprarHp){
                 if((hp+valorBarraHp)<=100&&gs->loja.ouro>=(valorBarraHp*5)){
                     hp+=valorBarraHp;
                     gs->loja.ouro-=(valorBarraHp*5);
