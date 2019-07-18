@@ -141,7 +141,7 @@ void ataqueSet(GameState* gs)
                 gs->atq.DistDiferenca += JOG_TIR_VEL * GetFrameTime();
             }
         // Iniciam o ataque
-        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && gs->atq.arma && !gs->atq.atqAtivo && !gs->loja.mostrar)
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && gs->atq.arma && !gs->atq.atqAtivo)
         {
             // Aqui sao setadas as posicoes angulares originais do ataque
             gs->atq.inicAtq = gs->jog.rot-JOG_ESP_ARC/2;
@@ -150,7 +150,7 @@ void ataqueSet(GameState* gs)
             PlaySound(gs->efet[0]);
         }
             // O ultimo parametro checa se ainda tem alguma bala
-            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.bala>0 && gs->loja.atiradoraComprada && !gs->loja.mostrar)
+            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.bala>0 && gs->loja.atiradoraComprada)
             {
                 // Aqui sao setadas as posicoes angulares originais do ataque
                 gs->atq.inicAtq = 0;
@@ -159,7 +159,7 @@ void ataqueSet(GameState* gs)
                 PlaySound(gs->efet[1]);
                 // Desconta uma bala
                 gs->atq.bala--;
-            } else if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.bala==0 && gs->loja.atiradoraComprada && !gs->loja.mostrar)
+            } else if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.bala==0 && gs->loja.atiradoraComprada)
             {
                 PlaySound(gs->efet[5]);
             }
