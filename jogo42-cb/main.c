@@ -15,8 +15,10 @@
 int main(void)
 {
     // [[[[[ INICIALIZACAO ]]]]]
+
     static bool pause = false;
-    pause=false;
+    pause = false;
+
     //[ JANELA ]===============================================================
     InitWindow(1024, 576, "Jogo42");
     SetTargetFPS(60);
