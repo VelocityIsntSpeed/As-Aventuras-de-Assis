@@ -252,10 +252,10 @@ GameState;
 #define SPWN_CLDN (98.0f)
 
 //! Velocidade do spawn
-#define SPWN_VEL (19.0f)
+#define SPWN_VEL (30.0f)
 
 //! Distancia de ativacao do spawner
-#define SPWN_DIST_ATV (270.0f)
+#define SPWN_DIST_ATV (290.0f)
 
 
 //[ OUTROS ]-------------------------------------------------------------------
@@ -333,6 +333,9 @@ void SpawnSet(GameState* gs);
 
 /*! Spawner spawna um inimigo*/
 void SpawnarAtivo(GameState* gs, int i);
+
+/*! Mata o spawner*/
+void MatarSpawn(GameState* gs, int i);
 
 
 // level.c --------------------------------------------------------------------
