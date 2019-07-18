@@ -15,7 +15,8 @@
 int main(void)
 {
     // [[[[[ INICIALIZACAO ]]]]]
-
+    static bool pause = false;
+    pause=false;
     //[ JANELA ]===============================================================
     InitWindow(1024, 576, "Jogo42");
     SetTargetFPS(60);
@@ -89,68 +90,78 @@ int main(void)
         {
             PlaySound(marte);
         }
-
-
-
-        // Mover jogador
-        MoverJog(gs);
-
-        // Ataque do jogador
-        ataqueSet(gs);
-
-        if (gs->atq.atqAtivo)
-        {
-        AtaqueJogador(gs);
-        }
-
-        // Mover inimigo
-        for (int i = 0; i < INIM_QTD_MAX; i++)
-        {
-            if (gs->inimigos[i].existe)
+        //[[[UPDATE-PAUSAR]]]
+        if(IsKeyPressed('P'))
             {
-                MoverInimigo(&gs->inimigos[i], gs);
+                pause=!pause;
             }
-        }
 
-
-        // Ataque Inimigo
-        for (int i = 0; i < INIM_QTD_MAX; i++)
+        if(!pause)
         {
-            if (gs->inimigos[i].existe)
+            // Mover jogador
+            MoverJog(gs);
+
+            // Ataque do jogador
+            ataqueSet(gs);
+
+            if (gs->atq.atqAtivo)
             {
-                AtaqueInimigo(&gs->inimigos[i], gs);
+            AtaqueJogador(gs);
             }
+
+            // Mover inimigo
+            for (int i = 0; i < INIM_QTD_MAX; i++)
+            {
+                if (gs->inimigos[i].existe)
+                {
+                    MoverInimigo(&gs->inimigos[i], gs);
+                }
+            }
+
+
+            // Ataque Inimigo
+            for (int i = 0; i < INIM_QTD_MAX; i++)
+            {
+                if (gs->inimigos[i].existe)
+                {
+                    AtaqueInimigo(&gs->inimigos[i], gs);
+                }
+            }
+
+
+
+            // Atualizar camera
+            gs->cam.offset = Vector2Negate(gs->jog.pos);
+            gs->cam.offset.x += GetScreenWidth() / 2.0f;
+            gs->cam.offset.y += GetScreenHeight() / 2.0f;
+            gs->cam.target = gs->jog.pos;
+
+
+            // Controlar mostragem da loja
+            if (IsKeyPressed(KEY_L))
+            {
+                gs->loja.mostrar = !gs->loja.mostrar;
+            }
+
+
+            // [[[ FIM UPDATE ]]]
         }
-
-
-
-        // Atualizar camera
-        gs->cam.offset = Vector2Negate(gs->jog.pos);
-        gs->cam.offset.x += GetScreenWidth() / 2.0f;
-        gs->cam.offset.y += GetScreenHeight() / 2.0f;
-        gs->cam.target = gs->jog.pos;
-
-
-        // Controlar mostragem da loja
-        if (IsKeyPressed(KEY_L))
-        {
-            gs->loja.mostrar = !gs->loja.mostrar;
-        }
-
-
-        // [[[ FIM UPDATE ]]]
-
 
         // [[[[[ DESENHAR ]]]]]
         BeginDrawing();
-
-            Desenhar(gs);
-
-            if (gs->loja.mostrar)
+            if(!pause)
             {
-                DesenharLoja(gs);
-            }
+                Desenhar(gs);
 
+                if (gs->loja.mostrar)
+                {
+                    DesenharLoja(gs);
+                }
+            }
+            if (pause)
+            {
+                DrawText("JOGO PAUSADO", GetScreenWidth()/2 - MeasureText("JOGO PAUSADO", 40)/2, GetScreenHeight()/2 - 40, 40, LIGHTGRAY);
+            }
         EndDrawing();
         // [[[ FIM DESENHAR ]]]
     }
