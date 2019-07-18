@@ -208,10 +208,6 @@ void Desenhar(const GameState* gs)
         // Se for a arma branca
         if (gs->atq.atqAtivo && gs->atq.arma)
         {
-            // Hitbox de ataque (remover depois da sprite do machado estiver pronta)
-            //DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, RED);
-
-
             //[ Desenhar sprite do machado ]------------------------------------
 
             // Qual parte da sprite utilizar (nesse caso, ela toda)
@@ -240,7 +236,7 @@ void Desenhar(const GameState* gs)
         }
 
 
-        // Inimigos    DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, RED);
+        // Inimigos
         for (int i = 0; i < INIM_QTD_MAX; i++)
         {
             if (gs->inimigos[i].existe)
