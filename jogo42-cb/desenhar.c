@@ -188,9 +188,6 @@ static void DesenharInimigo(const struct Inimigo* inimigo)
 
 void Desenhar(const GameState* gs)
 {
-    // Pausa o jogo
-    gs->pausado = true;
-
     // Pintar tudo (para formar o background)
     ClearBackground(DARKGRAY);
 
@@ -277,6 +274,9 @@ void Desenhar(const GameState* gs)
 
 void DesenharLoja(GameState* gs)
 {
+    // Pausa o jogo
+    gs->pausado = true;
+
     const float precoDe1Hp = 5.0f;
     const int precoAtiradora = 400;
 
