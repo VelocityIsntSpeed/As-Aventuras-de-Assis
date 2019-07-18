@@ -239,13 +239,19 @@ void Desenhar(const GameState* gs)
 
         }
 
-        // Inimigos
+
+        // Inimigos    DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, RED);
         for (int i = 0; i < INIM_QTD_MAX; i++)
         {
             if (gs->inimigos[i].existe)
             {
                 DesenharInimigo(&gs->inimigos[i]);
             }
+        }
+        // Desenha a mira do revolver
+        if (!gs->atq.atqAtivo && !gs->atq.arma)
+        {
+            DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, RED);
         }
         // Esconderijos
         DesenharEsconderijos(gs->sala);
