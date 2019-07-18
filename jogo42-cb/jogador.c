@@ -49,6 +49,10 @@ void AtaqueJogador(GameState* gs)
                     {
                         gs->inimigos[i].hp -= JOG_ATQ_DANO;
                         // Recarrega uma bala no revolver
+                        if(gs->atq.bala <6)
+                        {
+                            PlaySound(gs->efet[6]);
+                        }
                         gs->atq.bala++;
                         if (gs->inimigos[i].hp )
                         {
@@ -155,6 +159,9 @@ void ataqueSet(GameState* gs)
                 PlaySound(gs->efet[1]);
                 // Desconta uma bala
                 gs->atq.bala--;
+            } else if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.bala==0)
+            {
+                PlaySound(gs->efet[5]);
             }
 
         // Aqui e marcada a posicao angular final do ataque
