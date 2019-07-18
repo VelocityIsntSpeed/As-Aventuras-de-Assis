@@ -199,7 +199,7 @@ static void DesenharInimigo(const struct Inimigo* inimigo)
              inimigo->pos.x - 7, inimigo->pos.y + 23, 10, WHITE);
 }
 
-void DesenharSpawn(const GameState* gs)
+void DesenharSpawn(GameState* gs)
 {
      for (int i = 0; i< SPWN_QTD_MAX; i++)
         {
