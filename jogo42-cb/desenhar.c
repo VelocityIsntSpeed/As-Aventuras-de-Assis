@@ -205,8 +205,8 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
 void DesenharLoja(GameState* gs)
 {
     static int valorBarraHp = 0; // Valor atual do slider de compra de HP
-    float valorminimo = 0;
-    float valormaximo = 100;
+    const float valorminimo = 0;
+    const float valormaximo = 150;
 
     bool continuar = false;
     bool comprarHp = false;
@@ -226,19 +226,11 @@ void DesenharLoja(GameState* gs)
 
     //..................
 
-    //ClearBackground(DARKBLUE);
-    DrawRectangle(0,0,GetScreenWidth(),GetScreenHeight(),DARKBLUE); // Aqui seria um retângulo desenhado nessa cor, como um pop-up.
-    DrawRectangleRounded((Rectangle){-10,-10,GetScreenWidth()/5,GetScreenHeight()+10},0.25,1,BLUE);
-    ActiveInv=GuiComboBox((Rectangle){TamInv.x,TamInv.y,TamInv.width,TamInv.height},
-                          *TextInv,ActiveInv); // "Inventário"
+    // Fundo
+    DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), DARKBLUE);
 
-    if (ActiveInv >= 0 && ActiveInv < 7)
-    {
-        if (ActiveInv == 1)
-        {
-            DrawText(FormatText("Atiradoras\nEm estoque:%i",opcoes[1]), TamInv.x+10, (TamInv.y)+70, 10, RAYWHITE);
-        }
-    }
+    // Barra lateral
+    DrawRectangleRounded((Rectangle){-10, -10, GetScreenWidth()/5, GetScreenHeight()+10}, 0.25, 1, BLUE);
 
     // Titulo
     DrawText("[ LOJA ]",(int)GetScreenWidth()*0.55,(int)GetScreenHeight()*0.03, 30, RAYWHITE);
