@@ -150,6 +150,8 @@ typedef struct // GameState
         bool existe;
         //! Se o spawn esta ativo
         bool ativo;
+        //! Se o spawner foi atingido
+        bool atingido;
 
     }spwn[SPWN_QTD_MAX];//um so pra testar
 

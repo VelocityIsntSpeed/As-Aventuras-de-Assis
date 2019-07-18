@@ -47,25 +47,53 @@ void AtaqueJogador(GameState* gs)
                     if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
                                       gs->inimigos[i].pos, INIM_RAIO))
                     {
-                        gs->inimigos[i].hp -= JOG_ATQ_DANO;
-                        // Recarrega uma bala no revolver
-                        if(gs->atq.bala <6)
-                        {
-                            PlaySound(gs->efet[6]);
-                        }
-                        gs->atq.bala++;
-                        if (gs->inimigos[i].hp )
-                        {
-                            PlaySound(gs->efet[2]);
-                        }
-                        gs->inimigos[i].atingido = true;
-                        if (gs->inimigos[i].hp <= 0)
-                        {
-                            PlaySound(gs->efet[3]);
-                            matarInimigo(gs,i);
-                        }
+                    gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                    // Recarrega uma bala no revolver
+                    if(gs->atq.bala <6)
+                    {
+                        PlaySound(gs->efet[6]);
+                    }
+                    gs->atq.bala++;
+                    if (gs->inimigos[i].hp )
+                    {
+                        PlaySound(gs->efet[2]);
+                    }
+                    gs->inimigos[i].atingido = true;
+                    if (gs->inimigos[i].hp <= 0)
+                    {
+                        PlaySound(gs->efet[3]);
+                        matarInimigo(gs,i);
+                    }
+                }
+            }
+
+        }
+        for (int i = 0; i<SPWN_QTD_MAX; i++)
+        {
+            if(!gs->spwn[i].atingido)
+            {
+                    if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
+                                      gs->spwn[i].pos, INIM_RAIO))
+                    {
+                    gs->spwn[i].hp -= JOG_ATQ_DANO;
+                    gs->atq.bala++;
+                    // Recarrega uma bala no revolver
+                    /*if(gs->atq.bala <6)
+                    {
+                        PlaySound(gs->efet[6]);
                     }
 
+                    if (gs->spwn[i].hp )
+                    {
+                        PlaySound(gs->efet[2]);
+                    }
+                    gs->spwn[i].atingido = true;
+                    if (gs->spwn[i].hp <= 0)
+                    {
+                        PlaySound(gs->efet[3]);
+                        matarInimigo(gs,i);
+                    }*/
+                }
             }
 
         }
@@ -105,7 +133,30 @@ void AtaqueJogador(GameState* gs)
                         }
 
                     }
+            }
 
+        }
+         for (int i = 0; i<INIM_QTD_MAX; i++)
+        {
+            if(!gs->spwn[i].atingido)
+            {
+                    if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO/9,
+                                      gs->spwn[i].pos, INIM_RAIO))
+                    {
+
+                        gs->spwn[i].hp -= JOG_ATQ_DANO;
+                        /*if (gs->spwn[i].hp )
+                        {
+                            PlaySound(gs->efet[2]);
+                        }
+                        gs->spwn[i].atingido = true;
+                        if (gs->spwn[i].hp <= 0)
+                        {
+                            PlaySound(gs->efet[3]);
+                            matarInimigo(gs, i);
+                        }*/
+
+                    }
             }
 
         }
