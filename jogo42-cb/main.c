@@ -38,13 +38,20 @@ int main(void)
     gs->efet[4] = LoadSound("som/efeitos/jog/pain1.wav");
     gs->efet[5] = LoadSound("som/efeitos/pistola/outofammo.wav");
     gs->efet[6] = LoadSound("som/efeitos/pistola/weapload.wav");
+    gs->efet[7] = LoadSound("som/efeitos/monstro/seax-unsheathe-01.wav");
+    gs->efet[8] = LoadSound("som/efeitos/monstro/sheath-squeeze-04.wav");
     Sound musica[3];
     musica[0] = LoadSound("som/musicas/mars.wav");
     musica[1] = LoadSound("som/musicas/mercury.wav");
     musica[2] = LoadSound("som/musicas/venus.wav");
-    SetSoundVolume(musica[0], 0.70);
-    SetSoundVolume(musica[1], 0.70);
-    SetSoundVolume(musica[2], 0.70);
+    SetSoundVolume(musica[0], 0.66);
+    SetSoundVolume(musica[1], 0.66);
+    SetSoundVolume(musica[2], 0.66);
+
+
+
+
+
 
     //[ JOGADOR ]==============================================================
     InicializarJogador(gs);
@@ -279,7 +286,6 @@ int main(void)
     {
         UnloadSound(gs->efet[i]);
     }
-
     UnloadSound(musica[0]);
     UnloadSound(musica[1]);
     UnloadSound(musica[2]);
