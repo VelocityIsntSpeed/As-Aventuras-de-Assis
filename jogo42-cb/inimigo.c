@@ -169,6 +169,7 @@ void MatarSpawn(GameState* gs, int i)
     gs->spwn[i].existe = false;
     gs->spwn[i].pos.x = -20;
     gs->spwn[i].pos.y = -20;
+    gs->loja.ouro += 75;
 
 }
 
