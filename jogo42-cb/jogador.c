@@ -21,6 +21,8 @@ void InicializarJogador(GameState* gs)
     gs->jog.hp = 150;
     gs->atq.atqAtivo = false;
     gs->atq.arma = true;
+    gs->atq.bala = 6;
+
 }
 
 
@@ -29,8 +31,9 @@ void AtaqueJogador(GameState* gs)
     if (gs->atq.arma)
     {
         // Calcular posicao da hitbox de ataque
-            gs->jog.posHit.x = JOG_ATQ_DIST * cosf(gs->atq.DistDiferenca * DEG2RAD);
-            gs->jog.posHit.y = JOG_ATQ_DIST * sinf(gs->atq.DistDiferenca * DEG2RAD);
+        // O 1.25 e pra aumentar o range da espada sem mudar nada no revolver
+            gs->jog.posHit.x = 1.25*JOG_ATQ_DIST * cosf(gs->atq.DistDiferenca * DEG2RAD);
+            gs->jog.posHit.y = 1.25*JOG_ATQ_DIST * sinf(gs->atq.DistDiferenca * DEG2RAD);
 
             gs->jog.posHit = Vector2Add(gs->jog.pos, gs->jog.posHit);
 
@@ -44,8 +47,9 @@ void AtaqueJogador(GameState* gs)
                     if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
                                       gs->inimigos[i].pos, INIM_RAIO))
                     {
-                        PlaySound(gs->efet[2]);
                         gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                        // Recarrega uma bala no revolver
+                        gs->atq.bala++;
                         if (gs->inimigos[i].hp )
                         {
                             PlaySound(gs->efet[2]);
@@ -64,11 +68,13 @@ void AtaqueJogador(GameState* gs)
     }
     else
     {
-        // Se ele detectar q o tiro ja pegou em alguma coisa ele retorna e acaba com a animacao
+
 
         gs->jog.posHit.x = gs->atq.DistDiferenca * cosf(gs->atq.ang * DEG2RAD);
         gs->jog.posHit.y = gs->atq.DistDiferenca * sinf(gs->atq.ang * DEG2RAD);
         gs->jog.posHit = Vector2Add(gs->atq.atqin, gs->jog.posHit);
+
+        // Se a bala pegar na parede ele termina o ataque
         if(ColisaoComLevel(gs->jog.posHit, JOG_ATQ_RAIO, gs))
         {
 
@@ -107,25 +113,30 @@ void AtaqueJogador(GameState* gs)
 
 void ataqueSet(GameState* gs)
 {
+    // Esses dois ifs garantem q a qtd de balas nunca passe de 6 cargas, nem menos de 0
+        if (gs->atq.bala>6)
+        {
+            gs->atq.bala = 6;
+        }else if ( gs->atq.bala<0)
+        {
+            gs->atq.bala = 0;
+        }
 
-
-
-
-
-        if(IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
+        // Alterna entre armas
+        if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON))
         {
             gs->atq.arma = !gs->atq.arma;
         }
-
+        // Calculam as variacoes pra dizer q o ataque acabou
         if (gs->atq.arma && gs->atq.atqAtivo)
             {
                 gs->atq.DistDiferenca += JOG_ESP_VEL * GetFrameTime();
             }
-        else if (!gs->atq.arma && gs->atq.atqAtivo)
+            else if (!gs->atq.arma && gs->atq.atqAtivo)
             {
                 gs->atq.DistDiferenca += JOG_TIR_VEL * GetFrameTime();
             }
-
+        // Iniciam o ataque
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && gs->atq.arma && !gs->atq.atqAtivo)
         {
             // Aqui sao setadas as posicoes angulares originais do ataque
@@ -133,15 +144,19 @@ void ataqueSet(GameState* gs)
             gs->atq.DistDiferenca = gs->jog.rot-JOG_ESP_ARC/2;
             gs->atq.atqAtivo = true;
             PlaySound(gs->efet[0]);
-        }else if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo)
-        {
-            // Aqui sao setadas as posicoes angulares originais do ataque
-            gs->atq.inicAtq = 0;
-            gs->atq.DistDiferenca = JOG_RAIO;
-            gs->atq.atqAtivo = true;
-            PlaySound(gs->efet[1]);
-
         }
+            // O ultimo parametro checa se ainda tem alguma bala
+            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.bala>0)
+            {
+                // Aqui sao setadas as posicoes angulares originais do ataque
+                gs->atq.inicAtq = 0;
+                gs->atq.DistDiferenca = JOG_RAIO;
+                gs->atq.atqAtivo = true;
+                PlaySound(gs->efet[1]);
+                // Desconta uma bala
+                gs->atq.bala--;
+            }
+
         // Aqui e marcada a posicao angular final do ataque
         if (gs->atq.arma && gs->atq.DistDiferenca > gs->atq.inicAtq+JOG_ESP_ARC)
         {

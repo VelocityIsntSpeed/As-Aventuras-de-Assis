@@ -83,6 +83,8 @@ typedef struct // GameState
         float ang;
         //! Vetor pra pegar a posicao q o ataque vai usar
         Vector2 atqin;
+        //! Quantidade de balas
+        int bala;
 
 
     }
@@ -180,14 +182,14 @@ GameState;
 #define INIM_RAIO (17.0f)
 
 //! Velocidade de movimento do inimigo, por segundo.
-#define INIM_VEL (135.0f)
+#define INIM_VEL (125.0f)
 
 //! HP maximo e inicial do inimigo.
 #define INIM_HP_MAX (60.0f)
 
 /*! Distancia maxima na qual o inimigo vai seguir o jogador,
     de centro a centro. */
-#define INIM_MAX_DIST (195.0f)
+#define INIM_MAX_DIST (204.0f)
 
 /*! Distancia minima na qual o inimigo vai seguir o jogador,
     de borda a borda. */
