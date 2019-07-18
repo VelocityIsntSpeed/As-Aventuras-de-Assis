@@ -84,9 +84,6 @@ static void DesenharLevel(const enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
                 case TILE_chao: case TILE_paredeInvisivel:
                     cor = DARKBROWN; break;
 
-                case TILE_parede:
-                    cor = GRAY; break;
-
                 case TILE_final:
                     cor = GREEN; break;
             }
@@ -105,7 +102,7 @@ static void DesenharLevel(const enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
 }
 
 
-static void DesenharEsconderijos(const enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
+static void DesenharParedes(const enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
 {
     // Iterar sobre cada tile
     for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
@@ -121,6 +118,7 @@ static void DesenharEsconderijos(const enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COL
             {
 
                 case TILE_esconderijo:
+                {
                     cor = GRAY;
                     // Desenhar tile
                     DrawRectangleRec(RectDaTile(col, lin), cor);
@@ -129,7 +127,23 @@ static void DesenharEsconderijos(const enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COL
                     cor.r *= coeficiente;
                     cor.g *= coeficiente;
                     cor.b *= coeficiente;
-                    DrawRectangleLinesEx(RectDaTile(col, lin), 1, cor);break;
+                    DrawRectangleLinesEx(RectDaTile(col, lin), 1, cor);
+                    break;
+                }
+
+                case TILE_parede:
+                {
+                    cor = GRAY;
+                    // Desenhar tile
+                    DrawRectangleRec(RectDaTile(col, lin), cor);
+                    //Contorno da mesma cor so que mais escuro um pouco
+                    const float coeficiente = 0.85f;
+                    cor.r *= coeficiente;
+                    cor.g *= coeficiente;
+                    cor.b *= coeficiente;
+                    DrawRectangleLinesEx(RectDaTile(col, lin), 1, cor);
+                    break;
+                }
             }
         }
     }
@@ -288,8 +302,8 @@ void Desenhar(const GameState* gs)
         {
             DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, RED);
         }
-        // Esconderijos
-        DesenharEsconderijos(gs->sala);
+        // Paredes
+        DesenharParedes(gs->sala);
         for(int i = 0; i< SPWN_QTD_MAX; i++)
         {
             if (gs->spwn[i].ativo)
