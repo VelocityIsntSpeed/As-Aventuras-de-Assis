@@ -38,9 +38,13 @@ int main(void)
     gs->efet[4] = LoadSound("som/efeitos/jog/pain1.wav");
     gs->efet[5] = LoadSound("som/efeitos/pistola/outofammo.wav");
     gs->efet[6] = LoadSound("som/efeitos/pistola/weapload.wav");
-    Sound marte = LoadSound("som/musicas/mars.wav");
-    PlaySound(marte);
-    SetSoundVolume(marte, 0.70);
+    Sound musica[3];
+    musica[0] = LoadSound("som/musicas/mars.wav");
+    musica[1] = LoadSound("som/musicas/mercury.wav");
+    musica[2] = LoadSound("som/musicas/venus.wav");
+    SetSoundVolume(musica[0], 0.70);
+    SetSoundVolume(musica[1], 0.70);
+    SetSoundVolume(musica[2], 0.70);
 
     //[ JOGADOR ]==============================================================
     InicializarJogador(gs);
@@ -69,6 +73,7 @@ int main(void)
 
     //[ LEVEL E INIMIGOS ]=====================================================
     gs->estagioAtual = 1;
+    PlaySound(musica[gs->estagioAtual-1]);
     InicializarLevel(gs->sala, gs);
 
 
@@ -91,14 +96,14 @@ int main(void)
     {
 
         // [[[[[ UPDATE ]]]]]
-        // Musica
-        if (!IsSoundPlaying(marte) && !gs->pausado)
+        // Musica. Pause e Resume sao auto explicativos
+        if (!IsSoundPlaying(musica[gs->estagioAtual-1]) && !gs->pausado)
         {
-            PlaySound(marte);
+            PlaySound(musica[gs->estagioAtual-1]);
         }
         if (IsKeyPressed('P') && gs->pausado)
         {
-            ResumeSound(marte);
+            ResumeSound(musica[gs->estagioAtual-1]);
         }
 
 
@@ -106,7 +111,7 @@ int main(void)
         if (IsKeyPressed('P') && gs->loja.mostrar == false)
         {
             gs->pausado = !gs->pausado;
-            ResumeSound(marte);
+            ResumeSound(musica[gs->estagioAtual-1]);
         }
 
         // [[[[[ UPDATE-PAUSAR ]]]]]
@@ -116,6 +121,8 @@ int main(void)
             // Atalho para imediatamente passar para proxima fase
             if (IsKeyPressed(KEY_EQUAL))
             {
+                // Tem q parar a musica pra iniciar outra
+                StopSound(musica[gs->estagioAtual-1]);
                 PassarDeEstagio(gs);
             }
 
@@ -253,12 +260,12 @@ int main(void)
             if (gs->loja.mostrar)
             {
                 DesenharLoja(gs);
-                PauseSound(marte);
+                PauseSound(musica[gs->estagioAtual-1]);
             }
             else if (gs->pausado)
             {
                 DrawText("JOGO PAUSADO", GetScreenWidth()/2 - MeasureText("JOGO PAUSADO", 40)/2, GetScreenHeight()/2 - 40, 40, LIGHTGRAY);
-                PauseSound(marte);
+                PauseSound(musica[gs->estagioAtual-1]);
             }
 
 
@@ -273,7 +280,9 @@ int main(void)
         UnloadSound(gs->efet[i]);
     }
 
-    UnloadSound(marte);
+    UnloadSound(musica[0]);
+    UnloadSound(musica[1]);
+    UnloadSound(musica[2]);
     CloseAudioDevice();
     CloseWindow(); // Close window and OpenGL context
     return 0;
