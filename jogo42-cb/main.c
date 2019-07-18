@@ -20,13 +20,12 @@ int main(void)
     //[ JANELA ]===============================================================
     InitWindow(1024, 576, "Jogo42");
     SetTargetFPS(60);
-
+    int gover=0;
 
     //[ STRUCT DE ESTADO DO JOGO ]=============================================
     GameState* gs = malloc(sizeof(GameState));
 
     gs->pausado = false;
-    gs->gameover = false;
 
     //[ AUDIO ]================================================================
     InitAudioDevice();
@@ -81,8 +80,6 @@ int main(void)
             PlaySound(marte);
         }
 
-        if(!gs->gameover)
-        {
             // Controle de pausa
             if (IsKeyPressed('P') && gs->loja.mostrar == false)
             {
@@ -203,21 +200,12 @@ int main(void)
                 //Jogador Morrer
                 if(gs->jog.hp<=0)
                 {
-                    gs->gameover = true;
+                    gs->pausado = true;
+                    gover = 1;
+                    GameOver(gs,*gover);
                 }
               }
-            }
-            else
-            {
-                if(IsKeyPressed(KEY_ENTER))
-                {
-                    InicializarLevel(gs->sala,gs);
-                    gs->jog.hp=150.0;
-                    gs->estagioAtual = 1;
-                    gs->gameover = false;
 
-                }
-            }
             // Atualizar camera
                 gs->cam.offset = Vector2Negate(gs->jog.pos);
                 gs->cam.offset.x += GetScreenWidth() / 2.0f;
@@ -234,8 +222,6 @@ int main(void)
         BeginDrawing();
 
         Desenhar(gs);
-        if(!gs->gameover)
-        {
             if (gs->loja.mostrar)
             {
                 DesenharLoja(gs);
@@ -244,8 +230,7 @@ int main(void)
             {
                 DrawText("JOGO PAUSADO", GetScreenWidth()/2 - MeasureText("JOGO PAUSADO", 40)/2, GetScreenHeight()/2 - 40, 40, LIGHTGRAY);
             }
-        }
-        else
+        if(gover==1)
         {
             DrawRectangle(0,0,GetScreenWidth(),GetScreenHeight(),MAROON);
             DrawText("GAME OVER. Tecle [ENTER] para JOGAR DE NOVO.", GetScreenWidth()/2 - MeasureText("GAME OVER. Tecle [ENTER] para JOGAR DE NOVO.", 20)/2,

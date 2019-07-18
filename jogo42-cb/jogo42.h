@@ -56,8 +56,6 @@ enum Tile
 // Guarda todo o estado do jogo
 typedef struct // GameState
 {
-    //!Game Over
-    bool gameover;
 
     //! Se o jogo estah pausado.
     bool pausado;
@@ -310,6 +308,8 @@ void PassarDeEstagio(GameState* gs);
 /*! Verifica se ha colisao entre o circulo dado e o level. */
 bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);
 
+/*!GameOver*/
+void GameOver(const GameState *gs,int *gover);
 
 #endif // JOGO42_H_INCLUDED
 

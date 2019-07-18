@@ -173,4 +173,16 @@ bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs)
     return false;
 }
 
+void GameOver(const GameState *gs,int *gover)
+{
+    //gs->pausado = true;
+    if(IsKeyPressed(KEY_ENTER))
+                {
+                    InicializarLevel(gs->sala,gs);
+                    gs->jog.hp=150.0;
+                    gs->estagioAtual = 1;
+                    gs->pausado=false;
+                    gover=0;
 
+                }
+}
