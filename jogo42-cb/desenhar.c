@@ -202,6 +202,7 @@ void Desenhar(const GameState* gs)
 
         // Jogador
         DesenharJogador(gs);
+        DrawCircle(gs->spwn.pos.x, gs->spwn.pos.y, INIM_RAIO, YELLOW);
 
 
         // ATAQUE DO JOGADOR
@@ -255,6 +256,7 @@ void Desenhar(const GameState* gs)
         }
         // Esconderijos
         DesenharEsconderijos(gs->sala);
+
 
 
 

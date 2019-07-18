@@ -59,6 +59,8 @@ int main(void)
 
     // Os inimigos sao spawnados pela inicializacao do mapa.
 
+    //spawn
+
 
     //[ LEVEL ]================================================================
     InicializarLevel(gs->sala, gs);
@@ -89,7 +91,7 @@ int main(void)
         {
             PlaySound(marte);
         }
-
+            gs->spwn.pos = gs->jog.pos;
         // Controle de pausa
         if (IsKeyPressed('P') && gs->loja.mostrar == false)
         {
