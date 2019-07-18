@@ -175,7 +175,7 @@ void Desenhar(const GameState* gs)
             const Rectangle SRC_REC = {0, 0, gs->SPRITE_MACHADO.width, gs->SPRITE_MACHADO.height};
 
             // Posicao e tamanho
-            const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y, 45, 18};
+            const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y, 55, 19};
 
             const Vector2 ORIGEM = { -18.0f,  1.2f};
 
