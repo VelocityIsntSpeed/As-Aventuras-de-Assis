@@ -17,10 +17,10 @@
 static void DesenharControles()
 {
     // Texto que vai aparecer
-    const char TEXTO[] = "Controles:\n"
-                         "WASD/Setas para andar\n"
+    const char TEXTO[] = "WASD/Setas para andar\n"
                          "Clique esquerdo para atacar\n"
                          "Clique direito para trocar de arma\n"
+                         "P para pausar\n"
                          "L para abrir/fechar loja";
 
     // Tamanho da fonte
@@ -239,6 +239,7 @@ void Desenhar(const GameState* gs)
 
         }
 
+
         // Inimigos
         for (int i = 0; i < INIM_QTD_MAX; i++)
         {
@@ -246,6 +247,11 @@ void Desenhar(const GameState* gs)
             {
                 DesenharInimigo(&gs->inimigos[i]);
             }
+        }
+        // Desenha a mira do revolver
+        if (!gs->atq.atqAtivo && !gs->atq.arma)
+        {
+            DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, RED);
         }
         // Esconderijos
         DesenharEsconderijos(gs->sala);

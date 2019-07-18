@@ -117,6 +117,8 @@ void AtaqueJogador(GameState* gs)
 
 void ataqueSet(GameState* gs)
 {
+
+
     // Esses dois ifs garantem q a qtd de balas nunca passe de 6 cargas, nem menos de 0
         if (gs->atq.bala>6)
         {
@@ -130,6 +132,12 @@ void ataqueSet(GameState* gs)
         if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON) && gs->loja.atiradoraComprada)
         {
             gs->atq.arma = !gs->atq.arma;
+        }
+        // Cria a posicao da mira do revolver
+        if (!gs->atq.atqAtivo && !gs->atq.arma)
+        {
+            gs->jog.posHit.x = (gs->jog.pos.x)+JOG_TIR_ALC * cosf(gs->jog.rot * DEG2RAD);
+            gs->jog.posHit.y = (gs->jog.pos.y)+JOG_TIR_ALC * sinf(gs->jog.rot * DEG2RAD);
         }
         // Calculam as variacoes pra dizer q o ataque acabou
         if (gs->atq.arma && gs->atq.atqAtivo)
@@ -159,7 +167,9 @@ void ataqueSet(GameState* gs)
                 PlaySound(gs->efet[1]);
                 // Desconta uma bala
                 gs->atq.bala--;
+
             } else if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.bala==0 && gs->loja.atiradoraComprada)
+
             {
                 PlaySound(gs->efet[5]);
             }
@@ -188,6 +198,7 @@ void ataqueSet(GameState* gs)
             gs->atq.ang = gs->jog.rot;
             gs->atq.atqin = gs->jog.pos;
         }
+
 
 }
 

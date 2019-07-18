@@ -54,6 +54,9 @@ enum Tile
 // Guarda todo o estado do jogo
 typedef struct // GameState
 {
+    //! Se o jogo estah pausado.
+    bool pausado;
+
     //[ JOGADOR ]--------------------------------------------------------------
     // Estado do jogador
     struct Jog
@@ -179,7 +182,7 @@ GameState;
 #define JOG_TIR_VEL (900.0f)
 
 //! Alcance do tiro
-#define JOG_TIR_ALC (185.0f)
+#define JOG_TIR_ALC (231.0f)
 
 
 
