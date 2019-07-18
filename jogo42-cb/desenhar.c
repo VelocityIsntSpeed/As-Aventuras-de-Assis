@@ -42,10 +42,10 @@ static void DesenharControles()
 
 
 //! Desenha o jogador.
-static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
+static void DesenharJogador(const GameState* gs)
 {
     // A parte da sprite a ser utilizada (nesse caso, tudo)
-    const Rectangle SRC_REC = {0, 0, sprite->width, sprite->height};
+    const Rectangle SRC_REC = {0, 0, gs->SPRITE_JOG.width, gs->SPRITE_JOG.height};
 
     // Posicao e tamanho
     const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y,\
@@ -55,7 +55,7 @@ static void DesenharJogador(const GameState* gs, const Texture2D* sprite)
        onde {0, 0} eh no canto superior esquerdo do DEST_REC */
     const Vector2 ORIGEM = {DEST_REC.width / 2.0f, DEST_REC.height / 2.0f};
 
-    DrawTexturePro(*sprite, SRC_REC, DEST_REC, ORIGEM, gs->jog.rot, WHITE);
+    DrawTexturePro(gs->SPRITE_JOG, SRC_REC, DEST_REC, ORIGEM, gs->jog.rot, WHITE);
 }
 
 
@@ -99,15 +99,55 @@ static void DesenharLevel(const enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
 }
 
 
+static void DesenharEsconderijos(const enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
+{
+    // Iterar sobre cada tile
+    for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
+    {
+        for (int col = 0; col < MAPA_QTD_COLS; col++)
+        {
+            // Tile nas coordenadas atuais
+            const enum Tile AQUI = lvl[lin][col];
+
+            // Determinar grafico da tile (por enquanto eh so uma cor)
+            Color cor;
+            switch (AQUI)
+            {
+
+                case TILE_esconderijo:
+                    cor = GRAY;
+                    // Desenhar tile
+                    DrawRectangleRec(RectDaTile(col, lin), cor);
+                    //Contorno da mesma cor so que mais escuro um pouco
+                    const float coeficiente = 0.85f;
+                    cor.r *= coeficiente;
+                    cor.g *= coeficiente;
+                    cor.b *= coeficiente;
+                    DrawRectangleLinesEx(RectDaTile(col, lin), 1, cor);break;
+            }
+        }
+    }
+}
+
+
+
 //! Desenha o HP do jogador
 static void DesenharHUD(const GameState* gs)
 {
-    const int POS_X = 10, POS_Y = 10, TAM_FONTE = 20, POS_A = 10, POS_B = 40;
+    const int POS_HP_X = 10, POS_HP_Y = 10, TAM_FONTE = 20, POS_BAL_X = 10,POS_BAL_Y= 40,
+                        POS_ARMA_X = 100, POS_ARMA_Y = 10;
 
     DrawText(FormatText("HP: %d", (int)gs->jog.hp),
-             POS_X, POS_Y, TAM_FONTE, WHITE);
+             POS_HP_X, POS_HP_Y, TAM_FONTE, WHITE);
     DrawText(FormatText("Balas: %d", (int)gs->atq.bala),
-             POS_A, POS_B, TAM_FONTE, WHITE);
+             POS_BAL_X, POS_BAL_Y, TAM_FONTE, WHITE);
+    if (gs->atq.arma)
+    {
+        DrawText("MACHADO",POS_ARMA_X, POS_ARMA_Y, TAM_FONTE, WHITE );
+    } else
+    {
+        DrawText("REVOLVER",POS_ARMA_X, POS_ARMA_Y, TAM_FONTE, WHITE );
+    }
 }
 
 
@@ -145,7 +185,7 @@ static void DesenharInimigo(const struct Inimigo* inimigo)
 
 
 
-void Desenhar(const GameState* gs, const Texture2D* spriteJog)
+void Desenhar(const GameState* gs)
 {
     // Pintar tudo (para formar o background)
     ClearBackground(DARKGRAY);
@@ -159,25 +199,46 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
         DesenharLevel(gs->sala);
 
 
-
-
         // Jogador
-        DesenharJogador(gs, spriteJog);
+        DesenharJogador(gs);
 
 
-
-
-        // Desenhar contorno de circulo se o ataque estiver ativo
+        // ATAQUE DO JOGADOR
+        // Se for a arma branca
         if (gs->atq.atqAtivo && gs->atq.arma)
         {
-            Rectangle espada = {gs->jog.posHit.x, gs->jog.posHit.y, 35, 2};
-            DrawRectanglePro(espada, (Vector2) {30,1}, gs->atq.DistDiferenca, BLUE);
+            // Hitbox de ataque (remover depois da sprite do machado estiver pronta)
+            //DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, RED);
+
+
+            //[ Desenhar sprite do machado ]------------------------------------
+
+            // Qual parte da sprite utilizar (nesse caso, ela toda)
+            const Rectangle SRC_REC = {0, 0, gs->SPRITE_MACHADO.width, gs->SPRITE_MACHADO.height};
+
+            // Posicao e tamanho
+            const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y, 55, 19};
+
+            const Vector2 ORIGEM = { -18.0f,  1.2f};
+
+            DrawTexturePro(gs->SPRITE_MACHADO, SRC_REC, DEST_REC, ORIGEM, gs->atq.DistDiferenca, WHITE);
+
         }
+        // Se for a pistola
         else if (gs->atq.atqAtivo && !gs->atq.arma)
         {
             DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO/9, GOLD);
+
+
+            const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y, 20, 10};
+
+            const Vector2 ORIGEM = { -18.0f,  2.0f};
+
+            DrawRectanglePro(DEST_REC, ORIGEM, gs->jog.rot, BLACK);
+
         }
-          // Inimigos
+
+        // Inimigos
         for (int i = 0; i < INIM_QTD_MAX; i++)
         {
             if (gs->inimigos[i].existe)
@@ -185,6 +246,8 @@ void Desenhar(const GameState* gs, const Texture2D* spriteJog)
                 DesenharInimigo(&gs->inimigos[i]);
             }
         }
+        // Esconderijos
+        DesenharEsconderijos(gs->sala);
 
 
 
