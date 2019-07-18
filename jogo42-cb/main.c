@@ -153,19 +153,18 @@ int main(void)
 
         // [[[[[ DESENHAR ]]]]]
         BeginDrawing();
-            if (!pause)
-            {
-                Desenhar(gs);
 
-                if (gs->loja.mostrar)
-                {
-                    DesenharLoja(gs);
-                }
+            Desenhar(gs);
+
+            if (gs->loja.mostrar)
+            {
+                DesenharLoja(gs);
             }
-            if (pause)
+            else if (pause)
             {
                 DrawText("JOGO PAUSADO", GetScreenWidth()/2 - MeasureText("JOGO PAUSADO", 40)/2, GetScreenHeight()/2 - 40, 40, LIGHTGRAY);
             }
+
         EndDrawing();
         // [[[ FIM DESENHAR ]]]
     }
