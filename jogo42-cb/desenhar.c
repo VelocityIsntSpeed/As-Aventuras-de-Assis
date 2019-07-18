@@ -199,6 +199,21 @@ static void DesenharInimigo(const struct Inimigo* inimigo)
              inimigo->pos.x - 7, inimigo->pos.y + 23, 10, WHITE);
 }
 
+void DesenharSpawn(GameState* gs)
+{
+     for (int i = 0; i< SPWN_QTD_MAX; i++)
+        {
+            if(gs->spwn[i].existe)
+               {
+                    DrawCircleGradient(gs->spwn[i].pos.x, gs->spwn[i].pos.y, INIM_RAIO, BEIGE, YELLOW);
+                    // Indicador de HP
+                    DrawText(TextFormat("%d", (int)gs->spwn[i].hp),
+                    gs->spwn[i].pos.x - 7, gs->spwn[i].pos.y + 23, 10, WHITE);
+               }
+        }
+
+}
+
 
 
 void Desenhar(const GameState* gs)
@@ -253,6 +268,11 @@ void Desenhar(const GameState* gs)
             DrawRectanglePro(DEST_REC, ORIGEM, gs->jog.rot, BLACK);
 
         }
+        // Spawns
+        ///atualmente tem um spawn bem no comeco do primeiro lvl
+        ///isso e so pra teste e qnd terminar de implementar o spawner e pra tirar
+        DesenharSpawn(gs);
+
 
 
         // Inimigos
@@ -270,6 +290,15 @@ void Desenhar(const GameState* gs)
         }
         // Esconderijos
         DesenharEsconderijos(gs->sala);
+        for(int i = 0; i< SPWN_QTD_MAX; i++)
+        {
+            if (gs->spwn[i].ativo)
+                    {
+                        Color cor = {0, 121, 241, 23};
+                        DrawCircle(gs->spwn[i].pos.x, gs->spwn[i].pos.y, SPWN_DIST_ATV, cor);
+                    }
+        }
+
 
 
 

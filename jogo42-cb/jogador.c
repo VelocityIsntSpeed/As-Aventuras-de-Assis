@@ -37,42 +37,69 @@ void AtaqueJogador(GameState* gs)
 {
     if (gs->atq.arma)
     {
-        // Calcular posicao da hitbox de ataque
-        // O 1.25 e pra aumentar o range da espada sem mudar nada no revolver
-            gs->jog.posHit.x = 1.25*JOG_ATQ_DIST * cosf(gs->atq.DistDiferenca * DEG2RAD);
-            gs->jog.posHit.y = 1.25*JOG_ATQ_DIST * sinf(gs->atq.DistDiferenca * DEG2RAD);
+    // Calcular posicao da hitbox de ataque
+    // O 1.25 e pra aumentar o range da espada sem mudar nada no revolver
+        gs->jog.posHit.x = 1.25*JOG_ATQ_DIST * cosf(gs->atq.DistDiferenca * DEG2RAD);
+        gs->jog.posHit.y = 1.25*JOG_ATQ_DIST * sinf(gs->atq.DistDiferenca * DEG2RAD);
+        gs->jog.posHit = Vector2Add(gs->jog.pos, gs->jog.posHit);
 
-            gs->jog.posHit = Vector2Add(gs->jog.pos, gs->jog.posHit);
-
-
-         // Se acertar o inimigo
-
+        // Se acertar o inimigo
         for (int i = 0; i<INIM_QTD_MAX; i++)
         {
             if(!gs->inimigos[i].atingido)
             {
-                    if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
-                                      gs->inimigos[i].pos, INIM_RAIO))
+                if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
+                                    gs->inimigos[i].pos, INIM_RAIO))
+                {
+                    gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                    // Recarrega uma bala no revolver
+                    if(gs->atq.bala <6)
                     {
-                        gs->inimigos[i].hp -= JOG_ATQ_DANO;
-                        // Recarrega uma bala no revolver
-                        if(gs->atq.bala <6)
-                        {
-                            PlaySound(gs->efet[6]);
-                        }
-                        gs->atq.bala++;
-                        if (gs->inimigos[i].hp )
-                        {
-                            PlaySound(gs->efet[2]);
-                        }
-                        gs->inimigos[i].atingido = true;
-                        if (gs->inimigos[i].hp <= 0)
-                        {
-                            PlaySound(gs->efet[3]);
-                            matarInimigo(gs,i);
-                        }
+                        PlaySound(gs->efet[6]);
+                    }
+                    gs->atq.bala++;
+                    if (gs->inimigos[i].hp )
+                    {
+                        PlaySound(gs->efet[2]);
+                    }
+                    gs->inimigos[i].atingido = true;
+                    if (gs->inimigos[i].hp <= 0)
+                    {
+                        PlaySound(gs->efet[3]);
+                        matarInimigo(gs,i);
+                    }
+                }
+            }
+
+        }
+        for (int i = 0; i<SPWN_QTD_MAX; i++)
+        {
+            if(!gs->spwn[i].atingido)
+            {
+                if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
+                                      gs->spwn[i].pos, INIM_RAIO))
+                {
+                    gs->spwn[i].hp -= JOG_ATQ_DANO;
+                    gs->atq.bala++;
+                    gs->spwn[i].atingido = true;
+                    if (gs->spwn[i].hp <= 0)
+                    {
+                      //  PlaySound(gs->efet[3]);
+                        MatarSpawn(gs,i);
+                    }
+                    // Recarrega uma bala no revolver
+                    /*if(gs->atq.bala <6)
+                    {
+                        PlaySound(gs->efet[6]);
                     }
 
+                    if (gs->spwn[i].hp )
+                    {
+                        PlaySound(gs->efet[2]);
+                    }
+
+                    */
+                }
             }
 
         }
@@ -95,26 +122,48 @@ void AtaqueJogador(GameState* gs)
         {
             if(!gs->inimigos[i].atingido)
             {
-                    if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO/9,
-                                      gs->inimigos[i].pos, INIM_RAIO))
+                if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO/9,
+                                    gs->inimigos[i].pos, INIM_RAIO))
+                {
+
+                    gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                    if (gs->inimigos[i].hp )
                     {
-
-                        gs->inimigos[i].hp -= JOG_ATQ_DANO;
-                        if (gs->inimigos[i].hp )
-                        {
-                            PlaySound(gs->efet[2]);
-                        }
-                        gs->inimigos[i].atingido = true;
-                        if (gs->inimigos[i].hp <= 0)
-                        {
-                            PlaySound(gs->efet[3]);
-                            matarInimigo(gs, i);
-                        }
-
+                        PlaySound(gs->efet[2]);
+                    }
+                    gs->inimigos[i].atingido = true;
+                    if (gs->inimigos[i].hp <= 0)
+                    {
+                        PlaySound(gs->efet[3]);
+                        matarInimigo(gs, i);
                     }
 
+                }
             }
 
+        }
+         for (int i = 0; i<INIM_QTD_MAX; i++)
+        {
+            if(!gs->spwn[i].atingido)
+            {
+                if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO/9,
+                                    gs->spwn[i].pos, INIM_RAIO))
+                {
+                    gs->spwn[i].hp -= JOG_ATQ_DANO;
+                    gs->spwn[i].atingido = true;
+                    if (gs->spwn[i].hp <= 0)
+                    {
+                        //PlaySound(gs->efet[3]);
+                        MatarSpawn(gs, i);
+                    }
+                    /*if (gs->spwn[i].hp )
+                    {
+                        PlaySound(gs->efet[2]);
+                    }
+
+                    */
+                }
+            }
         }
 
 
@@ -148,13 +197,13 @@ void ataqueSet(GameState* gs)
         }
         // Calculam as variacoes pra dizer q o ataque acabou
         if (gs->atq.arma && gs->atq.atqAtivo)
-            {
-                gs->atq.DistDiferenca += JOG_ESP_VEL * GetFrameTime();
-            }
-            else if (!gs->atq.arma && gs->atq.atqAtivo)
-            {
-                gs->atq.DistDiferenca += JOG_TIR_VEL * GetFrameTime();
-            }
+        {
+            gs->atq.DistDiferenca += JOG_ESP_VEL * GetFrameTime();
+        }
+        else if (!gs->atq.arma && gs->atq.atqAtivo)
+        {
+            gs->atq.DistDiferenca += JOG_TIR_VEL * GetFrameTime();
+        }
         // Iniciam o ataque
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && gs->atq.arma && !gs->atq.atqAtivo)
         {
@@ -165,29 +214,31 @@ void ataqueSet(GameState* gs)
             PlaySound(gs->efet[0]);
         }
             // O ultimo parametro checa se ainda tem alguma bala
-            if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.bala>0 && gs->loja.atiradoraComprada)
-            {
-                // Aqui sao setadas as posicoes angulares originais do ataque
-                gs->atq.inicAtq = 0;
-                gs->atq.DistDiferenca = JOG_RAIO;
-                gs->atq.atqAtivo = true;
-                PlaySound(gs->efet[1]);
-                // Desconta uma bala
-                gs->atq.bala--;
+        if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.bala>0 && gs->loja.atiradoraComprada)
+        {
+            // Aqui sao setadas as posicoes angulares originais do ataque
+            gs->atq.inicAtq = 0;
+            gs->atq.DistDiferenca = JOG_RAIO;
+            gs->atq.atqAtivo = true;
+            PlaySound(gs->efet[1]);
+            // Desconta uma bala
+            gs->atq.bala--;
 
-            } else if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.bala==0 && gs->loja.atiradoraComprada)
-
-            {
-                PlaySound(gs->efet[5]);
-            }
-
-        // Aqui e marcada a posicao angular final do ataque
+        } else if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) && !gs->atq.arma && !gs->atq.atqAtivo && gs->atq.bala==0 && gs->loja.atiradoraComprada)
+        {
+            PlaySound(gs->efet[5]);
+        }
+    // Aqui e marcada a posicao angular final do ataque
         if (gs->atq.arma && gs->atq.DistDiferenca > gs->atq.inicAtq+JOG_ESP_ARC)
         {
             gs->atq.atqAtivo = false;
             for (int i = 0; i<INIM_QTD_MAX; i++)
             {
                 gs->inimigos[i].atingido = false;
+            }
+            for (int i = 0; i<SPWN_QTD_MAX; i++)
+            {
+                gs->spwn[i].atingido = false;
             }
         }
          // Aqui e marcada a posicao angular final do ataque
@@ -197,6 +248,10 @@ void ataqueSet(GameState* gs)
             for (int i = 0; i<INIM_QTD_MAX; i++)
             {
                 gs->inimigos[i].atingido = false;
+            }
+            for (int i = 0; i<SPWN_QTD_MAX; i++)
+            {
+                gs->spwn[i].atingido = false;
             }
         }
         // Serve pra impedir q a "bala" do tiro curve
@@ -248,7 +303,17 @@ void MoverJog(GameState* gs)
                 colide = true;
             }
         }
-
+    }
+    for (int i = 0; i < SPWN_QTD_MAX; i++)
+    {
+        if (gs->spwn[i].existe)
+        {
+            if (CheckCollisionCircles(posFutura, JOG_RAIO,
+                                      gs->spwn[i].pos, INIM_RAIO))
+            {
+                colide = true;
+            }
+        }
     }
 
 
