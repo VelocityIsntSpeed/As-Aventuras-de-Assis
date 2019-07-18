@@ -166,7 +166,7 @@ void Desenhar(const GameState* gs)
         if (gs->atq.atqAtivo && gs->atq.arma)
         {
             // Hitbox de ataque (remover depois da sprite do machado estiver pronta)
-            DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, RED);
+            //DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, RED);
 
 
             //[ Desenhar sprite do machado ]------------------------------------
