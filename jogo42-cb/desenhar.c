@@ -268,7 +268,7 @@ void Desenhar(const GameState* gs)
 
 void DesenharLoja(GameState* gs)
 {
-    static int valorBarraHp = 0; // Valor atual do slider de compra de HP
+    static float valorBarraHp = 0; // Valor atual do slider de compra de HP
     const float valorminimo = 0;
     const float valormaximo = 150;
 
@@ -309,13 +309,13 @@ void DesenharLoja(GameState* gs)
     // Titulo
     DrawText("[ Comprar HP ]", (int)GetScreenWidth()*0.25, (int)GetScreenHeight()*0.13, 20, (Color){255, 0, 0, 255});
     // Caixa de fundo
-    DrawRectangleRounded((Rectangle){(int)GetScreenWidth()*0.26, (int)GetScreenHeight()*0.18, 700, 110}, 0.25, 1, Fade(RAYWHITE, 0.7));
+    DrawRectangleRounded((Rectangle){(int)GetScreenWidth()*0.26, (int)GetScreenHeight()*0.18, 700, 120}, 0.25, 1, Fade(RAYWHITE, 0.7));
     // Slider
     valorBarraHp = GuiSlider((Rectangle){(int)GetScreenWidth()*0.27, (int)GetScreenHeight()*0.2, 600, 50 }, "", valorBarraHp, valorminimo, valormaximo, true);
     // Texto da quantidade a ser comprada
-    DrawText(TextFormat("%.1f de HP", (float)valorBarraHp), (int)GetScreenWidth()*0.3, (int)GetScreenHeight()*0.32, 20, (Color){255, 0, 0, 255});
+    DrawText(TextFormat("%.1f de HP", valorBarraHp), (int)GetScreenWidth()*0.3, (int)GetScreenHeight()*0.32, 20, (Color){255, 0, 0, 255});
     // Botao de comprar
-    comprarHpClicado = GuiButton((Rectangle){(int)GetScreenWidth()*0.725,(int)GetScreenHeight()*0.3,200, 25}, FormatText("COMPRAR (%d moedas)",(valorBarraHp*5)));
+    comprarHpClicado = GuiButton((Rectangle){(int)GetScreenWidth()*0.725,(int)GetScreenHeight()*0.32,200, 25}, FormatText("COMPRAR (%d moedas)",(valorBarraHp*5)));
 
     if (comprarHpClicado)
     {
