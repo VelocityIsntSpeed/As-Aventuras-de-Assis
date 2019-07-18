@@ -47,7 +47,9 @@ enum Tile
     //! Mostra grafico de chao e colide.
     TILE_paredeInvisivel,
     //! Mostra grafico de parede e nao colide
-    TILE_esconderijo
+    TILE_esconderijo,
+    //! Final de estagio, passa para o proximo
+    TILE_final
 };
 
 

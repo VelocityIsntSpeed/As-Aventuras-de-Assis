@@ -84,6 +84,9 @@ static void DesenharLevel(const enum Tile lvl[MAPA_QTD_LINS][MAPA_QTD_COLS])
 
                 case TILE_parede:
                     cor = GRAY; break;
+
+                case TILE_final:
+                    cor = GREEN; break;
             }
 
             // Desenhar tile

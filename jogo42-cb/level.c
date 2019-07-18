@@ -33,8 +33,7 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameSt
 
     // Selecionar estagio certo:
     struct Estagio ESTAGIO;
-
-    if (gs->estagioAtual == 1) { ESTAGIO = estagio1; }
+    if      (gs->estagioAtual == 1) { ESTAGIO = estagio1; }
     else if (gs->estagioAtual == 2) { ESTAGIO = estagio2; }
     else if (gs->estagioAtual == 3) { ESTAGIO = estagio3; }
     else
@@ -95,6 +94,9 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameSt
                     }
                 break;
 
+                case 'f':
+                    matriz_lvl[lin][col] = TILE_final; break;
+
                 default:
                     matriz_lvl[lin][col] = TILE_vazio; break;
             }
@@ -147,10 +149,6 @@ void PassarDeEstagio(GameState* gs)
 
 bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs)
 {
-
-
-
-
     //[ TILES ]----------------------------------------------------------------
     for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
     {

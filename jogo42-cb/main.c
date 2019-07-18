@@ -88,11 +88,26 @@ int main(void)
         // [[[[[ UPDATE-PAUSAR ]]]]]
         if (!gs->pausado)
         {
-            // Passar para proxima fase TODO: temporario
+            // Atalho para imediatamente passar para proxima fase
             if (IsKeyPressed(KEY_EQUAL))
             {
                 PassarDeEstagio(gs);
             }
+
+
+            // Quando chegar ao final do estagio, passar para proxima fase
+            for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
+            {
+                for (int col = 0; col < MAPA_QTD_COLS; col++)
+                {
+                    if ((gs->sala[lin][col] == TILE_final)
+                        && CheckCollisionCircleRec(gs->jog.pos, JOG_RAIO, RectDaTile(col, lin)))
+                    {
+                        PassarDeEstagio(gs);
+                    }
+                }
+            }
+
 
             // Mover jogador
             MoverJog(gs);
