@@ -20,7 +20,8 @@ static void DesenharControles()
     const char TEXTO[] = "Controles:\n"
                          "WASD/Setas para andar\n"
                          "Clique esquerdo para atacar\n"
-                         "Clique direito para trocar de arma";
+                         "Clique direito para trocar de arma\n"
+                         "L para abrir/fechar loja;
 
     // Tamanho da fonte
     const int TAM_FONTE = 20;

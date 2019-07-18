@@ -72,7 +72,7 @@ int main(void)
     gs->cam.zoom = 1.0f;
 
     //[ LOJA ]=================================================================
-    gs->loja.mostrar = true;
+    gs->loja.mostrar = false;
     gs->loja.ouro = 1000; // Ta 500 so pra teste, dps tem q setar pra 0
     gs->loja.atiradoraComprada = false;
 
