@@ -266,7 +266,7 @@ GameState;
 #define TAM_TILE (47)
 
 //! A saciedade inicial.
-#define SAC_INICIAL (100.0f)
+#define SAC_INICIAL (120.0f)
 
 
 
