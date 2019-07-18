@@ -163,25 +163,28 @@ void Desenhar(const GameState* gs)
 
 
         // ATAQUE DO JOGADOR
-        if (gs->atq.atqAtivo && gs->atq.arma) // Se for a arma branca
+        // Se for a arma branca
+        if (gs->atq.atqAtivo && gs->atq.arma)
         {
             // Hitbox de ataque (remover depois da sprite do machado estiver pronta)
             DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, RED);
 
-            // Sprite do machado
-            //TODO
+
+            //[ Desenhar sprite do machado ]------------------------------------
+
+            // Qual parte da sprite utilizar (nesse caso, ela toda)
             const Rectangle SRC_REC = {0, 0, gs->SPRITE_MACHADO.width, gs->SPRITE_MACHADO.height};
 
             // Posicao e tamanho
-            const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y,\
-                                  45,   18};
+            const Rectangle DEST_REC = {gs->jog.pos.x, gs->jog.pos.y, 45, 18};
 
             const Vector2 ORIGEM = { -18.0f,  1.2f};
 
             DrawTexturePro(gs->SPRITE_MACHADO, SRC_REC, DEST_REC, ORIGEM, gs->jog.rot, WHITE);
 
         }
-        else if (gs->atq.atqAtivo && !gs->atq.arma) // Se for a pistola
+        // Se for a pistola
+        else if (gs->atq.atqAtivo && !gs->atq.arma)
         {
             DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO/9, GOLD);
         }
