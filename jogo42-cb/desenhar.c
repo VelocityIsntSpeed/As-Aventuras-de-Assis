@@ -239,6 +239,14 @@ void Desenhar(const GameState* gs)
             DrawRectanglePro(DEST_REC, ORIGEM, gs->jog.rot, BLACK);
 
         }
+        // Spawns
+        for (int i = 0; i< SPWN_QTD_MAX; i++)
+        {
+            if(gs->spwn[i].existe)
+               {
+                   DrawCircle(gs->spwn[i].pos.x, gs->spwn[i].pos.y, INIM_RAIO, BLACK);
+               }
+        }
 
 
         // Inimigos

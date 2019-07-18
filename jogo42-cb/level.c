@@ -75,6 +75,14 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameSt
                         // TODO ERRO: Nao foi possivel spawnar inimigo especificado pelo mapa porque o array de inimigos estava cheio!
                     }
                 break;
+                case 'S':
+                    matriz_lvl[lin][col] = TILE_chao;
+                    // Adicionar inimigos:
+                    if (!SpawnarSpawn(CentroDaTile(col, lin), gs))
+                    {
+                        // TODO ERRO: Nao foi possivel spawnar inimigo especificado pelo mapa porque o array de inimigos estava cheio!
+                    }
+                break;
 
                 default:
                     matriz_lvl[lin][col] = TILE_vazio; break;

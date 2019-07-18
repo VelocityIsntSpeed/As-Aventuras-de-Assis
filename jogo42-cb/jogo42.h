@@ -31,6 +31,9 @@
 //! Quantidade de efeitos q agt ta usando*/
 #define QTD_FX 9
 
+//! Quantidade maxima de spaws
+#define SPWN_QTD_MAX (10)
+
 
 
 //[ DEFINICOES DE TIPOS ]======================================================
@@ -146,7 +149,7 @@ typedef struct // GameState
         //! existencia do spawn
         bool existe;
 
-    }spwn[10];//um so pra testar
+    }spwn[SPWN_QTD_MAX];//um so pra testar
 
 
     //[ LEVEL ]----------------------------------------------------------------
@@ -296,8 +299,8 @@ bool SpawnarInimigo(Vector2 pos, GameState* gs);
 /*! Seta todos os valores que importam do inimigo pra um estado q n afeta a atividade do jogo*/
 void matarInimigo(GameState* gs, int i);
 
-/*! spawna spawn
-void SpawnarSpawn(GameState* gs, Vector2 pos);
+/*! Spawna os spawn*/
+bool SpawnarSpawn( Vector2 pos,GameState* gs);
 
 // level.c --------------------------------------------------------------------
 /*! Move os obstaculos. */

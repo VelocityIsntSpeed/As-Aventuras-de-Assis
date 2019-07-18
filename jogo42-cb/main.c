@@ -63,6 +63,10 @@ int main(void)
     // Os inimigos sao spawnados pela inicializacao do mapa.
 
     //spawn
+    for (int i=0; i< SPWN_QTD_MAX; i++)
+    {
+        gs->spwn[i].existe = false;
+    }
 
 
 
@@ -85,7 +89,7 @@ int main(void)
 
 
     // [[[ FIM INICIALIZACAO ]]]
-    SpawnarSpawn(gs, gs->jog.pos);
+
 
     // Loop principal
     while (!WindowShouldClose())
