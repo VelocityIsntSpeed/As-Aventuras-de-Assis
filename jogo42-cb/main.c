@@ -138,10 +138,10 @@ int main(void)
             gs->cam.target = gs->jog.pos;
 
 
-            // Controlar mostragem da loja (temporario)
+            // Abrir a loja com a tecla L (temporario)
             if (IsKeyPressed(KEY_L))
             {
-                gs->loja.mostrar = !gs->loja.mostrar;
+                gs->loja.mostrar = true;
             }
         }
 
