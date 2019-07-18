@@ -79,7 +79,7 @@ typedef struct // GameState
         //! Variavel usada para descrescer a saciedade
         float timerSac;
         //! Potions
-        float pots;
+        int pots;
         //! Variavel que determina se a pocao estah sendo usada
         bool usingPot;
         //! Varaivel usada para contar o tempo de ativacao da potion

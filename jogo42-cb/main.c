@@ -61,7 +61,7 @@ int main(void)
 
     //[ LOJA ]=================================================================
     gs->loja.mostrar = false;
-    gs->loja.ouro = 1000; // Dps tem q setar pra 0
+    gs->loja.ouro = 0;
     gs->loja.atiradoraComprada = false;
 
 

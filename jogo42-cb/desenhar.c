@@ -22,7 +22,7 @@ static void DesenharControles()
                          "Clique direito para trocar de arma\n"
                          "P para pausar\n"
                          "L para abrir a loja (temporario)\n"
-                         "Q para usar pocao"
+                         "Q para usar pocao\n"
                          "= para pular estagio";
 
     // Tamanho da fonte
@@ -145,7 +145,7 @@ static void DesenharHUD(const GameState* gs)
               POS_BAL_X = 10,POS_BAL_Y = 40,
               POS_ARMA_X = 100, POS_ARMA_Y = 10,
               POS_SAC_X = 10, POS_SAC_Y = 70,
-              POS_POTS_X = 10, POS_POTS_Y = 100;
+              POS_POTS_X = 10, POS_POTS_Y = 100,
               POS_LVL_X = 10, POS_LVL_Y = 130;
     DrawText(FormatText("HP: %d", (int)gs->jog.hp),
              POS_HP_X, POS_HP_Y, TAM_FONTE, WHITE);
@@ -153,7 +153,7 @@ static void DesenharHUD(const GameState* gs)
              POS_BAL_X, POS_BAL_Y, TAM_FONTE, WHITE);
     DrawText(FormatText("Saciedade: %d", (int)gs->jog.sac),
              POS_SAC_X, POS_SAC_Y, TAM_FONTE, WHITE);
-    DrawText(FormatText("Pocoes: %d", (int)gs->jog.pots),
+    DrawText(FormatText("Pocoes: %d", gs->jog.pots),
              POS_POTS_X, POS_POTS_Y, TAM_FONTE, WHITE);
     DrawText(TextFormat("Estagio %d", gs->estagioAtual),
              POS_LVL_X, POS_LVL_Y, TAM_FONTE, WHITE);

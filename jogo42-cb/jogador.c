@@ -20,7 +20,7 @@ void InicializarJogador(GameState* gs)
     // HP
     gs->jog.hp = 150;
     // Pocoes
-    gs->jog.pots = 5;
+    gs->jog.pots = 6;
     gs->jog.usingPot = false;
     gs->jog.timerPot = 0;
 
