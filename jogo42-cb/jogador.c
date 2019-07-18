@@ -42,7 +42,7 @@ void AtaqueJogador(GameState* gs)
 
         for (int i = 0; i<INIM_QTD_MAX; i++)
         {
-            if(!gs->inimigos->atingido[i])
+            if(!gs->inimigos[i].atingido)
             {
                     if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO,
                                       gs->inimigos[i].pos, INIM_RAIO))
@@ -54,7 +54,7 @@ void AtaqueJogador(GameState* gs)
                         {
                             PlaySound(gs->efet[2]);
                         }
-                        gs->inimigos->atingido[i] = true;
+                        gs->inimigos[i].atingido = true;
                         if (gs->inimigos[i].hp <= 0)
                         {
                             PlaySound(gs->efet[3]);
@@ -82,7 +82,7 @@ void AtaqueJogador(GameState* gs)
         }
         for (int i = 0; i<INIM_QTD_MAX; i++)
         {
-            if(!gs->inimigos->atingido[i])
+            if(!gs->inimigos[i].atingido)
             {
                     if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO/9,
                                       gs->inimigos[i].pos, INIM_RAIO))
@@ -93,7 +93,7 @@ void AtaqueJogador(GameState* gs)
                         {
                             PlaySound(gs->efet[2]);
                         }
-                        gs->inimigos->atingido[i] = true;
+                        gs->inimigos[i].atingido = true;
                         if (gs->inimigos[i].hp <= 0)
                         {
                             PlaySound(gs->efet[3]);
@@ -163,7 +163,7 @@ void ataqueSet(GameState* gs)
             gs->atq.atqAtivo = false;
             for (int i = 0; i<INIM_QTD_MAX; i++)
             {
-                gs->inimigos->atingido[i] = false;
+                gs->inimigos[i].atingido = false;
             }
         }
          // Aqui e marcada a posicao angular final do ataque
@@ -172,7 +172,7 @@ void ataqueSet(GameState* gs)
             gs->atq.atqAtivo = false;
             for (int i = 0; i<INIM_QTD_MAX; i++)
             {
-                gs->inimigos->atingido[i] = false;
+                gs->inimigos[i].atingido = false;
             }
         }
         // Serve pra impedir q a "bala" do tiro curve
