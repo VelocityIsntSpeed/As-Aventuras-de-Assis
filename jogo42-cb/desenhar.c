@@ -254,6 +254,8 @@ void Desenhar(const GameState* gs)
 
         }
         // Spawns
+        ///atualmente tem um spawn bem no comeco do primeiro lvl
+        ///isso e so pra teste e qnd terminar de implementar o spawner e pra tirar
         DesenharSpawn(gs);
 
 
