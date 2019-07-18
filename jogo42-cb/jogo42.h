@@ -229,6 +229,15 @@ GameState;
 //! Dano de ataque
 #define INIM_DANO (15.0f)
 
+//! Cooldown do spawner
+#define SPWN_CLDN (98.0f)
+
+//! Velocidade do spawn
+#define SPWN_VEL (15.0f)
+
+//! Distancia de ativacao do spawner
+#define SPWN_DIST_ATV (400.0f)
+
 
 //[ OUTROS ]-------------------------------------------------------------------
 //! Velocidade do obstaculo circular (por segundo).
@@ -301,6 +310,13 @@ void matarInimigo(GameState* gs, int i);
 
 /*! Spawna os spawn*/
 bool SpawnarSpawn( Vector2 pos,GameState* gs);
+
+/*! Spawner prepara pra spawnar um inimigo*/
+void SpawnSet(GameState* gs);
+
+/*! Spawner spawna um inimigo*/
+void SpawnarAtivo(GameState* gs, int i);
+
 
 // level.c --------------------------------------------------------------------
 /*! Move os obstaculos. */

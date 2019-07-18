@@ -125,3 +125,36 @@ bool SpawnarSpawn(Vector2 pos, GameState* gs)
             }
             return false;
         }
+
+
+
+void SpawnarAtivo(GameState* gs, int i)
+{
+        if (gs->spwn[i].existe)
+        {
+            SpawnarInimigo(gs->spwn[i].pos, gs);
+        }
+
+}
+
+
+void SpawnSet(GameState* gs)
+{
+
+    for(int i=0; i< SPWN_QTD_MAX; i++)
+    {
+        if(Vector2Distance(gs->spwn[i].pos, gs->jog.pos)< SPWN_DIST_ATV)
+        {
+            gs->spwn[i].cooldown += SPWN_VEL*GetFrameTime();
+            if (gs->spwn[i].cooldown > SPWN_CLDN)
+            {
+                gs->spwn[i].cooldown = 0;
+                SpawnarAtivo(gs, i);
+            }
+
+        }
+
+    }
+
+}
+

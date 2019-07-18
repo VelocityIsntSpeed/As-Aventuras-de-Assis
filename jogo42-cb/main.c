@@ -129,6 +129,8 @@ int main(void)
                     MoverInimigo(&gs->inimigos[i], gs);
                 }
             }
+            // Logica do spawner
+            SpawnSet(gs);
 
 
             // Ataque Inimigo

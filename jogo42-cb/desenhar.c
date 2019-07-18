@@ -184,6 +184,17 @@ static void DesenharInimigo(const struct Inimigo* inimigo)
              inimigo->pos.x - 7, inimigo->pos.y + 23, 10, WHITE);
 }
 
+void DesenharSpawn(GameState* gs)
+{
+     for (int i = 0; i< SPWN_QTD_MAX; i++)
+        {
+            if(gs->spwn[i].existe)
+               {
+                   DrawCircleGradient(gs->spwn[i].pos.x, gs->spwn[i].pos.y, INIM_RAIO, BEIGE, YELLOW);
+               }
+        }
+}
+
 
 
 void Desenhar(const GameState* gs)
@@ -240,13 +251,7 @@ void Desenhar(const GameState* gs)
 
         }
         // Spawns
-        for (int i = 0; i< SPWN_QTD_MAX; i++)
-        {
-            if(gs->spwn[i].existe)
-               {
-                   DrawCircle(gs->spwn[i].pos.x, gs->spwn[i].pos.y, INIM_RAIO, BLACK);
-               }
-        }
+
 
 
         // Inimigos
