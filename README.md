@@ -13,13 +13,6 @@ Em [`doc/estilo.md`](doc/estilo.md) há diretrizes de estilo a serem seguidas na
 
 ----------------
 
-### Como limpar o diretório de trabalho:
-1. Se assegurar que não há mudanças listadas no GHD e que nenhum arquivo do repositório está aberto em algum outro programa (ex: CodeBlocks). Tem que fechar o projeto no CB, não apenas os arquivos.
-2. Deletar todos os arquivos do diretório de trabalho, exceto a pasta `.git`
-3. No GHD, acessar `branch` -> `Discard all changes...`, e confirmar
-
----------------
-
 ### Recursos úteis
 - Cheatsheet do Raylib  
   - https://www.raylib.com/cheatsheet/cheatsheet.html
