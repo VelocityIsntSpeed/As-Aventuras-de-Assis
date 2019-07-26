@@ -163,8 +163,11 @@ static void DesenharHUD(const GameState* gs)
               POS_LVL_X = 10, POS_LVL_Y = 130;
     DrawText(FormatText("HP: %d", (int)gs->jog.hp),
              POS_HP_X, POS_HP_Y, TAM_FONTE, WHITE);
-    DrawText(FormatText("Balas: %d", (int)gs->atq.bala),
-             POS_BAL_X, POS_BAL_Y, TAM_FONTE, WHITE);
+    if (gs->loja.atiradoraComprada)
+    {
+        DrawText(FormatText("Balas: %d", (int)gs->atq.bala),
+                 POS_BAL_X, POS_BAL_Y, TAM_FONTE, WHITE);
+    }
     DrawText(FormatText("Saciedade: %d", (int)gs->jog.sac),
              POS_SAC_X, POS_SAC_Y, TAM_FONTE, WHITE);
     DrawText(FormatText("Pocoes: %d", gs->jog.pots),
