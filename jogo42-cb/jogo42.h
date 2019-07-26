@@ -343,7 +343,7 @@ void MatarSpawn(GameState* gs, int i);
 void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameState* gs);
 
 /*! Passa para o proximo estagio (ou vence o jogo) */
-void PassarDeEstagio(GameState* gs);
+void PassarDeEstagio(Sound* musica, GameState* gs);
 
 /*! Verifica se ha colisao entre o circulo dado e o level. */
 bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);

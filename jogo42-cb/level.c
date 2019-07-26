@@ -142,9 +142,15 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameSt
 
 
 
-void PassarDeEstagio(GameState* gs)
+void PassarDeEstagio(Sound* musica, GameState* gs)
 {
+    // Parar musica do estagio de partida
+    StopSound(musica[gs->estagioAtual-1]);
+
     gs->estagioAtual++;
+
+    // Comecar musica do estagio de chegada
+    PlaySound(musica[gs->estagioAtual-1]);
 
     // Resetar saciedade
     gs->jog.sac = SAC_INICIAL;
