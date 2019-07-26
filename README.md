@@ -1,24 +1,13 @@
 # Jogo42
-Este é o repositório GitHub para o desenvolvimento do jogo provisoriamente intitulado Jogo42. Este é um projeto em grupo para a disciplina _Introdução à Programação I_, período 2019.1 da UFRPE ([Universidade Federal Rural de Pernambuco](http://www.ufrpe.br)). 
+Um jogo 2D top-down onde o jogador deve chegar ao final de um dungeon de 3 estágios, matando os monstros ao longo do caminho.
+
+Este foi um projeto de faculdade em grupo para a disciplina _Introdução à Programação I_ (14117) do primeiro período do curso de _Bacharelado em Ciência da Computação_, cursada em 2019.1 na UFRPE ([Universidade Federal Rural de Pernambuco](http://www.ufrpe.br)).
 
 Utilizamos a biblioteca [Raylib](https://www.raylib.com/) e a IDE [Code::Blocks](http://www.codeblocks.org/).
 
-----------------
-
-A pasta [`jogo42-cb`](jogo42-cb/) é um projeto de CodeBlocks utilizando Raylib.
-
-Em [`doc/exemplos/`](doc/exemplos/) há outro projeto de CodeBlocks, com exemplos de implementação de funcionalidades básicas do jogo.
-
-Em [`doc/estilo.md`](doc/estilo.md) há diretrizes de estilo a serem seguidas na programação do jogo.
+A pasta [`jogo42-cb`](jogo42-cb/) é o projeto de CodeBlocks do jogo.
 
 ----------------
-
-### Como limpar o diretório de trabalho:
-1. Se assegurar que não há mudanças listadas no GHD e que nenhum arquivo do repositório está aberto em algum outro programa (ex: CodeBlocks). Tem que fechar o projeto no CB, não apenas os arquivos.
-2. Deletar todos os arquivos do diretório de trabalho, exceto a pasta `.git`
-3. No GHD, acessar `branch` -> `Discard all changes...`, e confirmar
-
----------------
 
 ### Recursos úteis
 - Cheatsheet do Raylib  
