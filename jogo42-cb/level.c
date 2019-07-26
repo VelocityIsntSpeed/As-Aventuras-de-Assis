@@ -149,6 +149,11 @@ void PassarDeEstagio(Sound* musica, GameState* gs)
 
     gs->estagioAtual++;
 
+    if (gs->estagioAtual > 3)
+    {
+        gs->estagioAtual = 1;
+    }
+
     // Comecar musica do estagio de chegada
     PlaySound(musica[gs->estagioAtual-1]);
 
