@@ -20,6 +20,12 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameSt
         gs->inimigos[i].existe = false;
     }
 
+    // Zerar array de spawners
+    for (int i = 0; i < SPWN_QTD_MAX; i++)
+    {
+        gs->spwn[i].existe = false;
+    }
+
     // Zerar a matriz do level
     for (int lin = 0; lin < MAPA_QTD_LINS; lin++)
     {
@@ -136,9 +142,15 @@ void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameSt
 
 
 
-void PassarDeEstagio(GameState* gs)
+void PassarDeEstagio(Sound* musica, GameState* gs)
 {
+    // Parar musica do estagio de partida
+    StopSound(musica[gs->estagioAtual-1]);
+
     gs->estagioAtual++;
+
+    // Comecar musica do estagio de chegada
+    PlaySound(musica[gs->estagioAtual-1]);
 
     // Resetar saciedade
     gs->jog.sac = SAC_INICIAL;

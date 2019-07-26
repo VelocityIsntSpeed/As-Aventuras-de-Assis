@@ -126,7 +126,7 @@ void AtaqueJogador(GameState* gs)
                                     gs->inimigos[i].pos, INIM_RAIO))
                 {
 
-                    gs->inimigos[i].hp -= JOG_ATQ_DANO;
+                    gs->inimigos[i].hp -= JOG_ATQ_DANO*1.5;
                     if (gs->inimigos[i].hp )
                     {
                         PlaySound(gs->efet[2]);
@@ -149,7 +149,7 @@ void AtaqueJogador(GameState* gs)
                 if (CheckCollisionCircles(gs->jog.posHit, JOG_ATQ_RAIO/9,
                                     gs->spwn[i].pos, INIM_RAIO))
                 {
-                    gs->spwn[i].hp -= JOG_ATQ_DANO;
+                    gs->spwn[i].hp -= JOG_ATQ_DANO*1.5;
                     gs->spwn[i].atingido = true;
                     if (gs->spwn[i].hp <= 0)
                     {

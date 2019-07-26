@@ -80,7 +80,7 @@ int main(void)
 
     //[ LEVEL E INIMIGOS ]=====================================================
     gs->estagioAtual = 1;
-    PlaySound(musica[gs->estagioAtual-1]);
+    PlaySound(musica[0]);
     InicializarLevel(gs->sala, gs);
 
 
@@ -91,7 +91,7 @@ int main(void)
 
     //[ LOJA ]=================================================================
     gs->loja.mostrar = false;
-    gs->loja.ouro = 200;
+    gs->loja.ouro = 400;
     gs->loja.atiradoraComprada = false;
 
 
@@ -103,22 +103,27 @@ int main(void)
     {
 
         // [[[[[ UPDATE ]]]]]
-        // Musica. Pause e Resume sao auto explicativos
-        if (!IsSoundPlaying(musica[gs->estagioAtual-1]) && !gs->pausado)
+
+        // Pausar e despausar musica
+        if (gs->pausado)
         {
-            PlaySound(musica[gs->estagioAtual-1]);
+            PauseSound(musica[gs->estagioAtual-1]);
         }
-        if (IsKeyPressed('P') && gs->pausado)
+        else
         {
             ResumeSound(musica[gs->estagioAtual-1]);
         }
 
+        // Recomecar musica quando ela acabar
+        if (!IsSoundPlaying(musica[gs->estagioAtual-1]) && !gs->pausado)
+        {
+            PlaySound(musica[gs->estagioAtual-1]);
+        }
 
         // Controle de pausa
         if (IsKeyPressed('P') && gs->loja.mostrar == false)
         {
             gs->pausado = !gs->pausado;
-            ResumeSound(musica[gs->estagioAtual-1]);
         }
 
         // [[[[[ UPDATE-PAUSAR ]]]]]
@@ -128,9 +133,7 @@ int main(void)
             // Atalho para imediatamente passar para proxima fase
             if (IsKeyPressed(KEY_EQUAL))
             {
-                // Tem q parar a musica pra iniciar outra
-                StopSound(musica[gs->estagioAtual-1]);
-                PassarDeEstagio(gs);
+                PassarDeEstagio(musica, gs);
             }
 
 
@@ -142,7 +145,7 @@ int main(void)
                     if ((gs->sala[lin][col] == TILE_final)
                         && CheckCollisionCircleRec(gs->jog.pos, JOG_RAIO, RectDaTile(col, lin)))
                     {
-                        PassarDeEstagio(gs);
+                        PassarDeEstagio(musica, gs);
                     }
                 }
             }
@@ -267,12 +270,10 @@ int main(void)
             if (gs->loja.mostrar)
             {
                 DesenharLoja(gs);
-                PauseSound(musica[gs->estagioAtual-1]);
             }
             else if (gs->pausado)
             {
                 DrawText("JOGO PAUSADO", GetScreenWidth()/2 - MeasureText("JOGO PAUSADO", 40)/2, GetScreenHeight()/2 - 40, 40, LIGHTGRAY);
-                PauseSound(musica[gs->estagioAtual-1]);
             }
 
 

@@ -263,10 +263,10 @@ GameState;
 #define VEL_CIRC (200.0f)
 
 //! Tamanho de uma tile.
-#define TAM_TILE (47)
+#define TAM_TILE (55)
 
 //! A saciedade inicial.
-#define SAC_INICIAL (100.0f)
+#define SAC_INICIAL (120.0f)
 
 
 
@@ -343,7 +343,7 @@ void MatarSpawn(GameState* gs, int i);
 void InicializarLevel(enum Tile matriz_lvl[MAPA_QTD_LINS][MAPA_QTD_COLS], GameState* gs);
 
 /*! Passa para o proximo estagio (ou vence o jogo) */
-void PassarDeEstagio(GameState* gs);
+void PassarDeEstagio(Sound* musica, GameState* gs);
 
 /*! Verifica se ha colisao entre o circulo dado e o level. */
 bool ColisaoComLevel(Vector2 pos, float raio, const GameState* gs);

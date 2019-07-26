@@ -345,7 +345,9 @@ void DesenharLoja(GameState* gs)
     // Valor minimo do slider
     const float valorminimo = 0;
     // Valor maximo do slider
-    const float valormaximo = JOG_HP_MAX - gs->jog.hp;
+    const float valMaxPorHp = JOG_HP_MAX - gs->jog.hp;
+    const float valMaxPorOuro = gs->loja.ouro / precoDe1Hp;
+    const float valormaximo = (valMaxPorHp > valMaxPorOuro) ? valMaxPorOuro : valMaxPorHp;
 
     bool continuarClicado = false;
     bool comprarHpClicado = false;
