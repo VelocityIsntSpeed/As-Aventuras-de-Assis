@@ -206,8 +206,8 @@ void GameOver()
     {
         BeginDrawing();
         DrawRectangle(0,0,GetScreenWidth(),GetScreenHeight(),RED);
-        DrawText("GAME OVER.", GetScreenWidth()/2 - MeasureText("GAME OVER.", 20)/2,
-             GetScreenHeight()/2 - 50, 20, GRAY);
+        DrawText("FIM.", GetScreenWidth()/2 - MeasureText("FIM.", 40)/2,
+                 GetScreenHeight()/2, 40, BLACK);
 
         EndDrawing();
 
