@@ -301,11 +301,7 @@ void Desenhar(const GameState* gs)
                 DesenharInimigo(&gs->inimigos[i]);
             }
         }
-        // Desenha a mira do revolver
-        if (!gs->atq.atqAtivo && !gs->atq.arma)
-        {
-            DrawCircleLines(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, RED);
-        }
+
         // Paredes
         DesenharParedes(gs->sala);
         for(int i = 0; i< SPWN_QTD_MAX; i++)
@@ -317,8 +313,11 @@ void Desenhar(const GameState* gs)
                     }
         }
 
-
-
+        // Desenha a mira do revolver
+        if (!gs->atq.atqAtivo && !gs->atq.arma)
+        {
+            DrawCircleGradient(gs->jog.posHit.x, gs->jog.posHit.y, JOG_ATQ_RAIO, BLANK, RED);
+        }
 
     EndMode2D(); //[[[ FIM MODO CAMERA ]]]-------------------------------------
 
