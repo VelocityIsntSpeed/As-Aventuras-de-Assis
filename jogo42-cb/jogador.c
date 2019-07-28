@@ -142,7 +142,7 @@ void AtaqueJogador(GameState* gs)
             }
 
         }
-         for (int i = 0; i<INIM_QTD_MAX; i++)
+        for (int i=0; i<SPWN_QTD_MAX; i++)
         {
             if(!gs->spwn[i].atingido)
             {
