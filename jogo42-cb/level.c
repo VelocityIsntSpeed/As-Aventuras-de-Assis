@@ -151,7 +151,29 @@ void PassarDeEstagio(Sound* musica, GameState* gs)
 
     if (gs->estagioAtual > 3)
     {
-        gs->estagioAtual = 1;
+        // Vencer o jogo
+        UnloadSound(musica[0]);
+        UnloadSound(musica[1]);
+        UnloadSound(musica[2]);
+
+        Sound winSound = LoadSound("som/efeitos/vencer/crowd.wav");
+        SetSoundVolume(winSound, 5.0f);
+        PlaySound(winSound);
+
+        while (!WindowShouldClose())
+        {
+            BeginDrawing();
+
+                ClearBackground(YELLOW);
+
+                const char TEXTO[] = "PARABENS! VOCE VENCEU!";
+                const int POS_X = (GetScreenWidth() - MeasureText(TEXTO, 40)) / 2.0f;
+                DrawText(TEXTO, POS_X, GetScreenHeight()/2.0f - 5, 40, BLACK);
+
+            EndDrawing();
+        }
+
+        exit(0);
     }
 
     // Comecar musica do estagio de chegada
@@ -160,12 +182,6 @@ void PassarDeEstagio(Sound* musica, GameState* gs)
     // Resetar saciedade
     gs->jog.sac = SAC_INICIAL;
     gs->jog.timerSac = 0;
-
-    if (gs->estagioAtual > 3)
-    {
-        //TODO: VENCER O JOGO!!!!!!!1111!!1!!
-        gs->estagioAtual = 1;
-    }
 
     // Abrir loja
     gs->loja.mostrar = true;
