@@ -21,6 +21,7 @@ int main(void)
     //[ JANELA ]===============================================================
     InitWindow(1024, 576, "Jogo42");
     SetTargetFPS(60);
+    SetExitKey(-1); // Faz com que a tecla Esc nao saia do jogo
 
 
     //[ STRUCT DE ESTADO DO JOGO ]=============================================
