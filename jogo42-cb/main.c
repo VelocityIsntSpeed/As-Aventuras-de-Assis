@@ -156,32 +156,29 @@ int main(void)
             MoverJog(gs);
 
             // Potion
-            if(gs->jog.usingPot)
+            if (gs->jog.usingPot)
             {
-                if(gs->jog.timerPot >= 5 * GetFPS())
+                if (gs->jog.timerPot >= 5 * GetFPS())
                 {
                     gs->jog.usingPot = false;
                 }
                 else
                 {
                     gs->jog.timerPot++;
-                    if((int)gs->jog.timerPot % 12 == 0)
+                    if ((int)gs->jog.timerPot % 12 == 0)
                     {
-                        if(!(gs->jog.hp >= JOG_HP_MAX))
+                        if (!(gs->jog.hp >= JOG_HP_MAX))
                         {
-                            gs->jog.hp += JOG_HP_MAX/100;
+                            gs->jog.hp += JOG_HP_MAX / 100;
                         }
                     }
                 }
             }
-            else
+            else if (IsKeyPressed(KEY_Q) && gs->jog.pots > 0)
             {
-                if(IsKeyPressed(KEY_Q))
-                {
-                    gs->jog.pots--;
-                    gs->jog.timerPot = 0;
-                    gs->jog.usingPot = true;
-                }
+                gs->jog.pots--;
+                gs->jog.timerPot = 0;
+                gs->jog.usingPot = true;
             }
 
             // Ataque do jogador
